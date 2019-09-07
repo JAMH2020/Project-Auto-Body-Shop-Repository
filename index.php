@@ -13,7 +13,6 @@ include "navigation_bar.php";
     
     
   </body>
-  
 </html>
 
 <?php
