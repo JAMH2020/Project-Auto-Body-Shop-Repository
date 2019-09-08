@@ -1,7 +1,8 @@
 <?php
-/*
-** allows connection from the website to the database using PHPMyAdmin
-*/
+/*************************************************************************
+** allows connection from the website to the database using PHPMyAdmin  **
+**************************************************************************/
+
 //name of the MySQL server that is being used
 $servername = "********";
 
