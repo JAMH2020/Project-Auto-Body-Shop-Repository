@@ -2,7 +2,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="navigation_bar_styles.css">
-</head>
+  </head>
 
 <body>
 
