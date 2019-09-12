@@ -1,5 +1,5 @@
 <?php
-include "navigation_bar.php";
+include "navigationg_bar/navigation_bar.php";
 ?>
 
 <html>
@@ -16,5 +16,5 @@ include "navigation_bar.php";
 </html>
 
 <?php
-include "footer.php";
+include "footer/footer.php";
 ?>
