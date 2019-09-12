@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <link rel="stylesheet" type="text/css" href="navigation_bar.css">
+  <link rel="stylesheet" type="text/css" href="navigation_bar_styles.css">
 </head>
 
 <body>
