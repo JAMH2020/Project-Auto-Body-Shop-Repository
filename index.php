@@ -1,20 +1,15 @@
-<?php
-include "navigationg_bar/navigation_bar.php";
-?>
-
+<!DOCTYPE html>
 <html>
   <head>
-    
-  </head>
   
+  </head>
   <body>
-    
-    
-    
-    
+  
+  <?php
+  include 'navigation_bar/navigation_bar.php';
+  ?>
+  
+  
+  
   </body>
 </html>
-
-<?php
-include "footer/footer.php";
-?>
