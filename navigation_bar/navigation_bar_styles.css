@@ -7,7 +7,7 @@ body {
 
 .nav {
   overflow: hidden;
-  background-color: white;
+  background-color: Black;
 }
 
 
@@ -23,6 +23,6 @@ body {
 
 
 .nav a:hover {
-  background-color: black;
+  background-color: White;
   color: red;
 }
