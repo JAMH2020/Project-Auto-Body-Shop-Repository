@@ -23,54 +23,25 @@ $customer_firstnameERR = $customer_lastnameERR = $customer_passwordERR = $custom
 $error_title = "";
 
 
-//function that cancels escape codes and allows for html code input
-function fix_input($data){
-    
-  $data = htmlspecialchars($data);
-
-  for ($i = 0; $i < strlen($data); $i++){
-    if ($data[$i] == "\\"){
-      $data = substr_replace($data, "\\", $i, 0);
-      $i++;
-    }
-
-  }
-
-  return $data;
-}
+//include file that will fix the user inputs that are entered
+include "../database/fixinput.php";
 
 
-//returns an error message if a field is missing
+//returns an error message if a field is missing or there is an incorrect input
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
  
-  //customer's firstname
-  if (empty($_POST['customer_firstname'])){
-    $customer_firstnameERR = "first name is missing";
-  } else {
-    $customer_firstname = fix_input($_POST['customer_firstname']);
-  }
+  //firstname
+  createErrMsg("customer_firstname", "first name", "customer_firstname", "customer_firstnameERR");
 
-   //customer's lastname
-  if (empty($_POST['customer_lastname'])){
-    $customer_lastnameERR = "last name is missing";
-  } else {
-    $customer_lastname = fix_input($_POST['customer_lastname']);
-  }
+  //lastname
+  createErrMsg("customer_lastname", "last name", "customer_lastname", "customer_lastnameERR");
 
   //email
-  if (empty($_POST['customer_email'])){
-    $customer_emailERR = "email is missing";
-  } else {
-    $customer_email = fix_input($_POST['customer_email']);
-  }
- 
-  //password
-  if (empty($_POST['customer_password'])){
-    $customer_passwordERR = "password is missing";
-  } else {
-    $customer_password = fix_input($_POST['customer_password']);
-  }
+  createErrMsg("customer_email", "email", "customer_email", "customer_emailERR");
 
+  //password
+  createErrMsg("customer_password", "password", "customer_password", "customer_passwordERR");
+ 
  
   //show the error title if any fields are missing after signing up
   if (empty($_POST['customer_firstname']) or empty($_POST['customer_lastname']) or empty($_POST['customer_email']) or empty($_POST['customer_password'])){
@@ -129,7 +100,7 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
 
 </ul>
 
-<h2>Sign Up</h2>
+<h1>Sign Up</h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
 <span>First Name:</span>
@@ -158,6 +129,6 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
   echo "done";
 
   //insert the user sign up data into the accounts table in the database
-  include "../database/insert.php";
+  include "insert.php";
 }
 ?>
