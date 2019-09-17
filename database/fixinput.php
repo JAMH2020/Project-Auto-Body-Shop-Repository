@@ -12,8 +12,14 @@
 function createErrMsg($post_name, $name, $variable_name, $error_variable_name){
   if (empty($_POST["$post_name"])){
     $GLOBALS["$error_variable_name"] = $name . " is missing";
+
+    //store input into a session
+    $_SESSION["$variable_name"] = $_POST["$post_name"];
   } else {
     $GLOBALS["$variable_name"] = fix_input($_POST["$post_name"], $post_name);
+
+    //store input into a session
+    $_SESSION["$variable_name"] = $_POST["$post_name"];
   }
 }
 

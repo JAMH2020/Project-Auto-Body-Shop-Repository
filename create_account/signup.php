@@ -1,23 +1,22 @@
-<!--page to allow customer to sign up an account -->
-
-<!--script to create bullet points of error messages if there is a missing field-->
-<script src="js/errorlist.js"></script>
-<!--script to show password -->
-<script src="js/showpassword.js"></script>
+ <!--script to create bullet points of error messages if there is a missing field
+ or an error with the user's input-->
+  <script src="js/errorlist.js"></script>
+  <!--script to show password -->
+  <script src="js/showpassword.js"></script>
 
 <?php
 //first name and last name of the customer
-$customer_firstname = $customer_lastname = "";
+$customer_firstname = $customer_lastname = $_SESSION['customer_firstname'] = $_SESSION['customer_lastname'] = "";
 
 //email address
-$customer_email = "";
+$customer_email = $_SESSION['customer_email'] = "";
 
 //password for the customer's account
-$customer_password = "";
+$customer_password = $_SESSION['customer_password'] = "";
 
 
 //variables for any missing fields in the sign up page
-$customer_firstnameERR = $customer_lastnameERR = $customer_passwordERR = $customer_emailERR ="";
+$customer_firstnameERR = $customer_lastnameERR = $customer_passwordERR = $customer_emailERR = "";
 
 //title of error section if a missing field occurs
 $error_title = "";
@@ -104,13 +103,13 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
 <span>First Name:</span>
-<input type="text" name="customer_firstname" placeholder="First Name">
+<input type="text" name="customer_firstname" placeholder="First Name" value="<?php echo $_SESSION['customer_firstname'];?>">
 
 <span>Last Name:</span>
-<input type="text" name="customer_lastname" placeholder="Last Name"> <br>
+<input type="text" name="customer_lastname" placeholder="Last Name" value="<?php echo $_SESSION['customer_lastname'];?>"> <br>
 
 <span>Password:</span>
-<input type="password" name="customer_password" placeholder="Password" id="password"> <br>
+<input type="password" name="customer_password" placeholder="Password" id="password" value="<?php echo $_SESSION['customer_password'];?>"> <br>
 
 
 <input type="checkbox" onclick="showPassword()">
@@ -118,7 +117,7 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
 
 
 <span>Email:</span>
-<input type="text" name="customer_email" placeholder="Email"> <br>
+<input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
 
 <input type="submit" name="sign_up" value="Sign Up"> <br>
 
@@ -129,6 +128,7 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
   echo "done";
 
   //insert the user sign up data into the accounts table in the database
-  include "insert.php";
+  include "../database/insert.php";
 }
 ?>
+
