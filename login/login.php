@@ -2,35 +2,21 @@
 // Initialize the session
 session_start();
  
-// Check if the user is already logged in, if yes then redirect him to welcome page
+// Checks to see if the user is already "logged in". If yes, the user goes straight to the home page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: welcome.php");
     exit;
 }
  
-// Include config file
-require_once "insert.php";
+// Connects to the file connecting our code to our database
+require_once "../database/insert.php";
  
 // Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = "";
+$customer_email = "";
+$customer_password = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
-    } else{
-        $username = trim($_POST["username"]);
-    }
-    
-    // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
     
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
