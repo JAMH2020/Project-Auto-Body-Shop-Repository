@@ -1,5 +1,14 @@
-<!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
+<?php
+//start the session to remember the session variables
+session_start();
+?>
 
+<!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
 <?php
 //include file for initiating sessions if they have not beeen created yet
 include_once "../database/initiate_session.php";
@@ -8,6 +17,7 @@ include_once "../database/initiate_session.php";
 //order number
 $order_no = "";
 save_session("order_no");
+
 
 //school name and address
 $school_name = $school_address = "";
@@ -150,8 +160,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
 if (!isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) and !isset($_POST['waiver2_submit']) or $_SESSION['order_no'] == "" or $_SESSION['school_name'] == "" or $_SESSION['school_address'] == "" or $_SESSION['car_year'] == "" or $_SESSION['car_make'] == "" or $_SESSION['car_model'] == "" or $_SESSION['vin_no'] == "" or $_SESSION['license_plate'] == "" or $_SESSION['odometer_intake'] == "" or $_SESSION['plan_description'] == "" or $_SESSION['plan_date'] == "" or $_SESSION['estimate_parts_per_unit'] == "" or $_SESSION['estimate_parts_total'] == "" or $_SESSION['estimate_labour_per_unit'] == "" or $_SESSION['estimate_labour_total'] == "" or $_SESSION['estimate_supplies_per_unit']  == "" or $_SESSION['estimate_supplies_total'] == "" or $_SESSION['estimate_disposal_per_unit'] == "" or $_SESSION['estimate_disposal_total'] == "" or $_SESSION['estimate_total_cost'] == "" or $_SESSION['estimate_date'] == "" or $_SESSION['estimate_expiry_date'] == "" or $_SESSION['removal_choice'] == "" or $_SESSION['removal_fillin'] == ""){
-
-
 ?>
 
 
@@ -311,3 +319,6 @@ if (!isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) and !iss
   include "waiver.php";
 }
 ?>
+
+</body>
+</html>
