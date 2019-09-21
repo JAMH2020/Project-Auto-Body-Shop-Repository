@@ -128,7 +128,7 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
   echo "done";
 
   //insert the user sign up data into the accounts table in the database
-  include "../database/insert.php";
+  include "../database/insert/insert_signup.php";
 }
 ?>
 
