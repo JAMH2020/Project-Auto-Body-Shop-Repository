@@ -140,8 +140,12 @@ this</span>
 
 </form>
 
+<a href="waiver.php">Back</a>
+
 <?php
 } else {
   echo "intake and waiver complete";
+  
+  include "../database/insert/insert_intake.php";
 }
 ?>
