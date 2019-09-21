@@ -106,60 +106,70 @@ include_once "../database/fixinput.php";
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
   //order number
-  createErrMsg("order_no", "order number", "order_no", "order_noERR");
+  createErrMsg("submit_intake", "order number", "order_no", "order_noERR");
   //school name
-  createErrMsg("school_name", "school name", "school_name", "school_nameERR");
+  createErrMsg("submit_intake", "school name", "school_name", "school_nameERR");
   //school address
-  createErrMsg("school_address", "school address", "school_address", "school_addressERR");
+  createErrMsg("submit_intake", "school address", "school_address", "school_addressERR");
   //car year
-  createErrMsg("car_year", "car year", "car_year", "car_yearERR");
+  createErrMsg("submit_intake", "car year", "car_year", "car_yearERR");
   //car make
-  createErrMsg("car_make", "car make", "car_make", "car_makeERR");
+  createErrMsg("submit_intake", "car make", "car_make", "car_makeERR");
   //car model
-  createErrMsg("car_model", "car model", "car_model", "car_modelERR");
+  createErrMsg("submit_intake", "car model", "car_model", "car_modelERR");
   //VIN number
-  createErrMsg("vin_no", "VIN number", "vin_no", "vin_noERR");
+  createErrMsg("submit_intake", "VIN number", "vin_no", "vin_noERR");
   //license plate number
-  createErrMsg("license_plate", "license plate", "license_plate", "license_plateERR");
+  createErrMsg("submit_intake", "license plate", "license_plate", "license_plateERR");
   //odometer reading at intake
-  createErrMsg("odometer_intake", "odometer reading", "odometer_intake", "odometer_intakeERR");
+  createErrMsg("submit_intake", "odometer reading", "odometer_intake", "odometer_intakeERR");
   //description of work that is going to be done
-  createErrMsg("plan_description", "description", "plan_description", "plan_descriptionERR");
+  createErrMsg("submit_intake", "description", "plan_description", "plan_descriptionERR");
   //date that work is going to be done
-  createErrMsg("plan_date", "date", "plan_date", "plan_dateERR");
+  createErrMsg("submit_intake", "date", "plan_date", "plan_dateERR");
   //estimate of the cost of parts per unit
-  createErrMsg("estimate_parts_per_unit", "estimate", "estimate_parts_per_unit", "estimate_parts_per_unitERR");
+  createErrMsg("submit_intake", "estimate", "estimate_parts_per_unit", "estimate_parts_per_unitERR");
   //estimate of the total cost of parts
-  createErrMsg("estimate_parts_total", "total estimate", "estimate_parts_total", "estiamte_parts_totalERR");
+  createErrMsg("submit_intake", "total estimate", "estimate_parts_total", "estiamte_parts_totalERR");
   //estimate of the labour cost per unit
-  createErrMsg("estimate_labour_per_unit", "estimate", "estimate_labour_per_unit", "estimate_labour_per_unitERR");
+  createErrMsg("submit_intake", "estimate", "estimate_labour_per_unit", "estimate_labour_per_unitERR");
   //estimate of the total labour cost
-  createErrMsg("estimate_labour_total", "total estimate", "estimate_labour_total", "estimate_labour_totalERR");
+  createErrMsg("submit_intake", "total estimate", "estimate_labour_total", "estimate_labour_totalERR");
   //estimate of the cost of shop supplies used per unit
-  createErrMsg("estimate_supplies_per_unit", "estimate", "estimate_supplies_per_unit", "estimate_supplies_per_unitERR");
+  createErrMsg("submit_intake", "estimate", "estimate_supplies_per_unit", "estimate_supplies_per_unitERR");
   //estimate of the total cost of supplies
-  createErrMsg("estimate_supplies_total", "total estimate", "estimate_supplies_total", "estimate_supplies_totalERR");
+  createErrMsg("submit_intake", "total estimate", "estimate_supplies_total", "estimate_supplies_totalERR");
   //estimate of the recycling/disposal fee per unit
-  createErrMsg("estimate_disposal_per_unit", "estimate", "estimate_disposal_per_unit", "estimate_disposal_per_unitERR");
+  createErrMsg("submit_intake", "estimate", "estimate_disposal_per_unit", "estimate_disposal_per_unitERR");
   //estimate of the total recycling/disposal fee
-  createErrMsg("estimate_disposal_total", "total estimate", "estimate_disposal_total", "estimate_disposal_totalERR");
+  createErrMsg("submit_intake", "total estimate", "estimate_disposal_total", "estimate_disposal_totalERR");
   //estimate of the total cost
-  createErrMsg("estimate_total_cost", "total estimate", "estimate_total_cost", "estimate_total_costERR");
+  createErrMsg("submit_intake", "total estimate", "estimate_total_cost", "estimate_total_costERR");
   //date the estimate of costings were made
-  createErrMsg("estimate_date", "date", "estimate_date", "estimate_dateERR");
+  createErrMsg("submit_intake", "date", "estimate_date", "estimate_dateERR");
   //date the date of the estimate of the costings will expire
-  createErrMsg("estimate_expiry_date", "date", "estimate_expiry_date", "estimate_expiry_dateERR");
+  createErrMsg("submit_intake", "date", "estimate_expiry_date", "estimate_expiry_dateERR");
   //choice of removal
-  createErrMsg("removal_choice", "removal choice", "removal_choice", "removal_choiceERR");
+  createErrMsg("submit_intake", "removal choice", "removal_choice", "removal_choiceERR");
   //fill in for the removal choice
-  createErrMsg("removal_fillin", "blank", "removal_fillin", "removal_fillinERR");
+  createErrMsg("submit_intake", "blank", "removal_fillin", "removal_fillinERR");
 }
 
 
 
+//check if there are any missing or incorrect fields
+$error_intake_input;
+
+if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $car_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $plan_descriptionERR != "" or $plan_dateERR != "" or $estimate_parts_per_unitERR != "" or $estimate_parts_totalERR != "" or $estimate_labour_per_unitERR != "" or $estimate_labour_totalERR != "" or $estimate_supplies_per_unitERR  != "" or $estimate_supplies_totalERR != "" or $estimate_disposal_per_unitERR != "" or $estimate_disposal_totalERR != "" or $estimate_total_costERR != "" or $estimate_dateERR != "" or $estimate_expiry_dateERR != "" or $removal_choiceERR != "" or $removal_fillinERR != ""){
+  $error_intake_input = true;
+} else {
+  $error_intake_input = false;
+}
+
+
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
-if (!isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) and !isset($_POST['waiver2_submit']) or $_SESSION['order_no'] == "" or $_SESSION['school_name'] == "" or $_SESSION['school_address'] == "" or $_SESSION['car_year'] == "" or $_SESSION['car_make'] == "" or $_SESSION['car_model'] == "" or $_SESSION['vin_no'] == "" or $_SESSION['license_plate'] == "" or $_SESSION['odometer_intake'] == "" or $_SESSION['plan_description'] == "" or $_SESSION['plan_date'] == "" or $_SESSION['estimate_parts_per_unit'] == "" or $_SESSION['estimate_parts_total'] == "" or $_SESSION['estimate_labour_per_unit'] == "" or $_SESSION['estimate_labour_total'] == "" or $_SESSION['estimate_supplies_per_unit']  == "" or $_SESSION['estimate_supplies_total'] == "" or $_SESSION['estimate_disposal_per_unit'] == "" or $_SESSION['estimate_disposal_total'] == "" or $_SESSION['estimate_total_cost'] == "" or $_SESSION['estimate_date'] == "" or $_SESSION['estimate_expiry_date'] == "" or $_SESSION['removal_choice'] == "" or $_SESSION['removal_fillin'] == ""){
+if ($error_intake_input  or !isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) and !isset($_POST['waiver2_submit'])){
 ?>
 
 
