@@ -10,6 +10,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
  
 // Include setup file
 require_once "setup.php";
+
+//include file to send error message if field is empty or incorrect
+include "../database/fixinput.php";
  
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -19,18 +22,10 @@ $username_err = $password_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
-    } else{
-        $username = trim($_POST["username"]);
-    }
+    createErrMsg("username", "username", "username", "username_err");
     
     // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
+    createErrMsg("password", "password", "password", "password_err");
     
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
