@@ -1,4 +1,11 @@
+<?php
+if (session_start() === null){
+  session_start();
+}
+?>
+
 <!-- Waiver form for the intake of the vehicle -->
+
 <?php
 //include file for initiating sessions if they have not beeen created yet
 include_once "../database/initiate_session.php";
@@ -48,32 +55,43 @@ include_once "../database/fixinput.php";
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['waiver_submit'])){
 
   //firstname
-  createErrMsg("customer_firstname", "first name", "customer_firstname", "customer_firstnameERR");
+  createErrMsg("waiver_submit", "first name", "customer_firstname", "customer_firstnameERR");
 
   //lastname
-  createErrMsg("customer_lastname", "last name", "customer_lastname", "customer_lastnameERR");
+  createErrMsg("waiver_submit", "last name", "customer_lastname", "customer_lastnameERR");
 
   //address
-  createErrMsg("customer_address", "address", "customer_address", "customer_addressERR");
+  createErrMsg("waiver_submit", "address", "customer_address", "customer_addressERR");
 
   //email
-  createErrMsg("customer_email", "email", "customer_email", "customer_emailERR");
+  createErrMsg("waiver_submit", "email", "customer_email", "customer_emailERR");
 
   //phone
-  createErrMsg("customer_phone", "phone number", "customer_phone", "customer_phoneERR");
+  createErrMsg("waiver_submit", "phone number", "customer_phone", "customer_phoneERR");
 
   //initials
-  createErrMsg("customer_initial", "initial", "customer_initial", "customer_initialERR");
+  createErrMsg("waiver_submit", "initial", "customer_initial", "customer_initialERR");
 
 
   //exceed amount
-  createErrMsg("exceed_cost", "amount", "exceed_cost", "exceed_costERR");
+  createErrMsg("waiver_submit", "amount", "exceed_cost", "exceed_costERR");
 
 }
 
 
+//check if there are any error inputs
+$error_waiver1_input;
+
+if ($customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_addressERR != "" or $customer_emailERR != "" or $customer_phoneERR != "" or $customer_initialERR != "" or $exceed_costERR != ""){
+  $error_waiver1_input = true;
+} else {
+  $error_waiver1_input = false;
+}
+
+
+
 //ask the user to input the required fields if there are missing or incorrect fields or they have not submitted the form yet
-if (isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) or $_SESSION['customer_firstname'] == "" or $_SESSION['customer_lastname'] == "" or $_SESSION['customer_address'] == "" or $_SESSION['customer_email'] == "" or $_SESSION['customer_phone'] == "" or $_SESSION['customer_initial'] == "" or $_SESSION['exceed_cost'] == ""){
+if ($error_waiver1_input or isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) or !isset($_POST['waiver_submit']) and !isset($_POST['waiver2_submit'])){
 ?>
 
 <h1>WAIVER AND RELEASE OF LIABILITY</h1>
@@ -183,6 +201,8 @@ AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT
 on next page]</h3>
 
 </form>
+
+<a href="intake_repair_form.php">Back</a>
 
 <?php
 } else {
