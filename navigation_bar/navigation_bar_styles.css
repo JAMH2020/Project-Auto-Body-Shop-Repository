@@ -3,26 +3,47 @@ body {
   background-color: lightblue;
 }
 
+.title {
+  color: black;
+  width: 750px;   
+  float: left; 
+  padding:20px 10px 5px 10px;
+  height:40pt;
+  margin-top: 0px;
+  font-size: 30px;  
+  transform: translate(0px,-30px)
+}
 
+.phone {
+ font-size: 25px; 
+ float: right; 
+ width: 270px;
+ transform: translate(0px,10px)
+}
+
+.address {
+ font-size: 25px; 
+ float: right; 
+ width: 900px;
+ transform: translate(-10px,10px)
+}
 
 .nav {
   overflow: hidden;
   background-color: White;
+  width: 100%;
+  float: centre; 
 }
-
-
 
 .nav a {
-  float: right;
-  color: white;
-  padding: 23px 19px;
+  float: centre;
+  color: black;
+  padding: 500px 388.5px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 25px;
 }
 
-
-
 .nav a:hover {
-  background-color: Black;
-  color: red;
+  background-color: rgb(20, 17, 221);
+  color: rgb(250, 249, 249);
 }
