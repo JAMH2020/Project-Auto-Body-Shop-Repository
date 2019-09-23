@@ -3,47 +3,57 @@ body {
   background-color: lightblue;
 }
 
-.title {
-  color: black;
-  width: 750px;   
-  float: left; 
-  padding:20px 10px 5px 10px;
-  height:40pt;
-  margin-top: 0px;
-  font-size: 30px;  
-  transform: translate(0px,-30px)
+.title { 
+  color: black; 
+  width: 750px;    
+  float: left;  
+  padding:20px 10px 5px 10px; 
+  height:40pt; 
+  margin-top: 0px; 
+  font-size: 30px;   
+  transform: translate(0px,-30px) 
 }
 
-.phone {
- font-size: 25px; 
- float: right; 
- width: 270px;
- transform: translate(0px,10px)
+.phone { 
+ font-size: 25px;  
+ margin-left: 89%;
 }
 
-.address {
- font-size: 25px; 
- float: right; 
- width: 900px;
- transform: translate(-10px,10px)
+.address{
+  margin-left:70%;
 }
 
 .nav {
   overflow: hidden;
-  background-color: White;
-  width: 100%;
-  float: centre; 
+  background-color: white;
+  width: 100%;  
 }
+
+
 
 .nav a {
-  float: centre;
+  float: right;
   color: black;
-  padding: 500px 388.5px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 20px;
+  text-align: center;
 }
 
+
+
 .nav a:hover {
-  background-color: rgb(20, 17, 221);
+  background-color: rgb(100, 211, 252); 
   color: rgb(250, 249, 249);
+}
+
+/*links in the navigation bar*/
+.nav_link{
+  padding: 23px 0;
+  width: 33%
+}
+
+/*the link to the most right of the navigation bar*/
+.left_link{
+  padding: 23px 0;
+  width: 34%;
 }
