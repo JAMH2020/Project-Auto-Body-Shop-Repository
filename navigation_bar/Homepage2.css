@@ -1,0 +1,139 @@
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+.bg {
+  /* The Background Image */
+  background-image:url("https://cdn.hipwallpaper.com/i/74/49/RYm4vw.jpg");
+
+  /* Height of Image */
+  height: 105%;
+
+  /* Setting The location Of The Image */
+  background-position: center;
+  background-size: cover;
+}
+
+h1{
+  text-align: center;
+  text-decoration: underline;
+  text-shadow: 2px 2px #FF0000;
+}
+
+.C1{
+background-image: url("https://grid.gograph.com/oil-icons-vector-stock_gg75609320.jpg");
+height:80px;
+width:56px;
+position: static;
+z-index: 2;
+ margin-left: auto;
+ margin-right: auto;
+//margin-left: 50px;
+//float: left;
+}
+h2{
+text-align: center;
+  text-decoration: underline; 
+}
+.C2{
+background-image: url("https://media.gettyimages.com/vectors/auto-repair-shop-icons-set-vector-id510493087?s=612x612");
+height:80px;
+width:85px;
+position: static;
+z-index: 2;
+margin-left: auto;
+ margin-right: auto;
+ transform: translate(-210px,-80px);
+//margin-left: 30px;
+//float: left;
+}
+
+.F{padding-top: 10px;
+}/*
+.p1{
+  margin-top:100px;
+  transform: translate(0,1000px);
+}*/
+.Oil_label{
+  width: 55px;
+  height: 35px;
+  background-color: black;
+  border: 1px solid black;
+margin-left: auto;
+ margin-right: auto;
+  transform: translate(1px,-150px); /* Standard syntax */
+  /*
+  background-color: Black;
+  position: static;
+  margin-left: auto;
+ margin-right: auto;
+ transform: translate(100px,80px);
+  *//*position: static;
+ margin-top: auto;
+ margin-right: auto;*/
+ //transform: translate(100px,800px);
+}
+.repair_label{
+  width: 55px;
+  height: 35px;
+  background-color: black;
+  border: 1px solid black;
+margin-left: auto;
+ margin-right: auto;
+  transform: translate(-210px,-202px); /* Standard syntax */
+/* margin-left: auto;
+ margin-right: auto;*/
+  /*margin-left:155px;
+  margin-top:100px;
+  position: absolute;
+ */
+}
+
+.C3{
+background-image: url("https://freedesignfile.com/upload/2013/08/310666.jpg");
+height:79px;
+width:74px;
+position: static;
+z-index: 2;
+margin-left: auto;
+ margin-right: auto;
+ transform: translate(210px,-160px);
+//margin-left: 30px;
+//float: left;
+}
+
+.Consultation_label{
+  width: 85px;
+  height: 35px;
+  background-color: black;
+  border: 1px solid black;
+margin-left: auto;
+ margin-right: auto;
+  transform: translate(210px,-256px); /* Standard syntax */
+  /*margin-right:-240px;
+  margin-top:100px;
+  position: relative;
+ */
+}
+.Intro_Para{
+  width: 1000px;
+  height: 129px;
+   font-size: 20px;
+  background-color: black;
+  border: 2px solid blue;
+margin-left: auto;
+ margin-right: auto;
+  transform: translate(0px,-100px); /* Standard syntax */
+}
+.label{
+  width: 241px;
+  height: 39px;
+   font-size: 30px;
+  background-color: black;
+  border: 0px solid;
+  text-decoration: underline;
+margin-left: auto;
+ margin-right: auto;
+  transform: translate(0px,-100px); /* Standard syntax */
+}
