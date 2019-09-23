@@ -1,49 +1,94 @@
 body {
   margin: 0; 
-  background-color: lightblue;
+  background-color: rgb(163, 209, 240);
+  font-family: Verdana,sans-serif;
+  line-height: 1.6;
+  overflow-x:hidden;
 }
 
-.title {
-  color: black;
-  width: 750px;   
-  float: left; 
-  padding:20px 10px 5px 10px;
-  height:40pt;
-  margin-top: 0px;
-  font-size: 30px;  
-  transform: translate(0px,-30px)
+/*division containing title, address and phone number*/
+.title_bar{
+  padding: 10px;
+  color: rgb(255,255,255);
 }
 
-.phone {
- font-size: 25px; 
- float: right; 
- width: 270px;
- transform: translate(0px,10px)
+.title {  
+  width: 750px;    
+  float: left;  
+  padding:20px 10px 5px 10px; 
+  height:40px; 
+  margin-top: 0px; 
+  font-size: 40px;   
+  transform: translate(0px,-30px);
+  font-weight: bold;
 }
 
-.address {
- font-size: 25px; 
- float: right; 
- width: 900px;
- transform: translate(-10px,10px)
+/*first part of the title*/
+.title_front{
+ color: rgb(3, 55, 107);
+ text-shadow: 1px 2px 2px  rgb(255,255,255);
+}
+
+/*second part of the title*/
+.title_back{
+  color: rgb(255,255,255); 
+  text-shadow: 1px 2px 2px  #66c2ff;
+}
+
+/*division containing the phone number*/
+.phone { 
+ font-size: 20px;  
+ margin-left: 88%;
+}
+
+/*division containing the address*/
+.address{
+  margin-left:70%;
+  font-size: 18px;
+}
+
+/*styles for phone number and address*/
+.title_details{
+  text-shadow: 1px 2px 2px  rgb(0,0,0);
+}
+
+
+/*text of the address*/
+.address-heading{
+  font-weight: bold;
 }
 
 .nav {
   overflow: hidden;
-  background-color: White;
-  width: 100%;
-  float: centre; 
+  background-color: white;
+  width: 100%;  
 }
+
+
 
 .nav a {
-  float: centre;
+  float: right;
   color: black;
-  padding: 500px 388.5px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 20px;
+  text-align: center;
 }
 
+
+
 .nav a:hover {
-  background-color: rgb(20, 17, 221);
+  background-color: rgb(100, 211, 252); 
   color: rgb(250, 249, 249);
+}
+
+/*links in the navigation bar*/
+.nav_link{
+  padding: 23px 0;
+  width: 33%
+}
+
+/*the link to the most right of the navigation bar*/
+.left_link{
+  padding: 23px 0;
+  width: 34%;
 }
