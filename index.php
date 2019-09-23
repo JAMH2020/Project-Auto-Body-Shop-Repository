@@ -15,7 +15,7 @@
           <span class="slogan">Welcome To The Home Page</span> 
         </div>
       </div>
-    </div>  
+    </div>      
 
 
     <div class="services">
