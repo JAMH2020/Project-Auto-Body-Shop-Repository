@@ -1,10 +1,18 @@
 <?php
+//start the session if it has not been started yet
 if (session_start() === null){
   session_start();
 }
 ?>
 
 <!-- Waiver form for the intake of the vehicle -->
+<!DOCTYPE html>
+<html>
+<head>
+  <!--script that will redirect the user to another page-->
+  <script src="../src/js/submit_form.js"></script>
+</head>
+<body>
 
 <?php
 //include file for initiating sessions if they have not beeen created yet
@@ -92,6 +100,10 @@ if ($customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_add
 
 //ask the user to input the required fields if there are missing or incorrect fields or they have not submitted the form yet
 if ($error_waiver1_input or isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) or !isset($_POST['waiver_submit']) and !isset($_POST['waiver2_submit'])){
+
+
+  //include the navigation bar
+  include "../navigation_bar/navigation_bar.php";
 ?>
 
 <h1>WAIVER AND RELEASE OF LIABILITY</h1>
@@ -206,6 +218,13 @@ on next page]</h3>
 
 <?php
 } else {
-  include "waiverpt2.php";
+?>
+
+<script>redirect_page("waiverpt2.php");</script>
+
+<?php
 }
 ?>
+
+</body>
+</html>
