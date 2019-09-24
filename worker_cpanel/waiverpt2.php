@@ -1,7 +1,26 @@
+<?php
+//start the session if it has not been started yet
+if (session_start() === null){
+  session_start();
+}
+?>
+
+
 <!-- second part of the waiver form -->
+<!DOCTYPE html>
+<html>
+<head>
+  <!--script that will redirect the user to another page-->
+  <script src="../src/js/submit_form.js"></script>
+</head>
+<body>
+
 <?php
 //if the user has not pressed the submit button yet
-if (!isset($_POST['submit_intake']) and isset($_POST['waiver_submit']) and !isset($_POST['waiver2_submit'])){
+if (!isset($_POST['waiver2_submit'])){
+
+  //include the navigation bar
+  include "../navigation_bar/navigation_bar.php";
 ?>
 
 <h1>Automotive Repair Waiver</h1>
@@ -147,5 +166,10 @@ this</span>
   echo "intake and waiver complete";
   
   include "../database/insert/insert_intake.php";
+?>
+
+<script> redirect_page("worker_cpanel.php");</script>
+
+<?php
 }
 ?>
