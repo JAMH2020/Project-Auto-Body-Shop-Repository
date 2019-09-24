@@ -57,7 +57,10 @@ if($stmt_clogin->num_rows > 0){
                             
 
     // Redirect user to welcome page
-    header("location: ../worker_cpanel/worker_cpanel.php");
+?>
+<script>redirect_page("../worker_cpanel/worker_cpanel.php")</script>
+
+<?php
     }
 
 } else{

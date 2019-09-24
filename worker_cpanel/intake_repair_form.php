@@ -3,13 +3,17 @@
 session_start();
 ?>
 
-<!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
 <!DOCTYPE html>
 <html>
 <head>
+  <!--script that will redirect the user to another page-->
+  <script src="../src/js/submit_form.js"></script>
 </head>
 <body>
+
 <?php
+
+
 //include file for initiating sessions if they have not beeen created yet
 include_once "../database/initiate_session.php";
 
@@ -169,8 +173,13 @@ if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $
 
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
-if ($error_intake_input  or !isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) and !isset($_POST['waiver2_submit'])){
+if ($error_intake_input  or !isset($_POST['submit_intake'])){
+
+  //include the navigation bar
+  include "../navigation_bar/navigation_bar.php";
 ?>
+
+<!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
 
 
 <h1>Automotive Intake Repair Form</h1>
@@ -324,9 +333,15 @@ if ($error_intake_input  or !isset($_POST['submit_intake']) and !isset($_POST['w
 
 </form>
 
+<a href="worker_cpanel.php">Back</a>
+
 <?php
 } else {
-  include "waiver.php";
+?>
+
+<script>redirect_page("waiver.php");</script>
+
+<?php
 }
 ?>
 

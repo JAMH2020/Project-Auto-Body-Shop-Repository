@@ -3,18 +3,42 @@
 if (session_start() === null){
   session_start();
 }
+?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>  
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+  <!--script that will redirect user to the menu once they loggin in successfully-->
+  <script src="../src/js/submit_form.js"></script>
+  
+  <style type="text/css">
+    body{ font: 14px sans-serif; }
+    .wrapper{ width: 350px; padding: 20px; }
+  </style>
+
+</head>
+
+<body>
 
 
- 
-
+<?php
 //include file to send error message if field is empty or incorrect
 include "../database/fixinput.php";
 
 
 // Check if user is currently logged in, if yes, redirects
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: ../worker_cpanel/worker_cpanel.php");
-    exit;
+?>
+
+  <script>redirect_page("../worker_cpanel/worker_cpanel.php")</script>
+
+<?php
+    exit();
 }
 
  
@@ -45,27 +69,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
        //include file to check if the user name password is correct
        include "../database/select/select_login.php";
     }
-}      
+} 
+
+//include the navigation bar
+include "../navigation_bar/navigation_bar.php";
 ?>
 
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>  
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-  
-  <style type="text/css">
-    body{ font: 14px sans-serif; }
-    .wrapper{ width: 350px; padding: 20px; }
-  </style>
-
-</head>
-
-<body>
-
+ 
     <div class="wrapper">
 
         <h2>Login</h2>
@@ -75,7 +85,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
             <div class="form-group">
+
                 <label>Username</label>
+
                 <input type="text" name="login_username" class="form-control" value="<?php echo $login_username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
@@ -100,4 +112,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 
 </html>
-
