@@ -1,6 +1,5 @@
 body {
   margin: 0; 
-  background-color: rgb(163, 209, 240);
   font-family: Verdana,sans-serif;
   line-height: 1.6;
   overflow-x:hidden;
@@ -8,6 +7,7 @@ body {
 
 /*division containing title, address and phone number*/
 .title_bar{
+  background-color: rgb(163, 209, 240);
   padding: 10px;
   color: rgb(255,255,255);
 }
