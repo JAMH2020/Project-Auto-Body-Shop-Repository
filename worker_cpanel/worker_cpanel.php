@@ -13,6 +13,11 @@ if (session_start() === null){
 </head>
 
 <body>
+<?php
+//include the navigation bar
+include "../navigation_bar/navigation_bar.php";
+?>
+
 <a href="intake_repair_form.php">Create Order</a>
 
 <h2>My Orders</h2>
@@ -25,4 +30,3 @@ include '../database/select/select_orders.php';
 
 
 </body>
-</html>
