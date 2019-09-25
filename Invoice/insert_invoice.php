@@ -7,8 +7,8 @@ include '../database/connectdb.php';
 include '../database/error_check.php';
 
 //connects php statements to mysql table
-$stmt_signup = $conn->prepare("INSERT INTO Customer_Accounts (First_Name, Last_Name, Password, Email) VALUES (?, ?, ?, ?)");
-$stmt_signup->bind_param("ssss", $customer_firstname, $customer_lastname, $customer_password, $customer_email);
+$stmt_invoice = $conn->prepare("INSERT INTO Customer_Accounts (First_Name, Last_Name, Password, Email) VALUES (?, ?, ?, ?)");
+$stmt_invoice->bind_param("ssss", $customer_firstname, $customer_lastname, $customer_password, $customer_email);
   
 //customer work order number
 $work_order_number = $_POST['work_order_number'];
@@ -80,6 +80,6 @@ $teachers_name = $_POST['teachers_name'];
 $owner_signature = $_POST['owner_signature'];
 
 //execute the insertion for the prepared sql statement
-insertData($stmt_signup);
-$stmt_signup->close();
+insertData($stmt_invoice);
+$stmt_invoice->close();
 ?>
