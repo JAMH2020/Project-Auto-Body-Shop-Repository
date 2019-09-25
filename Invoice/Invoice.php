@@ -77,16 +77,10 @@ $teachers_name = $_SESSION['teachers_name'] = "";
 //siganture of owner
 $owner_signature = $_SESSION['owner_signature'] = "";
 
-//title of error section if a missing field occurs
-$error_title = "";
 
 //include file that will fix the user inputs that are entered
 include "../database/fixinput.php";
 
- //show the error title if any fields are missing after signing up
-  if (empty($_POST['work_order_number']) or empty($_POST['customer_full_name']) or empty($_POST['customer_phone_number']) or empty($_POST['customer_address'] or empty($_POST['customer_email'] or empty($_POST['invoice_number'] or empty($_POST['car_model_year'] or empty($_POST['car_make'] or empty($_POST['car_model'] or empty($_POST['VIN'] or empty($_POST['car_license_plate'] or empty($_POST['intake_odometer_reading'] or empty($_POST['return_odometer_reading'] or empty($_POST['return_date'] or empty($_POST['removed_part_returned'] or empty($_POST['parts_costs'] or empty($_POST['labour_costs'] or empty($_POST['supplies_costs'] or empty($_POST['redi_fees'] or empty($_POST['estimated_costs'] or empty($_POST['total_cost'] or empty($_POST['teachers_name'] or empty($_POST['owner_signature'])){
-    $error_title = "Error";
-  }
 ?>
 
 <ul></ul>
