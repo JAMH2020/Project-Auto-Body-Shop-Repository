@@ -41,7 +41,38 @@ $intake_odometer_reading = $_SESSION['intake_odometer_reading'] = "";
 //odometer reading on return
 $return_odometer_reading = $_SESSION['return_odometer_reading'] = "";
 
+//AUTHORIZATION STUFF
+//date of return vehicle
+$return_date = $_SESSION['return_date'] = "";
 
+//parts removed returned or not
+$removed_part_returned = $_SESSION['removed_part_returned'] = "";
+
+//COSTS
+//costs of parts
+$parts_costs = $_SESSION['parts_costs'] = "";
+
+//cost of labour
+$labour_costs = $_SESSION['labour_costs'] = "";
+
+//shop supplies cost
+$supplies_cost = $_SESSION['supplies_costs'] = "";
+
+//recycling and/or disposal fees
+$redi_fees = $_SESSION['redi_fees'] = "";
+
+//estimated costs of everything dones
+$estimated_costs = $_SESSION['estimated_costs'] = "";
+
+//Total cost of EVERYTHING
+$total_cost = $_SESSION ['total_cost'] = "";
+
+//FINAL
+//Teachers name
+$teachers_name = $_SESSION['teachers_name'] = "";
+
+//siganture of owner
+$owner_signature
 
 
 
