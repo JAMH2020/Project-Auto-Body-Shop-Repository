@@ -91,7 +91,10 @@ include "../database/fixinput.php";
 
 <ul></ul>
 
-<h1>Sign Up</h1>
+<h1>FORM B</h1>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+ 
+<h1>AUTOMOTIVE FINAL INVOICE </h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
 <span>First Name:</span>
@@ -122,4 +125,3 @@ include "../database/fixinput.php";
   include "insert_invoice.php";
 }
 ?>
-
