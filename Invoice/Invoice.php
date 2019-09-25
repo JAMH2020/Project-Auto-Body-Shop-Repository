@@ -123,7 +123,7 @@ include "../database/fixinput.php";
 } else {
   echo "done";
   //insert the user sign up data into the accounts table in the database
-  include "../database/insert/insert_signup.php";
+  include "insert_invoice.php";
 }
 ?>
 
