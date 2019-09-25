@@ -1,7 +1,6 @@
 <!--script to create bullet points of error messages if there is a missing field
  or an error with the user's input-->
   <script src="js/errorlist.js"></script>
-
 <?php
 
 //ALL CUSTOMER RELATED INFORMATION
@@ -88,12 +87,9 @@ include "../database/fixinput.php";
   if (empty($_POST['work_order_number']) or empty($_POST['customer_full_name']) or empty($_POST['customer_phone_number']) or empty($_POST['customer_address'] or empty($_POST['customer_email'] or empty($_POST['invoice_number'] or empty($_POST['car_model_year'] or empty($_POST['car_make'] or empty($_POST['car_model'] or empty($_POST['VIN'] or empty($_POST['car_license_plate'] or empty($_POST['intake_odometer_reading'] or empty($_POST['return_odometer_reading'] or empty($_POST['return_date'] or empty($_POST['removed_part_returned'] or empty($_POST['parts_costs'] or empty($_POST['labour_costs'] or empty($_POST['supplies_costs'] or empty($_POST['redi_fees'] or empty($_POST['estimated_costs'] or empty($_POST['total_cost'] or empty($_POST['teachers_name'] or empty($_POST['owner_signature'])){
     $error_title = "Error";
   }
-
-<?php
-  }
 ?>
 
-</ul>
+<ul></ul>
 
 <h1>Sign Up</h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
@@ -127,15 +123,3 @@ include "../database/fixinput.php";
 }
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
-?>
