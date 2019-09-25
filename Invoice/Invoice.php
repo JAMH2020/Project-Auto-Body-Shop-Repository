@@ -1,3 +1,7 @@
+<!--script to create bullet points of error messages if there is a missing field
+ or an error with the user's input-->
+  <script src="js/errorlist.js"></script>
+
 <?php
 
 //ALL CUSTOMER RELATED INFORMATION
@@ -72,7 +76,9 @@ $total_cost = $_SESSION ['total_cost'] = "";
 $teachers_name = $_SESSION['teachers_name'] = "";
 
 //siganture of owner
-$owner_signature
+$owner_signature = $_SESSION['owner_signature'] = "";
+
+
 
 
 
