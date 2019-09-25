@@ -1,8 +1,3 @@
-<?php
-//start the session to remember the session variables
-session_start();
-?>
-
 <!--script to create bullet points of error messages if there is a missing field
  or an error with the user's input-->
   <script src="js/errorlist.js"></script>
