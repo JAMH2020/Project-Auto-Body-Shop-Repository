@@ -89,6 +89,10 @@ include "../database/fixinput.php";
     $error_title = "Error";
   }
 
+<?php
+  }
+?>
+
 </ul>
 
 <h1>Sign Up</h1>
