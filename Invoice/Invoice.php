@@ -78,6 +78,51 @@ $teachers_name = $_SESSION['teachers_name'] = "";
 //siganture of owner
 $owner_signature = $_SESSION['owner_signature'] = "";
 
+//title of error section if a missing field occurs
+$error_title = "";
+
+//include file that will fix the user inputs that are entered
+include "../database/fixinput.php";
+
+ //show the error title if any fields are missing after signing up
+  if (empty($_POST['work_order_number']) or empty($_POST['customer_full_name']) or empty($_POST['customer_phone_number']) or empty($_POST['customer_address'] or empty($_POST['customer_email'] or empty($_POST['invoice_number'] or empty($_POST['car_model_year'] or empty($_POST['car_make'] or empty($_POST['car_model'] or empty($_POST['VIN'] or empty($_POST['car_license_plate'] or empty($_POST['intake_odometer_reading'] or empty($_POST['return_odometer_reading'] or empty($_POST['return_date'] or empty($_POST['removed_part_returned'] or empty($_POST['parts_costs'] or empty($_POST['labour_costs'] or empty($_POST['supplies_costs'] or empty($_POST['redi_fees'] or empty($_POST['estimated_costs'] or empty($_POST['total_cost'] or empty($_POST['teachers_name'] or empty($_POST['owner_signature'])){
+    $error_title = "Error";
+  }
+
+</ul>
+
+<h1>Sign Up</h1>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+
+<span>First Name:</span>
+<input type="text" name="customer_firstname" placeholder="First Name" value="<?php echo $_SESSION['customer_firstname'];?>">
+
+<span>Last Name:</span>
+<input type="text" name="customer_lastname" placeholder="Last Name" value="<?php echo $_SESSION['customer_lastname'];?>"> <br>
+
+<span>Password:</span>
+<input type="password" name="customer_password" placeholder="Password" id="password" value="<?php echo $_SESSION['customer_password'];?>"> <br>
+
+
+<input type="checkbox" onclick="showPassword()">
+<span>Show Password</span> <br>
+
+
+<span>Email:</span>
+<input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
+
+<input type="submit" name="sign_up" value="Sign Up"> <br>
+
+</form>
+
+<?php
+} else {
+  echo "done";
+  //insert the user sign up data into the accounts table in the database
+  include "../database/insert/insert_signup.php";
+}
+?>
+
 
 
 
