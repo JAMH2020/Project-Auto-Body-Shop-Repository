@@ -114,7 +114,7 @@ save_session('teachers_name');
   //errors for any missing fields in the repair intake form
 $work_order_numberERR = $customer_full_nameERR = $customer_phone_numberERR = $customer_addressERR = $customer_emailERR = 
 $invoice_numberERR  = $car_model_yearERR = $car_makeERR = $car_modelERR = $VINERR = $car_license_plateERR = 
-$intake_odometer_readingERR = $return_odometer_readingERR = $return_dateERR = $removed_part_returnedERR = $parts_costs = $labour_costsERR
+$intake_odometer_readingERR = $return_odometer_readingERR = $return_dateERR = $removed_part_returnedERR = $parts_costsERR = $labour_costsERR
 = $supplies_costERR = $redi_feesERR = $estimated_costsERR = $total_costERR = $teachers_nameERR = "";
 
   //include file that will fix the user inputs that are entered
@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
   //check if there are any missing or incorrect fields
 $error_intake_input;
-if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $car_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $plan_descriptionERR != "" or $plan_dateERR != "" or $estimate_parts_per_unitERR != "" or $estimate_parts_totalERR != "" or $estimate_labour_per_unitERR != "" or $estimate_labour_totalERR != "" or $estimate_supplies_per_unitERR  != "" or $estimate_supplies_totalERR != "" or $estimate_disposal_per_unitERR != "" or $estimate_disposal_totalERR != "" or $estimate_total_costERR != "" or $estimate_dateERR != "" or $estimate_expiry_dateERR != "" or $removal_choiceERR != "" or $removal_fillinERR != ""){
+if ($work_order_numberERR != "" or $customer_full_nameERR != "" or $customer_phone_numberERR != "" or $customer_addressERR != "" or $customer_emailERR != "" or $invoice_numberERR != "" or $car_model_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $VINERR != "" or $car_license_plateERR != "" or $intake_odometer_readingERR != "" or $return_odometer_readingERR != "" or $return_dateERR != "" or $removed_part_returnedERR != "" or $parts_costsERR  != "" or $labour_costsERR != "" or $supplies_costERR != "" or $redi_feesERR != "" or $estimated_costsERR != "" or  $total_costERR != ""){
   $error_intake_input = true;
 } else {
   $error_intake_input = false;
