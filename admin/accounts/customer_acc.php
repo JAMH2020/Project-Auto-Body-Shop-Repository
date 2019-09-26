@@ -25,8 +25,7 @@ if (session_start() === null){
      //include the file that will print out all the orders
      include "../../database/select/aselect_caccounts.php";
     ?>
-
-    <input type="submit" name="delete_waccounts" value="Delete Account">
+    
     <input type="submit" name="modify_waccounts" value="Change Account">
   </form>
   
