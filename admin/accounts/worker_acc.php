@@ -26,7 +26,6 @@ if (session_start() === null){
      include "../../database/select/aselect_waccounts.php";
     ?>
 
-    <input type="submit" name="delete_waccounts" value="Delete Account">
     <input type="submit" name="modify_waccounts" value="Change Account">
   </form>
   
