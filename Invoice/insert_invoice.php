@@ -10,12 +10,12 @@ include '../database/error_check.php';
 $stmt_invoice = $conn->prepare("INSERT INTO Invoice (Work_order_name, Customer_full_name, Customer_phone_number, Customer_address, 
 Customer_email, Invoice_Number, Car_model_year, Car_make, Car_model, VIN, Car_license_plate, Intake_odometer_reading, 
 Return_odometer_reading, Removed_part_returned, Return_date, Parts_costs, Labour_costs, Supplies_costs, Redi_fees, Estimated_costs, 
-Total_cost, Teachers_name, Owner_signature ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+Total_cost, Teachers_name ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 $stmt_invoice->bind_param("ssss", $work_order_number, $customer_full_name, $customer_phone_number, $customer_address, 
                           $customer_email, $invoice_number, $car_model_year, $car_make, $car_model, $VIN, $car_license_plate, 
                           $intake_odometer_reading, $return_odometer_reading, $removed_part_returned, $return_date, $parts_costs, 
-                          $labour_costs, $supplies_cost, $redi_fees, $estimated_costs, $total_cost, $teachers_name, $owner_signature);
+                          $labour_costs, $supplies_cost, $redi_fees, $estimated_costs, $total_cost, $teachers_name);
   
 
 //customer work order number
@@ -83,9 +83,6 @@ $total_cost = $_POST['total_cost'];
 
 //Teachers name
 $teachers_name = $_POST['teachers_name'];
-
-//siganture of owner
-$owner_signature = $_POST['owner_signature'];
 
 //execute the insertion for the prepared sql statement
 insertData($stmt_invoice);
