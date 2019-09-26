@@ -26,8 +26,7 @@ if (session_start() === null){
      include "../../database/select/aselect_cprofiles.php";
     ?>
 
-    <input type="submit" name="delete_waccounts" value="Delete Account">
-    <input type="submit" name="modify_waccounts" value="Change Account">
+    <input type="submit" name="modify_waccounts" value="Change Profile">
   </form>
   
   <a href="../admin_cpanel.php">Back</a>
