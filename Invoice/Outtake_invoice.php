@@ -112,11 +112,10 @@ save_session('teachers_name');
 
 
   //errors for any missing fields in the repair intake form
-$order_noERR = $school_nameERR = $school_addressERR = $car_yearERR = $car_makeERR = $car_modelERR = $vin_noERR = $license_plateERR
-= $odometer_intakeERR = $plan_descriptionERR = $plan_dateERR = $estimate_parts_per_unitERR = $estimate_parts_totalERR =
-$estimate_labour_per_unitERR = $estimate_labour_totalERR = $estimate_supplies_per_unitERR = $estimate_supplies_totalERR = 
-$estimate_disposal_per_unitERR = $estimate_disposal_totalERR = $estimate_total_costERR = $estimate_dateERR = $estimate_expiry_dateERR
-= $removal_choiceERR = $removal_fillinERR = "";
+$work_order_numberERR = $customer_full_nameERR = $customer_phone_numberERR = $customer_addressERR = $customer_emailERR = 
+$invoice_numberERR  = $car_model_yearERR = $car_makeERR = $car_modelERR = $VINERR = $car_license_plateERR = 
+$intake_odometer_readingERR = $return_odometer_readingERR = $return_dateERR = $removed_part_returnedERR = $parts_costs = $labour_costsERR
+= $supplies_costERR = $redi_feesERR = $estimated_costsERR = $total_costERR = $teachers_nameERR = "";
 
   //include file that will fix the user inputs that are entered
 include_once "../database/fixinput.php";
