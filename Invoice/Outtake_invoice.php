@@ -123,77 +123,69 @@ include_once "../database/fixinput.php";
   //returns an error message if a field is missing
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
   
-  //order number
-  createErrMsg("submit_intake", "order number", "order_no", "order_noERR");
+  //customer work order number
+  createErrMsg("submit_intake", "order number", "work_order_number", "work_order_numberERR");
  
-  //school name
-  createErrMsg("submit_intake", "school name", "school_name", "school_nameERR");
+  //customer full name
+  createErrMsg("submit_intake", "customer name", "customer_full_name", "customer_full_nameERR");
  
-  //school address
-  createErrMsg("submit_intake", "school address", "school_address", "school_addressERR");
+  //customer phone number
+  createErrMsg("submit_intake", "customer phone ", "customer_phone_number", "customer_phone_numberERR");
  
-  //car year
-  createErrMsg("submit_intake", "car year", "car_year", "car_yearERR");
+  //customer address
+  createErrMsg("submit_intake", "customer address", "customer_address", "customer_addressERR");
   
-  //car make
-  createErrMsg("submit_intake", "car make", "car_make", "car_makeERR");
+  //customer invoice number
+  createErrMsg("submit_intake", "invoice number", "invoice_number", "invoice_numberERR");
   
+  //car model year
+  createErrMsg("submit_intake", "car model year", "car_model_year", "car_model_yearERR");
+ 
+  //car year make
+  createErrMsg("submit_intake", "car year make ", "car_make", "car_makeERR");
+ 
   //car model
   createErrMsg("submit_intake", "car model", "car_model", "car_modelERR");
  
-  //VIN number
-  createErrMsg("submit_intake", "VIN number", "vin_no", "vin_noERR");
- 
-  //license plate number
-  createErrMsg("submit_intake", "license plate", "license_plate", "license_plateERR");
- 
-  //odometer reading at intake
-  createErrMsg("submit_intake", "odometer reading", "odometer_intake", "odometer_intakeERR");
+  //car VIN number
+  createErrMsg("submit_intake", "odometer reading", "VIN", "VINERR");
   
-  //description of work that is going to be done
-  createErrMsg("submit_intake", "description", "plan_description", "plan_descriptionERR");
- 
-  //date that work is going to be done
-  createErrMsg("submit_intake", "date", "plan_date", "plan_dateERR");
- 
-  //estimate of the cost of parts per unit
-  createErrMsg("submit_intake", "estimate", "estimate_parts_per_unit", "estimate_parts_per_unitERR");
- 
-  //estimate of the total cost of parts
-  createErrMsg("submit_intake", "total estimate", "estimate_parts_total", "estiamte_parts_totalERR");
- 
-  //estimate of the labour cost per unit
-  createErrMsg("submit_intake", "estimate", "estimate_labour_per_unit", "estimate_labour_per_unitERR");
+   //car license plate
+  createErrMsg("submit_intake", "license plate", "car_license_plate", "car_license_plateERR");
   
-  //estimate of the total labour cost
-  createErrMsg("submit_intake", "total estimate", "estimate_labour_total", "estimate_labour_totalERR");
+  //intake odometer reading
+  createErrMsg("submit_intake", "intake odometer", "intake_odometer_reading", "intake_odometer_readingERR");
   
-  //estimate of the cost of shop supplies used per unit
-  createErrMsg("submit_intake", "estimate", "estimate_supplies_per_unit", "estimate_supplies_per_unitERR");
+  //odometer reading when returned
+  createErrMsg("submit_intake", "return reading", "return_odometer_reading ", "return_odometer_reading ERR");
   
-  //estimate of the total cost of supplies
-  createErrMsg("submit_intake", "total estimate", "estimate_supplies_total", "estimate_supplies_totalERR");
+  //date when vehicle was returned
+  createErrMsg("submit_intake", "date of return", "$return_date", "$return_dateERR");
   
-  //estimate of the recycling/disposal fee per unit
-  createErrMsg("submit_intake", "estimate", "estimate_disposal_per_unit", "estimate_disposal_per_unitERR");
+  //returned parts returned or not
+  createErrMsg("submit_intake", "removed parts returned or not", "$removed_part_returned", "$removed_part_returnedERR");
   
-  //estimate of the total recycling/disposal fee
-  createErrMsg("submit_intake", "total estimate", "estimate_disposal_total", "estimate_disposal_totalERR");
- 
-  //estimate of the total cost
-  createErrMsg("submit_intake", "total estimate", "estimate_total_cost", "estimate_total_costERR");
- 
-  //date the estimate of costings were made
-  createErrMsg("submit_intake", "date", "estimate_date", "estimate_dateERR");
+  //cost of parts
+  createErrMsg("submit_intake", "cost of parts", "parts_costs", "parts_costsERR");
   
-  //date the date of the estimate of the costings will expire
-  createErrMsg("submit_intake", "date", "estimate_expiry_date", "estimate_expiry_dateERR");
- 
-  //choice of removal
-  createErrMsg("submit_intake", "removal choice", "removal_choice", "removal_choiceERR");
- 
-  //fill in for the removal choice
-  createErrMsg("submit_intake", "blank", "removal_fillin", "removal_fillinERR");
+  //cost of labour
+  createErrMsg("submit_intake", "cost of labout", "labour_costs", "labour_costsERR");
+  
+  //cost of supplies
+  createErrMsg("submit_intake", "supplies cost", "supplies_cost", "supplies_costERR");
+  
+  //items recycled or disposed of fees
+  createErrMsg("submit_intake", "fees of disposal or recycling", "redi_fees", "redi_feesERR");
+  
+  //total estimated cost
+  createErrMsg("submit_intake", "estimated costs", "estimated_costs", "estimated_costsERR");
+  
+  //total cost of repair
+  createErrMsg("submit_intake", "repair cost", "total_cost", "total_costERR");
+  
+  //name of supervising teachers
+  createErrMsg("submit_intake", "teachers name", "teachers_name", "teachers_nameERR");
+  
 }
 
   //check if there are any missing or incorrect fields
@@ -210,7 +202,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
   include "../navigation_bar/navigation_bar.php";
 ?>
 
-//Form that the worker will fill out
+<!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
 
 <h1>Automotive Intake Repair Form</h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
