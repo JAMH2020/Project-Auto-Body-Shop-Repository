@@ -13,8 +13,28 @@ if (session_start() === null){
 </head>
 <body>
   <?php
+  //include file to delete the orders
+  include "../../database/delete/delete_orders.php";
+  
   //include the navigation bar
   include "../../navigation_bar/navigation_bar.php";
+  
+  //delete all post checked rows 
+  if ($_SERVER['REQUEST_METHOD'] == "POST"){
+    
+    //if none of the rows are checked
+    if (empty($_POST['order_idArr'])){
+      echo "<h3>Please select an order</h3>";
+    } else {
+    
+      //delete each selected row
+      foreach($_POST['order_idArr'] as $key => $value){
+        delete_ordersRow($value);
+      }
+    }
+  }
+  
+  
   ?>
 
 
@@ -26,7 +46,10 @@ if (session_start() === null){
     ?>
 
     <input type="submit" name="delete_order" value="Delete Order">
-    <input type="submit" name="modify_order" value="Change Order">
+    <input type="submit" name="modify_order" value="Modify Order">
   </form>
+  
+  <a href="../admin_cpanel.php">Back</a>
+  
 </body>
 </html>
