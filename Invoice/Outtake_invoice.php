@@ -359,11 +359,19 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 <?php
 } else {
+  echo "done";
+  //insert the user sign up data into the accounts table in the database
+  include "insert_invoice.php";
+}
+?>
+
 ?>
 
 <?php
 }
 ?>
+
+
 
 </body>
 </html>
