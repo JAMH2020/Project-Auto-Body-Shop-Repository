@@ -9,80 +9,107 @@ session_start();
   
   <!--script that will redirect the user to another page-->
   <script src="../src/js/submit_form.js"></script>
-</head>
+  </head>
 <body>
+  </body>
+</html>
 
 <?php
 //include file for initiating sessions if they have not beeen created yet
 include_once "../database/initiate_session.php";
 
-//order number
-$order_no = "";
-save_session("order_no");
+//work order number
+$work_order_number = "";
+save_session('work_order_number');
 
-//school name and address
-$school_name = $school_address = "";
-save_session("school_name");
-save_session("school_address");
+//customer full name
+$customer_full_name = "";
+save_session('customer_full_name');
 
+//customer phone number
+$customer_phone_number = "";
+save_session('customer_phone_number');
 
-//year of car
-$car_year = "";
-save_session("car_year");
+//customer address
+$customer_address = "";
+save_session('customer_address');
 
-  //brand of the vehicle and the model
-$car_make = $car_model = "";
-save_session("car_make");
-save_session("car_model");
+//customer email
+$customer_email = "";
+save_session('customer_email');
 
-  //client's VIN number and license plate number
-$vin_no = $license_plate = "";
-save_session("vin_no");
-save_session("license_plate");
+//customer invoice number
+$customer_invoice_number = "";
+save_session('customer_invoice_number');
 
-  //odometer reading at intake
-$odometer_intake = "";
-save_session("odometer_intake");
+//car model year
+$car_model_year = "";
+save_session('car_model_year');
 
-  //description of the work that is going to be done and date work is going to be performed
-$plan_description = $plan_date = "";
-save_session("plan_description");
-save_session("plan_date");
+//car year make
+$car_year_make = "";
+save_session('car_year_make');
 
-  //Estimate costings of repair
-//price of parts per unit and its total
-$estimate_parts_per_unit = $estimate_parts_total = "";
-save_session("estimate_parts_per_unit");
-save_session("estimate_parts_total");
+//car model
+$car_model =  "";
+save_session('car_model');
 
-  //price of labour per unit and its total
-$estimate_labour_per_unit = $estimate_labour_total =  "";
-save_session("estimate_labour_per_unit");
-save_session("estimate_labour_total");
+//car VIN number
+$VIN = "";
+save_session('VIN');
 
-  //price of shop supplies per unit and its total
-$estimate_supplies_per_unit = $estimate_supplies_total = "";
-save_session("estimate_supplies_per_unit");
-save_session("estimate_supplies_total");
+//car license plate
+$car_license_plate = "";
+save_session('car_license_plate');
 
-  //price of recycling/disposal fee per unit and its total
-$estimate_disposal_per_unit = $estimate_disposal_total = "";
-save_session("estimate_disposal_per_unit");
-save_session("estimate_disposal_total");
+//intake odometer reading
+$intake_odometer_reading =  "";
+save_session('intake_odometer_reading');
 
-  //total cost
-$estimtate_total_cost = "";
-save_session("estimate_total_cost");
+//outtake odometer reading
+$return_odometer_reading =  "";
+save_session('return_odometer_reading');
+  
+//vehicle return date
+$return_date =  "";
+save_session('return_date');
+  
+//parts removed or not
+$removed_part_returned =  "";
+save_session('removed_part_returned');
+  
+//cost of parts
+$parts_costs =  "";
+save_session('parts_costs');
+  
+//cost of labour
+$labour_costs =  "";
+save_session('labour_costs');
+  
+//intake odometer reading
+$intake_odometer_reading =  "";
+save_session('intake_odometer_reading');
+  
+//shops supplies cost
+$supplies_cost =  "";
+save_session('supplies_costs');
+  
+//recycling and or disposal fees
+$redi_fees =  "";
+save_session('redi_fees');
+  
+//estimated total costs
+$estimated_costs =  "";
+save_session('estimated_costs');
+  
+//Total cost of EVERYTHING
+$total_cost =  "";
+save_session('total_cost');
+  
+//Teachers name
+$teachers_name =  "";
+save_session('teachers_name');
 
-  //date the estimate costings were declared and its expiry date
-$estimate_date = $estimate_expiry_date =  "";
-save_session("estimate_date");
-save_session("estimate_expiry_date");
-
-  //removal choice of parts during the work process (A: returned to undersigned ______ or B: disposed of bye the school ______)
-$removal_choice = $removal_fillin = "";
-save_session("removal_choice");
-save_session("removal_fillin");
 
   //errors for any missing fields in the repair intake form
 $order_noERR = $school_nameERR = $school_addressERR = $car_yearERR = $car_makeERR = $car_modelERR = $vin_noERR = $license_plateERR
@@ -123,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
  
   //odometer reading at intake
   createErrMsg("submit_intake", "odometer reading", "odometer_intake", "odometer_intakeERR");
+  
   //description of work that is going to be done
   createErrMsg("submit_intake", "description", "plan_description", "plan_descriptionERR");
  
