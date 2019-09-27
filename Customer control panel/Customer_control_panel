@@ -22,11 +22,5 @@ include "../navigation_bar/navigation_bar.php";
 
 <h2>My Orders</h2>
 
-<?php
-//include file for selecting orders
-include '../database/select/select_orders.php';
-?>
-
-
-
 </body
+</html>
