@@ -203,159 +203,83 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 ?>
 
 <!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
-
-<h1>Automotive Intake Repair Form</h1>
+<html>
+<h1>Automotive Final invoice</h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
-<p>School Information</p>
+<p>Customer information</p>
 <span>Work Order #:</span>
-<input type="text" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>"> <br>
-<span><?php echo $order_noERR;?></span> <br>
+<input type="text" name="work_order_number" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>"> <br>
+<span><?php echo $work_order_numberERR;?></span> <br>
 
-<span>School Name:</span>
-<input type="text" name="school_name" placeholder="School Name" value="<?php echo $_SESSION['school_name'];?>">
+<span>Name of customer:</span>
+<input type="text" name="customer_full_name" placeholder="Customer Name" value="<?php echo $_SESSION['customer_full_name'];?>">
 
-<span>School Address:</span>
-<input type="text" name="school_address" placeholder="School Address" value="<?php echo $_SESSION['school_address'];?>"> <br>
+<span>Customer Phone Number:</span>
+<input type="text" name="customer_phone_number" placeholder="Phone number" value="<?php echo $_SESSION['customer_phone_number'];?>"> <br>
 
-<span><?php echo $school_nameERR;?></span>
-<span><?php echo $school_addressERR;?></span> <br>
+<span>Customer Address:</span>
+<input type="text" name="customer_address" placeholder="Customer Address" value="<?php echo $_SESSION['customer_address'];?>"> 
 
+<span>Email of customer :</span>
+<input type="text" name="customer_email" placeholder="Email of customer." value="<?php echo $_SESSION['customer_email'];?>"><br>
 
+<span>Number of invoice:</span>
+<input type="text" name="customer_invoice_number" placeholder="Invoice number" value="<?php echo $_SESSION['customer_invoice_number'];?>">
 
-<p>Automobile To Be Repaired</p>
-<span>Year:</span>
-<input type="text" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>"> 
+<p>Automobile repaired</p>
+<span>Car year:</span>
+<input type="text" name="car_model_year" placeholder="car year model" value="<?php echo $_SESSION['car_model_year'];?>"><br>
 
-<span>VIN #:</span>
-<input type="text" name="vin_no" placeholder="VIN No." value="<?php echo $_SESSION['vin_no'];?>"><br>
-
-<span><?php echo $car_yearERR;?></span>
-<span><?php echo $vin_noERR;?></span> <br>
-
-<span>Make:</span>
-<input type="text" name="car_make" placeholder="Make" value="<?php echo $_SESSION['car_make'];?>">
-
-<span>License Plate:</span>
-<input type="text" name="license_plate" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"><br>
-
-<span><?php echo $car_makeERR;?></span>
-<span><?php echo $license_plateERR;?></span> <br>
-
-<span>Model:</span>
+<span>Car make:</span>
+<input type="text" name="car_year_make" placeholder="Model" value="<?php echo $_SESSION['car_year_make'];?>">
+  
+<span>Car model:</span>
 <input type="text" name="car_model" placeholder="Model" value="<?php echo $_SESSION['car_model'];?>">
 
-<span>Odometer:</span>
-<input type="text" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
+<span>VIN number:</span>
+<input type="text" name="VIN" placeholder="VIN" value="<?php echo $_SESSION['VIN'];?>"><br>
+  
+<span>Car license plate number:</span>
+<input type="text" name="car_license_plate" placeholder="License plate" value="<?php echo $_SESSION['car_license_plate'];?>"><br>
 
-<span><?php echo $car_modelERR;?></span>
-<span><?php echo $odometer_intakeERR;?></span> <br>
+<span>Odometer reading on intake:</span>
+<input type="text" name="intake_odometer_reading" placeholder="" value="<?php echo $_SESSION['intake_odometer_reading'];?>"><br>
+  
+<span>Odometer reading on return:</span>
+<input type="text" name="return_odometer_reading" placeholder="" value="<?php echo $_SESSION['return_odometer_reading'];?>"><br>
 
-<p>Description</p>
-<span><?php echo $plan_descriptionERR;?></span> <br>
-<textarea name="plan_description" placeholder="Description..." rows="10" columns="50" value="<?php echo $_SESSION['plan_description'];?>"></textarea><br>
+<span>Date vehicle was returned:</span>
+<input type="date" name="return_date" placeholder="Date of return" value="<?php echo $_SESSION['return_date'];?>"> <br>
+<span><?php echo $return_dateERR;?></span> <br>
 
-<span>Date on which the work shall be completed:</span>
-<input type="date" name="plan_date" placeholder="Date" value="<?php echo $_SESSION['plan_date'];?>"> <br>
-<span><?php echo $plan_dateERR;?></span> <br>
+<span>Were removed parts returned or not:</span>
+<input type="text" name=" removed_part_returned" placeholder="Returned or not" value="<?php echo $_SESSION[' removed_part_returned'];?>"><br>
 
+<p>Fees</p>  
+<span>Cost of parts:</span>
+<input type="text" name="parts_costs" placeholder="cost of parts" value="<?php echo $_SESSION['parts_costs'];?>"><br>
 
+<span>Cost of labour:</span>
+<input type="text" name="labour_costs" placeholder="labour costs" value="<?php echo $_SESSION['labour_costs'];?>">
+  
+<span>Cost of supplies needed for auto repair:</span>
+<input type="text" name="supplies_costs" placeholder="cost of supplies" value="<?php echo $_SESSION['supplies_costs'];?>">
 
+<span>Cost of redisposal and/or recycling items:</span>
+<input type="text" name="redi_fees" placeholder="" value="<?php echo $_SESSION['redi_fees'];?>"><br>
+  
+<span>Estimated total costs:</span>
+<input type="text" name="estimated_costs" placeholder="estimated costs" value="<?php echo $_SESSION['estimated_costs'];?>"><br>
 
-<p>Estimate Costs</p>
-<table>
-  <tr>
-    <th>Total Estimated Cost</th>
-    <th>Price Per Unit</th>
-    <th>Line Total</th>
-  </tr>
-
-  <tr>
-    <td>Parts:</td>
-    <td> 
-      <input type="text" name="estimate_parts_per_unit" placeholder="$-Parts/Unit" value="<?php echo $_SESSION['estimate_parts_per_unit'];?>"> <br> 
-      <span><?php echo $estimate_parts_per_unitERR;?></span>
-    </td>
-
-    <td> 
-      <input type="text" name="estimate_parts_total" placeholder="$-Parts Total" value="<?php echo $_SESSION['estimate_parts_total'];?>"> <br>
-      <span><?php echo $estimate_parts_totalERR;?></span>
-    </td>
-  </tr>
-
-  <tr>
-    <td>Labour:</td>
-    <td> 
-      <input type="text" name="estimate_labour_per_unit" placeholder="$-Labour/Unit" value="<?php echo $_SESSION['estimate_labour_per_unit'];?>"> <br>
-      <span><?php echo $estimate_labour_per_unitERR;?></span>
-    </td>
-
-    <td> 
-      <input type="text" name="estimate_labour_total" placeholder="$-Labour Total" value="<?php echo $_SESSION['estimate_labour_total'];?>"> <br>
-      <span><?php echo $estimate_labour_totalERR;?></span>
-    </td>
-  </tr>
-
-  <tr>
-    <td>Shop Supplies:</td>
-    <td> 
-      <input type="text" name="estimate_supplies_per_unit" placeholder="$-Supplies/Unit" value="<?php echo $_SESSION['estimate_supplies_per_unit'];?>"> <br>
-      <span><?php echo $estimate_supplies_per_unitERR;?></span>
-    </td>
-
-    <td>
-      <input type="text" name="estimate_supplies_total" placeholder="$-Supplies Total" value="<?php echo $_SESSION['estimate_supplies_total'];?>"> <br>
-      <span><?php echo $estimate_supplies_totalERR;?></span>
-    </td>
-  </tr>
-
-  <tr>
-    <td>Recycling/Disposal Fee:</td>
-    <td> 
-      <input type="text" name="estimate_disposal_per_unit" placeholder="$-Recycling and Disposal/Unit" value="<?php echo $_SESSION['estimate_disposal_per_unit'];?>"> <br>
-      <span><?php echo $estimate_disposal_per_unitERR;?></span>
-    </td>
-
-    <td> 
-      <input type="text" name="estimate_disposal_total" placeholder="$-Recycling and Disposal Total" value="<?php echo $_SESSION['estimate_disposal_total'];?>"> <br>
-      <span><?php echo $estimate_disposal_totalERR;?></span>
-    </td>
-  </tr>
-
-  <tr>
-    <td>Total Estimated Cost:</td>
-    <td>  </td>
-    <td> 
-      <input type="text" name="estimate_total_cost" placeholder="$-Estimate Total" value="<?php echo $_SESSION['estimate_total_cost'];?>"> <br>
-      <span><?php echo $estimate_total_costERR;?></span>
-    </td>
-  </tr>
-</table> <br>
-
-
-<span>Date of Estimate:</span>
-<input type="date" name="estimate_date" placeholder="Date of Estimate" value="<?php echo $_SESSION['estimate_date'];?>"> <br>
-<span><?php echo $estimate_dateERR;?></span><br>
-
-<span>This estimate expires on:</span>
-<input type="date" name="estimate_expiry_date" placeholder="Expiry Date" value="<?php echo $_SESSION['estimate_expiry_date'];?>"> <br>
-<span><?php echo $estimate_expiry_dateERR;?></span> <br>
-
-<span>Any parts removed in the course of work on repairs to the automobile shall be (select one)</span>
-<select name="removal_choice" value="<?php echo $_SESSION['removal_choice'];?>">
-  <option value="A">(A) return to the undersigned</option>
-  <option value="B">(B) disposed of by the School</option>
-</select>
-<span><?php echo $removal_choiceERR;?></span>
-
-<input type="text" name="removal_fillin" value="<?php echo $_SESSION['removal_fillin'];?>"><br>
-<span><?php echo $removal_fillinERR;?></span> <br>
-
-<input type="submit" name="submit_intake" value="Submit">
+<span>Calculated total cost of EVERYTHING:</span>
+<input type="text" name="total_cost" placeholder="total costs" value="<?php echo $_SESSION['total_cost'];?>"><br>
+  
+<span>Name of supervising teacher:</span>
+<input type="text" name="teachers_name" placeholder="" value="<?php echo $_SESSION['teachers_name'];?>"><br>  
 
 </form>
-
-<a href="worker_cpanel.php">Back</a>
+</html>
 
 <?php
 } else {
@@ -370,8 +294,6 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 <?php
 }
 ?>
-
-
 
 </body>
 </html>
