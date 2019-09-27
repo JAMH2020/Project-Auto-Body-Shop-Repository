@@ -86,10 +86,6 @@ save_session('parts_costs');
 $labour_costs =  "";
 save_session('labour_costs');
   
-//intake odometer reading
-$intake_odometer_reading =  "";
-save_session('intake_odometer_reading');
-  
 //shops supplies cost
 $supplies_cost =  "";
 save_session('supplies_costs');
