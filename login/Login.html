@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <div class="backcolour">
+    <div class="background">
+    <div class="wrapper">
+       
+            
+          <font class="login" size="10">Login</font>
+    
+       
+         <div class="adjustments">
+        <center><font size="5">Please fill in your credentials to login.</font></center>
+         
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+
+            <center><div class="form-group">
+                <label>Username</label>
+                <input type="text" name="login_username" class="form-control" value="<?php echo $login_username; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>  </center>  
+
+            <center><div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <label>Password</label>
+                <input type="text" name="login_password" class="form-control">
+                <span class="help-block"><?php echo $password_err; ?></span>
+
+            </div></center>
+
+            <center><div class="form-group" >
+                <input type="submit" name="login" class="btn btn-primary" value="Login">
+            </div></center>
+
+            <center><p>Don't have an account? <a href="../create_account/signup.php">Sign up now</a>.</p></center>
+          
+        </form>
+      </div>
+    </div>  
+    <style>
+      body{
+       //background-color:#008080; 
+  //background-color:#000066;
+//background-color:#246175;
+background-color:teal;
+ }
+
+      }
+      
+      </style>     
+    
+      
+
+
+ </div>
+</body>
+</div>
+</div>
+</html>
