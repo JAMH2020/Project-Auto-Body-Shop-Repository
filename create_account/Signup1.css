@@ -1,0 +1,42 @@
+.Signup{
+ text-decoration: underline;
+ 
+ /* transform: translate(-210px,-80px);*/
+ display:inline-block;
+ width:100%;
+ text-align: center;
+padding-top:150px;
+padding-bottom:100px;
+ 
+}
+.di{
+ padding-bottom:12.5px;
+ padding-top:12.5px;
+
+
+}
+.background{
+
+  /* The Background Image */
+  background-image:url("https://openroadautobody.com/sites/default/files/wyswiyg_uploads/orrab-langley-shop-970x300-20151210-draft-1.jpg");
+
+  /* Height of Image */
+  height: 100%;
+
+  /* Setting The location Of The Image */
+  background-position: center;
+  background-size: cover;
+margin-top: 150px;
+
+ }
+ .box{
+  width: 400px;
+  height: 100%;
+  background-color: rgb(100, 211, 252);
+  border: 5px solid White;
+margin-left: auto;
+ margin-right: auto;
+ margin-top: 50px;
+
+ }
+ 
