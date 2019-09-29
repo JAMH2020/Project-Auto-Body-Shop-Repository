@@ -5,10 +5,10 @@
 
 
 //include file to connect to the database
-include '../../database/connectdb.php';
+include_once '../../database/connectdb.php';
 
 //include file to check errors in sql statements
-include '../../database/error_check.php';
+include_once '../../database/error_check.php';
 
 
 //prepare and bind sql statement
@@ -44,7 +44,13 @@ if ($stmt_a_waccounts->num_rows > 0){
       echo "<td>" . $worker_firstnameRow . " " . $worker_lastnameRow . "</td>";
       echo "<td>" . $worker_passwordRow . "</td>";
       echo "<td>" . $worker_emailRow . "</td>";
-     
+?>
+
+            <td>
+              <a href='#' onclick='findCAccountRow("<?php echo $worker_idRow?>", "../../database/select/find_row/find_row_waccounts.php", "change/change_account.php"); return false;'>Edit</a>
+            </td>
+
+<?php     
     echo "</tr>";
   }
   
