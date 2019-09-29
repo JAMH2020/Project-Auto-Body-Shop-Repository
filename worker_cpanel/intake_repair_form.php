@@ -1,6 +1,8 @@
 <?php
-//start the session to remember the session variables
-session_start();
+//start the session if it has not been started yet
+if (session_start() === null){
+  session_start();
+}
 ?>
 
 <!DOCTYPE html>

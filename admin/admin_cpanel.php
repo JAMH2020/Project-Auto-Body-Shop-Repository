@@ -14,11 +14,11 @@ if (session_start() === null){
   include "../navigation_bar/navigation_bar.php";
 ?>
 
-<a href="#">Check Orders</a>
+<a href="orders/check_orders.php">Check Orders</a>
 <a href="#">Check Invoices</a>
-<a href="#">Check Customer Accounts</a>
-<a href="#">Check Customer Profiles</a>
-<a href="#">Check Worker Accounts</a>
+<a href="accounts/customer_acc.php">Check Customer Accounts</a>
+<a href="profiles/check_profiles.php">Check Profiles</a>
+<a href="accounts/worker_acc.php">Check Worker Accounts</a>
 
 
 

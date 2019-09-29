@@ -5,14 +5,14 @@
 
 
 //include file to connect to the database
-include '../../database/connectdb.php';
+include_once '../../database/connectdb.php';
 
 //include file to check errors in sql statements
-include '../../database/error_check.php';
+include_once '../../database/error_check.php';
 
 
 //prepare and bind sql statement
-$stmt_a_caccounts = $conn->prepare("SELECT * FROM Customer_Accounts");
+$stmt_a_caccounts = $conn->prepare("SELECT * FROM Customer_Accounts ORDER BY Last_Name");
 
 //execute the statement
 $stmt_a_caccounts->execute();
@@ -23,6 +23,7 @@ $stmt_a_caccounts->store_result();
 //bind the results
 $stmt_a_caccounts->bind_result($customer_idRow, $customer_firstnameRow, $customer_lastnameRow, $customer_passwordRow, $customer_emailRow);
 
+//$path = "../../database/select/find_row/find_row_caccounts.php";
 
 //print out the accounts that are available
 if ($stmt_a_caccounts->num_rows > 0){
@@ -35,15 +36,22 @@ if ($stmt_a_caccounts->num_rows > 0){
       echo "<th>Name</th>";
       echo "<th>Password</th>";
       echo "<th>Email</th>";
+      echo "<th></th>";
       
     echo "</tr>";
 
   while($stmt_a_caccounts->fetch()){
-     echo "<tr>";
-      echo "<td> <input type='radio' name='order_id' value=" . $customer_idRow .">" . $customer_idRow . "</td>";
+   echo "<tr>";
+      echo "<td> <input type='checkbox' name='customer_idArr[]' value=" . $customer_idRow .">" . $customer_idRow . "</td>";
       echo "<td>" . $customer_firstnameRow . " " . $customer_lastnameRow . "</td>";
       echo "<td>" . $customer_passwordRow . "</td>";
       echo "<td>" . $customer_emailRow . "</td>";
+      
+?>
+            <td>
+              <a href='#' onclick='findCAccountRow("<?php echo $customer_idRow?>", "../../database/select/find_row/find_row_caccounts.php", "change/change_account.php"); return false;'>Edit</a>
+            </td>
+<?php
      
     echo "</tr>";
    }
@@ -58,3 +66,4 @@ if ($stmt_a_caccounts->num_rows > 0){
 
 //close the statement
 $stmt_a_caccounts->close();
+?>

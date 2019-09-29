@@ -1,8 +1,7 @@
 <?php
 /***********************************************
-** shows all the customer accounts available  **
+** shows all the customer profiles available  **
 ************************************************/
-
 
 //include file to connect to the database
 include '../../database/connectdb.php';
@@ -17,15 +16,17 @@ $stmt_a_cprofiles = $conn->prepare("SELECT Customer_Profile.Profile_Id, Customer
                                     LEFT JOIN Customer_Accounts ON Customer_Profile.Email=Customer_Accounts.Email
                                     WHERE Customer_Profile.Email=Customer_Accounts.Email");
 
+
 //execute the statement
 $stmt_a_cprofiles->execute();
+
 
 //store the result
 $stmt_a_cprofiles->store_result();
 
+
 //bind the results
 $stmt_a_cprofiles->bind_result($profile_idRow,$customer_firstnameRow ,$customer_lastnameRow,$customer_phoneRow, $customer_addressRow, $customer_emailRow, $car_makeRow, $car_modelRow, $vin_noRow, $license_plateRow);
-
 
 //print out the accounts that are available
 if ($stmt_a_cprofiles->num_rows > 0){
@@ -33,7 +34,7 @@ if ($stmt_a_cprofiles->num_rows > 0){
   //prints out a table
   echo "<table>";
     echo "<tr>";
-      
+
       echo "<th>Customer Profile Id</th>";
       echo "<th>Name</th>";
       echo "<th>Phone Number</th>";
@@ -43,12 +44,12 @@ if ($stmt_a_cprofiles->num_rows > 0){
       echo "<th>Car Model</th>";
       echo "<th>Vin Number</th>";
       echo "<th>License Plate</th>";
-      
     echo "</tr>";
 
   while($stmt_a_cprofiles->fetch()){
+
      echo "<tr>";
-      echo "<td> <input type='radio' name='order_id' value=" . $customer_idRow .">" . $customer_idRow . "</td>";
+      echo "<td> <input type='radio' name='order_id' value=" . $profile_idRow .">" . $profile_idRow . "</td>";
       echo "<td>" . $customer_firstnameRow . " " . $customer_lastnameRow . "</td>";
       echo "<td>" . $customer_phoneRow . "</td>";
       echo "<td>" . $customer_addressRow . "</td>";
@@ -57,16 +58,20 @@ if ($stmt_a_cprofiles->num_rows > 0){
       echo "<td>" . $car_modelRow . "</td>";
       echo "<td>" . $vin_noRow . "</td>";
       echo "<td>" . $license_plateRow . "</td>";
-     
+?>
+
+            <td>
+              <a href='#' onclick='findCAccountRow("<?php echo $profile_idRow?>", "../../database/select/find_row/find_row_cprofiles.php", "change/change_profile.php"); return false;'>Edit</a>
+            </td>
+
+<?php
     echo "</tr>";
    }
-   
    echo "</table>";
    
 } else {
   echo "<h3>" . "There are no orders available" . "</h3>";
 }
-
 
 
 //close the statement
