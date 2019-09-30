@@ -1,0 +1,138 @@
+
+body{
+  background-color:teal;
+}
+
+.login{
+  text-decoration: underline;
+  display:inline-block;
+  width:100%;
+  text-align: center;
+  padding-top:100px;
+  font-size:40px;
+}
+
+.form-group{
+  padding-top: 25px;
+}
+
+.adjustments{
+  padding-top: 100px;
+  padding-bottom: 110px;
+}
+
+.wrapper{
+  width: 400px;
+  height: 100%;
+  background-color: rgb(100, 211, 252);
+  border: 5px solid White;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+ }
+
+ /*instruction to the login*/
+ .instruction{
+   display:inline-block;
+   width:100%;
+   text-align: center;
+ }
+
+ .background{
+  /* The Background Image */
+  background-image:url("https://columbiaautoservice.ca/wp-content/uploads/2018/03/Service-5.jpg");
+    min-height: 550px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+
+ .background_cover{
+   position:relative;
+   top: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   background-color: rgba(0, 115, 153,0.3)
+ }
+
+ /*headings of the login page*/
+ .login_headings{
+   font-weight: bold;
+ }
+
+ /*text input box*/
+ .form-control{
+  border-radius: 5px;
+  color: rgb(51, 204, 204);
+  background-color: rgb(0, 51, 102);
+  border-color: rgb(51, 204, 204);
+  padding: 3px 10px;
+ }
+
+ /*text inputs when highlighted*/
+ .form-control:focus{
+   transition: background-color 1s, border-color 1s, color 1s;
+   background-color:rgb(51, 204, 204);
+   border-color: rgb(0, 51, 102);
+   color: rgb(0, 51, 102);
+  
+ }
+
+ /*login button*/
+ .login_btn{
+   padding: 2px 30px;
+   color: rgb(0, 51, 102);
+   border-radius: 20px;
+   background-color:rgb(100, 211, 252);
+   border: 2px solid rgb(0, 51, 102);
+   margin-bottom: 20px;
+ }
+
+ /*button on hover*/
+ .login_btn:hover{
+   transition: background-color 1s, border-color 1s;
+   background-color: rgb(0,255,204);
+   border-color: rgb(0,255,204);
+ }
+
+ /*placeholder*/
+ ::placeholder{
+   color:rgb(0,204,163);
+   opacity:0.7;
+ }
+
+ /*link to signup page*/
+ .join_link{
+   text-decoration: none;
+   color:rgb(0, 153, 153);
+   display: block;
+   text-align:center;
+ }
+
+ .join_link:hover{
+   transition: color 1s;
+    color: rgb(0, 255, 204);
+ }
+
+ .link_underline{
+  opacity:0;
+  padding: 1px 2px;
+  background-color:rgb(0, 153, 153);
+  height: 1px;
+  width:2px;
+  margin:auto;
+  border-radius: 20px;
+  position:relative;
+ }
+
+ .join_link:hover .link_underline{
+   opacity:1;
+   background-color:rgb(0, 255, 204);
+   transform: scaleX(17);
+   transition: opactiy 1s, background-color 1s, transform 1s;
+
+ }
