@@ -12,9 +12,11 @@ if (session_start() === null){
 <head>  
   <meta charset="UTF-8">
   <title>Login</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
   <!--script that will redirect user to the menu once they loggin in successfully-->
   <script src="../src/js/submit_form.js"></script>
+  <!--style sheet for the login page-->
+  <link href="login_styles.css" rel="stylesheet" type="text/css" />
+  
   
   <style type="text/css">
     body{ font: 14px sans-serif; }
@@ -76,38 +78,57 @@ include "../navigation_bar/navigation_bar.php";
 ?>
 
  
-    <div class="wrapper">
+    <div class="background">
+     <div class="background_cover">
+        <div class="wrapper">
 
-        <h2>Login</h2>
+      
+          <font class="login" size="10">Login</font>
 
-        <p>Please fill in your credentials to login.</p>
+         <div class="adjustments">
+
+        <span class="instruction">Please fill in your credentials to login.</span>
+
+         
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
-            <div class="form-group">
 
-                <label>Username</label>
+
+            <center><div class="form-group">
+                <label class="login_headings">Username</label>
 
                 <input type="text" name="login_username" class="form-control" value="<?php echo $login_username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
 
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="text" name="login_password" class="form-control">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>  </center>  
+
+
+            <center><div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+
+                <label class="login_headings">Password</label>
+
+                <input type="text" name="login_password" class="form-control" placeholder="Password">
+
                 <span class="help-block"><?php echo $password_err; ?></span>
 
-            </div>
+              </div>
+            </center>
 
-            <div class="form-group">
-                <input type="submit" name="login" class="btn btn-primary" value="Login">
-            </div>
+            <center><div class="form-group" >
+                <input type="submit" name="login" class="login_btn" value="Login">
+            </div></center>
 
-            <p>Don't have an account? <a href="../create_account/signup.php">Sign up now</a>.</p>
-
+            <span class="instruction">Don't have an account? </span>
+            
+            <a class="join_link" href="../create_account/signup.php">Sign up now
+                <div class="link_underline"></div>
+            </a>
+       
         </form>
 
-    </div>    
+       </div>
+     </div>  
 
 </body>
 
