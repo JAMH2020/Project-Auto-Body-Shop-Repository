@@ -1,0 +1,136 @@
+.Signup{
+  text-decoration: underline;
+  display:inline-block;
+  width:100%;
+  text-align: center;
+  padding-top:100px;
+  font-size:40px;
+}
+.di{
+ padding-bottom:12.5px;
+ padding-top:12.5px;
+ font-weight: bold;
+
+
+}
+.background{
+
+  /* The Background Image */
+  background-image:url("../images/sign_up/signup_pic.jpg");
+
+    min-height: 550px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+ .box{
+  width: 400px;
+  height: 100%;
+  background-color: rgb(100, 211, 252);
+  border: 5px solid White;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 60px 40px;
+ }
+
+ /*text input box*/
+ .form-control{
+  border-radius: 5px;
+  color: rgb(51, 204, 204);
+  background-color: rgb(0, 51, 102);
+  border-color: rgb(51, 204, 204);
+  padding: 3px 10px;
+ }
+
+  /*text inputs when highlighted*/
+ .form-control:focus{
+   transition: background-color 1s, border-color 1s, color 1s;
+   background-color:rgb(51, 204, 204);
+   border-color: rgb(0, 51, 102);
+   color: rgb(0, 51, 102);
+  
+ }
+
+  /*sign-up button*/
+ .signup_btn{
+   padding: 2px 30px;
+   color: rgb(0, 51, 102);
+   border-radius: 20px;
+   background-color:rgb(100, 211, 252);
+   border: 2px solid rgb(0, 51, 102);
+   margin-bottom: 20px;
+ }
+
+ /*button on hover*/
+ .signup_btn:hover{
+   transition: background-color 1s, border-color 1s;
+   background-color: rgb(0,255,204);
+   border-color: rgb(0,255,204);
+   cursor: pointer;
+ }
+
+ /*checkbox container*/
+ .checkbox_container{
+   display: block;
+   position: relative;
+   padding: 10px;
+ }
+
+ /*custom checkmark*/
+ .checkmark{
+   padding: 10px;
+   background-color: rgb(0, 51, 102);
+   display:inline-block;
+   transform:translate(0,5px);
+ }
+
+ /*the hidden checkbox*/
+ .checkbox_hidden{
+   display:block;
+   opacity:0;
+ }
+
+ /*when hovering over the checkbox option*/
+ .checkbox_container:hover .checkmark{
+  background-color:rgb(0, 115, 230);
+  transition: background-color 0.5s;
+ }
+
+ /*have a pointer cursor when hovering over the checkbox or its heading*/
+ .checkbox_container:hover{
+   cursor:pointer;
+ }
+
+ /*change colour of the checkmark box when input is checked*/
+ .checkbox_hidden:checked ~ .checkmark{
+  background-color:rgb(51, 204, 204);
+  transition: background-color 0.5s;
+ }
+
+ /*add a check symbol when the checkbox is checked*/
+ .checkmark::after{
+   content:"";
+   position: absolute;
+   opacity:0;
+   padding:3px;
+   border: solid rgb(255,255,255);
+   top:1.5px;
+   left: 7px;
+   height:6px;
+   transform:rotate(45deg);
+   border-width: 0 2px 2px 0;
+ }
+
+ /*show the check mark symbol when hidden checkbox is checked*/
+ .checkbox_hidden:checked ~.checkmark::after{
+   opacity:1;
+   transition:opacity 1s;
+ }
+
+   transition:opacity 1s;
+ }
+
+ 
