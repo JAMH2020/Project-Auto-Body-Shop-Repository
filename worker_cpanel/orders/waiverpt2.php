@@ -11,7 +11,7 @@ if (session_start() === null){
 <html>
 <head>
   <!--script that will redirect the user to another page-->
-  <script src="../src/js/submit_form.js"></script>
+  <script src="../../src/js/submit_form.js"></script>
 </head>
 <body>
 
@@ -20,7 +20,7 @@ if (session_start() === null){
 if (!isset($_POST['waiver2_submit'])){
 
   //include the navigation bar
-  include "../navigation_bar/navigation_bar.php";
+  include "../../navigation_bar/navigation_bar.php";
 ?>
 
 <h1>Automotive Repair Waiver</h1>
@@ -165,11 +165,13 @@ this</span>
 } else {
   echo "intake and waiver complete";
   
-  include "../database/insert/insert_intake.php";
+  include "../../database/insert/insert_intake.php";
 ?>
 
-<script> redirect_page("worker_cpanel.php");</script>
+<script> redirect_page("../worker_cpanel.php");</script>
 
 <?php
 }
 ?>
+  </body>
+</html>
