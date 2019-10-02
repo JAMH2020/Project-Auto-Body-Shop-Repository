@@ -9,7 +9,7 @@ if (session_start() === null){
 <html>
 <head>
   <!--script that will redirect the user to another page-->
-  <script src="../src/js/submit_form.js"></script>
+  <script src="../../src/js/submit_form.js"></script>
 </head>
 <body>
 
@@ -17,7 +17,7 @@ if (session_start() === null){
 
 
 //include file for initiating sessions if they have not beeen created yet
-include_once "../database/initiate_session.php";
+include_once "../../database/initiate_session.php";
 
 
 //order number
@@ -88,9 +88,8 @@ save_session("estimate_date");
 save_session("estimate_expiry_date");
 
 //removal choice of parts during the work process (A: returned to undersigned ______ or B: disposed of bye the school ______)
-$removal_choice = $removal_fillin = "";
+$removal_choice = "";
 save_session("removal_choice");
-save_session("removal_fillin");
 
 
 
@@ -100,11 +99,11 @@ $order_noERR = $school_nameERR = $school_addressERR = $car_yearERR = $car_makeER
 = $odometer_intakeERR = $plan_descriptionERR = $plan_dateERR = $estimate_parts_per_unitERR = $estimate_parts_totalERR =
 $estimate_labour_per_unitERR = $estimate_labour_totalERR = $estimate_supplies_per_unitERR = $estimate_supplies_totalERR = 
 $estimate_disposal_per_unitERR = $estimate_disposal_totalERR = $estimate_total_costERR = $estimate_dateERR = $estimate_expiry_dateERR
-= $removal_choiceERR = $removal_fillinERR = "";
+= $removal_choiceERR = "";
 
 
 //include file that will fix the user inputs that are entered
-include_once "../database/fixinput.php";
+include_once "../../database/fixinput.php";
 
 
 
@@ -166,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 //check if there are any missing or incorrect fields
 $error_intake_input;
 
-if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $car_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $plan_descriptionERR != "" or $plan_dateERR != "" or $estimate_parts_per_unitERR != "" or $estimate_parts_totalERR != "" or $estimate_labour_per_unitERR != "" or $estimate_labour_totalERR != "" or $estimate_supplies_per_unitERR  != "" or $estimate_supplies_totalERR != "" or $estimate_disposal_per_unitERR != "" or $estimate_disposal_totalERR != "" or $estimate_total_costERR != "" or $estimate_dateERR != "" or $estimate_expiry_dateERR != "" or $removal_choiceERR != "" or $removal_fillinERR != ""){
+if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $car_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $plan_descriptionERR != "" or $plan_dateERR != "" or $estimate_parts_per_unitERR != "" or $estimate_parts_totalERR != "" or $estimate_labour_per_unitERR != "" or $estimate_labour_totalERR != "" or $estimate_supplies_per_unitERR  != "" or $estimate_supplies_totalERR != "" or $estimate_disposal_per_unitERR != "" or $estimate_disposal_totalERR != "" or $estimate_total_costERR != "" or $estimate_dateERR != "" or $estimate_expiry_dateERR != "" or $removal_choiceERR != ""){
   $error_intake_input = true;
 } else {
   $error_intake_input = false;
@@ -178,7 +177,7 @@ if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $
 if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
   //include the navigation bar
-  include "../navigation_bar/navigation_bar.php";
+  include "../../navigation_bar/navigation_bar.php";
 ?>
 
 <!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
@@ -231,7 +230,8 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 <span><?php echo $car_modelERR;?></span>
 <span><?php echo $odometer_intakeERR;?></span> <br>
 
-<p>Description</p>
+<p>Detailed description of work to be performed including anticipated parts (including whether each part is a new part provided by the original equipment manufacturer, a new part not provided by the original equipment manufacturer, a used part or a reconditioned part) shop materials, environmental related, fees, disposal/recycling fees, etc.:
+</p>
 <span><?php echo $plan_descriptionERR;?></span> <br>
 <textarea name="plan_description" placeholder="Description..." rows="10" columns="50" value="<?php echo $_SESSION['plan_description'];?>"></textarea><br>
 
@@ -312,6 +312,8 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
   </tr>
 </table> <br>
 
+<p>The Board agrees that it will not charge the undersigned an amount that exceeds the Total Estimated Cost by more than 10 per cent. </p>
+
 
 <span>Date of Estimate:</span>
 <input type="date" name="estimate_date" placeholder="Date of Estimate" value="<?php echo $_SESSION['estimate_date'];?>"> <br>
@@ -326,16 +328,13 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
   <option value="A">(A) return to the undersigned</option>
   <option value="B">(B) disposed of by the School</option>
 </select>
-<span><?php echo $removal_choiceERR;?></span>
-
-<input type="text" name="removal_fillin" value="<?php echo $_SESSION['removal_fillin'];?>"><br>
-<span><?php echo $removal_fillinERR;?></span> <br>
+<span><?php echo $removal_choiceERR;?></span> <br>
 
 <input type="submit" name="submit_intake" value="Submit">
 
 </form>
 
-<a href="worker_cpanel.php">Back</a>
+<a href="../worker_cpanel.php">Back</a>
 
 <?php
 } else {
