@@ -10,13 +10,13 @@ if (session_start() === null){
 <html>
 <head>
   <!--script that will redirect the user to another page-->
-  <script src="../src/js/submit_form.js"></script>
+  <script src="../../src/js/submit_form.js"></script>
 </head>
 <body>
 
 <?php
 //include file for initiating sessions if they have not beeen created yet
-include_once "../database/initiate_session.php";
+include_once "../../database/initiate_session.php";
 
 
 //first name and last name of the customer
@@ -55,7 +55,7 @@ $customer_firstnameERR = $customer_lastnameERR = $customer_addressERR = $custome
 
 
 //include file that will fix the user inputs that are entered
-include_once "../database/fixinput.php";
+include_once "../../database/fixinput.php";
 
 
 
@@ -103,7 +103,7 @@ if ($error_waiver1_input or isset($_POST['submit_intake']) and !isset($_POST['wa
 
 
   //include the navigation bar
-  include "../navigation_bar/navigation_bar.php";
+  include "../../navigation_bar/navigation_bar.php";
 ?>
 
 <h1>WAIVER AND RELEASE OF LIABILITY</h1>
