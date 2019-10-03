@@ -18,9 +18,10 @@ if (session_start() === null){
 include "../navigation_bar/navigation_bar.php";
 ?>
 
-<a href="intake_repair_form.php">Create Order</a>
+<a href="intake_repair_form.php" class='order'>Create Order</a>
 
-<h2>My Orders</h2>
+<h2 class='title'>MY ORDERS</h2>
+
 
 <?php
 //include file for selecting orders
