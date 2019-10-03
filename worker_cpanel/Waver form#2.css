@@ -1,0 +1,43 @@
+.Title{
+ text-decoration: underline #cc0000;
+ 
+ /* transform: translate(-210px,-80px);*/
+ display:inline-block;
+ width:100%;
+ text-align: center;
+padding-top:150px;
+padding-bottom:100px;
+ 
+}
+.button{
+background-color: #008CBA;/* blue */
+  //border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+border: 5px solid black;
+}
+.back{
+background-color: rgb(170, 18, 18);/* Green */
+  //border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+border: 5px solid black;
+margin-left:30px;
+}
+.Name{
+padding-left:1200px;
+
+}
+.Sig{
+padding-left:100px;
+
+
+}
