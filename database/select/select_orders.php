@@ -2,14 +2,10 @@
 /********************************************************
 ** shows all the orders of the worker who is logged on **
 *********************************************************/
-
-
 //include file to connect to the database
 include '../database/connectdb.php';
-
 //include file to check errors in sql statements
 include '../database/error_check.php';
-
 //prepare and bind sql statement
 //first part of the orders table
 //inner join the customer accounts table into the orders table in order to get the customer's name using the customer id as the key
@@ -18,27 +14,18 @@ $stmt_orders1 = $conn->prepare("SELECT Orders.Order_No, Orders.Date, Customer_Ac
                                 INNER JOIN Customer_Accounts ON Orders.Customer_Id=Customer_Accounts.Customer_Id
                                 WHERE Orders.Customer_Id = ?");
 $stmt_orders1->bind_param("i", $worker_id);
-
-
-
 //worker id from the sessions in the login
 $worker_id = 1;
-
 //execute the prepared statement
 $stmt_orders1->execute();
-
 //store the selected result
 $stmt_orders1->store_result();
-
 //bind the selected results
 $stmt_orders1->bind_result($order_noRow, $dateRow, $customer_firstnameRow, $customer_lastnameRow, $plan_descriptionRow, $plan_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow); 
-
-
-
 //prints out the orders if there are any
 if ($stmt_orders1->num_rows > 0){
   //print table out
-  echo "<table>";
+  echo "<table class='table'>";
     echo "<tr>";
   
       echo "<th>Order Number</th>";
@@ -50,6 +37,7 @@ if ($stmt_orders1->num_rows > 0){
       echo "<th>School Name</th>";
       echo "<th>School Address</th>";
       echo "<th>Status</th>";
+      
   
     echo "</tr>";
     
@@ -65,6 +53,7 @@ if ($stmt_orders1->num_rows > 0){
      echo "<td>" . $school_nameRow . "</td>";
      echo "<td>" . $school_addressRow . "</td>";
      echo "<td>" . $statusRow . "</td>";
+  
      
    echo "</tr>";
   }
@@ -73,11 +62,9 @@ if ($stmt_orders1->num_rows > 0){
   
 //if there are no orders for the specific id
 } else {
-  echo "<h3>" . "There are no orders available" . "</h3";
+  echo "<h3 class='conclusion'>" . "There Are No Orders Available" . "</h3>";
   exit();
 }
-
-
 //close the statement
 $stmt_orders1->close();
   
