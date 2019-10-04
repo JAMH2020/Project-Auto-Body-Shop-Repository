@@ -3,6 +3,15 @@ body {
   background-color:	rgb(230, 230, 230);
 }
 
+.image{
+  height:120px;
+  background-image:url('PDSB.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+  margin: -100px 0 100px 50px;
+}
+
 .title {
   text-align: center;
   margin: auto;
