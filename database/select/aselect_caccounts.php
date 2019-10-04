@@ -1,69 +1,76 @@
 <?php
-/***********************************************
-** shows all the customer accounts available  **
-************************************************/
+/*****************************************************************
+** find values of a specific row in the customer accounts table **
+******************************************************************/
 
+//start the session if it has not been started yet
+if (session_start() === null){
+  session_start();
+}
 
 //include file to connect to the database
-include_once '../../database/connectdb.php';
+include_once '../../connectdb.php';
 
 //include file to check errors in sql statements
-include_once '../../database/error_check.php';
+include_once '../../error_check.php';
 
 
 //prepare and bind sql statement
-$stmt_a_caccounts = $conn->prepare("SELECT * FROM Customer_Accounts ORDER BY Last_Name");
+$stmt_find_caccounts = $conn->prepare("SELECT * FROM Customer_Accounts WHERE Customer_Id= ?");
+$stmt_find_caccounts->bind_param("i",$customer_find_id);
+
+//get the customer id using AJAX
+$customer_find_id = $_POST['rowId'];
 
 //execute the statement
-$stmt_a_caccounts->execute();
+$stmt_find_caccounts->execute();
 
 //store the result
-$stmt_a_caccounts->store_result();
+$stmt_find_caccounts->store_result();
 
 //bind the results
-$stmt_a_caccounts->bind_result($customer_idRow, $customer_firstnameRow, $customer_lastnameRow, $customer_passwordRow, $customer_emailRow);
+$stmt_find_caccounts->bind_result($customer_idRow, $customer_firstnameRow, $customer_lastnameRow, $customer_passwordRow, $customer_emailRow);
 
-//$path = "../../database/select/find_row/find_row_caccounts.php";
 
-//print out the accounts that are available
-if ($stmt_a_caccounts->num_rows > 0){
 
-  //prints out a table
-  echo "<table>";
-    echo "<tr>";
-      
-      echo "<th>Customer Id</th>";
-      echo "<th>Name</th>";
-      echo "<th>Password</th>";
-      echo "<th>Email</th>";
-      echo "<th></th>";
-      
-    echo "</tr>";
 
-  while($stmt_a_caccounts->fetch()){
-   echo "<tr>";
-      echo "<td> <input type='checkbox' name='customer_idArr[]' value=" . $customer_idRow .">" . $customer_idRow . "</td>";
-      echo "<td>" . $customer_firstnameRow . " " . $customer_lastnameRow . "</td>";
-      echo "<td>" . $customer_passwordRow . "</td>";
-      echo "<td>" . $customer_emailRow . "</td>";
-      
-?>
-            <td>
-              <a href='#' onclick='findCAccountRow("<?php echo $customer_idRow?>", "../../database/select/find_row/find_row_caccounts.php", "change/change_account.php"); return false;'>Edit</a>
-            </td>
-<?php
-     
-    echo "</tr>";
+//store the values of the row into sessions
+if ($stmt_find_caccounts->num_rows > 0){
+
+  while($stmt_find_caccounts->fetch()){
+    //store the values into sessions
+    //customer id
+    $_SESSION['customer_id'] = $customer_idRow;
+ 
+    //firstname
+    $_SESSION['customer_firstname'] = $customer_firstnameRow;
+    
+    //lastname
+    $_SESSION['customer_lastname'] = $customer_lastnameRow;
+    
+    //password
+    $_SESSION['customer_password'] = $customer_passwordRow;
+    
+    //email
+    $_SESSION['customer_email'] = $customer_emailRow;
+    
+    
+    //identify that a customer account is being changed instead of worker account
+    $_SESSION['account_change'] = 0;
+
    }
-   
-   echo "</table>";
-   
 } else {
-  echo "<h3>" . "There are no accounts available" . "</h3>";
+  echo "<p>nothing</p>";
 }
+
+echo "<p>c_id:" .  $_SESSION['customer_id'] . "</p>";
+echo "<p>c_firstame:" .  $_SESSION['customer_firstname'] . "</p>";
+echo "<p>c_password:" .  $_SESSION['customer_password'] . "</p>";
+echo "<p>c_email:" .  $_SESSION['customer_email'] . "</p>";
+echo "<p>c_change_status:" .  $_SESSION['account_change'] . "</p>";
 
 
 
 //close the statement
-$stmt_a_caccounts->close();
+$stmt_find_caccounts->close();
 ?>
