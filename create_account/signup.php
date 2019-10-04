@@ -1,8 +1,29 @@
- <!--script to create bullet points of error messages if there is a missing field
- or an error with the user's input-->
+<?php
+//start the session if it has not been started yet
+if (session_start() === null){
+  session_start();
+}
+?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>  
+
+
+  <!--script to create bullet points of error messages if there is a missing field
+  or an error with the user's input-->
   <script src="js/errorlist.js"></script>
   <!--script to show password -->
   <script src="js/showpassword.js"></script>
+  <!--script that will redirect the user to another page-->
+  <script src="../src/js/submit_form.js"></script>
+  <!--style page for the signup page-->
+  <link href="signup_styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
 
 <?php
 //first name and last name of the customer
@@ -30,16 +51,16 @@ include "../database/fixinput.php";
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
  
   //firstname
-  createErrMsg("customer_firstname", "first name", "customer_firstname", "customer_firstnameERR");
+  createErrMsg("sign_up", "first name", "customer_firstname", "customer_firstnameERR");
 
   //lastname
-  createErrMsg("customer_lastname", "last name", "customer_lastname", "customer_lastnameERR");
+  createErrMsg("sign_up", "last name", "customer_lastname", "customer_lastnameERR");
 
   //email
-  createErrMsg("customer_email", "email", "customer_email", "customer_emailERR");
+  createErrMsg("sign_up", "email", "customer_email", "customer_emailERR");
 
   //password
-  createErrMsg("customer_password", "password", "customer_password", "customer_passwordERR");
+  createErrMsg("sign_up", "password", "customer_password", "customer_passwordERR");
  
  
   //show the error title if any fields are missing after signing up
@@ -52,83 +73,93 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 //ask the user to input the required fields if the user has not pressed the sign up button yet
 if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_passwordERR != "" or $customer_emailERR = ""){
+
+  //include the navigation bar
+  include "../navigation_bar/navigation_bar.php";
 ?>
 
-<span><?php echo $error_title;?></span>
-<ul id="errorList">
-  <?php
-  //list the error message for firstname if missing
-  if ($customer_firstnameERR != ""){
-  ?>
+    <div class="background">
+      <div class="box">
+    
+        <span><?php echo $error_title;?></span>
+          <ul id="errorList">
+          <?php
+           //list the error message for firstname if missing
+          if ($customer_firstnameERR != ""){
+          ?>
 
-  <script> listErrors("<?php echo $customer_firstnameERR?>"); </script>
+            <script> listErrors("<?php echo $customer_firstnameERR?>"); </script>
 
-  <?php
-  }
-
-  //list the error message for lastname if missing
-  if ($customer_lastnameERR != ""){
-  ?>
+          <?php
+           }
+          //list the error message for lastname if missing
+           if ($customer_lastnameERR != ""){
+          ?>
  
-  <script>
-  listErrors("<?php echo $customer_lastnameERR?>");
-  </script>
+            <script>listErrors("<?php echo $customer_lastnameERR?>");</script>
 
-  <?php
-  }
+          <?php
+          }
+          //list the error message for password if missing
+          if ($customer_passwordERR != ""){
+          ?>
 
-  //list the error message for password if missing
-  if ($customer_passwordERR != ""){
-  ?>
+            <script> listErrors("<?php echo $customer_passwordERR?>"); </script>
 
-  <script> listErrors("<?php echo $customer_passwordERR?>"); </script>
+          <?php
+          }
+          //list the error message for email if missing
+          if ($customer_emailERR != ""){
+          ?>
 
-  <?php
-  }
+           <script> listErrors("<?php echo $customer_emailERR?>"); </script>
 
-  //list the error message for email if missing
-  if ($customer_emailERR != ""){
-  ?>
-
-  <script> listErrors("<?php echo $customer_emailERR?>"); </script>
-
-  <?php
-  }
-  ?>
+          <?php
+          }
+          ?>
 
 
-</ul>
+         </ul>
 
-<h1>Sign Up</h1>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+        <font class="Signup" size="10">Sign Up</font>
+        <center>
+          <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
-<span>First Name:</span>
-<input type="text" name="customer_firstname" placeholder="First Name" value="<?php echo $_SESSION['customer_firstname'];?>">
+            <center class="di"><span>First Name:</span>
+            <input type="text" name="customer_firstname" class="form-control" placeholder="First Name" value="<?php echo $_SESSION['customer_firstname'];?>"></center>
 
-<span>Last Name:</span>
-<input type="text" name="customer_lastname" placeholder="Last Name" value="<?php echo $_SESSION['customer_lastname'];?>"> <br>
+            <center class="di"><span>Last Name:</span>
+            <input type="text" name="customer_lastname" class="form-control" placeholder="Last Name" value="<?php echo $_SESSION['customer_lastname'];?>"> <br></center>
 
-<span>Password:</span>
-<input type="password" name="customer_password" placeholder="Password" id="password" value="<?php echo $_SESSION['customer_password'];?>"> <br>
-
-
-<input type="checkbox" onclick="showPassword()">
-<span>Show Password</span> <br>
+            <center class="di"><span>Password:</span>
+            <input type="password" name="customer_password" class="form-control" placeholder="Password" id="password" value="<?php echo $_SESSION['customer_password'];?>"> <br></center>
 
 
-<span>Email:</span>
-<input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
+           <center class="di">
+             <label class="checkbox_container">
+              <input type="checkbox" class="checkbox_hidden" onclick="showPassword()">
+              <div class="checkmark"></div>
+              <span>Show Password</span> 
+             </label><br>
+           </center>
 
-<input type="submit" name="sign_up" value="Sign Up"> <br>
 
-</form>
+            <center class="di"><span>Email:</span>
+           <input type="text" name="customer_email" class="form-control" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> </center><br>
+
+            <center><input  type="submit" name="sign_up" class="signup_btn" value="Sign Up" > <br></center>
+
+          </form>
+        </center>
 
 <?php
 } else {
   echo "done";
-
   //insert the user sign up data into the accounts table in the database
   include "../database/insert/insert_signup.php";
 }
 ?>
-
+  </div>
+  </div>
+</body>
+</html>

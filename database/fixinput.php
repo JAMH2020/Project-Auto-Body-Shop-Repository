@@ -9,24 +9,34 @@
 //@param name name of the value that is going to appear in the error message
 //@param variable_name name of the global variable being used
 //@param error_variable_name corresponding error message that will display
-function createErrMsg($post_name, $name, $variable_name, $error_variable_name){
+function createErrMsg($intake_name, $name, $variable_name, $error_variable_name){
 
-  if (empty($_POST["$post_name"]) and empty($_SESSION["$variable_name"])){
+  //if the post of the variable is not set and the submit button has been pressed
+  if ($_POST["$variable_name"] == "" and isset($_POST["$intake_name"])) {
+      
+ 
     $GLOBALS["$error_variable_name"] = $name . " is missing";
 
     //store input into a session
-    $_SESSION["$variable_name"] = $_POST["$post_name"];
-
-  //if the user goes back  to a previous page
-  } else if (empty($_POST["$post_name"]) and !empty($_SESSION["$variable_name"])){
-    //store post value as the remembered session value
-    $_POST["$post_name"] = $_SESSION["$variable_name"];
-
-  }else {
-    $GLOBALS["$variable_name"] = fix_input($_POST["$post_name"], $post_name);
+    $_SESSION["$variable_name"] = $_POST["$variable_name"];
+    
+ 
+  } else if (empty($_POST["$variable_name"]) and !isset($_POST["$intake_name"])){
+  
+    //remembers the session if the user goes back to a previous page
+    if (!empty($_SESSION["$variable_name"])){
+      //store post value as the remembered session value
+      $_POST["$variable_name"] = $_SESSION["$variable_name"];
+    
+    }
+  
+  
+  } else {
+    $GLOBALS["$variable_name"] = fix_input($_POST["$variable_name"], $post_name);
 
     //store input into a session
-    $_SESSION["$variable_name"] = $_POST["$post_name"];
+    $_SESSION["$variable_name"] = $_POST["$variable_name"];
+    
   }
 }
 
@@ -47,5 +57,15 @@ function fix_input($data, $post_name){
   $_POST["$post_name"] = $data;
 
   return $data;
+}
+
+
+
+
+//function that is used to reformat dates into YYYY-MM-DD format to set value for date inputs
+function reformat_date($timestamp){
+
+  $date_format = date("Y-m-d",$timestamp);
+  return $date_format;
 }
 
