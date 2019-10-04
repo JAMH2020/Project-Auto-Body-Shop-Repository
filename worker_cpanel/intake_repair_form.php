@@ -141,6 +141,8 @@ if ($error_intake_input  or !isset($_POST['submit_intake']) and !isset($_POST['w
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 </div> 
 
+<div class="image"></div>
+  
 <div class="subtitle">
 <p class="subtitle-heading">School Information</p>
 </div>
