@@ -19,8 +19,8 @@ if (session_start() === null){
 //include file for initiating sessions if they have not beeen created yet
 include_once "../../database/initiate_session.php";
 //work order number
-$work_order_number = "";
-save_session('work_order_number');
+$order_no = "";
+save_session('order_no');
 
 //customer firstname
 $customer_firstname = "";
@@ -32,7 +32,7 @@ save_session('customer_lastname');
 
 //customer phone number
 $customer_phone_number = "";
-save_session('customer_phone_number');
+save_session('customer_phone');
 
 //customer address
 $customer_address = "";
@@ -62,16 +62,16 @@ $car_model =  "";
 save_session('car_model');
 
 //car VIN number
-$VIN = "";
-save_session('VIN');
+$vin_no = "";
+save_session('vin_no');
 
 //car license plate
-$car_license_plate = "";
-save_session('car_license_plate');
+$license_plate = "";
+save_session('license_plate');
 
 //intake odometer reading
 $intake_odometer_reading =  "";
-save_session('intake_odometer_reading');
+save_session('odometer_intake');
 
 //outtake odometer reading
 $return_odometer_reading =  "";
@@ -82,8 +82,8 @@ $done_description = "";
 save_session('done_description');
 
 //date of authorization of work
-$authorization_date = "";
-save_session('authorization_date');
+$work_date = "";
+save_session('work_date');
 
 //date of completion
 $completion_date = "";
@@ -96,8 +96,8 @@ save_session('return_date');
 
   
 //parts removed or not
-$removed_part_returned =  "";
-save_session('removed_part_returned');
+$removal_choice =  "";
+save_session('removal_choice');
 
 
 
@@ -136,8 +136,8 @@ $redi_fees =  "";
 save_session('redi_fees');
   
 //estimated total costs
-$estimated_costs =  "";
-save_session('estimated_costs');
+$estimate_total =  "";
+save_session('estimate_total');
   
 //Total cost of EVERYTHING
 $total_cost =  "";
@@ -146,11 +146,11 @@ save_session('total_cost');
   
   
 //errors for any missing fields in the repair intake form
-$work_order_numberERR = $customer_firstnameERR = $customer_lastnameERR = $customer_phone_numberERR = $customer_addressERR = $customer_emailERR = 
-$invoice_numberERR  = $car_model_yearERR = $car_makeERR = $car_modelERR = $VINERR = $car_license_plateERR = 
-$intake_odometer_readingERR = $return_odometer_readingERR = $done_descriptionERR = $authorization_dateERR = $completion_dateERR = $return_dateERR = 
-$removed_part_returnedERR = $parts_per_unitERR = $labour_per_unitERR = $supplies_per_unitERR = $disposal_per_unitERR=$parts_costsERR = $labour_costsERR
-= $supplies_costERR = $redi_feesERR = $estimated_costsERR = $total_costERR  = "";
+$order_noERR = $customer_firstnameERR = $customer_lastnameERR = $customer_phoneERR = $customer_addressERR = $customer_emailERR = 
+$invoice_numberERR  = $car_model_yearERR = $car_makeERR = $car_modelERR = $vin_noERR = $license_plateERR = 
+$odometer_intakeERR = $return_odometer_readingERR = $done_descriptionERR = $work_dateERR = $completion_dateERR = $return_dateERR = 
+$removal_choiceERR = $parts_per_unitERR = $labour_per_unitERR = $supplies_per_unitERR = $disposal_per_unitERR=$parts_costsERR = $labour_costsERR
+= $supplies_costERR = $redi_feesERR = $estimate_totalERR = $total_costERR  = "";
 
 
 
@@ -163,7 +163,7 @@ include_once "../../database/fixinput.php";
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
   
   //customer work order number
-  createErrMsg("submit_invoice", "order number", "work_order_number", "work_order_numberERR");
+  createErrMsg("submit_invoice", "order number", "order_no", "order_noERR");
  
   //customer firstname
   createErrMsg("submit_invoice", "customer firstname", "customer_firstname", "customer_firstnameERR");
@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "customer lastname", "customer_lastname", "customer_lastnameERR");
  
   //customer phone number
-  createErrMsg("submit_invoice", "customer phone ", "customer_phone_number", "customer_phone_numberERR");
+  createErrMsg("submit_invoice", "customer phone ", "customer_phone", "customer_phoneERR");
  
   //customer address
   createErrMsg("submit_invoice", "customer address", "customer_address", "customer_addressERR");
@@ -190,13 +190,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "car model", "car_model", "car_modelERR");
  
   //car VIN number
-  createErrMsg("submit_invoice", "odometer reading", "VIN", "VINERR");
+  createErrMsg("submit_invoice", "odometer reading", "vin_no", "vin_noERR");
   
    //car license plate
-  createErrMsg("submit_invoice", "license plate", "car_license_plate", "car_license_plateERR");
+  createErrMsg("submit_invoice", "license plate", "license_plate", "license_plateERR");
   
   //intake odometer reading
-  createErrMsg("submit_invoice", "intake odometer", "intake_odometer_reading", "intake_odometer_readingERR");
+  createErrMsg("submit_invoice", "intake odometer", "odometer_intake", "odometer_intakeERR");
   
   //odometer reading when returned
   createErrMsg("submit_invoice", "return reading", "return_odometer_reading", "return_odometer_reading ERR");
@@ -205,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "description", "done_description", "done_descriptionERR");
   
   //authorization date of work
-  createErrMsg("submit_invoice", "authorization date", "authorization_date", "authorization_dateERR");
+  createErrMsg("submit_invoice", "authorization date", "work_date", "work_dateERR");
   
   //completion date of work
   createErrMsg("submit_invoice", "completion date", "completion_date", "completion_dateERR");
@@ -214,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "date of return", "return_date", "return_dateERR");
   
   //returned parts returned or not
-  createErrMsg("submit_invoice", "removed parts returned or not", "removed_part_returned", "removed_part_returnedERR");
+  createErrMsg("submit_invoice", "removed parts returned or not", "removal_choice", "removal_choiceERR");
   
   //cost of parts per unit
   createErrMsg("submit_invoice", "cost of parts/unit", "parts_per_unit", "parts_per_unitERR");
@@ -241,27 +241,45 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "fees of disposal or recycling", "redi_fees", "redi_feesERR");
   
   //total estimated cost
-  createErrMsg("submit_invoice", "estimated costs", "estimated_costs", "estimated_costsERR");
+  createErrMsg("submit_invoice", "estimated costs", "estimate_total", "estimate_totalERR");
   
   //total cost of repair
   createErrMsg("submit_invoice", "repair cost", "total_cost", "total_costERR");
   
 }
-  //check if there are any missing or incorrect fields
+
+
+
+//if the session that store the dates are not blank, then reformat the dates into YYYY-MM-DD format
+//work authorization date
+if ($_SESSION['work_date'] != ""){
+  $work_date_format = date("Y-m-d",$_SESSION['work_date']);
+}
+
+
+
+//check if there are any missing or incorrect fields
 $error_intake_input;
-if ($work_order_numberERR != "" or $customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_phone_numberERR != "" or $customer_addressERR != "" or $customer_emailERR != "" or $invoice_numberERR != "" 
-or $car_model_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $VINERR != "" or $car_license_plateERR != "" or $intake_odometer_readingERR != "" or $return_odometer_readingERR != "" or $done_descriptionERR != ""  
-or $authorization_dateERR != "" or $completion_dateERR != "" or $return_dateERR != "" or $parts_per_unitERR != "" or $labour_per_unitERR != "" or $supplies_per_unitERR != "" or $disposal_per_unitERR != "" or $removed_part_returnedERR != ""
-or $parts_costsERR  != "" or $labour_costsERR != "" or $supplies_costERR != "" or $redi_feesERR != "" or $estimated_costsERR != "" or  $total_costERR != ""){
+if ($order_noERR != "" or $customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_phoneERR != "" or $customer_addressERR != "" or $customer_emailERR != "" or $invoice_numberERR != "" 
+or $car_model_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $return_odometer_readingERR != "" or $done_descriptionERR != ""  
+or $work_dateERR != "" or $completion_dateERR != "" or $return_dateERR != "" or $parts_per_unitERR != "" or $labour_per_unitERR != "" or $supplies_per_unitERR != "" or $disposal_per_unitERR != "" or $removal_choiceERR != ""
+or $parts_costsERR  != "" or $labour_costsERR != "" or $supplies_costERR != "" or $redi_feesERR != "" or $estimate_totalERR != "" or  $total_costERR != ""){
   
   $error_invoice_input = true;
+  
 } else {
   $error_invoice_input = false;
+  
+  //reformat all the dates into the correct format
+  //authorization of work date
+  $work_date = reformat_date($_SESSION['work_date']);
+  
+  //
 }
 
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
-if ($error_intake_input  or !isset($_POST['submit_invoice'])){
+if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
   //include the navigation bar
   include "../../navigation_bar/navigation_bar.php";
 ?>
@@ -272,8 +290,8 @@ if ($error_intake_input  or !isset($_POST['submit_invoice'])){
 
 <h3>Customer information</h3>
 <span>Work Order #:</span>
-<input type="text" name="work_order_number" placeholder="Work Order No." value="<?php echo $_SESSION['work_order_number'];?>"> <br>
-<span><?php echo $work_order_numberERR;?></span> <br>
+<input type="text" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>"> <br>
+<span><?php echo $order_noERR;?></span> <br>
 
 
 <span>Name(Print):</span>
@@ -283,10 +301,10 @@ if ($error_intake_input  or !isset($_POST['submit_invoice'])){
 
 
 <span>Phone:</span>
-<input type="text" name="customer_phone_number" placeholder="Phone number" value="<?php echo $_SESSION['customer_phone_number'];?>"> <br>
+<input type="text" name="customer_phone" placeholder="Phone number" value="<?php echo $_SESSION['customer_phone'];?>"> <br>
 <span><?php echo $customer_firstnameERR;?></span>
 <span><?php echo $customer_lastnameERR;?></span>
-<span><?php echo $customer_phone_numberERR;?></span> <br>
+<span><?php echo $customer_phoneERR;?></span> <br>
 
 
 <span>Address:</span>
@@ -319,8 +337,8 @@ if ($error_intake_input  or !isset($_POST['submit_invoice'])){
     
     <td> 
       <span>VIN #:</span>
-      <input type="text" name="VIN" placeholder="VIN" value="<?php echo $_SESSION['VIN'];?>"><br>
-      <span><?php echo $VINERR;?></span> <br>
+      <input type="text" name="vin_no" placeholder="VIN" value="<?php echo $_SESSION['vin_no'];?>"><br>
+      <span><?php echo $Vin_noERR;?></span> <br>
     </td>
   
   </tr>
@@ -334,8 +352,8 @@ if ($error_intake_input  or !isset($_POST['submit_invoice'])){
     
     <td>
       <span>License Plate</span>
-      <input type="text" name="car_license_plate" placeholder="License plate" value="<?php echo $_SESSION['car_license_plate'];?>"> <br>
-      <span><?php echo $car_license_plateERR;?></span>
+      <input type="text" name="license_plate" placeholder="License plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
+      <span><?php echo $license_plateERR;?></span>
     </td>
   </tr>
   
@@ -348,8 +366,8 @@ if ($error_intake_input  or !isset($_POST['submit_invoice'])){
     
     <td>
       <span>Odometer reading on intake:</span>
-      <input type="text" name="intake_odometer_reading" placeholder="Odometer on Intake" value="<?php echo $_SESSION['intake_odometer_reading'];?>"> <br>
-      <span><?php echo $intake_odometer_readingERR;?></span> <br>
+      <input type="text" name="odometer_intake" placeholder="Odometer on Intake" value="<?php echo $_SESSION['odometer_intake'];?>"> <br>
+      <span><?php echo $odometer_intakeERR;?></span> <br>
     </td>
   </tr>
   
@@ -372,19 +390,19 @@ if ($error_intake_input  or !isset($_POST['submit_invoice'])){
 <textarea name="done_description" placeholder="Description..." rows="10" columns="50" value="<?php echo $_SESSION['done_description'];?>"></textarea><br>
 
 <span>Date of authorization of work:</span>
-<input type="date" name="authorization_date" value="<?php echo $_SESSION['authorization_date'];?>">
+<input type="date" name="work_date" value="<?php echo $work_date_format;?>">
 
 <span>Date of completion of work:</span>
 <input type="date" name="completion_date" value="<?php echo $_SESSION['completion_date'];?>"><br>
-<span><?php echo $authorization_dateERR;?></span>
-<span><?php echo $completion_dateERR;?></span>
+<span><?php echo $work_dateERR;?></span>
+<span><?php echo $completion_dateERR;?></span> <br>
 
 <span>Date vehicle was returned:</span>
 <input type="date" name="return_date" placeholder="Date of return" value="<?php echo $_SESSION['return_date'];?>"> <br>
 <span><?php echo $return_dateERR;?></span> <br>
 
 <span>Any parts removed in the course of work on or repairs to the automobile shall be (select one): </span>
-<select name="removed_part_returned" value="<?php echo $_SESSION['removed_part_returned'];?>">
+<select name="removal_choice" value="<?php echo $_SESSION['removal_choice'];?>">
   <option value="A">(A) return to the undersigned</option>
   <option value="B">(B) disposed of by the School</option>
 </select>
@@ -453,8 +471,8 @@ if ($error_intake_input  or !isset($_POST['submit_invoice'])){
     <td>ESTIMATED OR AUTHORIZED COST:</td>
     <td></td>
     <td>
-      <input type="text" name="estimated_costs" placeholder="$ -Estimated Total" value="<?php echo $_SESSION['estimated_costs'];?>"><br>
-      <span><?php echo $estimated_costsERR;?></span>
+      <input type="text" name="estimate_total" placeholder="$ -Estimated Total" value="<?php echo $_SESSION['estimate_total'];?>"><br>
+      <span><?php echo $estimate_totalERR;?></span>
     </td>
   </tr>
   
@@ -480,7 +498,7 @@ if ($error_intake_input  or !isset($_POST['submit_invoice'])){
 } else {
   echo "done";
   //insert the user sign up data into the accounts table in the database
-  include "../../database/insert/insert_invoice.php";
+  //include "../../database/insert/insert_invoice.php";
 }
 ?>
 
