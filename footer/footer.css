@@ -1,0 +1,71 @@
+.footer{
+
+  background-color: 	rgb(3, 55, 107);
+  padding: 60px 40px 140px 40px;
+  z-index:2;
+  position:relative;
+  
+
+}
+
+
+.footer_items p {
+
+  color: white;
+
+  font-size: 12px;
+
+}
+
+
+.about{
+  margin-left:34%
+}
+
+
+.memeber{
+  float:left;
+}
+
+
+
+
+.photo{
+  width: 75px;
+  height: 75px;
+  background-color:rgb(163, 209, 240);
+  border-radius:100%;
+  margin:auto;
+  margin:0 2.5em;
+  background-color:rgb(163, 209, 240);
+}
+
+
+
+
+.name{
+  text-align:center;
+  font-size:15px;
+  font-weight:bold;
+}
+
+.conclusion{
+  height:50px;
+  background-color: rgb(163, 209, 240);
+}
+
+.conclusion{
+  text-align:center;
+  color: rgb(3, 55, 107);
+  font-size:18px;
+  font-weight:bold;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+
+
+.conclusion_info{
+  line-height:50px;
+}
+

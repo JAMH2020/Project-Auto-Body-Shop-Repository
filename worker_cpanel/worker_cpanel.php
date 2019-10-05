@@ -12,10 +12,10 @@ if (session_start() === null){
 <head>
   <!--JQuery library-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
+
   <!--script use to redirect the user to another page-->
   <script src="../src/js/submit_form.js"></script>
-  
+
   <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
   <script src="../database/findRow.js"></script>
 </head>
@@ -26,10 +26,10 @@ if (session_start() === null){
 include "../navigation_bar/navigation_bar.php";
 ?>
 
-<a href="orders/intake_repair_form.php">Create Order</a>
-<a href="invoices/invoice.php">Create Invoice</a>
+<a href="intake_repair_form.php" class='order'>Create Order</a>
 
-<h2>My Orders</h2>
+<h2 class='title'>MY ORDERS</h2>
+
 
 <?php
 //include file for selecting orders

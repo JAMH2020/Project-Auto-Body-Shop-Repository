@@ -1,10 +1,9 @@
 <?php
-//start the session if it has not been started yet
-if (session_start() === null){
-  session_start();
-}
+//start the session to remember the session variables
+session_start();
 ?>
 
+<!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +11,7 @@ if (session_start() === null){
   <script src="../../src/js/submit_form.js"></script>
 </head>
 <body>
-
 <?php
-
-
 //include file for initiating sessions if they have not beeen created yet
 include_once "../../database/initiate_session.php";
 
@@ -23,70 +19,53 @@ include_once "../../database/initiate_session.php";
 //order number
 $order_no = "";
 save_session("order_no");
-
-
 //school name and address
 $school_name = $school_address = "";
 save_session("school_name");
 save_session("school_address");
-
 //client's car repair information
 //year of car
 $car_year = "";
 save_session("car_year");
-
 //brand of the vehicle and the model
 $car_make = $car_model = "";
 save_session("car_make");
 save_session("car_model");
-
 //client's VIN number and license plate number
 $vin_no = $license_plate = "";
 save_session("vin_no");
 save_session("license_plate");
-
 //odometer reading at intake
 $odometer_intake = "";
 save_session("odometer_intake");
-
 //description of the work that is going to be done and date work is going to be performed
 $plan_description = $plan_date = "";
 save_session("plan_description");
 save_session("plan_date");
-
-
-
-
 //Estimate costings of repair
 //price of parts per unit and its total
 $estimate_parts_per_unit = $estimate_parts_total = "";
 save_session("estimate_parts_per_unit");
 save_session("estimate_parts_total");
-
 //price of labour per unit and its total
 $estimate_labour_per_unit = $estimate_labour_total =  "";
 save_session("estimate_labour_per_unit");
 save_session("estimate_labour_total");
-
 //price of shop supplies per unit and its total
 $estimate_supplies_per_unit = $estimate_supplies_total = "";
 save_session("estimate_supplies_per_unit");
 save_session("estimate_supplies_total");
-
 //price of recycling/disposal fee per unit and its total
 $estimate_disposal_per_unit = $estimate_disposal_total = "";
 save_session("estimate_disposal_per_unit");
 save_session("estimate_disposal_total");
-
 //total cost
 $estimtate_total_cost = "";
 save_session("estimate_total_cost");
-
 //date the estimate costings were declared and its expiry date
 $estimate_date = $estimate_expiry_date =  "";
 save_session("estimate_date");
 save_session("estimate_expiry_date");
-
 //removal choice of parts during the work process (A: returned to undersigned ______ or B: disposed of bye the school ______)
 $removal_choice = "";
 save_session("removal_choice");
@@ -97,7 +76,7 @@ save_session("removal_choice");
 //errors for any missing fields in the repair intake form
 $order_noERR = $school_nameERR = $school_addressERR = $car_yearERR = $car_makeERR = $car_modelERR = $vin_noERR = $license_plateERR
 = $odometer_intakeERR = $plan_descriptionERR = $plan_dateERR = $estimate_parts_per_unitERR = $estimate_parts_totalERR =
-$estimate_labour_per_unitERR = $estimate_labour_totalERR = $estimate_supplies_per_unitERR = $estimate_supplies_totalERR = 
+$estimate_labour_per_unitERR = $estimate_labour_totalERR = $estimate_supplies_per_unitERR = $estimate_supplies_totalERR =
 $estimate_disposal_per_unitERR = $estimate_disposal_totalERR = $estimate_total_costERR = $estimate_dateERR = $estimate_expiry_dateERR
 = $removal_choiceERR = "";
 
@@ -109,7 +88,6 @@ include_once "../../database/fixinput.php";
 
 //returns an error message if a field is missing
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
-
   //order number
   createErrMsg("submit_intake", "order number", "order_no", "order_noERR");
   //school name
@@ -159,9 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   //fill in for the removal choice
   createErrMsg("submit_intake", "blank", "removal_fillin", "removal_fillinERR");
 }
-
-
-
 //check if there are any missing or incorrect fields
 $error_intake_input;
 
@@ -170,9 +145,6 @@ if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $
 } else {
   $error_intake_input = false;
 }
-
-
-
 //ask the user to input the required fields if the user has not pressed the submit button yet
 if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
@@ -180,16 +152,25 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
   include "../../navigation_bar/navigation_bar.php";
 ?>
 
-<!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
-
-
-<h1>Automotive Intake Repair Form</h1>
+<div class ="title">
+<h1 class="title-heading">AUTOMOTIVE INTAKE REPAIR FORM</h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+</div>
 
-<p>School Information</p>
-<span>Work Order #:</span>
-<input type="text" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>"> <br>
+<div class="image"></div>
+
+<div class="subtitle">
+<p class="subtitle-heading">School Information</p>
+</div>
+
+<div class="information">
+<span class="information-heading"> Work Order #:</span>
+<input type="text" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>">
+<span>Teacher:</span>
+<input type="text" name="teacher" placeholder="Teacher" value="<?php echo $_SESSION['teacher'];?>">
+<br>
 <span><?php echo $order_noERR;?></span> <br>
+
 
 <span>School Name:</span>
 <input type="text" name="school_name" placeholder="School Name" value="<?php echo $_SESSION['school_name'];?>">
@@ -199,12 +180,16 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 <span><?php echo $school_nameERR;?></span>
 <span><?php echo $school_addressERR;?></span> <br>
+</div>
 
 
+<div class="subtitle">
+<p class="subtitle-heading">Automobile To Be Repaired</p>
+</div>
 
-<p>Automobile To Be Repaired</p>
-<span>Year:</span>
-<input type="text" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>"> 
+<div class="information">
+<span class="information-heading">Year:</span>
+<input type="text" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
 
 <span>VIN #:</span>
 <input type="text" name="vin_no" placeholder="VIN No." value="<?php echo $_SESSION['vin_no'];?>"><br>
@@ -233,17 +218,21 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 <p>Detailed description of work to be performed including anticipated parts (including whether each part is a new part provided by the original equipment manufacturer, a new part not provided by the original equipment manufacturer, a used part or a reconditioned part) shop materials, environmental related, fees, disposal/recycling fees, etc.:
 </p>
 <span><?php echo $plan_descriptionERR;?></span> <br>
+<div class="description">
 <textarea name="plan_description" placeholder="Description..." rows="10" columns="50" value="<?php echo $_SESSION['plan_description'];?>"></textarea><br>
+</div>
 
 <span>Date on which the work shall be completed:</span>
 <input type="date" name="plan_date" placeholder="Date" value="<?php echo $_SESSION['plan_date'];?>"> <br>
 <span><?php echo $plan_dateERR;?></span> <br>
+</div>
 
 
 
+<div class="subtitle">
+<p class="subtitle-heading">Estimate Costs</p> </div>
 
-<p>Estimate Costs</p>
-<table>
+<table class="table">
   <tr>
     <th>Total Estimated Cost</th>
     <th>Price Per Unit</th>
@@ -252,12 +241,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
   <tr>
     <td>Parts:</td>
-    <td> 
-      <input type="text" name="estimate_parts_per_unit" placeholder="$-Parts/Unit" value="<?php echo $_SESSION['estimate_parts_per_unit'];?>"> <br> 
+    <td>
+      <input type="text" name="estimate_parts_per_unit" placeholder="$-Parts/Unit" value="<?php echo $_SESSION['estimate_parts_per_unit'];?>"> <br>
       <span><?php echo $estimate_parts_per_unitERR;?></span>
     </td>
 
-    <td> 
+    <td>
       <input type="text" name="estimate_parts_total" placeholder="$-Parts Total" value="<?php echo $_SESSION['estimate_parts_total'];?>"> <br>
       <span><?php echo $estimate_parts_totalERR;?></span>
     </td>
@@ -265,12 +254,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
   <tr>
     <td>Labour:</td>
-    <td> 
+    <td>
       <input type="text" name="estimate_labour_per_unit" placeholder="$-Labour/Unit" value="<?php echo $_SESSION['estimate_labour_per_unit'];?>"> <br>
       <span><?php echo $estimate_labour_per_unitERR;?></span>
     </td>
 
-    <td> 
+    <td>
       <input type="text" name="estimate_labour_total" placeholder="$-Labour Total" value="<?php echo $_SESSION['estimate_labour_total'];?>"> <br>
       <span><?php echo $estimate_labour_totalERR;?></span>
     </td>
@@ -278,7 +267,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
   <tr>
     <td>Shop Supplies:</td>
-    <td> 
+    <td>
       <input type="text" name="estimate_supplies_per_unit" placeholder="$-Supplies/Unit" value="<?php echo $_SESSION['estimate_supplies_per_unit'];?>"> <br>
       <span><?php echo $estimate_supplies_per_unitERR;?></span>
     </td>
@@ -291,12 +280,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
   <tr>
     <td>Recycling/Disposal Fee:</td>
-    <td> 
+    <td>
       <input type="text" name="estimate_disposal_per_unit" placeholder="$-Recycling and Disposal/Unit" value="<?php echo $_SESSION['estimate_disposal_per_unit'];?>"> <br>
       <span><?php echo $estimate_disposal_per_unitERR;?></span>
     </td>
 
-    <td> 
+    <td>
       <input type="text" name="estimate_disposal_total" placeholder="$-Recycling and Disposal Total" value="<?php echo $_SESSION['estimate_disposal_total'];?>"> <br>
       <span><?php echo $estimate_disposal_totalERR;?></span>
     </td>
@@ -305,7 +294,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
   <tr>
     <td>Total Estimated Cost:</td>
     <td>  </td>
-    <td> 
+    <td>
       <input type="text" name="estimate_total_cost" placeholder="$-Estimate Total" value="<?php echo $_SESSION['estimate_total_cost'];?>"> <br>
       <span><?php echo $estimate_total_costERR;?></span>
     </td>
@@ -314,8 +303,8 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 <p>The Board agrees that it will not charge the undersigned an amount that exceeds the Total Estimated Cost by more than 10 per cent. </p>
 
-
-<span>Date of Estimate:</span>
+<div class="information">
+<span class="information-heading">Date of Estimate:</span>
 <input type="date" name="estimate_date" placeholder="Date of Estimate" value="<?php echo $_SESSION['estimate_date'];?>"> <br>
 <span><?php echo $estimate_dateERR;?></span><br>
 
@@ -328,21 +317,18 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
   <option value="A">(A) return to the undersigned</option>
   <option value="B">(B) disposed of by the School</option>
 </select>
-<span><?php echo $removal_choiceERR;?></span> <br>
+<span><?php echo $removal_choiceERR;?></span>
 
-<input type="submit" name="submit_intake" value="Submit">
+</div>
 
-</form>
+
+<input class="button" type="submit" name="submit_intake" value="Submit">
 
 <a href="../worker_cpanel.php">Back</a>
 
 <?php
 } else {
-?>
-
-<script>redirect_page("waiver.php");</script>
-
-<?php
+  include "waiver.php";
 }
 ?>
 

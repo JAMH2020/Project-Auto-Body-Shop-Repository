@@ -2,8 +2,6 @@
 /********************************************************
 ** shows all the orders of the worker who is logged on **
 *********************************************************/
-
-
 //include file to connect to the database
 include_once '../database/connectdb.php';
 
@@ -18,29 +16,23 @@ $stmt_orders1 = $conn->prepare("SELECT Orders.Order_Id, Orders.Order_No, Orders.
                                 INNER JOIN Customer_Accounts ON Orders.Customer_Id=Customer_Accounts.Customer_Id
                                 WHERE Orders.Worker_Id = ?");
 $stmt_orders1->bind_param("i", $worker_id);
-
-
-
 //worker id from the sessions in the login
 $worker_id = 1;
-
 //execute the prepared statement
 $stmt_orders1->execute();
-
 //store the selected result
 $stmt_orders1->store_result();
-
 //bind the selected results
-$stmt_orders1->bind_result($order_idRow, $order_noRow, $dateRow, $customer_firstnameRow, $customer_lastnameRow, $plan_descriptionRow, $plan_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow); 
+$stmt_orders1->bind_result($order_idRow, $order_noRow, $dateRow, $customer_firstnameRow, $customer_lastnameRow, $plan_descriptionRow, $plan_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow);
 
 
 
 //prints out the orders if there are any
 if ($stmt_orders1->num_rows > 0){
   //print table out
-  echo "<table>";
+  echo "<table class='table'>";
     echo "<tr>";
-  
+
       echo "<th>Order Number</th>";
       echo "<th>Date</th>";
       echo "<th>Customer Name</th>";
@@ -51,9 +43,9 @@ if ($stmt_orders1->num_rows > 0){
       echo "<th>School Address</th>";
       echo "<th>Status</th>";
       echo "<th></th>";
-  
+
     echo "</tr>";
-    
+
   //print out the details of each order
   while ($stmt_orders1->fetch()){
    echo "<tr>";
@@ -70,25 +62,22 @@ if ($stmt_orders1->num_rows > 0){
            <td>
              <a href='#' onclick='findCAccountRow("<?php echo $order_idRow?>", "../database/select/find_row/find_row_orders.php", "invoices/invoice.php"); return false;'>Create Invoice</a>
            </td>
-
+           
 <?php
-     
+
    echo "</tr>";
   }
-  
+
   echo "</table>";
-  
+
   echo "<div id='rowText'></div>";
-  
+
 //if there are no orders for the specific id
 } else {
-  echo "<h3>" . "There are no orders available" . "</h3";
-  echo "<p>$worker_id no.</p>";
+  echo "<h3 class='conclusion'>" . "There Are No Orders Available" . "</h3>";
   exit();
 }
-
-
 //close the statement
 $stmt_orders1->close();
-  
+
 ?>
