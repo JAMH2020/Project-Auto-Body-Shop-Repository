@@ -11,22 +11,22 @@
 
       <div class="about">
       <div class="memeber">
-        <img alt="" class="photo first" src="png"/>
+        <img alt="" class="photo first" src="Momhammed.jpeg.jpg"/>
         <p class="name">Momhammed Baig</p>
       </div>
       
       <div class="memeber">
-        <img alt="" class="photo second" src="png"/>
+        <img alt="" class="photo second" src="Alex.jpeg.jpg"/>
         <p class="name">Alex Au</p>
       </div>
         
        <div class="memeber">
-         <img alt="" class="photo third" src="png"/>
+         <img alt="" class="photo third" src="Harman.jpeg.jpg"/>
          <p class="name">Harman Sekhon</p>
       </div>
 
       <div class="memeber">
-        <img alt="" class="photo first" src="png"/>
+        <img alt="" class="photo first" src="Josh.jpeg.jpg"/>
         <p class="name">Joshua Noronha</p>
       </div>
       </div>
