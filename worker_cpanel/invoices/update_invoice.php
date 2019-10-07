@@ -5,10 +5,10 @@
 
 //connect to the database
 include_once '../../../database/connectdb.php';
-//include file to check for errors in sql statements
 
+//include file to check for errors in sql statements
 include_once '../../../database/error_check.php';
-//prepare sql statement to bind
+
 
 //update customer account table
 $stmt_u_cprofiles = $conn->prepare("UPDATE Customer_Profile SET Phone_No = ?, Address = ?, Email = ?, Car_Make = ?, Car_Model = ?, Vin_No = ?, License_Plate = ? WHERE Profile_Id = ?");
