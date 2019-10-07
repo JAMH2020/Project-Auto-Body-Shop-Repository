@@ -64,8 +64,36 @@ function fix_input($data, $post_name){
 
 //function that is used to reformat dates into YYYY-MM-DD format to set value for date inputs
 function reformat_date($timestamp){
-
-  $date_format = date("Y-m-d",$timestamp);
+  
+  //initiate the date to be formatted
+  $date_format = "";
+  
+  //get the year of the date
+  $year = substr_replace($timestamp, "", 4, 15);
+  
+  
+  //get the montrh of the date
+  //remove the first part of the string
+  $month = substr_replace($timestamp, "", 0, 5);
+  
+  //remove the end part of the string
+  $month = substr_replace($month, "", 2, 12);
+  
+  
+  //get the day of the date
+  //remove the first part of the string
+  $day = substr_replace($timestamp, "", 0, 8);
+  
+  //remove the last part of the string
+  $day = substr_replace($day, "", 2, 9);
+  
+  
+  
+  //combine the values to get the date format
+  $date_format = $year . "-" . $month . "-" . $day;
+  
+  
+  
   return $date_format;
 }
 
