@@ -8,6 +8,8 @@ if (session_start() === null){
 <!DOCTYPE html>
 <html>
 <head>
+  <!--styles for the invoice page-->
+  <link rel="stylesheet" type="text/css" href="invoice_styles.css">
   
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
@@ -43,15 +45,15 @@ $customer_email = "";
 save_session('customer_email');
 
 //customer invoice number
-$customer_invoice_number = "";
-save_session('customer_invoice_number');
+$invoice_no = "";
+save_session('invoice_no');
 
 //date invoice was created
 $invoice_date = $_SESSION['invoice_date'] = date("Y-m-d H:i:s");
 
 //car model year
-$car_model_year = "";
-save_session('car_model_year');
+$car_year = "";
+save_session('car_year');
 
 //car year make
 $car_make = "";
@@ -74,8 +76,8 @@ $intake_odometer_reading =  "";
 save_session('odometer_intake');
 
 //outtake odometer reading
-$return_odometer_reading =  "";
-save_session('return_odometer_reading');
+$odometer_return =  "";
+save_session('odometer_return');
 
 //description of job done
 $done_description = "";
@@ -120,20 +122,20 @@ save_session('disposal_per_unit');
   
   
 //total cost of parts
-$parts_costs =  "";
-save_session('parts_costs_');
+$parts_total =  "";
+save_session('parts_total');
   
 //total cost of labour
-$labour_costs =  "";
-save_session('labour_costs');
+$labour_total =  "";
+save_session('labour_total');
   
 //total shops supplies cost
-$supplies_cost =  "";
-save_session('supplies_costs');
+$supplies_total =  "";
+save_session('supplies_total');
   
 //total recycling and or disposal fees
-$redi_fees =  "";
-save_session('redi_fees');
+$disposal_total =  "";
+save_session('disposal_total');
   
 //estimated total costs
 $estimate_total =  "";
@@ -147,10 +149,10 @@ save_session('total_cost');
   
 //errors for any missing fields in the repair intake form
 $order_noERR = $customer_firstnameERR = $customer_lastnameERR = $customer_phoneERR = $customer_addressERR = $customer_emailERR = 
-$invoice_numberERR  = $car_model_yearERR = $car_makeERR = $car_modelERR = $vin_noERR = $license_plateERR = 
-$odometer_intakeERR = $return_odometer_readingERR = $done_descriptionERR = $work_dateERR = $completion_dateERR = $return_dateERR = 
-$removal_choiceERR = $parts_per_unitERR = $labour_per_unitERR = $supplies_per_unitERR = $disposal_per_unitERR=$parts_costsERR = $labour_costsERR
-= $supplies_costERR = $redi_feesERR = $estimate_totalERR = $total_costERR  = "";
+$invoice_noERR  = $car_yearERR = $car_makeERR = $car_modelERR = $vin_noERR = $license_plateERR = 
+$odometer_intakeERR = $odometer_returnERR = $done_descriptionERR = $work_dateERR = $completion_dateERR = $return_dateERR = 
+$removal_choiceERR = $parts_per_unitERR = $labour_per_unitERR = $supplies_per_unitERR = $disposal_per_unitERR=$parts_totalERR = $labour_totalERR
+= $supplies_totalERR = $disposal_totalERR = $estimate_totalERR = $total_costERR  = "";
 
 
 
@@ -178,10 +180,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "customer address", "customer_address", "customer_addressERR");
   
   //customer invoice number
-  createErrMsg("submit_invoice", "invoice number", "invoice_number", "invoice_numberERR");
+  createErrMsg("submit_invoice", "invoice number", "invoice_no", "invoice_noERR");
   
   //car model year
-  createErrMsg("submit_intvoice", "car model year", "car_model_year", "car_model_yearERR");
+  createErrMsg("submit_intvoice", "car model year", "car_year", "car_yearERR");
  
   //car year make
   createErrMsg("submit_invoice", "car make ", "car_make", "car_makeERR");
@@ -190,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "car model", "car_model", "car_modelERR");
  
   //car VIN number
-  createErrMsg("submit_invoice", "odometer reading", "vin_no", "vin_noERR");
+  createErrMsg("submit_invoice", "VIN number", "vin_no", "vin_noERR");
   
    //car license plate
   createErrMsg("submit_invoice", "license plate", "license_plate", "license_plateERR");
@@ -199,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "intake odometer", "odometer_intake", "odometer_intakeERR");
   
   //odometer reading when returned
-  createErrMsg("submit_invoice", "return reading", "return_odometer_reading", "return_odometer_reading ERR");
+  createErrMsg("submit_invoice", "return reading", "odometer_return", "odometer_returnERR");
   
   //description of work done
   createErrMsg("submit_invoice", "description", "done_description", "done_descriptionERR");
@@ -229,16 +231,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "cost of disposal/unit", "disposal_per_unit", "disposal_per_unitERR");
     
   //cost of parts
-  createErrMsg("submit_invoice", "cost of parts", "parts_costs", "parts_costsERR");
+  createErrMsg("submit_invoice", "cost of parts", "parts_total", "parts_totalERR");
   
   //cost of labour
-  createErrMsg("submit_invoice", "cost of labout", "labour_costs", "labour_costsERR");
+  createErrMsg("submit_invoice", "cost of labout", "labour_total", "labour_totalERR");
   
   //cost of supplies
-  createErrMsg("submit_invoice", "supplies cost", "supplies_cost", "supplies_costERR");
+  createErrMsg("submit_invoice", "supplies cost", "supplies_total", "supplies_totalERR");
   
   //items recycled or disposed of fees
-  createErrMsg("submit_invoice", "fees of disposal or recycling", "redi_fees", "redi_feesERR");
+  createErrMsg("submit_invoice", "fees of disposal or recycling", "disposal_total", "disposal_totalERR");
   
   //total estimated cost
   createErrMsg("submit_invoice", "estimated costs", "estimate_total", "estimate_totalERR");
@@ -250,32 +252,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
 
-//if the session that store the dates are not blank, then reformat the dates into YYYY-MM-DD format
-//work authorization date
-if ($_SESSION['work_date'] != ""){
-  $work_date_format = date("Y-m-d",$_SESSION['work_date']);
-}
-
 
 
 //check if there are any missing or incorrect fields
 $error_intake_input;
-if ($order_noERR != "" or $customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_phoneERR != "" or $customer_addressERR != "" or $customer_emailERR != "" or $invoice_numberERR != "" 
-or $car_model_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $return_odometer_readingERR != "" or $done_descriptionERR != ""  
+if ($order_noERR != "" or $customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_phoneERR != "" or $customer_addressERR != "" or $customer_emailERR != "" or $invoice_noERR != "" 
+or $car_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $odometer_returnERR != "" or $done_descriptionERR != ""  
 or $work_dateERR != "" or $completion_dateERR != "" or $return_dateERR != "" or $parts_per_unitERR != "" or $labour_per_unitERR != "" or $supplies_per_unitERR != "" or $disposal_per_unitERR != "" or $removal_choiceERR != ""
-or $parts_costsERR  != "" or $labour_costsERR != "" or $supplies_costERR != "" or $redi_feesERR != "" or $estimate_totalERR != "" or  $total_costERR != ""){
+or $parts_totalERR  != "" or $labour_totalERR != "" or $supplies_totalERR != "" or $disposal_totalERR != "" or $estimate_totalERR != "" or  $total_costERR != ""){
   
   $error_invoice_input = true;
   
 } else {
   $error_invoice_input = false;
-  
+}
+
+
   //reformat all the dates into the correct format
   //authorization of work date
-  $work_date = reformat_date($_SESSION['work_date']);
-  
-  //
-}
+  if (!empty($_SESSION['work_date'])){
+    $work_date_format = reformat_date($_SESSION['work_date']);
+  }
 
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
@@ -316,11 +313,11 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 <span><?php echo $customer_emailERR;?></span> <br>
 
 <span>invoice #:</span>
-<input type="text" name="invoice_number" placeholder="Invoice number" value="<?php echo $_SESSION['invoice_number'];?>">
+<input type="text" name="invoice_no" placeholder="Invoice number" value="<?php echo $_SESSION['invoice_no'];?>">
 
 <span>Date of Invoice:</span>
 <span> <?php echo date("D j/M/Y")?> </span> <br>
-<span><?php echo $invoice_numberERR;?></span>
+<span><?php echo $invoice_noERR;?></span>
 
 
 
@@ -330,9 +327,9 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 <table>
   <tr>
     <td>
-      <span>Car year:</span>
-      <input type="text" name="car_model_year" placeholder="car year model" value="<?php echo $_SESSION['car_model_year'];?>"> <br>
-      <span><?php echo $car_model_yearERR;?></span>
+      <span>Year:</span>
+      <input type="text" name="car_year" placeholder="car year model" value="<?php echo $_SESSION['car_year'];?>"> <br>
+      <span><?php echo $car_yearERR;?></span>
     </td>
     
     <td> 
@@ -376,8 +373,8 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     </td>
     <td>
       <span>Odometer reading on return:</span>
-      <input type="text" name="return_odometer_reading" placeholder="Odometer on Return" value="<?php echo $_SESSION['return_odometer_reading'];?>"><br>
-      <span><?php echo $return_odometer_readingERR;?></span>
+      <input type="text" name="odometer_return" placeholder="Odometer on Return" value="<?php echo $_SESSION['odometer_return'];?>"><br>
+      <span><?php echo $odometer_returnERR;?></span>
     </td>
   </tr>
   
@@ -403,8 +400,24 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 
 <span>Any parts removed in the course of work on or repairs to the automobile shall be (select one): </span>
 <select name="removal_choice" value="<?php echo $_SESSION['removal_choice'];?>">
-  <option value="A">(A) return to the undersigned</option>
+<?php
+//display the selected option based off the session variable
+if ($_SESSION['removal_choice'] == "A"){
+?>
+
+  <option value="A" selected>(A) return to the undersigned</option>
   <option value="B">(B) disposed of by the School</option>
+
+<?php
+} else {
+?>
+
+  <option value="A">(A) return to the undersigned</option>
+  <option value="B" selected>(B) disposed of by the School</option>
+
+<?php
+}
+?>
 </select>
  
 <table>
@@ -423,8 +436,8 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     </td>
     
     <td>
-      <input type="text" name="parts_costs" placeholder="$ -Parts Total" value="<?php echo $_SESSION['parts_costs'];?>"><br>
-      <span><?php echo $parts_costsERR;?></span>
+      <input type="text" name="parts_total" placeholder="$ -Parts Total" value="<?php echo $_SESSION['parts_total'];?>"><br>
+      <span><?php echo $parts_totalERR;?></span>
     </td>
   </tr>
   
@@ -436,8 +449,8 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     </td>
     
     <td>
-      <input type="text" name="labour_costs" placeholder="$ -Labour Total" value="<?php echo $_SESSION['labour_costs'];?>"><br>
-      <span><?php echo $labour_costsERR;?></span>
+      <input type="text" name="labour_total" placeholder="$ -Labour Total" value="<?php echo $_SESSION['labour_total'];?>"><br>
+      <span><?php echo $labour_totalERR;?></span>
     </td>
   </tr>
   
@@ -449,8 +462,8 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     </td>
     
     <td>
-      <input type="text" name="supplies_cost" placeholder="$ -Supplies Total" value="<?php echo $_SESSION['supplies_cost'];?>"><br>
-      <span><?php echo $supplies_costERR;?></span>
+      <input type="text" name="supplies_total" placeholder="$ -Supplies Total" value="<?php echo $_SESSION['supplies_total'];?>"><br>
+      <span><?php echo $supplies_totalERR;?></span>
     </td>
   </tr>
   
@@ -462,8 +475,8 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     </td>
     
     <td>
-      <input type="text" name="redi_fees" placeholder="$ -Disposal Total" value="<?php echo $_SESSION['redi_fees'];?>"><br>
-      <span><?php echo $redi_feesERR;?></span>
+      <input type="text" name="disposal_total" placeholder="$ -Disposal Total" value="<?php echo $_SESSION['disposal_total'];?>"><br>
+      <span><?php echo $disposal_totalERR;?></span>
     </td>
   </tr>
   
@@ -496,9 +509,10 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 
 <?php
 } else {
-  echo "done";
-  //insert the user sign up data into the accounts table in the database
-  //include "../../database/insert/insert_invoice.php";
+?>
+  <script>redirect_page("invoicept2.php");</script>
+  
+<?php
 }
 ?>
 

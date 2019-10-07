@@ -1,33 +1,28 @@
-.footer{
 
-  background-color: 	rgb(3, 55, 107);
-  padding: 60px 40px 140px 40px;
+.footer{
+  background-color: rgb(3, 55, 107);
+  width:100%;
   z-index:2;
   position:relative;
-  
-
+  padding: 40px 0;
+  text-align:center;
 }
+
+/*division for all of the items in the footer*/
+.footer_items{
+  display:inline-block;
+}
+
 
 
 .footer_items p {
-
   color: white;
-
   font-size: 12px;
-
 }
 
-
-.about{
-  margin-left:34%
+.member{
+ float:left;
 }
-
-
-.memeber{
-  float:left;
-}
-
-
 
 
 .photo{
@@ -42,17 +37,18 @@
 
 
 
-
 .name{
   text-align:center;
   font-size:15px;
   font-weight:bold;
 }
 
+
 .conclusion{
   height:50px;
   background-color: rgb(163, 209, 240);
 }
+
 
 .conclusion{
   text-align:center;
@@ -64,8 +60,6 @@
 }
 
 
-
 .conclusion_info{
   line-height:50px;
 }
-
