@@ -1,0 +1,55 @@
+.Title{
+  text-decoration: underline #cc0000;
+  display:inline-block;
+  width:100%;
+  text-align: center;
+  padding-top:150px;
+  padding-bottom:100px;
+}
+
+.button{
+  background-color: #008CBA;/* blue */
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 5px solid black;
+}
+
+.back{
+  background-color: rgb(170, 18, 18);/* Green */
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 5px solid black;
+}
+
+.space{
+  padding-bottom:50px;
+  padding-top:100px;
+  padding-right:100px;
+}
+
+.spacep{
+  padding-top:34px;
+  padding-right:100px;
+}
+
+.spaceA{
+  padding-bottom:10px;
+}
+
+.box{
+  width: 1000px;
+  height: 400px;
+  background-color: rgb(100, 211, 252);
+  border: 10px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
