@@ -9,6 +9,9 @@ if (session_start() === null){
 <!DOCTYPE html>
 <html>
 <head>
+  <!--stylesheet of waiver form-->
+  <link rel="stylesheet" type="text/css" href="css/waiver_styles.css">
+
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
 </head>
@@ -106,13 +109,14 @@ if ($error_waiver1_input or isset($_POST['submit_intake']) and !isset($_POST['wa
   include "../../navigation_bar/navigation_bar.php";
 ?>
 
-<h1>WAIVER AND RELEASE OF LIABILITY</h1>
+
+<font class="Title" size="10">WAIVER AND RELEASE OF LIABILITY</font>
+
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
 
-  <ul>
     <li>
-      <p>I agree to release and hold the Peel District School Board (the “Board”), its trustees, officers, agents,
+      <center><p>I agree to release and hold the Peel District School Board (the “Board”), its trustees, officers, agents,
 volunteers, students and insurers and their respective heirs, executors, personal representatives, 
 successors and assigns (the “Indemnified Parties”) harmless and to indemnify them from and 
 against all actions, damages, claims and demands which may be brought against the Indemnified 
@@ -123,12 +127,15 @@ any way
       </p>
     </li>
 
+
     <li>
       <p>I agree to pay for all labour, parts, materials, supplies, environmental fees, disposal and recycling 
 fees of all kinds, required to perform the work described above. Final payment is due when the
 work is completed.
       </p>
     </li>
+
+
 
     <li>
       <p>I understand that if my automobile is not claimed by me within THIRTY (30) days after notice of 
@@ -139,11 +146,12 @@ beneficial owner and not as a trustee for its own use absolutel
       </p>
     </li>
 
+
     <li>
       <p>I agree that any notice may be adequately given by prepaid post to the address below. I agree that
 the onus of keeping up to date at all times as to the progress of and cost of the repairs to the
 automobile rests solely with me.
-      </p>
+      </p></center>
     </li>
 
     <li>
@@ -152,69 +160,99 @@ outlined at a cost not to exceed </span>
 
       <input type="text" name="exceed_cost" placeholder="$-Amount" value="<?php echo $_SESSION['exceed_cost'];?>">   
 
-      <span> by   initialing here: </span>
 
+      <span> by   initialing here: </span>
       <input type="text" name="customer_initial" placeholder="Initial" value="<?php echo $_SESSION['customer_initial'];?>"> 
     </li>
   </ul> <br>
-
+  
   <span><?php echo $exceed_costERR;?></span> <br>
   <span><?php echo $customer_initialERR;?></span> <br>
 
 
-  <table>
+
+<div class="box">
+
+  <center>
+   <table>
+
     <tr>
       <td>
-        <span>Name(Print):</span>
-        <input type="text" name="customer_firstname" placeholder="Firstname" value="<?php echo $_SESSION['customer_firstname'];?>"> 
-        <input type="text" name="customer_lastname" placeholder="Lastname" value="<?php echo $_SESSION['customer_lastname'];?>"> <br>
-        <span><?php echo $customer_firstnameERR;?></span> <br>
-        <span><?php echo $customer_lastnameERR;?></span>
+        <center class="space">
+        
+          <span >Name(Print):</span>
+          <input type="text" name="customer_firstname" placeholder="Firstname" value="<?php echo $_SESSION['customer_firstname'];?>"> 
+          <input type="text" name="customer_lastname" placeholder="Lastname" value="<?php echo $_SESSION['customer_lastname'];?>"> <br>
+          <span><?php echo $customer_firstnameERR;?></span> <br>
+          <span><?php echo $customer_lastnameERR;?></span>
+          
+         </center>
       </td>
 
+
+
       <td>
-        <span>Phone:</span>
+        <center class="spacep" ><span>Phone:</span>
          <input type="text" name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
-         <span><?php echo $customer_phoneERR;?></span>
+         <span><?php echo $customer_phoneERR;?></span></center>
       </td>
     </tr>
 
+
+
     <tr>
       <td>
-        <span>Address:</span>
+        <center class="spaceA"><span>Address:</span>
         <input type="text" name="customer_address" placeholder="Address" value="<?php echo $_SESSION['customer_address'];?>"> <br>
-        <span><?php echo $customer_addressERR;?></span>
+        <span><?php echo $customer_addressERR;?></span></center>
       </td>
     </tr>
 
+
     <tr>
       <td>
-        <span>Email:</span>
+        <center><span>Email:</span>
         <input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
-        <span><?php echo $customer_emailERR;?></span>
+        <span><?php echo $customer_emailERR;?></span></center>
       </td>
     </tr>
+
 
     <tr>
       <td>
       </td>
 
       <td>
-        <span>Date:</span>
+        <center class"date"><span>Date:</span></center>
         <span> <?php echo date("D j/M/Y")?></span>
       </td>
     </tr>
+
   </table>
+ </center>
+</div>
 
-<input type="submit" name="waiver_submit" value="Submit"> <br>
 
+
+<button type="button" name="waiver_submit" class="button">Submit</button>
+
+<center>
   <h3>[Please proceed to the 
 AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT 
 on next page]</h3>
+</center>
+
+<style>
+  body{
+background-color:#e6e6e6;
+shadow:red;
+ }
+</style>
 
 </form>
 
-<a href="intake_repair_form.php">Back</a>
+<a href="intake_repair_form.php" class="back">Back</a>
+
 
 <?php
 } else {
