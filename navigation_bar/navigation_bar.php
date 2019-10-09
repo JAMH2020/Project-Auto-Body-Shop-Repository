@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" type="text/css" href="http://www.portcreditautobodyshop.tk/navigation_bar/navigation_bar_styles.css">
 
 <!--JQuery library-->
@@ -28,7 +27,7 @@
 
       <a class= "nav_link "href="http://www.portcreditautobodyshop.tk/login/login.php">Sign-In</a>
 
-      <a class = "nav_link" href="http://www.portcreditautobodyshop.tk/admin/admin_cpanel.php">Sign-Up</a>
+      <a class = "nav_link" href="http://www.portcreditautobodyshop.tk/create_account/signup.php">Sign-Up</a>
 
       <a  class= "left_link" href="http://www.portcreditautobodyshop.tk">Home</a>
 
