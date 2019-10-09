@@ -508,6 +508,9 @@ if ($_SESSION['removal_choice'] == "A"){
 <a href="../worker_cpanel.php">Back</a>
 
 <?php
+//include the footer
+include '../../footer/footer.php';
+
 } else {
 ?>
   <script>redirect_page("invoicept2.php");</script>
