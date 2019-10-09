@@ -2,13 +2,14 @@ body{
   background-color: rgb(230, 230, 230);
 }
 
+
 .image{
   height:120px;
-  background-image:url('PDSB.png');
+  background-image:url('../../../images/worker_cpanel/PDSB.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left;
-  margin: -100px 0 100px 50px;
+  margin: -85px 0 100px 50px;
 }
 
 
