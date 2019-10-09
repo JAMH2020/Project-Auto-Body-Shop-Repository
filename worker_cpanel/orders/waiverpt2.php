@@ -165,6 +165,9 @@ this</span>
 </center>
 
 <?php
+//include the footer
+include '../../footer/footer.php';
+
 } else {
   echo "intake and waiver complete";
   
