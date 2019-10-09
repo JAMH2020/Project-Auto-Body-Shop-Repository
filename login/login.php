@@ -14,8 +14,12 @@ if (session_start() === null){
   <title>Login</title>
   <!--script that will redirect user to the menu once they loggin in successfully-->
   <script src="../src/js/submit_form.js"></script>
+  <!--script to show password -->
+  <script src="../create_account/js/showpassword.js"></script>
+  
   <!--style sheet for the login page-->
   <link href="login_styles.css" rel="stylesheet" type="text/css" />
+  
   
   
   <style type="text/css">
@@ -33,17 +37,39 @@ if (session_start() === null){
 include "../database/fixinput.php";
 
 
-// Check if user is currently logged in, if yes, redirects
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+// Check if customer is currently logged in, if yes, redirects
+if(isset($_SESSION["customer_loggedin"]) && $_SESSION["customer_loggedin"] === true){
+?>
+
+  <script>redirect_page("../customer/customer_cpanel.php")</script>
+
+<?php
+    exit();
+    
+// check if the worker is currently loggin in, if yes, redirect to worker control panel
+} else if(isset($_SESSION["worker_loggedin"]) && $_SESSION["worker_loggedin"] === true){
 ?>
 
   <script>redirect_page("../worker_cpanel/worker_cpanel.php")</script>
 
 <?php
     exit();
+    
+// check if the admin is currently loggin in, if yes, redirect to admin control panel
+} else if(isset($_SESSION["admin_loggedin"]) && $_SESSION["admin_loggedin"] === true){
+?>
+
+  <script>redirect_page("../admin/admin_cpanel.php")</script>
+
+
+<?php
+    exit();
 }
 
- 
+
+
+
+
 
 // Define variables and initialize with empty values
 //username
@@ -98,7 +124,7 @@ include "../navigation_bar/navigation_bar.php";
             <center><div class="form-group">
                 <label class="login_headings">Username</label>
 
-                <input type="text" name="login_username" class="form-control" value="<?php echo $login_username; ?>">
+                <input type="text" name="login_username" class="form-control" placeholder="Username" value="<?php echo $login_username; ?>">
 
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>  </center>  
@@ -108,11 +134,18 @@ include "../navigation_bar/navigation_bar.php";
 
                 <label class="login_headings">Password</label>
 
-                <input type="text" name="login_password" class="form-control" placeholder="Password">
+                <input type="password" name="login_password" class="form-control"  id="password" placeholder="Password">
 
                 <span class="help-block"><?php echo $password_err; ?></span>
 
               </div>
+              
+              <label class="checkbox_container">
+                <input type="checkbox" class="checkbox_hidden" onclick="showPassword()">
+                <div class="checkmark"></div>
+              <span>Show Password</span> 
+             </label><br>
+             
             </center>
 
             <center><div class="form-group" >
@@ -129,6 +162,11 @@ include "../navigation_bar/navigation_bar.php";
 
        </div>
      </div>  
+     
+     <?php
+    //include the footer
+    include '../footer/footer.php';
+    ?>
 
 </body>
 
