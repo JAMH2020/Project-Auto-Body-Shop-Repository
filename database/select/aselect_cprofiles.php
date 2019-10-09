@@ -2,39 +2,26 @@
 /***********************************************
 ** shows all the customer profiles available  **
 ************************************************/
-
 //include file to connect to the database
 include '../../database/connectdb.php';
-
 //include file to check errors in sql statements
 include '../../database/error_check.php';
-
-
 //prepare and bind sql statement
 $stmt_a_cprofiles = $conn->prepare("SELECT Customer_Profile.Profile_Id, Customer_Accounts.First_name, Customer_Accounts.Last_name, Customer_Profile.Phone_No, Customer_Profile.Address, Customer_Profile.Email, Customer_Profile.Car_Make, Customer_Profile.Car_Model, Customer_Profile.Vin_No, Customer_Profile.License_Plate 
                                     FROM Customer_Profile
                                     LEFT JOIN Customer_Accounts ON Customer_Profile.Email=Customer_Accounts.Email
                                     WHERE Customer_Profile.Email=Customer_Accounts.Email");
-
-
 //execute the statement
 $stmt_a_cprofiles->execute();
-
-
 //store the result
 $stmt_a_cprofiles->store_result();
-
-
 //bind the results
 $stmt_a_cprofiles->bind_result($profile_idRow,$customer_firstnameRow ,$customer_lastnameRow,$customer_phoneRow, $customer_addressRow, $customer_emailRow, $car_makeRow, $car_modelRow, $vin_noRow, $license_plateRow);
-
 //print out the accounts that are available
 if ($stmt_a_cprofiles->num_rows > 0){
-
   //prints out a table
-  echo "<table>";
+  echo "<table class='table'>";
     echo "<tr>";
-
       echo "<th>Customer Profile Id</th>";
       echo "<th>Name</th>";
       echo "<th>Phone Number</th>";
@@ -45,9 +32,7 @@ if ($stmt_a_cprofiles->num_rows > 0){
       echo "<th>Vin Number</th>";
       echo "<th>License Plate</th>";
     echo "</tr>";
-
   while($stmt_a_cprofiles->fetch()){
-
      echo "<tr>";
       echo "<td> <input type='radio' name='order_id' value=" . $profile_idRow .">" . $profile_idRow . "</td>";
       echo "<td>" . $customer_firstnameRow . " " . $customer_lastnameRow . "</td>";
@@ -70,9 +55,7 @@ if ($stmt_a_cprofiles->num_rows > 0){
    echo "</table>";
    
 } else {
-  echo "<h3>" . "There are no orders available" . "</h3>";
+  echo "<h3 class='conclusion'>" . "There Are No Orders Available" . "</h3>";
 }
-
-
 //close the statement
 $stmt_a_cprofiles->close();
