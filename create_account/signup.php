@@ -151,15 +151,22 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
 
           </form>
         </center>
+      </div>
+  </div>
 
 <?php
+//include the footer
+include '../footer/footer.php';
+
+
+
 } else {
   echo "done";
   //insert the user sign up data into the accounts table in the database
   include "../database/insert/insert_signup.php";
 }
 ?>
-  </div>
-  </div>
+
 </body>
 </html>
+

@@ -137,6 +137,9 @@ WARRANTY </p> <br>
 <a href="invoice.php">Back</a>
 
 <?php
+//include the footer
+include 'footer/footer.php';
+
 } else {
 
  echo "done";

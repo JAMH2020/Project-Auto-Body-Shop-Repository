@@ -2,13 +2,14 @@ body{
   background-color: rgb(230, 230, 230);
 }
 
+
 .image{
   height:120px;
-  background-image:url('PDSB.png');
+  background-image:url('../../../images/worker_cpanel/PDSB.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left;
-  margin: -100px 0 100px 50px;
+  margin: -85px 0 100px 50px;
 }
 
 
@@ -47,7 +48,6 @@ body{
 
 
 .description{
-  background-color: red;
   vertical-align: sub;
   height:110px;
   width: 200px;
@@ -73,6 +73,5 @@ body{
   font-size: 25px;
   color:rgb(26, 26, 255); 
   left: 50px;  
-  background-color: rgb(102, 217, 255); 
+  background-color: rgb(102, 217, 255; 
 }
-

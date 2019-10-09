@@ -1,3 +1,7 @@
+body{
+  background-color:#e6e6e6;
+}
+
 .Title{
   text-decoration: underline #cc0000;
   display:inline-block;
@@ -47,9 +51,15 @@
 .box{
   width: 1000px;
   height: 400px;
-  background-color: rgb(100, 211, 252);
   border: 10px solid black;
+  background-color: rgb(100, 211, 252);
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
+}
+
+
+.rule_list{
+    margin-left: 20px;
+    padding-left: 0;
 }

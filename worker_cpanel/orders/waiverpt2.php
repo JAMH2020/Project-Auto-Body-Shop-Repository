@@ -10,6 +10,9 @@ if (session_start() === null){
 <!DOCTYPE html>
 <html>
 <head>
+  <!--style sheet for the second waiver form-->
+  <link rel="stylesheet" type="text/css" href="css/waiverpt2_styles.css">
+
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
 </head>
@@ -23,29 +26,29 @@ if (!isset($_POST['waiver2_submit'])){
   include "../../navigation_bar/navigation_bar.php";
 ?>
 
-<h1>Automotive Repair Waiver</h1>
+<font class="Title" size="10">Automotive Repair Waiver</font>
 
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+<center><form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 <span>Work Order #:</span> 
-<span> <?php echo $_SESSION['order_no']; ?></span><br>
+<span> <?php echo $_SESSION['order_no']; ?></span><br></center>
 
-<h3>AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT </h3>
+<center><h3>AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT </h3>
 <h4>*Schools must retain form for 3 years*</h4>
-
+</center>
 <table>
   <tr>
-    <th>WARNING:</th>
+   <center> <th>WARNING:</th></center>
 
-    <td>BY SIGNING THIS AGREEMENT YOU GIVE UP YOUR RIGHT TO BRING A COURT ACTION TO RECOVER
+    <center><td>BY SIGNING THIS AGREEMENT YOU GIVE UP YOUR RIGHT TO BRING A COURT ACTION TO RECOVER
 COMPENSATION FOR ANY INJURY OR DEATH TO YOU OR OTHERS AND FOR DAMAGE TO YOUR 
 PROPERTY ARISING DIRECTLY, INDIRECTLY OR CONSEQUENTIALLY FROM OR RELATED TO YOUR CHOICE
 TO HAVE UNTRAINED STUDENTS WORK ON YOUR AUTOMOBILE</td>
   </tr>
-</table>
+</table></center>
 
 
-<h4>PRELIMINARY UNDERSTANDING</h4>
+<center><h4>PRELIMINARY UNDERSTANDING</h4></center>
 
 <ol>
   <li>
@@ -107,7 +110,7 @@ hazards inherent in allowing untrained students to work on the undersigned’ au
 <p> <?php echo $_SESSION['customer_initial']; ?></p>
 <p>(initial)</p> <br>
 
-<h4>RELEASE AND WAIVER OF LIABILITY</h4>
+<center><h4>RELEASE AND WAIVER OF LIABILITY</h4></center>
 
 
 <ol>
@@ -148,20 +151,23 @@ this</span>
   </li>
 </ol> <br>
 
-<span>Signature of Registered Owner:</span>
-<button type="button">Sign Here</button> <br>
+<span class="Sig">Signature of Registered Owner:</span>
+<button type="button" class="button">Sign Here</button> <br>
 
-<span>Name(print):</span>
+<center><span class="Name">Name(print):</span>
 <span> <?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']; ?></span>
 
-
-<input type="submit" name="waiver2_submit" value="Submit"> 
+<button type="submit"  name="waiver2_submit" class="button">Submit</button>
 
 </form>
 
-<a href="waiver.php">Back</a>
+<a href="waiver.php" class="back">Back</a>
+</center>
 
 <?php
+//include the footer
+include '../../footer/footer.php';
+
 } else {
   echo "intake and waiver complete";
   
@@ -173,5 +179,3 @@ this</span>
 <?php
 }
 ?>
-  </body>
-</html>
