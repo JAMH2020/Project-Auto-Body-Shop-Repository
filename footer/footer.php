@@ -34,4 +34,3 @@
 <div class="conclusion">
   <span class="conclusion_info">That's all folks!</span>
 </div>
-
