@@ -10,47 +10,74 @@ include_once '../../../database/connectdb.php';
 include_once '../../../database/error_check.php';
 
 
-//update customer account table
-$stmt_u_cprofiles = $conn->prepare("UPDATE Customer_Profile SET Phone_No = ?, Address = ?, Email = ?, Car_Make = ?, Car_Model = ?, Vin_No = ?, License_Plate = ? WHERE Profile_Id = ?");
-$stmt_u_cprofiles->bind_param("sssssssi", $customer_phone, $customer_address, $customer_email, $car_make, $car_model, $vin_no, $license_plate, $profile_id);
+//update invoice table
+$stmt_u_cprofiles = $conn->prepare("UPDATE Invoice SET Order_No = ?, Invoice_No = ?, Worker_Id = ?, Invoice_Date = ?, Odometer_Return = ?, Description = ?, Authorization_Date = ?, Completion_Date = ?");
+$stmt_u_cprofiles->bind_param("isisisss", $order_no, $invoice_no, $worker_id, $invoice_date, $odometer_return, $done_description, $work_date, $completion_date);
 
-//update changes that could affect the customer profile table
-$stmt_u_accounts = $conn->prepare("UPDATE Customer_Accounts SET Email = ? WHERE Email = ?");
-$stmt_u_accounts->bind_param("ss", $customer_cemail, $customer_cemail_prev);
+//update cost table
+$stmt_u_accounts = $conn->prepare("UPDATE Total_cost SET Invoice_No = ?, Parts_Price_Unit = ?, Labour_Price_Unit = ?, Supplies_Price_Unit = ?, Disposal_Price_Unit = ?, Parts_Total = ?, Labour_Total = ?, Supplies_Total = ?, Disposal_Total = ?, Estimate_Total = ?, Total = ?");
+$stmt_u_accounts->bind_param("siiiiiiiiii", $invoice_no, $parts_per_unit, $labour_per_unit, $supplies_per_unit, $disposal_per_unit, $parts_total, $labour_total, $supplies_total, $disposal_total, $estimate_total, $total_cost);
 
-//------customer profile account table-------//
 
-//customer's phone number
-$customer_phone = $_POST['customer_phone'];
+//--------Data to insert into invoice table----//
 
-//customer's address
-$customer_address = $_POST['customer_address'];
+//order number
+$order_no = $_POST['order_no'];
 
-//customer's email
-$customer_email = $_POST['customer_email'];
+//invoice number
+$invoice_no = $_POST['invoice_no'];
 
-//car make
-$car_make = $_POST['car_make'];
+//worker id
+$worker_id = 1;
 
-//car model
-$car_model = $_POST['car_model'];
+//invoice date
+$invoice_date = $_POST['invoice_date'];
 
-//vin number
-$vin_no = $_POST['vin_no'];
+//odometer reading on the return of the vehicle
+$odometer_return = $_POST['odometer_return'];
 
-//license plate
-$license_plate = $_POST['license_plate'];
+//description of work done
+$done_description = $_POST['done_description'];
 
-//profile id
-$profile_id = $_SESSION['profile_id'];
+//date that work was authorized
+$work_date = $_POST['work_date'];
 
-//---------customer accounts table------//
+//date the work is completed
+$completion_date = $_POST['completion_date'];
 
-//customer's email
-$customer_cemail = $_POST['customer_email'];
 
-//customer's previous email before change
-$customer_cemail_prev = $_SESSION['prev_customer_email'];
+//-----------Data to insert into the total cost table---------//
+
+//parts per unit
+$parts_per_unit = $_POST['parts_per_unit'];
+
+//labour per unit
+$labour_per_unit = $_POST['labour_per_unit'];
+
+//supplies per unit
+$supplies_per_unit = $_POST['supplies_per_unit'];
+
+//disposal and recycing per ubnit
+$disposal_per_unit = $_POST['disposal_per_unit'];
+
+//total of parts
+$parts_total = $_POST['parts_total'];
+
+//total for labour work
+$labour_total = $_POST['labour_total'];
+
+//total of supplies used
+$supplies_total = $_POST['supplies_total'];
+
+//total of of recycling/disposal fee
+$disposal_total = $_POST['disposal_total'];
+
+//estimate of total
+$estimate_total = $_POST['estimate_total'];
+
+//total of parts
+$total_cost = $_POST['total_cost'];
+
 
 //execute the insertion for the prepared sql statement
 $stmt_u_cprofiles->execute();
