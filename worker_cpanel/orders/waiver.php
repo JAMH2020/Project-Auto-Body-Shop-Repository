@@ -102,7 +102,7 @@ if ($customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_add
 
 
 //ask the user to input the required fields if there are missing or incorrect fields or they have not submitted the form yet
-if ($error_waiver1_input or isset($_POST['submit_intake']) and !isset($_POST['waiver_submit']) or !isset($_POST['waiver_submit']) and !isset($_POST['waiver2_submit'])){
+if ($error_waiver1_input or !isset($_POST['waiver_submit'])){
 
 
   //include the navigation bar
@@ -114,9 +114,9 @@ if ($error_waiver1_input or isset($_POST['submit_intake']) and !isset($_POST['wa
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
-
+  <ul class="rule_list"> 
     <li>
-      <center><p>I agree to release and hold the Peel District School Board (the “Board”), its trustees, officers, agents,
+      <p>I agree to release and hold the Peel District School Board (the “Board”), its trustees, officers, agents,
 volunteers, students and insurers and their respective heirs, executors, personal representatives, 
 successors and assigns (the “Indemnified Parties”) harmless and to indemnify them from and 
 against all actions, damages, claims and demands which may be brought against the Indemnified 
@@ -151,9 +151,8 @@ beneficial owner and not as a trustee for its own use absolutel
       <p>I agree that any notice may be adequately given by prepaid post to the address below. I agree that
 the onus of keeping up to date at all times as to the progress of and cost of the repairs to the
 automobile rests solely with me.
-      </p></center>
+      </p>
     </li>
-
     <li>
       <span>I may decline the estimated amount above and instead authorize the Board to perform the work
 outlined at a cost not to exceed </span>
@@ -223,7 +222,7 @@ outlined at a cost not to exceed </span>
       </td>
 
       <td>
-        <center class"date"><span>Date:</span></center>
+        <center class="date"><span>Date:</span></center>
         <span> <?php echo date("D j/M/Y")?></span>
       </td>
     </tr>
@@ -234,7 +233,7 @@ outlined at a cost not to exceed </span>
 
 
 
-<button type="button" name="waiver_submit" class="button">Submit</button>
+<input type="submit" name="waiver_submit" class="button" value="Submit">
 
 <center>
   <h3>[Please proceed to the 
@@ -242,12 +241,6 @@ AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT
 on next page]</h3>
 </center>
 
-<style>
-  body{
-background-color:#e6e6e6;
-shadow:red;
- }
-</style>
 
 </form>
 
