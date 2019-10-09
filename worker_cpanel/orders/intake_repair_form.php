@@ -207,15 +207,15 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 
 
+
 <div class ="intake_title">
   <h1 class="title-heading">AUTOMOTIVE INTAKE REPAIR FORM</h1>
 </div>
 
+
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
-
 <div class="image"></div>
-
 
 <div class="subtitle">
   <p class="subtitle-heading">School Information</p>
@@ -423,6 +423,10 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 <a href="../worker_cpanel.php">Back</a>
 
 <?php
+//include the footer
+include '../../footer/footer.php';
+
+
 } else {
 ?>
 
@@ -434,4 +438,3 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 </body>
 </html>
-
