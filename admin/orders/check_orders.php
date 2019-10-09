@@ -1,3 +1,4 @@
+  
 <?php
 //start the session if it has not been started yet
 if (session_start() === null){
@@ -45,11 +46,11 @@ if (session_start() === null){
      include "../../database/select/aselect_orders.php";
     ?>
 
-    <input type="submit" name="delete_order" value="Delete Order">
-    <input type="submit" name="modify_order" value="Modify Order">
+    <input class="button" type="submit" name="delete_order" value="Delete Order">
+    <input class="button" type="submit" name="modify_order" value="Modify Order">
   </form>
   
-  <a href="../admin_cpanel.php">Back</a>
+  <a href="../admin_cpanel.php" class='back' >Back</a>
   
 </body>
 </html>
