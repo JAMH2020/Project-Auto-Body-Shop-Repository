@@ -156,5 +156,12 @@ include 'footer/footer.php';
 }
 ?>
 
+<?php
+  } else {
+    //change the account data in the worker accounts table in the database
+    include "worker_cpanel/invoices/update_invoice.php";
+  }
+?>
+
 </body>
 </html>
