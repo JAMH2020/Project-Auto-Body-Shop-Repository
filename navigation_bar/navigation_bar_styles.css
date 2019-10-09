@@ -1,8 +1,6 @@
 *{
   font-family: Verdana,sans-serif;
   margin: 0px;
-  padding: 0px;
-  overflow-x: hidden; 
   line-height: 1.6;
 }
 
@@ -12,6 +10,7 @@
   background-color: rgb(163, 209, 240);
   padding: 10px;
   color: rgb(255,255,255);
+  overflow-x:hidden;
 }
 
 /*vertical sticky element for the title*/
