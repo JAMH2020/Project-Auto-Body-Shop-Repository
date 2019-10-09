@@ -248,6 +248,9 @@ on next page]</h3>
 
 
 <?php
+//include the footer
+include '../../footer/footer.php';
+
 } else {
 ?>
 
