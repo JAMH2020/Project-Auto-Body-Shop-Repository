@@ -1,12 +1,14 @@
+body{
+  background-color:#e6e6e6;
+}
+
 .Title{
- text-decoration: underline #cc0000;
- 
- /* transform: translate(-210px,-80px);*/
- display:inline-block;
- width:100%;
- text-align: center;
-padding-top:150px;
-padding-bottom:100px;
+  text-decoration: underline #cc0000;
+  display:inline-block;
+  width:100%;
+  text-align: center;
+  padding-top:150px;
+  padding-bottom:100px;
  
 }
 .button{
@@ -18,7 +20,7 @@ background-color: #008CBA;/* blue */
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-border: 5px solid black;
+  border: 5px solid black;
 }
 .back{
 background-color: rgb(170, 18, 18);/* Green */
@@ -29,15 +31,13 @@ background-color: rgb(170, 18, 18);/* Green */
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-border: 5px solid black;
-margin-left:30px;
+  border: 5px solid black;
+  margin-left:30px;
 }
 .Name{
-padding-left:1200px;
+  padding-left:1200px;
 
 }
 .Sig{
-padding-left:100px;
-
-
+  padding-left:100px;
 }
