@@ -104,9 +104,7 @@ $estimate_disposal_per_unitERR = $estimate_disposal_totalERR = $estimate_total_c
 
 
 
-
 //include file that will fix the user inputs that are entered
-
 include_once "../../database/fixinput.php";
 
 
@@ -197,6 +195,27 @@ if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $
 } else {
   $error_intake_input = false;
 }
+
+
+
+//reformat all the dates into the correct format
+//authorization of work date
+if (!empty($_SESSION['plan_date'])){
+  $plan_date_format = reformat_date($_SESSION['plan_date']);
+}
+
+//estimate date of costings
+if (!empty($_SESSION['estimate_date'])){
+  $estimate_date_format = reformat_date($_SESSION['estimate_date']);
+}
+
+//expiry of estimate date of costings
+if (!empty($_SESSION['estimate_expiry_date'])){
+  $estimate_expiry_date_format = reformat_date($_SESSION['estimate_expiry_date']);
+}
+
+
+
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
 if ($error_intake_input  or !isset($_POST['submit_intake'])){
@@ -296,12 +315,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
   <span><?php echo $plan_descriptionERR;?></span> <br>
 
   <div class="description">
-    <textarea name="plan_description" placeholder="Description..." rows="10" columns="50" value="<?php echo $_SESSION['plan_description'];?>"></textarea><br>
+    <textarea name="plan_description" placeholder="Description..." rows="10" columns="50"> <?php echo $_SESSION['plan_description'];?> </textarea><br>
   </div>
 
 
   <span>Date on which the work shall be completed:</span>
-  <input type="date" name="plan_date" placeholder="Date" value="<?php echo $_SESSION['plan_date'];?>"> <br>
+  <input type="date" name="plan_date" placeholder="Date" value="<?php echo $plan_date_format;?>"> <br>
   <span><?php echo $plan_dateERR;?></span> <br>
 
 </div>
@@ -399,12 +418,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 <div class="information">
 
   <span class="information-heading">Date of Estimate:</span>
-  <input type="date" name="estimate_date" placeholder="Date of Estimate" value="<?php echo $_SESSION['estimate_date'];?>"> <br>
+  <input type="date" name="estimate_date" placeholder="Date of Estimate" value="<?php echo $estimate_date_format?>"> <br>
   <span><?php echo $estimate_dateERR;?></span><br>
 
 
   <span>This estimate expires on:</span>
-  <input type="date" name="estimate_expiry_date" placeholder="Expiry Date" value="<?php echo $_SESSION['estimate_expiry_date'];?>"> <br>
+  <input type="date" name="estimate_expiry_date" placeholder="Expiry Date" value="<?php echo $estimate_expiry_date_format;?>"> <br>
   <span><?php echo $estimate_expiry_dateERR;?></span> <br>
 
   <span>Any parts removed in the course of work on repairs to the automobile shall be (select one)</span>
@@ -419,10 +438,24 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 </div>
 
 <input  class="button"type="submit" name="submit_intake" value="Submit"><br>
+<?php
+//bring the user back to the worker control panel if they are a worker
+if($_SESSION['worker_loggedin']){
+?>
 
 <a href="../worker_cpanel.php">Back</a>
 
 <?php
+// bring the user back to the admin check orders page if they are the admin
+} else if ($_SESSION['admin_loggedin']){
+?>
+
+<a href="../../admin/orders/check_orders.php">Back</a>
+
+<?php
+}
+
+
 //include the footer
 include '../../footer/footer.php';
 
@@ -438,3 +471,4 @@ include '../../footer/footer.php';
 
 </body>
 </html>
+
