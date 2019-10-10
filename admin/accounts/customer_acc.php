@@ -21,12 +21,11 @@ if (session_start() === null){
   <?php
   //include the navigation bar
   include_once "../../navigation_bar/navigation_bar.php";
-
   //include the file that will print out all the orders
   include "../../database/select/aselect_caccounts.php";
   ?>
   
-  <a href="../admin_cpanel.php">Back</a>
+  <a href="../admin_cpanel.php" class='back'>Back</a>
   
   <div id="rowText"></div>
   
@@ -34,3 +33,4 @@ if (session_start() === null){
   
 </body>
 </html>
+

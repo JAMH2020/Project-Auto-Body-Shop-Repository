@@ -29,7 +29,7 @@ if (session_start() === null){
   include "../../database/select/aselect_cprofiles.php";
   ?>
   
-  <a href="../admin_cpanel.php">Back</a>
+  <a href="../admin_cpanel.php" class='back'>Back</a>
   
   <div id="rowText"></div>
 

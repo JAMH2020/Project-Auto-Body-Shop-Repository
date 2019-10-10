@@ -2,33 +2,22 @@
 /*********************************************
 ** shows all the orders that are available  **
 **********************************************/
-
-
 //include file to connect to the database
 include '../../database/connectdb.php';
-
 //include file to check errors in sql statements
 include '../../database/error_check.php';
-
-
 //prepare and bind sql statement
 $stmt_aorder = $conn->prepare("SELECT * FROM Orders");
-
 //execute the statement
 $stmt_aorder->execute();
-
 //store the result
 $stmt_aorder->store_result();
-
 //bind the results
 $stmt_aorder->bind_result($order_idRow, $order_noRow, $dateRow, $worker_idRow, $customer_idRow, $plan_descriptionRow, $plan_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow);
-
-
 //print out the orders that are available
 if ($stmt_aorder->num_rows > 0){
-
 //prints out a table
-  echo "<table>";
+  echo "<table class='table'>";
     echo "<tr>";
       
       echo "<th>Order Id</th>";
@@ -66,14 +55,9 @@ if ($stmt_aorder->num_rows > 0){
   
 //if there are no orders
 } else {
-  echo "<h3>" . "There are no orders available" . "</h3>";
+  echo "<h3 class='conclusion'>" . "There Are No Orders Available" . "</h3>";
   exit();
 }
-
-
-
-
-
 //close the statment
 $stmt_aorder->close();
 ?>
