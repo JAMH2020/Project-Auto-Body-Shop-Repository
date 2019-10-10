@@ -54,17 +54,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
 //check if there are any missing or incorrect fields
-if ($teacher_firstnameERR != "" or $teacher_lastnameERR != ""){
+if ($worker_firstnameERR != "" or $worker_lastnameERR != ""){
   
-  $error_invoice_input = true;
+  $error_invoicept2_input = true;
   
 } else {
-  $error_invoice_input = false;
+  $error_invoicept2_input = false;
 }
 
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
-if ($error_invoice_input  or !isset($_POST['submit_invoicept2'])){
+if ($error_invoicept2_input  or !isset($_POST['submit_invoicept2'])){
   //include the navigation bar
   include "../../navigation_bar/navigation_bar.php";
 ?>
@@ -114,7 +114,11 @@ WARRANTY </p> <br>
 <h3>PEEL DISTRICT SCHOOL BOARD</h3> <br>
 <span>Teacher’s Name: <span>
 <input type="text" name="worker_firstname" placeholder="firstname" value="<?php echo $_SESSION['worker_firstname'];?>">
+
 <input type="text" name="worker_lastname" placeholder="lastname" value="<?php echo $_SESSION['worker_lastname'];?>"> <br>
+
+<span><?php echo $worker_firstnameERR;?></span>
+<span><?php echo $worker_lastnameERR;?></span> <br>
 
 <p>I have authority to bind the Board. E. & O. Excepted </p>
 
@@ -138,29 +142,33 @@ WARRANTY </p> <br>
 
 <?php
 //include the footer
-include 'footer/footer.php';
+include '../../footer/footer.php';
 
 } else {
 
  echo "done";
  
+ 
  //insert the data into the database
  include "../../database/insert/insert_invoice.php";
+   
+ //if the worker is logged int
+ if($_SESSION['worker_loggedin']){
  
- //redirect page
+   //redirect page to worker control panel if worker is logged int
 ?>
 
-<script>redirect_page("../worker_cpanel.php");</script>
+   <script>redirect_page("../worker_cpanel.php");</script>
 
 <?php 
-}
+  } else if($_SESSION['admin_loggedin']){
+    //redirect page to the admin check order page if the admini is logged in
 ?>
-
+    <script>redirect_page("../../admin/orders/check_orders.php");</script>
+    
 <?php
-  } else {
-    //change the account data in the worker accounts table in the database
-    include "worker_cpanel/invoices/update_invoice.php";
   }
+}
 ?>
 
 </body>
