@@ -8,7 +8,7 @@ if (session_start() === null){
 <html>
 <head>
   <!--style sheet for the worker control panel-->
-  <link rel="stylesheet" type="text/css" href="css/worker_cpanel_styles.css">
+  <link rel="stylesheet" type="text/css" href="css/admin_cpanel_styles.css">
 
 </head>
 <body>
@@ -17,7 +17,7 @@ if (session_start() === null){
   include "../navigation_bar/navigation_bar.php";
 ?>
 
-<div class="worker_cpanelPage">
+<div class="admin_cpanelPage">
   <a href="orders/check_orders.php">Check Orders</a>
   <a href="invoices/check_invoices.php">Check Invoices</a>
   <a href="accounts/customer_acc.php">Check Customer Accounts</a>
