@@ -1,4 +1,3 @@
-  
 <?php
 //start the session if it has not been started yet
 if (session_start() === null){
@@ -11,6 +10,9 @@ if (session_start() === null){
 <head>
   <!--script use to redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
+  
+   <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
+  <script src="../../database/findRow.js"></script>
 </head>
 <body>
   <?php
@@ -39,6 +41,7 @@ if (session_start() === null){
   ?>
 
 
+
   <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
     <?php
@@ -50,7 +53,9 @@ if (session_start() === null){
     <input class="button" type="submit" name="modify_order" value="Modify Order">
   </form>
   
-  <a href="../admin_cpanel.php" class='back' >Back</a>
+  <div id="rowText"></div>
+  
+  <a href="../admin_cpanel.php">Back</a>
   
 </body>
 </html>
