@@ -287,7 +287,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 
 <h3>Customer information</h3>
 <span>Work Order #:</span>
-<input type="text" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>"> <br>
+<input type="number" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>"> <br>
 <span><?php echo $order_noERR;?></span> <br>
 
 
@@ -298,7 +298,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 
 
 <span>Phone:</span>
-<input type="text" name="customer_phone" placeholder="Phone number" value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+<input type="number" name="customer_phone" placeholder="Phone number" value="<?php echo $_SESSION['customer_phone'];?>"> <br>
 <span><?php echo $customer_firstnameERR;?></span>
 <span><?php echo $customer_lastnameERR;?></span>
 <span><?php echo $customer_phoneERR;?></span> <br>
@@ -313,7 +313,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 <span><?php echo $customer_emailERR;?></span> <br>
 
 <span>invoice #:</span>
-<input type="text" name="invoice_no" placeholder="Invoice number" value="<?php echo $_SESSION['invoice_no'];?>">
+<input type="number" name="invoice_no" placeholder="Invoice number" value="<?php echo $_SESSION['invoice_no'];?>">
 
 <span>Date of Invoice:</span>
 <span> <?php echo date("D j/M/Y")?> </span> <br>
@@ -328,13 +328,13 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
   <tr>
     <td>
       <span>Year:</span>
-      <input type="text" name="car_year" placeholder="car year model" value="<?php echo $_SESSION['car_year'];?>"> <br>
+      <input type="number" name="car_year" placeholder="car year model" value="<?php echo $_SESSION['car_year'];?>"> <br>
       <span><?php echo $car_yearERR;?></span>
     </td>
     
     <td> 
       <span>VIN #:</span>
-      <input type="text" name="vin_no" placeholder="VIN" value="<?php echo $_SESSION['vin_no'];?>"><br>
+      <input type="number" name="vin_no" placeholder="VIN" value="<?php echo $_SESSION['vin_no'];?>"><br>
       <span><?php echo $Vin_noERR;?></span> <br>
     </td>
   
@@ -349,7 +349,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     
     <td>
       <span>License Plate</span>
-      <input type="text" name="license_plate" placeholder="License plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
+      <input type="number" name="license_plate" placeholder="License plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
       <span><?php echo $license_plateERR;?></span>
     </td>
   </tr>
@@ -363,7 +363,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     
     <td>
       <span>Odometer reading on intake:</span>
-      <input type="text" name="odometer_intake" placeholder="Odometer on Intake" value="<?php echo $_SESSION['odometer_intake'];?>"> <br>
+      <input type="number" name="odometer_intake" placeholder="Odometer on Intake" value="<?php echo $_SESSION['odometer_intake'];?>"> <br>
       <span><?php echo $odometer_intakeERR;?></span> <br>
     </td>
   </tr>
@@ -373,7 +373,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     </td>
     <td>
       <span>Odometer reading on return:</span>
-      <input type="text" name="odometer_return" placeholder="Odometer on Return" value="<?php echo $_SESSION['odometer_return'];?>"><br>
+      <input type="number" name="odometer_return" placeholder="Odometer on Return" value="<?php echo $_SESSION['odometer_return'];?>"><br>
       <span><?php echo $odometer_returnERR;?></span>
     </td>
   </tr>
@@ -431,12 +431,12 @@ if ($_SESSION['removal_choice'] == "A"){
     <td>PARTS:</td>
     
     <td>
-      <input type="text" name="parts_per_unit" placeholder="$ -Parts/Unit" value="<?php echo $_SESSION['parts_per_unit'];?>"><br>
+      <input type="number" name="parts_per_unit" placeholder="$ -Parts/Unit" value="<?php echo $_SESSION['parts_per_unit'];?>"><br>
       <span><?php echo $parts_per_unitERR;?></span>
     </td>
     
     <td>
-      <input type="text" name="parts_total" placeholder="$ -Parts Total" value="<?php echo $_SESSION['parts_total'];?>"><br>
+      <input type="number" name="parts_total" placeholder="$ -Parts Total" value="<?php echo $_SESSION['parts_total'];?>"><br>
       <span><?php echo $parts_totalERR;?></span>
     </td>
   </tr>
@@ -444,12 +444,12 @@ if ($_SESSION['removal_choice'] == "A"){
   <tr>
     <td>LABOUR:</td>
     <td>
-      <input type="text" name="labour_per_unit" placeholder="$ -Labour/Unit" value="<?php echo $_SESSION['labour_per_unit'];?>"><br>
+      <input type="number" name="labour_per_unit" placeholder="$ -Labour/Unit" value="<?php echo $_SESSION['labour_per_unit'];?>"><br>
       <span><?php echo $labour_per_unitERR;?></span>
     </td>
     
     <td>
-      <input type="text" name="labour_total" placeholder="$ -Labour Total" value="<?php echo $_SESSION['labour_total'];?>"><br>
+      <input type="number" name="labour_total" placeholder="$ -Labour Total" value="<?php echo $_SESSION['labour_total'];?>"><br>
       <span><?php echo $labour_totalERR;?></span>
     </td>
   </tr>
@@ -457,12 +457,12 @@ if ($_SESSION['removal_choice'] == "A"){
   <tr>
     <td>SHOP SUPPLIES:</td>
     <td>
-      <input type="text" name="supplies_per_unit" placeholder="$ -Supplies/Unit" value="<?php echo $_SESSION['supplies_per_unit'];?>"><br>
+      <input type="number" name="supplies_per_unit" placeholder="$ -Supplies/Unit" value="<?php echo $_SESSION['supplies_per_unit'];?>"><br>
       <span><?php echo $supplies_per_unitERR;?></span>
     </td>
     
     <td>
-      <input type="text" name="supplies_total" placeholder="$ -Supplies Total" value="<?php echo $_SESSION['supplies_total'];?>"><br>
+      <input type="number" name="supplies_total" placeholder="$ -Supplies Total" value="<?php echo $_SESSION['supplies_total'];?>"><br>
       <span><?php echo $supplies_totalERR;?></span>
     </td>
   </tr>
@@ -470,12 +470,12 @@ if ($_SESSION['removal_choice'] == "A"){
   <tr>
     <td>RECYCLING/ DISPOSAL FEE:</td>
     <td>
-      <input type="text" name="disposal_per_unit" placeholder="$ -Disposal/Unit" value="<?php echo $_SESSION['disposal_per_unit'];?>"><br>
+      <input type="number" name="disposal_per_unit" placeholder="$ -Disposal/Unit" value="<?php echo $_SESSION['disposal_per_unit'];?>"><br>
       <span><?php echo $disposal_per_unitERR;?></span>
     </td>
     
     <td>
-      <input type="text" name="disposal_total" placeholder="$ -Disposal Total" value="<?php echo $_SESSION['disposal_total'];?>"><br>
+      <input type="number" name="disposal_total" placeholder="$ -Disposal Total" value="<?php echo $_SESSION['disposal_total'];?>"><br>
       <span><?php echo $disposal_totalERR;?></span>
     </td>
   </tr>
@@ -484,7 +484,7 @@ if ($_SESSION['removal_choice'] == "A"){
     <td>ESTIMATED OR AUTHORIZED COST:</td>
     <td></td>
     <td>
-      <input type="text" name="estimate_total" placeholder="$ -Estimated Total" value="<?php echo $_SESSION['estimate_total'];?>"><br>
+      <input type="number" name="estimate_total" placeholder="$ -Estimated Total" value="<?php echo $_SESSION['estimate_total'];?>"><br>
       <span><?php echo $estimate_totalERR;?></span>
     </td>
   </tr>
@@ -493,7 +493,7 @@ if ($_SESSION['removal_choice'] == "A"){
     <td>TOTAL COST:</td>
     <td></td>
     <td>
-      <input type="text" name="total_cost" placeholder="$ -Total" value="<?php echo $_SESSION['total_cost'];?>"><br>
+      <input type="number"="total_cost" placeholder="$ -Total" value="<?php echo $_SESSION['total_cost'];?>"><br>
       <span><?php echo $total_costERR;?></span>
     </td>
   </tr>
