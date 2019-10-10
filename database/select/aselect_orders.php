@@ -2,20 +2,31 @@
 /*********************************************
 ** shows all the orders that are available  **
 **********************************************/
+
+
 //include file to connect to the database
-include '../../database/connectdb.php';
+include_once '../../database/connectdb.php';
+
 //include file to check errors in sql statements
-include '../../database/error_check.php';
+include_once '../../database/error_check.php';
+
+
 //prepare and bind sql statement
 $stmt_aorder = $conn->prepare("SELECT * FROM Orders");
+
 //execute the statement
 $stmt_aorder->execute();
+
 //store the result
 $stmt_aorder->store_result();
+
 //bind the results
 $stmt_aorder->bind_result($order_idRow, $order_noRow, $dateRow, $worker_idRow, $customer_idRow, $plan_descriptionRow, $plan_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow);
+
+
 //print out the orders that are available
 if ($stmt_aorder->num_rows > 0){
+
 //prints out a table
   echo "<table class='table'>";
     echo "<tr>";
@@ -31,6 +42,8 @@ if ($stmt_aorder->num_rows > 0){
       echo "<th>School Name</th>";
       echo "<th>School Address</th>";
       echo "<th>Status</th>";
+      echo "<th></th>";
+      echo "<th></th>";
       
     echo "</tr>";
   
@@ -47,6 +60,17 @@ if ($stmt_aorder->num_rows > 0){
       echo "<td>" . $school_nameRow . "</td>";
       echo "<td>" . $school_addressRow . "</td>";
       echo "<td>" . $statusRow . "</td>";
+?>
+
+           <td>
+             <a href='#' onclick='findCAccountRow("<?php echo $order_idRow?>", "../../database/select/find_row/find_row_orders.php", "../../worker_cpanel/invoices/invoice.php"); return false;'>Create Invoice</a>
+           </td>
+           
+           <td>
+             <a href='#' onclick='findCAccountRow("<?php echo $order_idRow?>", "../../database/select/find_row/find_row_orders.php", "../../worker_cpanel/orders/intake_repair_form.php"); return false;'>Edit</a>
+           </td>
+
+<?php     
      
     echo "</tr>";
   }

@@ -26,10 +26,10 @@ $stmt_find_caccounts->bind_param("i",$customer_find_id);
 
 //get the row from the customer profile table
 $stmt_find_profiles = $conn->prepare("SELECT * FROM Customer_Profile WHERE Email = ?");
-$stmt_find_profiles->bind_param("i",$profile_find_email);
+$stmt_find_profiles->bind_param("s",$profile_find_email);
 
 //get the row from the estimate cost table
-$stmt_find_estimate = $conn->prepare("SELECT Total_Cost, Removal_Choice FROM Estimate_Cost WHERE Order_No = ?");
+$stmt_find_estimate = $conn->prepare("SELECT * FROM Estimate_Cost WHERE Order_No = ?");
 $stmt_find_estimate->bind_param("i",$estimate_find_id);
 
 
@@ -75,7 +75,7 @@ if ($stmt_find_orders->num_rows > 0){
     $_SESSION['plan_description'] = $plan_descriptionRow;
     
     //date the job was done
-    $_SESSION['work_date'] = $work_dateRow;
+    $_SESSION['plan_date'] = $work_dateRow;
     
     //odometer intake
     $_SESSION['odometer_intake'] = $odometer_intakeRow;
@@ -146,7 +146,7 @@ $stmt_find_profiles->execute();
 $stmt_find_profiles->store_result();
 
 //bind the results
-$stmt_find_profiles->bind_result($profile_idRow, $customer_phoneRow, $customer_addressRow, $customer_emailRow, $car_makeRow, $car_modelRow, $vin_noRow, $license_plateRow);
+$stmt_find_profiles->bind_result($profile_idRow, $customer_phoneRow, $customer_addressRow, $customer_emailRow, $car_yearRow, $car_makeRow, $car_modelRow, $vin_noRow, $license_plateRow);
 
 //store the values of the row into sessions
 if ($stmt_find_profiles->num_rows > 0){
@@ -163,6 +163,9 @@ if ($stmt_find_profiles->num_rows > 0){
     
      //customer's address
     $_SESSION['customer_address'] = $customer_addressRow;
+    
+    //car year
+    $_SESSION['car_year'] = $car_yearRow;
     
      //car make
     $_SESSION['car_make'] = $car_makeRow;
@@ -192,7 +195,7 @@ $stmt_find_estimate->execute();
 $stmt_find_estimate->store_result();
 
 //bind the results
-$stmt_find_estimate->bind_result($estimate_totalRow, $removal_choiceRow);
+$stmt_find_estimate->bind_result($order_noRow, $estimate_dateRow, $estimate_date_expiryRow, $estimate_parts_unitRow, $estimate_labour_unitRow, $estimate_supplies_unitRow, $estimate_disposal_unitRow, $estimate_parts_totalRow, $estimate_labour_totalRow, $estimate_supplies_totalRow, $estimate_disposal_totalRow, $estimate_total_costRow, $removal_choiceRow);
 
 //store the values of the row into sessions
 if ($stmt_find_estimate->num_rows > 0){
@@ -200,9 +203,38 @@ if ($stmt_find_estimate->num_rows > 0){
   while($stmt_find_estimate->fetch()){
     //store the values into sessions
     //-----estimate cost table-----//
+    //estimate date selected
+    $_SESSION['estimate_date'] = $estimate_dateRow;
+    
+    //date of expiry of the estimate date selected
+    $_SESSION['estimate_expiry_date'] = $estimate_date_expiryRow;
+    
+    //estimate of parts per unit selected
+    $_SESSION['estimate_parts_per_unit'] = $estimate_parts_unitRow;
+    
+    //estimate of labour per unit selected
+    $_SESSION['estimate_labour_per_unit'] = $estimate_labour_unitRow;
+    
+    //estimate of supplies per unit selected
+    $_SESSION['estimate_supplies_per_unit'] = $estimate_supplies_unitRow;
+    
+    //estimate of disposal/recycling per unit selected
+    $_SESSION['estimate_disposal_per_unit'] = $estimate_disposal_unitRow;
+    
+    //estimate of total parts selected
+    $_SESSION['estimate_parts_total'] = $estimate_parts_totalRow;
+    
+    //estimate of total labour selected
+    $_SESSION['estimate_labour_total'] = $estimate_labour_totalRow;
+    
+    //estimate of total supplies selected
+    $_SESSION['estimate_supplies_total'] = $estimate_supplies_totalRow;
+    
+    //estimate of total disposal selected
+    $_SESSION['estimate_disposal_total'] = $estimate_disposal_totalRow;
     
      //estimate total
-    $_SESSION['estimate_total'] = $estimate_totalRow;
+    $_SESSION['estimate_total_cost'] = $estimate_total_costRow;
     
      //removal choice selected
     $_SESSION['removal_choice'] = $removal_choiceRow;
@@ -219,7 +251,7 @@ echo "<p>o_date:" .  $_SESSION['order_date'] . "</p>";
 echo "<p>o_workid:" .  $_SESSION['worker_id'] . "</p>";
 echo "<p>o_customerid:" .  $_SESSION['customer_id'] . "</p>";
 echo "<p>o_plandescription:" .  $_SESSION['plan_description'] . "</p>";
-echo "<p>o_workdate:" .  $_SESSION['work_date'] . "</p>";
+echo "<p>o_workdate:" .  $_SESSION['plan_date'] . "</p>";
 echo "<p>o_odometerIn:" .  $_SESSION['odometer_intake'] . "</p>";
 echo "<p>o_school_name:" .  $_SESSION['school_name'] . "</p>";
 echo "<p>o_school_add:" .  $_SESSION['school_address'] . "</p>";
@@ -235,12 +267,23 @@ echo "<p>c_password:" .  $_SESSION['customer_password'] . "</p><br><br>";
 echo "<p>p_id:" .  $_SESSION['profile_id'] . "</p>";
 echo "<p>p_phone:" .  $_SESSION['customer_phone'] . "</p>";
 echo "<p>p_addres:" .  $_SESSION['customer_address'] . "</p>";
+echo "<p>p_year:" .  $_SESSION['car_year'] . "</p>";
 echo "<p>p_make:" .  $_SESSION['car_make'] . "</p>";
 echo "<p>p_model:" .  $_SESSION['car_model'] . "</p>";
 echo "<p>p_vin:" .  $_SESSION['vin_no'] . "</p>";
 echo "<p>p_license:" .  $_SESSION['license_plate'] . "</p> <br><br>";
 
 
+echo "<p>e_esti_date:" .  $_SESSION['estimate_date'] . "</p>";
+echo "<p>e_expir_esti_date:" .  $_SESSION['estimate_expiry_date'] . "</p>";
+echo "<p>e_p/unit:" .  $_SESSION['estimate_parts_per_unit'] . "</p>";
+echo "<p>e_l/unit:" .  $_SESSION['estimate_labour_per_unit'] . "</p>";
+echo "<p>e_s/unit:" .  $_SESSION['estimate_supplies_per_unit'] . "</p>";
+echo "<p>e_d/unit:" .  $_SESSION['estimate_disposal_per_unit'] . "</p>";
+echo "<p>e_p_total:" .  $_SESSION['estimate_parts_total'] . "</p>";
+echo "<p>e_l_total:" .  $_SESSION['estimate_labour_total'] . "</p>";
+echo "<p>e_s_total:" .  $_SESSION['estimate_supplies_total'] . "</p>";
+echo "<p>e_d_total:" .  $_SESSION['estimate_disposal_total'] . "</p>";
 echo "<p>e_total:" .  $_SESSION['estimate_total'] . "</p>";
 echo "<p>e_choice:" .  $_SESSION['removal_choice'] . "</p>";
 

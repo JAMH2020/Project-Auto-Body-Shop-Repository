@@ -384,7 +384,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 </p>
 
 <span><?php echo $done_descriptionERR;?></span> <br>
-<textarea name="done_description" placeholder="Description..." rows="10" columns="50" value="<?php echo $_SESSION['done_description'];?>"></textarea><br>
+<textarea name="done_description" placeholder="Description..." rows="10" columns="50"><?php echo $_SESSION['done_description'];?></textarea><br>
 
 <span>Date of authorization of work:</span>
 <input type="date" name="work_date" value="<?php echo $work_date_format;?>">
@@ -504,10 +504,25 @@ if ($_SESSION['removal_choice'] == "A"){
 <input type="submit" name="submit_invoice" value="Submit">
 
 </form>
+<?php
+//back button redirects to worker control panel if worker is logged in
+if ($_SESSION['worker_loggedin']){
+?>
 
 <a href="../worker_cpanel.php">Back</a>
 
+
 <?php
+//back butto redirects to the admin check orders page if admin is logged in
+} else if($_SESSION['admin_loggedin']){
+?>
+
+<a href="../../admin/orders/check_orders.php">Back</a>
+
+<?php
+}
+
+
 //include the footer
 include '../../footer/footer.php';
 
