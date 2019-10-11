@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <script src="script.js"></script>
+  </body>
+  <div class="background">
+     <div class="box">
+</html>
+<font class="Change_Account" size="10">Change Account</font>
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+
+
+<center class="di"><span>First Name:</span>
+
+<input type="text" name="customer_firstname" placeholder="First Name" value="<?php echo $_SESSION['customer_firstname']; ?>"></center>
+
+<center class="di"><span>Last Name:</span>
+<input type="text" name="customer_lastname" placeholder="Last Name" value="<?php echo $_SESSION['customer_lastname']; ?>"> <br></center>
+
+<center class="di"><span>Password:</span>
+<input type="password" name="customer_password" placeholder="Password" id="password" value="<?php echo $_SESSION['customer_password']; ?>"> <br></center>
+
+
+<center><input type="checkbox" onclick="showPassword()">
+<span>Show Password</span> <br></center>
+
+
+<center class="di move1"><span>Email:</span>
+<input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email']; ?>"> <br></center>
+
+
+<center class="move"><input type="text" name="worker_firstname" placeholder="First Name" value="<?php echo $_SESSION['worker_firstname']; ?>"></center>
+
+<center class="di move2"><span>Last Name:</span>
+<input type="text" name="worker_lastname" placeholder="Last Name" value="<?php echo $_SESSION['worker_lastname']; ?>"> <br></center>
+
+<center class="di"><span>Password:</span>
+<input type="password" name="worker_password" placeholder="Password" id="password" value="<?php echo $_SESSION['worker_password']; ?>"> <br></center>
+
+
+<center class="di"><input type="checkbox" onclick="showPassword()">
+<span>Show Password</span> <br></center>
+
+
+<center class="di move3"><span>Email:</span>
+<input type="text" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email']; ?>"> <br></center>
+
+
+
+<center class="di"><input class="change" type="submit" name="change_account"value="Change" > <br></center>
+
+</div>
+</form>
+
+<center><a href="../customer_acc.php" class="back">Back</a>
+</center>
+
+
+<script>redirect_page("../customer_acc.php");</script>
+
+
+
+<script>redirect_page("../worker_acc.php");</script>
+<style>
+  body{
+      
+background-color:#002b80;
+ }
+  </style>
+</div>
+</body>
+</html>
