@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <script src="script.js"></script>
+    <div class="background">
+      <div class="box">
+  </body>
+</html>
+
+<font class="Change_Customer_Profile" size="10">Change Customer Profile</font>
+
+<center><form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off"></center>
+
+<center><span>Name:</span>
+<span><?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']?></span> <br><center>
+
+<center><span>Phone:</span>
+<input type="text" name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+<span><?php echo $customer_phoneERR;?></span> <br></center>
+
+<center class="move1"><span>Address:</span>
+<input type="text" name="customer_address" placeholder="Address" value="<?php echo $_SESSION['customer_address'];?>"> <br>
+<span><?php echo $customer_addressERR;?></span> <br></center>
+
+<center><span>Email:</span>
+<input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
+<span><?php echo $customer_emailERR;?></span> <br></center>
+
+<center class="move2"><span>Car Make:</span>
+<input type="text" name="car_make" placeholder="Car Make" value="<?php echo $_SESSION['car_make'];?>"> <br>
+<span><?php echo $car_makeERR;?></span> <br></center>
+
+<center class="move3"><span>Car Model:</span>
+<input type="text" name="car_model" placeholder="Car Model" value="<?php echo $_SESSION['car_model'];?>"> <br>
+<span><?php echo $car_modelERR;?></span> <br></center>
+
+<center class="move4"><span>Vin Number:</span>
+<input type="text" name="vin_no" placeholder="Vin No." value="<?php echo $_SESSION['vin_no'];?>"> <br>
+<span><?php echo $vin_noERR;?></span> <br></center>
+
+<center class="move5"><span>License Plate:</span>
+<input type="text" name="license_plate" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
+<span><?php echo $license_plateERR;?></span> <br></center>
+
+
+
+<input class="change" type="submit" name="change_profile" value="Change"> <br>
+
+</div>
+</form>
+<center><a href="../check_profiles.php" class="back">Back</a>
+
+<?php
+} else {
+ //change the profile data in the customer accounts table in the database
+ include "../../../database/update/update_cprofiles.php";
+?>
+
+<script>redirect_page("../check_profiles.php");</script>
+
+<?php
+}
+?>
+<style>
+  body{
+      
+background-color:#0099cc;
+ }
+  </style>
+</div>
+</body>
+</html>
