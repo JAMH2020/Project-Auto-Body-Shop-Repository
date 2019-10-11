@@ -1,0 +1,20 @@
+
+.nav {
+  overflow: hidden;
+  background-color: #cceeff;
+  width: 100%; 
+ padding: 15px 15px ;
+ border: 3px solid black;
+ margin-right: 18px;
+ color: black;
+ font-size: 19px;
+ margin-top: 15px;
+ display: flex;
+ justify-content: center; 
+ 
+}
+.space{
+  margin-top: 100px;
+}
+
+
