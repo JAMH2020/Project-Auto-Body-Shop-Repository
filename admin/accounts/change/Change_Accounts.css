@@ -1,0 +1,80 @@
+.Change_Account{
+ text-decoration: underline;
+ 
+ /* transform: translate(-210px,-80px);*/
+ display:inline-block;
+ width:100%;
+ text-align: center;
+padding-top:150px;
+padding-bottom:100px;
+ 
+}
+.di{
+ padding-bottom:12.5px;
+ padding-top:12.5px;
+
+
+}
+.background{
+
+  /* The Background Image */
+  background-image:url("https://www.brockroadgarage.ca/wp-content/uploads/2018/03/Electrical-Diagnostic-Repair-1140x760.jpg");
+
+  /* Height of Image */
+  height: 100%;
+
+  /* Setting The location Of The Image */
+  background-position: center;
+  background-size: cover;
+ margin-top: 150px;
+
+ }
+ .back{
+background-color: rgb(170, 18, 18);/* Green */
+  //border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+border: 5px solid black;
+margin-left:92%;
+}
+.box{
+  width: 400px;
+  height: 100%;
+  background-color: rgb(100, 211, 252);
+  border: 5px solid White;
+margin-left: auto;
+ margin-right: auto;
+ margin-top: 50px;
+
+ }
+ .move1{
+   margin-left:23px;
+ }
+ .move{
+   margin-left:70px;
+ }
+ .move2{
+   margin-right:10px;
+ }
+ .move3{
+   margin-left:23px;
+ }
+ .change{
+background-color: #008CBA;/* blue */
+  //border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+border: 5px solid black;
+}
+
+
+ }
+ 
