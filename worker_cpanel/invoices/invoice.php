@@ -298,7 +298,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 
 
 <span>Phone:</span>
-<input type="number" name="customer_phone" placeholder="Phone number" value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+<input type="tel" name="customer_phone" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required value="<?php echo $_SESSION['customer_phone'];?>"> <br>
 <span><?php echo $customer_firstnameERR;?></span>
 <span><?php echo $customer_lastnameERR;?></span>
 <span><?php echo $customer_phoneERR;?></span> <br>
@@ -309,7 +309,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 <span><?php echo $customer_addressERR;?></span> <br>
 
 <span>Email:</span>
-<input type="text" name="customer_email" placeholder="Email of customer." value="<?php echo $_SESSION['customer_email'];?>"><br>
+<input type="email" name="customer_email" placeholder="Email of customer." value="<?php echo $_SESSION['customer_email'];?>"><br>
 <span><?php echo $customer_emailERR;?></span> <br>
 
 <span>invoice #:</span>
@@ -328,13 +328,13 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
   <tr>
     <td>
       <span>Year:</span>
-      <input type="number" name="car_year" placeholder="car year model" value="<?php echo $_SESSION['car_year'];?>"> <br>
+      <input type="number" max = "4" min = "4" name="car_year" placeholder="car year model" value="<?php echo $_SESSION['car_year'];?>"> <br>
       <span><?php echo $car_yearERR;?></span>
     </td>
     
     <td> 
       <span>VIN #:</span>
-      <input type="number" name="vin_no" placeholder="VIN" value="<?php echo $_SESSION['vin_no'];?>"><br>
+      <input type="text" max = "17" min = "17" name="vin_no" placeholder="VIN" value="<?php echo $_SESSION['vin_no'];?>"><br>
       <span><?php echo $Vin_noERR;?></span> <br>
     </td>
   
@@ -349,7 +349,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     
     <td>
       <span>License Plate</span>
-      <input type="number" name="license_plate" placeholder="License plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
+      <input type="text" max = "8" min = "2" name="license_plate" placeholder="License plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
       <span><?php echo $license_plateERR;?></span>
     </td>
   </tr>
