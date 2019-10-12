@@ -7,4 +7,4 @@ everything belongs. All backend forms for inserting data into the database is mo
 html is available, whereas all forms and their dtabase inserts are available here, as well as most of the images. Feel free to look around
 and if any edits are required please do not hesitate to let us know! Have a good day!
 
-                                                                                                        - Team JAHM
+                                                                                                        - Team JAMH
