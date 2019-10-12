@@ -15,10 +15,13 @@ if (session_start() === null){
   <!--script to create bullet points of error messages if there is a missing field
   or an error with the user's input-->
   <script src="js/errorlist.js"></script>
+ 
   <!--script to show password -->
   <script src="js/showpassword.js"></script>
+  
   <!--script that will redirect the user to another page-->
   <script src="../src/js/submit_form.js"></script>
+ 
   <!--style page for the signup page-->
   <link href="signup_styles.css" rel="stylesheet" type="text/css" />
 </head>
@@ -118,7 +121,7 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
           }
           ?>
 
-
+<!---------Signup sheet that the custome or emplotee will see and fill out to sighn up for an account-------------->
          </ul>
 
         <font class="Signup" size="10">Sign Up</font>
@@ -145,7 +148,7 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
 
 
             <center class="di"><span>Email:</span>
-           <input type="text" name="customer_email" class="form-control" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> </center><br>
+           <input type="email" name="customer_email" class="form-control" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> </center><br>
 
             <center><input  type="submit" name="sign_up" class="signup_btn" value="Sign Up" > <br></center>
 
