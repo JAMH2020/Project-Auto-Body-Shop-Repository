@@ -103,7 +103,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 include "../navigation_bar/navigation_bar.php";
 ?>
 
- 
+ <!------Login page that visitors will use to log in-------->
     <div class="background">
      <div class="background_cover">
         <div class="wrapper">
