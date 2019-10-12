@@ -225,7 +225,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 ?>
 
 
-
+<!---------------The form that will be filled out------------------->
 
 <div class ="intake_title">
   <h1 class="title-heading">AUTOMOTIVE INTAKE REPAIR FORM</h1>
@@ -246,7 +246,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
   <span class="information-heading"> Work Order #:</span>
 
-  <input type="text" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>">
+  <input type="number" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>">
 
   <span>Teacher:</span>
   <input type="text" name="teacher" placeholder="Teacher" value="<?php echo $_SESSION['teacher'];?>">
@@ -278,12 +278,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 <div class="information">
 
   <span class="information-heading">Year:</span>
-  <input type="text" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
+  <input type="number" max= "4" min = "4" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
 
 
 
   <span>VIN #:</span>
-  <input type="text" name="vin_no" placeholder="VIN No." value="<?php echo $_SESSION['vin_no'];?>"><br>
+  <input type="text" name="vin_no" placeholder="VIN No." min = "17" max = "17" value="<?php echo $_SESSION['vin_no'];?>"><br>
   <span><?php echo $car_yearERR;?></span>
   <span><?php echo $vin_noERR;?></span> <br>
 
@@ -294,7 +294,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 
   <span>License Plate:</span>
-  <input type="text" name="license_plate" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"><br>
+  <input type="text" name="license_plate" max = "8" min = "2" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"><br>
   <span><?php echo $car_makeERR;?></span>
   <span><?php echo $license_plateERR;?></span> <br>
 
@@ -304,7 +304,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 
   <span>Odometer:</span>
-  <input type="text" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
+  <input type="number" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
   <span><?php echo $car_modelERR;?></span>
   <span><?php echo $odometer_intakeERR;?></span> <br>
 
@@ -345,12 +345,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
     <td>Parts:</td>
 
     <td>
-      <input type="text" name="estimate_parts_per_unit" placeholder="$-Parts/Unit" value="<?php echo $_SESSION['estimate_parts_per_unit'];?>"> <br>
+      <input type="number" name="estimate_parts_per_unit" placeholder="$-Parts/Unit" value="<?php echo $_SESSION['estimate_parts_per_unit'];?>"> <br>
       <span><?php echo $estimate_parts_per_unitERR;?></span>
     </td>
 
     <td>
-      <input type="text" name="estimate_parts_total" placeholder="$-Parts Total" value="<?php echo $_SESSION['estimate_parts_total'];?>"> <br>
+      <input type="number" name="estimate_parts_total" placeholder="$-Parts Total" value="<?php echo $_SESSION['estimate_parts_total'];?>"> <br>
       <span><?php echo $estimate_parts_totalERR;?></span>
     </td>
   </tr>
@@ -360,12 +360,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
     <td>Labour:</td>
 
     <td>
-      <input type="text" name="estimate_labour_per_unit" placeholder="$-Labour/Unit" value="<?php echo $_SESSION['estimate_labour_per_unit'];?>"> <br>
+      <input type="number" name="estimate_labour_per_unit" placeholder="$-Labour/Unit" value="<?php echo $_SESSION['estimate_labour_per_unit'];?>"> <br>
       <span><?php echo $estimate_labour_per_unitERR;?></span>
     </td>
 
     <td>
-      <input type="text" name="estimate_labour_total" placeholder="$-Labour Total" value="<?php echo $_SESSION['estimate_labour_total'];?>"> <br>
+      <input type="number" name="estimate_labour_total" placeholder="$-Labour Total" value="<?php echo $_SESSION['estimate_labour_total'];?>"> <br>
       <span><?php echo $estimate_labour_totalERR;?></span>
     </td>
   </tr>
@@ -375,12 +375,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
     <td>Shop Supplies:</td>
 
     <td>
-      <input type="text" name="estimate_supplies_per_unit" placeholder="$-Supplies/Unit" value="<?php echo $_SESSION['estimate_supplies_per_unit'];?>"> <br>
+      <input type="number" name="estimate_supplies_per_unit" placeholder="$-Supplies/Unit" value="<?php echo $_SESSION['estimate_supplies_per_unit'];?>"> <br>
       <span><?php echo $estimate_supplies_per_unitERR;?></span>
     </td>
 
     <td>
-      <input type="text" name="estimate_supplies_total" placeholder="$-Supplies Total" value="<?php echo $_SESSION['estimate_supplies_total'];?>"> <br>
+      <input type="number" name="estimate_supplies_total" placeholder="$-Supplies Total" value="<?php echo $_SESSION['estimate_supplies_total'];?>"> <br>
       <span><?php echo $estimate_supplies_totalERR;?></span>
     </td>
   </tr>
@@ -389,12 +389,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
     <td>Recycling/Disposal Fee:</td>
 
     <td>
-      <input type="text" name="estimate_disposal_per_unit" placeholder="$-Recycling and Disposal/Unit" value="<?php echo $_SESSION['estimate_disposal_per_unit'];?>"> <br>
+      <input type="number" name="estimate_disposal_per_unit" placeholder="$-Recycling and Disposal/Unit" value="<?php echo $_SESSION['estimate_disposal_per_unit'];?>"> <br>
       <span><?php echo $estimate_disposal_per_unitERR;?></span>
     </td>
 
     <td>
-      <input type="text" name="estimate_disposal_total" placeholder="$-Recycling and Disposal Total" value="<?php echo $_SESSION['estimate_disposal_total'];?>"> <br>
+      <input type="number" name="estimate_disposal_total" placeholder="$-Recycling and Disposal Total" value="<?php echo $_SESSION['estimate_disposal_total'];?>"> <br>
       <span><?php echo $estimate_disposal_totalERR;?></span>
     </td>
   </tr>
@@ -403,7 +403,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
     <td>Total Estimated Cost:</td>
     <td></td>
     <td>
-      <input type="text" name="estimate_total_cost" placeholder="$-Estimate Total" value="<?php echo $_SESSION['estimate_total_cost'];?>"> <br>
+      <input type="number" name="estimate_total_cost" placeholder="$-Estimate Total" value="<?php echo $_SESSION['estimate_total_cost'];?>"> <br>
       <span><?php echo $estimate_total_costERR;?></span>
     </td>
     
