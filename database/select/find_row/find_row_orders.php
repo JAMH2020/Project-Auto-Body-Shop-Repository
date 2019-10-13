@@ -32,6 +32,9 @@ $stmt_find_profiles->bind_param("s",$profile_find_email);
 $stmt_find_estimate = $conn->prepare("SELECT * FROM Estimate_Cost WHERE Order_No = ?");
 $stmt_find_estimate->bind_param("i",$estimate_find_id);
 
+//get the row from worker accounts table
+$stmt_find_waccounts = $conn->prepare("SELECT * FROM Worker_Accounts WHERE Worker_Id = ?");
+$stmt_find_waccounts->bind_param("i",$worker_find_id);
 
 
 //get the order id using AJAX
@@ -60,7 +63,7 @@ if ($stmt_find_orders->num_rows > 0){
     $_SESSION['order_id'] = $order_idRow;
  
     //order number
-    $_SESSION['order_no'] = $order_noRow;
+    $_SESSION['order_no'] = $_SESSION['prev_order_no'] = $order_noRow;
     
     //date the order was made
     $_SESSION['order_date'] = $order_dateRow;
@@ -128,7 +131,7 @@ if ($stmt_find_caccounts->num_rows > 0){
     $_SESSION['customer_password'] = $customer_passwordRow;
     
      //customer's email
-    $_SESSION['customer_email'] = $customer_emailRow;
+    $_SESSION['customer_email'] = $_SESSION['prev_customer_email'] = $customer_emailRow;
     }
  }
 
@@ -195,7 +198,7 @@ $stmt_find_estimate->execute();
 $stmt_find_estimate->store_result();
 
 //bind the results
-$stmt_find_estimate->bind_result($order_noRow, $estimate_dateRow, $estimate_date_expiryRow, $estimate_parts_unitRow, $estimate_labour_unitRow, $estimate_supplies_unitRow, $estimate_disposal_unitRow, $estimate_parts_totalRow, $estimate_labour_totalRow, $estimate_supplies_totalRow, $estimate_disposal_totalRow, $estimate_total_costRow, $removal_choiceRow);
+$stmt_find_estimate->bind_result($order_noRow, $estimate_dateRow, $estimate_date_expiryRow, $estimate_parts_unitRow, $estimate_labour_unitRow, $estimate_supplies_unitRow, $estimate_disposal_unitRow, $estimate_parts_totalRow, $estimate_labour_totalRow, $estimate_supplies_totalRow, $estimate_disposal_totalRow, $estimate_total_costRow, $exceed_costRow, $removal_choiceRow, $customer_initialRow);
 
 //store the values of the row into sessions
 if ($stmt_find_estimate->num_rows > 0){
@@ -236,12 +239,66 @@ if ($stmt_find_estimate->num_rows > 0){
      //estimate total
     $_SESSION['estimate_total_cost'] = $estimate_total_costRow;
     
+    //exceed cost
+    $_SESSION['exceed_cost'] = $exceed_costRow;
+    
      //removal choice selected
     $_SESSION['removal_choice'] = $removal_choiceRow;
     
+    //custooer initial
+    $_SESSION['customer_initial'] = $customer_initialRow;
+    
     }
  }
+ 
+ 
+ 
+//get the worker id from sessions
+$worker_find_id = $_SESSION['worker_id'];
 
+
+
+//execute the statement for getting values from worker account
+$stmt_find_waccounts->execute();
+
+//store the result
+$stmt_find_waccounts->store_result();
+
+//bind the results
+$stmt_find_waccounts->bind_result($worker_idRow, $worker_firstnameRow, $worker_lastnameRow, $worker_passwordRow, $worker_emailRow);
+
+//store the values of the row into sessions
+if ($stmt_find_waccounts->num_rows > 0){
+
+  while($stmt_find_waccounts->fetch()){
+  
+    //worker id
+    $_SESSION['worker_id'] = $worker_idRow;
+  
+    //worker firstname
+    $_SESSION['worker_firstname'] = $worker_firstnameRow;
+  
+    //worker lastname
+    $_SESSION['worker_lastname'] = $worker_lastnameRow;
+  
+    //worker password
+    $_SESSION['worker_password'] = $worker_passwordRow;
+  
+    //worker email
+    $_SESSION['worker_email'] = $worker_emailRow;
+  }
+}
+
+
+
+
+//edit orders if the user pressed the edit button
+if ($_POST['editForm'] == "1"){
+  $_SESSION['editForm'] = true;
+  
+} else if ($_POST['editForm'] == "0"){
+  $_SESSION['editForm'] = false;
+}
 
 
 
@@ -285,7 +342,12 @@ echo "<p>e_l_total:" .  $_SESSION['estimate_labour_total'] . "</p>";
 echo "<p>e_s_total:" .  $_SESSION['estimate_supplies_total'] . "</p>";
 echo "<p>e_d_total:" .  $_SESSION['estimate_disposal_total'] . "</p>";
 echo "<p>e_total:" .  $_SESSION['estimate_total'] . "</p>";
+echo "<p>e_exceed:" .  $_SESSION['exceed_cost'] . "</p>";
 echo "<p>e_choice:" .  $_SESSION['removal_choice'] . "</p>";
+echo "<p>e_initial:" .  $_SESSION['customer_initial'] . "</p> <br> <br>";
+
+echo "<p>modify variable:" . $_SESSION['editForm'] . "</p>";
+echo "<p>modify variable_post:" . $_POST['editForm'] . "</p>";
 
 
 //close the statement
