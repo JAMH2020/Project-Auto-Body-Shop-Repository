@@ -56,6 +56,7 @@ if ($stmt_orders1->num_rows > 0){
       echo "<th>School Address</th>";
       echo "<th>Status</th>";
       echo "<th></th>";
+      echo "<th></th>";
       
     echo "</tr>";
 
@@ -74,6 +75,10 @@ if ($stmt_orders1->num_rows > 0){
 ?>
            <td>
              <a href='#' onclick='findCAccountRow("<?php echo $order_idRow?>", "../database/select/find_row/find_row_orders.php", "invoices/invoice.php"); return false;'>Create Invoice</a>
+           </td>
+           
+           <td>
+             <a href='#' onclick='editPage("../database/select/find_row/find_row_orders.php", "../database/select/find_row/find_row_orders.php", 1); findCAccountRow("<?php echo $order_idRow?>", "../database/select/find_row/find_row_orders.php", "../worker_cpanel/orders/intake_repair_form.php"); return false;'>Edit</a>
            </td>
 
 <?php
