@@ -53,6 +53,12 @@ function fix_input($data, $post_name){
     }
 
   }
+  
+  //trims whitespace at the beggining of the string
+  $data = ltrim($data);
+  
+  //trims whitespace at the end of the string
+  $data = rtrim($data);
  
   $_POST["$post_name"] = $data;
 
@@ -96,4 +102,3 @@ function reformat_date($timestamp){
   
   return $date_format;
 }
-
