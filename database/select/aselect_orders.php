@@ -49,7 +49,7 @@ if ($stmt_aorder->num_rows > 0){
   
   while($stmt_aorder->fetch()){
     echo "<tr>";
-      echo "<td> <input type='radio' name='order_id' value=" . $order_idRow .">" . $order_idRow . "</td>";
+      echo "<td> <input type='checkbox' name='order_idArr[]' value=" . $order_idRow .">" . $order_idRow . "</td>";
       echo "<td>" . $order_noRow . "</td>";
       echo "<td>" . $dateRow . "</td>";
       echo "<td>" . $worker_idRow . "</td>";
@@ -67,11 +67,11 @@ if ($stmt_aorder->num_rows > 0){
            </td>
            
            <td>
-             <a href='#' onclick='findCAccountRow("<?php echo $order_idRow?>", "../../database/select/find_row/find_row_orders.php", "../../worker_cpanel/orders/intake_repair_form.php"); return false;'>Edit</a>
+             <a href='#' onclick='editPage("../../database/select/find_row/find_row_orders.php", "../../database/select/find_row/find_row_orders.php", 1); findCAccountRow("<?php echo $order_idRow?>", "../../database/select/find_row/find_row_orders.php", "../../worker_cpanel/orders/intake_repair_form.php"); return false;'>Edit</a>
            </td>
 
+
 <?php     
-     
     echo "</tr>";
   }
   
@@ -79,9 +79,14 @@ if ($stmt_aorder->num_rows > 0){
   
 //if there are no orders
 } else {
-  echo "<h3 class='conclusion'>" . "There Are No Orders Available" . "</h3>";
+  echo "<h3 class='conclusion'>" . "There are no orders available" . "</h3>";
   exit();
 }
+
+
+
+
+
 //close the statment
 $stmt_aorder->close();
 ?>
