@@ -19,7 +19,7 @@ $stmt_invoice->bind_param("isisisss", $order_no, $invoice_no, $worker_id, $invoi
   
 //statement to insert into the total cost table
 $stmt_total_cost = $conn->prepare("INSERT INTO Total_Cost (Invoice_No, Parts_Price_Unit, Labour_Price_Unit, Supplies_Price_Unit, Disposal_Price_Unit, Parts_Total, Labour_Total, Supplies_Total, Disposal_Total, Estimate_Total, Total) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-$stmt_total_cost->bind_param("siiiiiiiiii", $invoice_no, $parts_per_unit, $labour_per_unit, $supplies_per_unit, $disposal_per_unit, $parts_total, $labour_total, $supplies_total, $disposal_total, $estimate_total, $total_cost);
+$stmt_total_cost->bind_param("sdddddddddd", $invoice_no, $parts_per_unit, $labour_per_unit, $supplies_per_unit, $disposal_per_unit, $parts_total, $labour_total, $supplies_total, $disposal_total, $estimate_total, $total_cost);
 
 
   
