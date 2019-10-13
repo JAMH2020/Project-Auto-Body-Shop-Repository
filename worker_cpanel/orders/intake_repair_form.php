@@ -366,12 +366,12 @@ if ($_SESSION['admin_loggedin']){
 <div class="information">
 
   <span class="information-heading">Year:</span>
-  <input type="number" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
+  <input type="number" max= "4" min = "4" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
 
 
 
   <span>VIN #:</span>
-  <input type="text" name="vin_no" placeholder="VIN No." value="<?php echo $_SESSION['vin_no'];?>"><br>
+  <input type="text" name="vin_no" placeholder="VIN No." min = "17" max = "17" value="<?php echo $_SESSION['vin_no'];?>"><br>
   <span><?php echo $car_yearERR;?></span>
   <span><?php echo $vin_noERR;?></span> <br>
 
@@ -382,7 +382,7 @@ if ($_SESSION['admin_loggedin']){
 
 
   <span>License Plate:</span>
-  <input type="text" name="license_plate" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"><br>
+  <input type="text" name="license_plate" max = "8" min = "2" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
   <span><?php echo $car_makeERR;?></span>
   <span><?php echo $license_plateERR;?></span> <br>
 
@@ -392,7 +392,7 @@ if ($_SESSION['admin_loggedin']){
 
 
   <span>Odometer:</span>
-  <input type="text" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
+  <input type="number" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
   <span><?php echo $car_modelERR;?></span>
   <span><?php echo $odometer_intakeERR;?></span> <br>
 
