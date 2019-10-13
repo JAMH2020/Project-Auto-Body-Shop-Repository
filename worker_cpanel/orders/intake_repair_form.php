@@ -93,6 +93,31 @@ $removal_choice = "";
 save_session("removal_choice");
 
 
+//if user is editting form, have session to change the status of the order
+if ($_SESSION['editForm']){
+
+ //status of the order
+ $order_status = "";
+  save_session("status");
+  
+  $statusERR = "";
+}
+
+
+//if the user is the admin
+if ($_SESSION['admin_loggedin']){
+
+  //worker email
+  $worker_email = "";
+  save_session("worker_email");
+  
+  $worker_emailERR = "";
+}
+
+
+
+
+
 
 
 //errors for any missing fields in the repair intake form
@@ -150,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_intake", "estimate", "estimate_parts_per_unit", "estimate_parts_per_unitERR");
 
   //estimate of the total cost of parts
-  createErrMsg("submit_intake", "total estimate", "estimate_parts_total", "estiamte_parts_totalERR");
+  createErrMsg("submit_intake", "total estimate", "estimate_parts_total", "estimate_parts_totalERR");
 
   //estimate of the labour cost per unit
   createErrMsg("submit_intake", "estimate", "estimate_labour_per_unit", "estimate_labour_per_unitERR");
@@ -181,9 +206,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
   //choice of removal
   createErrMsg("submit_intake", "removal choice", "removal_choice", "removal_choiceERR");
-
-  //fill in for the removal choice
-  createErrMsg("submit_intake", "blank", "removal_fillin", "removal_fillinERR");
+  
+  //if user is editting the orders
+  if ($_SESSION['editForm']){
+    //status of the work
+    createErrMsg("submit_intake", "order status", "status", "statusERR");
+  }
+  
+  
+  //if the user is the admin
+  if ($_SESSION['admin_loggedin']){
+    //worker account
+    createErrMsg("submit_intake", "worker email", "worker_email", "worker_emailERR");
+  }
 }
 
 //check if there are any missing or incorrect fields
@@ -192,8 +227,26 @@ $error_intake_input;
 if ($order_noERR != "" or $school_nameERR != "" or $school_addressERR != "" or $car_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $plan_descriptionERR != "" or $plan_dateERR != "" or $estimate_parts_per_unitERR != "" or $estimate_parts_totalERR != "" or $estimate_labour_per_unitERR != "" or $estimate_labour_totalERR != "" or $estimate_supplies_per_unitERR  != "" or $estimate_supplies_totalERR != "" or $estimate_disposal_per_unitERR != "" or $estimate_disposal_totalERR != "" or $estimate_total_costERR != "" or $estimate_dateERR != "" or $estimate_expiry_dateERR != "" or $removal_choiceERR != ""){
  
  $error_intake_input = true;
+ 
 } else {
   $error_intake_input = false;
+}
+
+
+
+//for editting orders
+if ($_SESSION['editForm']){
+  if ($statusERR){
+    $error_intake_input = true;   
+  }
+}
+
+
+//for the admin as user
+if ($_SESSION['admin_loggedin']){
+  if ($worker_emailERR){
+    $error_intake_input = true;
+  } 
 }
 
 
@@ -225,33 +278,68 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 ?>
 
 
-<!---------------The form that will be filled out------------------->
+
 
 <div class ="intake_title">
   <h1 class="title-heading">AUTOMOTIVE INTAKE REPAIR FORM</h1>
 </div>
 
 
+
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
 <div class="image"></div>
-
-<div class="subtitle">
-  <p class="subtitle-heading">School Information</p>
-</div>
 
 
 
 <div class="information">
 
+<?php
+//when editting the form
+if ($_SESSION['editForm']){
+?>
+  <span>Status:</span>
+  <input type="text" name="status" placeholder="Status" value="<?php echo $_SESSION['status'];?>">
+  <span><?php echo $statusERR;?></span> <br> <br>
+  
+<?php
+}
+?>
+  
+  
+  <div class="subtitle">
+    <p class="subtitle-heading">School Information</p>
+  </div>
+  
+
   <span class="information-heading"> Work Order #:</span>
 
   <input type="number" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>">
+  
+<?php
+//if the user is the admin
+if ($_SESSION['admin_loggedin']){
+?>
+  <span>Teacher Email:</span>
+  <input type="text" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email'];?>">
+  
+<?php
+}
+?>
 
-  <span>Teacher:</span>
-  <input type="text" name="teacher" placeholder="Teacher" value="<?php echo $_SESSION['teacher'];?>">
   <br>
-  <span><?php echo $order_noERR;?></span> <br>
+  <span><?php echo $order_noERR;?></span>
+  
+<?php
+//if the user is the admin
+if ($_SESSION['admin_loggedin']){
+?>
+  <span><?php echo $worker_emailERR;?></span> 
+<?php
+}
+?>
+  
+  <br>
 
 
  <span>School Name:</span>
@@ -278,12 +366,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 <div class="information">
 
   <span class="information-heading">Year:</span>
-  <input type="number" max= "4" min = "4" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
+  <input type="number" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
 
 
 
   <span>VIN #:</span>
-  <input type="text" name="vin_no" placeholder="VIN No." min = "17" max = "17" value="<?php echo $_SESSION['vin_no'];?>"><br>
+  <input type="text" name="vin_no" placeholder="VIN No." value="<?php echo $_SESSION['vin_no'];?>"><br>
   <span><?php echo $car_yearERR;?></span>
   <span><?php echo $vin_noERR;?></span> <br>
 
@@ -294,7 +382,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 
   <span>License Plate:</span>
-  <input type="text" name="license_plate" max = "8" min = "2" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"><br>
+  <input type="text" name="license_plate" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"><br>
   <span><?php echo $car_makeERR;?></span>
   <span><?php echo $license_plateERR;?></span> <br>
 
@@ -304,7 +392,7 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
 
   <span>Odometer:</span>
-  <input type="number" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
+  <input type="text" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
   <span><?php echo $car_modelERR;?></span>
   <span><?php echo $odometer_intakeERR;?></span> <br>
 
@@ -471,4 +559,3 @@ include '../../footer/footer.php';
 
 </body>
 </html>
-
