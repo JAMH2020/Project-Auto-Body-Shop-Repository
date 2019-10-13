@@ -84,8 +84,8 @@ $done_description = "";
 save_session('done_description');
 
 //date of authorization of work
-$work_date = "";
-save_session('work_date');
+$plan_date = "";
+save_session('plan_date');
 
 //date of completion
 $completion_date = "";
@@ -138,8 +138,8 @@ $disposal_total =  "";
 save_session('disposal_total');
   
 //estimated total costs
-$estimate_total =  "";
-save_session('estimate_total');
+$estimate_total_cost =  "";
+save_session('estimate_total_cost');
   
 //Total cost of EVERYTHING
 $total_cost =  "";
@@ -150,9 +150,9 @@ save_session('total_cost');
 //errors for any missing fields in the repair intake form
 $order_noERR = $customer_firstnameERR = $customer_lastnameERR = $customer_phoneERR = $customer_addressERR = $customer_emailERR = 
 $invoice_noERR  = $car_yearERR = $car_makeERR = $car_modelERR = $vin_noERR = $license_plateERR = 
-$odometer_intakeERR = $odometer_returnERR = $done_descriptionERR = $work_dateERR = $completion_dateERR = $return_dateERR = 
+$odometer_intakeERR = $odometer_returnERR = $done_descriptionERR = $plan_dateERR = $completion_dateERR = $return_dateERR = 
 $removal_choiceERR = $parts_per_unitERR = $labour_per_unitERR = $supplies_per_unitERR = $disposal_per_unitERR=$parts_totalERR = $labour_totalERR
-= $supplies_totalERR = $disposal_totalERR = $estimate_totalERR = $total_costERR  = "";
+= $supplies_totalERR = $disposal_totalERR = $estimate_total_costERR = $total_costERR  = "";
 
 
 
@@ -207,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "description", "done_description", "done_descriptionERR");
   
   //authorization date of work
-  createErrMsg("submit_invoice", "authorization date", "work_date", "work_dateERR");
+  createErrMsg("submit_invoice", "authorization date", "plan_date", "plan_dateERR");
   
   //completion date of work
   createErrMsg("submit_invoice", "completion date", "completion_date", "completion_dateERR");
@@ -243,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("submit_invoice", "fees of disposal or recycling", "disposal_total", "disposal_totalERR");
   
   //total estimated cost
-  createErrMsg("submit_invoice", "estimated costs", "estimate_total", "estimate_totalERR");
+  createErrMsg("submit_invoice", "estimated costs", "estimate_total_cost", "estimate_total_costERR");
   
   //total cost of repair
   createErrMsg("submit_invoice", "repair cost", "total_cost", "total_costERR");
@@ -258,8 +258,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 $error_intake_input;
 if ($order_noERR != "" or $customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_phoneERR != "" or $customer_addressERR != "" or $customer_emailERR != "" or $invoice_noERR != "" 
 or $car_yearERR != "" or $car_makeERR != "" or $car_modelERR != "" or $vin_noERR != "" or $license_plateERR != "" or $odometer_intakeERR != "" or $odometer_returnERR != "" or $done_descriptionERR != ""  
-or $work_dateERR != "" or $completion_dateERR != "" or $return_dateERR != "" or $parts_per_unitERR != "" or $labour_per_unitERR != "" or $supplies_per_unitERR != "" or $disposal_per_unitERR != "" or $removal_choiceERR != ""
-or $parts_totalERR  != "" or $labour_totalERR != "" or $supplies_totalERR != "" or $disposal_totalERR != "" or $estimate_totalERR != "" or  $total_costERR != ""){
+or $plan_dateERR != "" or $completion_dateERR != "" or $return_dateERR != "" or $parts_per_unitERR != "" or $labour_per_unitERR != "" or $supplies_per_unitERR != "" or $disposal_per_unitERR != "" or $removal_choiceERR != ""
+or $parts_totalERR  != "" or $labour_totalERR != "" or $supplies_totalERR != "" or $disposal_totalERR != "" or $estimate_total_costERR != "" or  $total_costERR != ""){
   
   $error_invoice_input = true;
   
@@ -270,8 +270,8 @@ or $parts_totalERR  != "" or $labour_totalERR != "" or $supplies_totalERR != "" 
 
   //reformat all the dates into the correct format
   //authorization of work date
-  if (!empty($_SESSION['work_date'])){
-    $work_date_format = reformat_date($_SESSION['work_date']);
+  if (!empty($_SESSION['plan_date'])){
+    $plan_date_format = reformat_date($_SESSION['plan_date']);
   }
 
 
@@ -298,7 +298,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 
 
 <span>Phone:</span>
-<input type="tel" name="customer_phone" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+<input type="tel" name="customer_phone" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required value="<?php echo $_SESSION['customer_phone'];?>"><br>
 <span><?php echo $customer_firstnameERR;?></span>
 <span><?php echo $customer_lastnameERR;?></span>
 <span><?php echo $customer_phoneERR;?></span> <br>
@@ -328,13 +328,13 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
   <tr>
     <td>
       <span>Year:</span>
-      <input type="number" max = "4" min = "4" name="car_year" placeholder="car year model" value="<?php echo $_SESSION['car_year'];?>"> <br>
+      <input type="number" max = "4" min = "4" name="car_year" placeholder="car year model" value="<?php echo $_SESSION['car_year'];?>"><br>
       <span><?php echo $car_yearERR;?></span>
     </td>
     
     <td> 
       <span>VIN #:</span>
-      <input type="text" max = "17" min = "17" name="vin_no" placeholder="VIN" value="<?php echo $_SESSION['vin_no'];?>"><br>
+       <input type="text" max = "17" min = "17" name="vin_no" placeholder="VIN" value="<?php echo $_SESSION['vin_no'];?>"><br>
       <span><?php echo $Vin_noERR;?></span> <br>
     </td>
   
@@ -387,7 +387,7 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 <textarea name="done_description" placeholder="Description..." rows="10" columns="50"><?php echo $_SESSION['done_description'];?></textarea><br>
 
 <span>Date of authorization of work:</span>
-<input type="date" name="work_date" value="<?php echo $work_date_format;?>">
+<input type="date" name="plan_date" value="<?php echo $plan_date_format;?>">
 
 <span>Date of completion of work:</span>
 <input type="date" name="completion_date" value="<?php echo $_SESSION['completion_date'];?>"><br>
@@ -484,8 +484,8 @@ if ($_SESSION['removal_choice'] == "A"){
     <td>ESTIMATED OR AUTHORIZED COST:</td>
     <td></td>
     <td>
-      <input type="number" name="estimate_total" placeholder="$ -Estimated Total" value="<?php echo $_SESSION['estimate_total'];?>"><br>
-      <span><?php echo $estimate_totalERR;?></span>
+      <input type="number" name="estimate_total_cost" placeholder="$ -Estimated Total" value="<?php echo $_SESSION['estimate_total_cost'];?>"><br>
+      <span><?php echo $estimate_total_costERR;?></span>
     </td>
   </tr>
   
@@ -493,7 +493,7 @@ if ($_SESSION['removal_choice'] == "A"){
     <td>TOTAL COST:</td>
     <td></td>
     <td>
-      <input type="number"="total_cost" placeholder="$ -Total" value="<?php echo $_SESSION['total_cost'];?>"><br>
+      <input type="number" name="total_cost" placeholder="$ -Total" value="<?php echo $_SESSION['total_cost'];?>"><br>
       <span><?php echo $total_costERR;?></span>
     </td>
   </tr>
