@@ -171,11 +171,30 @@ include '../../footer/footer.php';
 } else {
   echo "intake and waiver complete";
   
-  include "../../database/insert/insert_intake.php";
+  //if user is editting the form
+  if ($_SESSION['editForm']){
+    echo "EDITTING FORM";
+    include "../../database/update/update_orders.php";
+    
+   
+  //if user is inserting data
+  } else {
+    include "../../database/insert/insert_intake.php";
+
+  }
+  
+  //if the user is the admin
+  if ($_SESSION['admin_loggedin']){
+?>
+  <script> redirect_page("../../admin/orders/check_orders.php");</script>
+  
+<?php
+  } else {
 ?>
 
-<script> redirect_page("../worker_cpanel.php");</script>
-
+  <script> redirect_page("../worker_cpanel.php");</script>
+  
 <?php
+  }
 }
 ?>
