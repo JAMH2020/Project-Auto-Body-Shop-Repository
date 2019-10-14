@@ -3,7 +3,7 @@
   
 <div class="footer">
 
-  <div class="footer_items">
+  <div class="footer_items">   
     
       <div class="member">
          <img alt="" class="photo first" src="http://www.portcreditautobodyshop.tk/images/footer/Baig.jpg"/> 
