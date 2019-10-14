@@ -21,6 +21,10 @@ if (session_start() === null){
 //include file for initiating sessions if they have not beeen created yet
 include_once "../../database/initiate_session.php";
 
+//include file that will fix the user inputs that are entered
+include_once "../../database/fixinput.php";
+
+
 
 //first name and last name of the customer
 $customer_firstname = $customer_lastname = "";
@@ -40,7 +44,21 @@ $customer_phone = "";
 save_session("customer_phone");
 
 //date the form was signed
-$waiver_date = $_SESSION['waiver_date'] = date("Y-m-d H:i:s");
+//if user is editting the page
+if ($_SESSION['editForm']){
+  //reformat date to YYYY-MM-DD format
+  $waiver_date_format = reformat_date($_SESSION['order_date']);
+  
+  //create new date
+  $waiver_date = date_create($waiver_date_format);
+
+  $_SESSION['waiver_date'] = $waiver_date;
+  
+//if the user is inserting data
+} else {
+
+  $waiver_date = $_SESSION['waiver_date'] = date("Y-m-d H:i:s");
+}
 
 //customer initial
 $customer_initial = "";
@@ -54,11 +72,6 @@ save_session("exceed_cost");
 
 //variables for any missing or incorrect fields
 $customer_firstnameERR = $customer_lastnameERR = $customer_addressERR = $customer_emailERR = $customer_phoneERR = $customer_initialERR = $exceed_costERR = "";
-
-
-
-//include file that will fix the user inputs that are entered
-include_once "../../database/fixinput.php";
 
 
 
@@ -111,6 +124,7 @@ if ($error_waiver1_input or !isset($_POST['waiver_submit'])){
 
 
 <font class="Title" size="10">WAIVER AND RELEASE OF LIABILITY</font>
+
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
@@ -223,7 +237,21 @@ outlined at a cost not to exceed </span>
 
       <td>
         <center class="date"><span>Date:</span></center>
-        <span> <?php echo date("D j/M/Y")?></span>
+<?php
+// if the user is editting the form
+if ($_SESSION['editForm']){
+?>
+        <span> <?php echo date_format($waiver_date, "D j/M/Y"); ?></span>
+ 
+<?php
+} else {
+?>
+
+        <span> <?php echo date("D j/M/Y"); ?></span>
+        
+<?php
+}
+?>
       </td>
     </tr>
 

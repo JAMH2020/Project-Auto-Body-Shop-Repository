@@ -3,6 +3,9 @@
 if (session_start() === null){
   session_start();
 }
+
+//session to identify if the user is editting a form
+$_SESSION['editForm'] = false;
 ?>
 
 <!-- control panel for the worker -->
@@ -40,6 +43,7 @@ include "../navigation_bar/navigation_bar.php";
 
 <a href="orders/intake_repair_form.php" class='order'>Create Order</a>
 <div class="create_order_underline"></div>
+<div id="editCheck"></div>
 
 <?php
 //include file for selecting orders

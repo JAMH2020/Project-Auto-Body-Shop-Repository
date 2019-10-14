@@ -4,10 +4,10 @@
 *********************************************************************/
 
 //connect to the database
-include '../database/connectdb.php';
+include_once '../../database/connectdb.php';
 
 //include file to check for errors in sql statements
-include '../database/error_check.php';
+include_once '../../database/error_check.php';
 
 
 
@@ -19,13 +19,13 @@ $stmt_orders->bind_param("isiississs", $order_no, $date, $worker_id, $customer_i
   
   
 //statement to insert into the Customer Profile table
-$stmt_cprofile = $conn->prepare("INSERT INTO Customer_Profile (Phone_No, Address, Email, Car_Make, Car_Model, Vin_No, License_Plate) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$stmt_cprofile->bind_param("sssssss", $customer_phone, $customer_address, $customer_email, $car_make, $car_model, $vin_no, $license_plate);
+$stmt_cprofile = $conn->prepare("INSERT INTO Customer_Profile (Phone_No, Address, Email, Car_Year, Car_Make, Car_Model, Vin_No, License_Plate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt_cprofile->bind_param("sssissss", $customer_phone, $customer_address, $customer_email, $car_year, $car_make, $car_model, $vin_no, $license_plate);
 
 
 //statement to insert into the Estimate Cost table
-$stmt_estimate_cost = $conn->prepare("INSERT INTO Estimate_Cost (Order_No, Estimate_Date, Estimate_Date_Expiry, Parts_Unit_Price, Labour_Unit_Price, Supplies_Unit_Price, Disposal_Unit_Price, Parts_Total, Labour_Total, Supplies_Total, Disposal_Total, Total_Cost, Removal_Choice, Removal_Fill_In) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt_estimate_cost->bind_param("issdddddddddss", $order_no, $estimate_date, $estimate_expiry_date, $estimate_parts_per_unit, $estimate_labour_per_unit, $estimate_supplies_per_unit, $estimate_disposal_per_unit, $estimate_parts_total, $estimate_labour_total, $estimate_supplies_total, $estimate_disposal_total, $estimate_total_cost, $removal_choice, $removal_fillin); 
+$stmt_estimate_cost = $conn->prepare("INSERT INTO Estimate_Cost (Order_No, Estimate_Date, Estimate_Date_Expiry, Parts_Unit_Price, Labour_Unit_Price, Supplies_Unit_Price, Disposal_Unit_Price, Parts_Total, Labour_Total, Supplies_Total, Disposal_Total, Total_Cost, Exceed_Cost, Removal_Choice, Initial) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt_estimate_cost->bind_param("issddddddddddss", $order_no, $estimate_date, $estimate_expiry_date, $estimate_parts_per_unit, $estimate_labour_per_unit, $estimate_supplies_per_unit, $estimate_disposal_per_unit, $estimate_parts_total, $estimate_labour_total, $estimate_supplies_total, $estimate_disposal_total, $estimate_total_cost, $exceed_cost, $removal_choice, $customer_initial); 
 
   
 //--------Data of intake repair form----//
@@ -99,8 +99,6 @@ $estimate_expiry_date = $_SESSION['estimate_expiry_date'];
 //removal choice of parts during the work process (A: returned to undersigned ______ or B: disposed of bye the school ______)
 $removal_choice = $_SESSION['removal_choice'];
 
-//fill-in of the blank for the removal choice
-$removal_fillin = $_SESSION['removal_fillin'];
   
   
   
@@ -140,10 +138,27 @@ $date = date("Y-m-d H:i:s");
   
   
 //worker id
-$worker_id = 1;
+//if the admin is logged in
+if ($_SESSION['admin_loggedin']){
+
+  //get the new worker id
+  //include file to get the worker id using the worker email
+  include_once "../../database/select/aselect_waccounts.php";
+  $worker_id = get_waccounts_id($conn);
   
+//if the worker is logged in  
+} else {
+  $worker_id = $_SESSION['worker_id'];
+}
+
+
+
+
+
 //customer id
-$customer_id = 1;
+//include file to get the customer id using the customer email
+include_once "../../database/select/aselect_caccounts.php";
+$customer_id = get_caccounts_id($conn);
 
 
 //status
@@ -152,25 +167,35 @@ $status = "imcomplete";
 
 
 
-//$sql_orders = "INSERT INTO Orders (INSERT INTO Orders (Order_No, Date, Worker_Id, Customer_Id, Description, Work_Date, Odometer_Intake, School_Name, School_Address, Status) VALUES ()
-
 
 
 
 
 
 //insert the data for the orders table
-//insertData($stmt_orders);
+//$stmt_orders->execute();
 
 
 //insert the data for the customer profile table
-//insertData($stmt_cprofile);
+//$stmt_cprofile->execute();
 
 //insert the data for the estimate cost table
-//insertData($stmt_estimate_cost);
+//$stmt_estimate_cost->execute();
 
 
-//$stmt_orders->close();
+//close statement
+$stmt_orders->close();
 $stmt_cprofile->close();
 $stmt_estimate_cost->close();
+
+
+
+//set all session variables for order to blank
+$_SESSION['order_no'] = $_SESSION['school_name'] = $_SESSION['school_address'] = $_SESSION['car_year'] = $_SESSION['car_make'] = $_SESSION['car_model'] =
+$_SESSION['vin_no'] = $_SESSION['license_plate'] = $_SESSION['odometer_intake'] = $_SESSION['plan_description'] = $_SESSION['plan_date'] = 
+$_SESSION['estimate_parts_per_unit'] = $_SESSION['estimate_parts_total'] = $_SESSION['estimate_labour_per_unit'] = $_SESSION['estimate_labour_total'] =
+$_SESSION['estimate_supplies_per_unit'] = $_SESSION['estimate_supplies_total'] = $_SESSION['estimate_disposal_per_unit'] = $_SESSION['estimate_disposal_total'] =
+$_SESSION['estimate_total_cost'] = $_SESSION['estimate_date'] = $_SESSION['estimate_expiry_date'] = $_SESSION['removal_choice'] = $_SESSION['customer_firstname'] =
+$_SESSION['customer_lastname'] = $_SESSION['customer_address'] = $_SESSION['customer_email'] = $_SESSION['customer_phone'] = $_SESSION['waiver_date'] = 
+$_SESSION['customer_initial'] = $_SESSION['exceed_cost'] = $_SESSION['worker_id'] = "";
 ?>
