@@ -27,7 +27,7 @@ if (session_start() === null){
   list_caccounts();
   ?>
   
-  <a href="../admin_cpanel.php">Back</a>
+  <a href="../admin_cpanel.php" class="back">Back</a>
   
   <div id="rowText"></div>
   
