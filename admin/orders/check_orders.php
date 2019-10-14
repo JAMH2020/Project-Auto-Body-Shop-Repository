@@ -38,10 +38,13 @@ if (session_start() === null){
   }
   
   
+  
+  //session to identify if the user is editting a form
+  $_SESSION['editForm'] = false;
+  
   ?>
 
-
-
+  <a href="../../worker_cpanel/orders/intake_repair_form.php" class='order'>Create Order</a>
   <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
     <?php
@@ -49,11 +52,10 @@ if (session_start() === null){
      include "../../database/select/aselect_orders.php";
     ?>
 
-    <input class="button" type="submit" name="delete_order" value="Delete Order">
-    <input class="button" type="submit" name="modify_order" value="Modify Order">
+    <input type="submit" name="delete_order" value="Delete Order">
   </form>
-  
   <div id="rowText"></div>
+  <div id="editCheck"></div>
   
   <a href="../admin_cpanel.php">Back</a>
   
