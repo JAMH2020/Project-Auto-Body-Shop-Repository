@@ -24,10 +24,11 @@ if (session_start() === null){
   
   //include the file that will print out all the orders
   include "../../database/select/aselect_waccounts.php";
+  list_waccounts();
   ?>
 
   
-  <a href="../admin_cpanel.php"class='back'>Back</a>
+  <a href="../admin_cpanel.php" class="back">Back</a>
   
   <div id="rowText"></div>
   
