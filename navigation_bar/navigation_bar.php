@@ -1,4 +1,9 @@
+
 <link rel="stylesheet" type="text/css" href="http://www.portcreditautobodyshop.tk/navigation_bar/navigation_bar_styles.css">
+
+<!--Google Titillium font-->
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
+
 
 <!--JQuery library-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -25,7 +30,7 @@
 
     <div class="nav" id="stickyNavX">
 
-      <a class= "nav_link "href="http://www.portcreditautobodyshop.tk/login/login.php">Sign-In</a>
+      <a class= "nav_link" href="http://www.portcreditautobodyshop.tk/login/login.php">Sign-In</a>
 
       <a class = "nav_link" href="http://www.portcreditautobodyshop.tk/create_account/signup.php">Sign-Up</a>
 

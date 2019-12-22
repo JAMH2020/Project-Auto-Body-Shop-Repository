@@ -274,6 +274,18 @@ or $parts_totalERR  != "" or $labour_totalERR != "" or $supplies_totalERR != "" 
     $plan_date_format = reformat_date($_SESSION['plan_date']);
   }
 
+  //date the work was completed
+  if (!empty($_SESSION['completion_date'])){
+    $completion_date_format = reformat_date($_SESSION['completion_date']);
+  }
+
+  //date the car was returned
+  if (!empty($_SESSION['return_date'])){
+    $return_date_format = reformat_date($_SESSION['return_date']);
+  }
+  
+  
+
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
 if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
