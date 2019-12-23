@@ -23,6 +23,10 @@ function delete_ordersRow($value){
   //delete estimate cost of the order form the estimate cost table
   $stmt_a_estimate = $GLOBALS['conn']->prepare("DELETE FROM Estimate_Cost WHERE Order_No = ?");
   $stmt_a_estimate->bind_param("i", $order_noDelete);
+  
+  //delete order profile 
+  $stmt_a_profile = $GLOBALS['conn']->prepare("DELETE FROM Order_Profile WHERE Order_No = ?");
+  $stmt_a_profile->bind_param("i", $order_noDelete);
 
 
   
@@ -56,8 +60,13 @@ function delete_ordersRow($value){
   
   //execute the statement to delete the estimate cost
   $stmt_a_estimate->execute();
+  
+  //execute the statement to delete the profile
+  $stmt_a_profile->execute();
 
   //close the statements
   $stmt_a_orders->close();
   $stmt_a_estimate->close();
+  $stmt_a_profile->close();
 }
+?>
