@@ -3,6 +3,12 @@
 if (session_start() === null){
   session_start();
 }
+
+//clear saved session variable from other pages
+include "../../src/clear_sessions.php";
+
+//session to identify if the user is editting a form
+$_SESSION['editForm'] = false;
 ?>
 
 <!--the admin control panel section where they can check the orders in the system-->
