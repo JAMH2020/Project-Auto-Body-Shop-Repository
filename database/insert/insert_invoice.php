@@ -43,7 +43,7 @@ $odometer_return = $_SESSION['odometer_return'];
 $done_description = $_SESSION['done_description'];
 
 //date that work was authorized
-$work_date = $_SESSION['work_date'];
+$work_date = $_SESSION['plan_date'];
 
 //date the work is completed
 $completion_date = $_SESSION['completion_date'];
@@ -75,7 +75,7 @@ $supplies_total = $_SESSION['supplies_total'];
 $disposal_total = $_SESSION['disposal_total'];
 
 //estimate of total
-$estimate_total = $_SESSION['estimate_total'];
+$estimate_total = $_SESSION['estimate_total_cost'];
 
 //total of parts
 $total_cost = $_SESSION['total_cost'];
