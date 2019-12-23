@@ -13,9 +13,8 @@ include_once '../../database/error_check.php';
 
 //prepare sql statement to bind
 //statement to insert into the Orders table
-
-$stmt_orders = $conn->prepare("INSERT INTO Orders (Order_No, Date, Worker_Id, Customer_Id, Description, Work_Date, Odometer_Intake, School_Name, School_Address, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt_orders->bind_param("isiississs", $order_no, $date, $worker_id, $customer_id, $plan_description, $plan_date, $odometer_intake, $school_name, $school_address, $status);
+$stmt_orders = $conn->prepare("INSERT INTO Orders (Order_No, Date, Worker_Id, Description, Work_Date, Odometer_Intake, School_Name, School_Address, Status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt_orders->bind_param("isississs", $order_no, $date, $worker_id, $plan_description, $plan_date, $odometer_intake, $school_name, $school_address, $status);
   
   
 //statement to insert into the Customer Profile table
@@ -23,10 +22,45 @@ $stmt_cprofile = $conn->prepare("INSERT INTO Customer_Profile (Phone_No, Address
 $stmt_cprofile->bind_param("sssissss", $customer_phone, $customer_address, $customer_email, $car_year, $car_make, $car_model, $vin_no, $license_plate);
 
 
+//statement to insert into the Order Profile table
+$stmt_oprofile = $conn->prepare("INSERT INTO Order_Profile (Order_No, First_Name, Last_Name, Phone_No, Address, Email, Car_Year, Car_Make, Car_Model, Vin_No, License_Plate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt_oprofile->bind_param("isssssissss", $order_no, $customer_firstname, $customer_lastname, $customer_phone, $customer_address, $customer_email, $car_year, $car_make, $car_model, $vin_no, $license_plate);
+
 //statement to insert into the Estimate Cost table
 $stmt_estimate_cost = $conn->prepare("INSERT INTO Estimate_Cost (Order_No, Estimate_Date, Estimate_Date_Expiry, Parts_Unit_Price, Labour_Unit_Price, Supplies_Unit_Price, Disposal_Unit_Price, Parts_Total, Labour_Total, Supplies_Total, Disposal_Total, Total_Cost, Exceed_Cost, Removal_Choice, Initial) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt_estimate_cost->bind_param("issddddddddddss", $order_no, $estimate_date, $estimate_expiry_date, $estimate_parts_per_unit, $estimate_labour_per_unit, $estimate_supplies_per_unit, $estimate_disposal_per_unit, $estimate_parts_total, $estimate_labour_total, $estimate_supplies_total, $estimate_disposal_total, $estimate_total_cost, $exceed_cost, $removal_choice, $customer_initial); 
+$stmt_estimate_cost->bind_param("issddddddddddss", $order_no, $estimate_date, $estimate_expiry_date, $estimate_parts_per_unit, $estimate_labour_per_unit, $estimate_supplies_per_unit, $estimate_disposal_per_unit, $estimate_parts_total, $estimate_labour_total, $estimate_supplies_total, $estimate_disposal_total, $estimate_total_cost, $exceed_cost, $removal_choice, $customer_initial);
 
+//statement to insert into the Customer_Accounts 
+$stmt_account = $conn->prepare("INSERT INTO Customer_Accounts (First_Name, Last_Name, Password, Email) VALUES (?, ?, ?, ?)");
+$stmt_account->bind_param("ssss", $customer_firstname, $customer_lastname, $customer_password, $customer_email);
+
+
+
+
+
+//statement to search for an existing email in the Customer Profile table
+$stmt_find_profile = $conn->prepare("SELECT Email FROM Customer_Profile WHERE Email = ?");
+$stmt_find_profile->bind_param("s", $customer_email);
+
+//statement to search for an existing email in the Customer Account table
+$stmt_find_account = $conn->prepare("SELECT Email FROM Customer_Accounts WHERE Email = ?");
+$stmt_find_account->bind_param("s", $customer_email);
+
+
+
+
+
+//statement to update an existing customer account
+$stmt_update_account = $conn->prepare("UPDATE Customer_Accounts SET First_name = ?, Last_name = ? WHERE Email = ?");
+$stmt_update_account->bind_param("sss", $customer_firstname, $customer_lastname, $customer_email);
+
+
+//statement to update an existing customer profile
+$stmt_update_profile = $conn->prepare("UPDATE Customer_Profile SET Phone_No = ?, Address = ?, Email = ?, Car_Year = ?, Car_Make = ?, Car_Model = ?, Vin_No = ?, License_Plate = ? WHERE Email = ?");
+$stmt_update_profile->bind_param("sssisssss", $customer_phone, $customer_address, $customer_email, $car_year, $car_make, $car_model, $vin_no, $license_plate, $customer_email);
+  
+  
+  
   
 //--------Data of intake repair form----//
 //order number
@@ -153,6 +187,11 @@ if ($_SESSION['admin_loggedin']){
 
 
 
+//status
+$status = "imcomplete";
+
+
+
 
 
 //customer id
@@ -161,33 +200,91 @@ include_once "../../database/select/aselect_caccounts.php";
 $customer_id = get_caccounts_id($conn);
 
 
-//status
-$status = "imcomplete";
 
 
 
 
 
+//find if the customer profile already exists
+//execute the statement
+$stmt_find_profile->execute();
+
+//store the result
+$stmt_find_profile->store_result();
+
+//bind the results
+$stmt_find_profile->bind_result($customer_pemail_exist);
 
 
 
+
+//find if the customer account already exists
+//execute the statement
+$stmt_find_account->execute();
+
+//store the result
+$stmt_find_account->store_result();
+
+//bind the results
+$stmt_find_account->bind_result($customer_cemail_exist);
+
+
+
+//updates the account if it already exists
+if ($stmt_find_account->num_rows > 0){
+  $stmt_update_account->execute();
+
+//insert the new account if it does not exist in the database
+} else {
+
+  //filler password for accounts that are not made online
+  $customer_password = "-";
+  
+  $stmt_account->execute();
+}
+
+
+
+
+//updates the profile if it already exists
+if ($stmt_find_profile->num_rows > 0){
+  $stmt_update_profile->execute();
+
+//insert the new profile if it does not exist in the database
+} else {
+  $stmt_cprofile->execute();
+}
+
+
+
+
+/*
 
 //insert the data for the orders table
-//$stmt_orders->execute();
+$stmt_orders->execute();
 
-
-//insert the data for the customer profile table
-//$stmt_cprofile->execute();
+//insert the data for the order profile table
+$stmt_oprofile->execute();
 
 //insert the data for the estimate cost table
-//$stmt_estimate_cost->execute();
+$stmt_estimate_cost->execute();
+*/
+
+
+
 
 
 //close statement
 $stmt_orders->close();
 $stmt_cprofile->close();
+$stmt_oprofile->close();
 $stmt_estimate_cost->close();
+$stmt_account->close();
 
+$stmt_find_profile->close();
+$stmt_find_account->close();
+$stmt_update_account->close();
+$stmt_update_profile->close();
 
 
 //set all session variables for order to blank

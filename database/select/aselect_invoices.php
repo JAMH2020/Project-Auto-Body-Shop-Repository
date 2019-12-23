@@ -58,7 +58,7 @@ if ($stmt_ainvoice->num_rows > 0){
 ?>
 
             <td>
-              <a href='#' onclick='findCAccountRow("<?php echo $invoice_idRow?>", "../../database/select/find_row/find_row_invoices.php", "change/change_account.php"); return false;'>Edit</a>
+              <a href='#' onclick='editPage("../../database/select/find_row/find_row_invoices.php", "../../database/select/find_row/find_row_invoices.php", 1); findCAccountRow("<?php echo $invoice_idRow; ?>", "../../database/select/find_row/find_row_invoices.php", "../../worker_cpanel/invoices/invoice.php"); return false;'>Edit</a>
             </td>
 
 <?php
