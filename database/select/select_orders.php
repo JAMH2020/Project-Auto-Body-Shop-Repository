@@ -15,9 +15,9 @@ include_once '../database/error_check.php';
 
 //prepare and bind sql statement
 //inner join the customer accounts table into the orders table in order to get the customer's name using the customer id as the key
-$stmt_orders1 = $conn->prepare("SELECT Orders.Order_Id, Orders.Order_No, Orders.Date, Customer_Accounts.First_Name, Customer_Accounts.Last_Name, Orders.Description, Orders.Work_Date, Orders.Odometer_Intake, Orders.School_Name, Orders.School_Address, Orders.Status
+$stmt_orders1 = $conn->prepare("SELECT Orders.Order_Id, Orders.Order_No, Orders.Date, Order_Profile.First_Name, Order_Profile.Last_Name, Orders.Description, Orders.Work_Date, Orders.Odometer_Intake, Orders.School_Name, Orders.School_Address, Orders.Status
                                 FROM Orders
-                                INNER JOIN Customer_Accounts ON Orders.Customer_Id=Customer_Accounts.Customer_Id
+                                INNER JOIN Order_Profile ON Orders.Order_No = Order_Profile.Order_No
                                 WHERE Orders.Worker_Id = ?");
 
 $stmt_orders1->bind_param("i", $worker_id);
