@@ -41,7 +41,7 @@ function list_caccounts(){
 
     while($stmt_a_caccounts->fetch()){
      echo "<tr>";
-        echo "<td> <input type='checkbox' name='customer_idArr[]' value=" . $customer_idRow .">" . $customer_idRow . "</td>";
+        echo "<td>" . $customer_idRow . "</td>";
         echo "<td>" . $customer_firstnameRow . " " . $customer_lastnameRow . "</td>";
         echo "<td>" . $customer_passwordRow . "</td>";
         echo "<td>" . $customer_emailRow . "</td>";
