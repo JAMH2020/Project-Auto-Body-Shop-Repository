@@ -112,4 +112,11 @@ $stmt_u_tcost->execute();
 //close statements
 $stmt_u_invoices->close();
 $stmt_u_tcost->close();
+
+
+
+//set all session variables for invoice to blank
+include "../../src/clear_sessions.php";
+
+clear_invoice();
 ?>
