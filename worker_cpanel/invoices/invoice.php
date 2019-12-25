@@ -402,12 +402,12 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 <input type="date" name="plan_date" value="<?php echo $plan_date_format;?>">
 
 <span>Date of completion of work:</span>
-<input type="date" name="completion_date" value="<?php echo $_SESSION['completion_date'];?>"><br>
+<input type="date" name="completion_date" value="<?php echo $completion_date_format;?>"><br>
 <span><?php echo $work_dateERR;?></span>
 <span><?php echo $completion_dateERR;?></span> <br>
 
 <span>Date vehicle was returned:</span>
-<input type="date" name="return_date" placeholder="Date of return" value="<?php echo $_SESSION['return_date'];?>"> <br>
+<input type="date" name="return_date" placeholder="Date of return" value="<?php echo $return_date_format;?>"> <br>
 <span><?php echo $return_dateERR;?></span> <br>
 
 <span>Any parts removed in the course of work on or repairs to the automobile shall be (select one): </span>
@@ -527,11 +527,22 @@ if ($_SESSION['worker_loggedin']){
 <?php
 //back butto redirects to the admin check orders page if admin is logged in
 } else if($_SESSION['admin_loggedin']){
+
+  //if the admin is editting an invoice
+  if ($_SESSION['editForm'] == true){
+?>
+
+<a href="../../admin/invoices/check_invoices.php">Back</a>
+
+<?php
+  //if the admin is creating a new invoice
+  } else {
 ?>
 
 <a href="../../admin/orders/check_orders.php">Back</a>
 
-<?php
+<?php  
+  }
 }
 
 
