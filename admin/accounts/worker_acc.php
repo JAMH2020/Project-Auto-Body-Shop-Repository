@@ -21,14 +21,18 @@ if (session_start() === null){
   <?php
   //include the navigation bar
   include "../../navigation_bar/navigation_bar.php";
+  ?>
   
+  <a href="../../create_account/worker_signup.php">Create Worker Account</a>
+  
+  <?php
   //include the file that will print out all the orders
   include "../../database/select/aselect_waccounts.php";
   list_waccounts();
   ?>
 
   
-  <a href="../admin_cpanel.php" class="back">Back</a>
+  <a href="../admin_cpanel.php">Back</a>
   
   <div id="rowText"></div>
   
