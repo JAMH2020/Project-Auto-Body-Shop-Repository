@@ -34,7 +34,7 @@ if ($stmt_a_cprofiles->num_rows > 0){
     echo "</tr>";
   while($stmt_a_cprofiles->fetch()){
      echo "<tr>";
-      echo "<td> <input type='radio' name='order_id' value=" . $profile_idRow .">" . $profile_idRow . "</td>";
+      echo "<td>" . $profile_idRow . "</td>";
       echo "<td>" . $customer_firstnameRow . " " . $customer_lastnameRow . "</td>";
       echo "<td>" . $customer_phoneRow . "</td>";
       echo "<td>" . $customer_addressRow . "</td>";
