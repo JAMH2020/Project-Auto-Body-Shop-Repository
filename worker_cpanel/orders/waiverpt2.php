@@ -5,173 +5,195 @@ if (session_start() === null){
 }
 ?>
 
-<!-- 2nd part of the invoice form-->
+
+<!-- second part of the waiver form -->
 <!DOCTYPE html>
 <html>
 <head>
-  <!--styles for the invoice pages-->
-  <link rel="stylesheet" type="text/css" href="invoice_styles.css">
+  <!--style sheet for the second waiver form-->
+  <link rel="stylesheet" type="text/css" href="css/waiverpt2_styles.css">
 
-  
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
-  </head>
+</head>
 <body>
 
-
 <?php
-//include file for initiating sessions if they have not beeen created yet
-include_once "../../database/initiate_session.php";
+//if the user has not pressed the submit button yet
+if (!isset($_POST['waiver2_submit'])){
 
-//teacher's name
-$worker_firstname = "";
-save_session('worker_firstname');
-
-//teacher's name
-$worker_lastname = "";
-save_session('worker_lastname');
-  
-    
-//errors for any missing fields in the invoice form
-$worker_firstnameERR = $worker_lastnameERR = "";
-
-
-
-//include file that will fix the user inputs that are entered
-include_once "../../database/fixinput.php";
-
-
-
-//returns an error message if a field is missing
-if ($_SERVER['REQUEST_METHOD'] == "POST"){
-  //teacher firstname
-  createErrMsg("submit_invoicept2", "firstname", "worker_firstname", "worker_firstnameERR");
-  
-  //teacher lastname
-  createErrMsg("submit_invoicept2", "lastname", "worker_lastname", "worker_lastnameERR");
-}
-
-
-
-//check if there are any missing or incorrect fields
-if ($worker_firstnameERR != "" or $worker_lastnameERR != ""){
-  
-  $error_invoicept2_input = true;
-  
-} else {
-  $error_invoicept2_input = false;
-}
-
-
-//ask the user to input the required fields if the user has not pressed the submit button yet
-if ($error_invoicept2_input  or !isset($_POST['submit_invoicept2'])){
   //include the navigation bar
   include "../../navigation_bar/navigation_bar.php";
 ?>
 
-<!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
-<p>If this Invoice is not paid, and/or if the automobile is not claimed within THIRTY (30) days after notice of completion of work, it and all property therein or thereon will be deemed abandoned and disposed of as considered appropriate in the sole discretion of the Board. 
-WARRANTY </p> <br>
+<font class="Title" size="10">Automotive Repair Waiver</font>
 
-<h3>WARRANTY</h3>
-<p>Notwithstanding the STUDENT AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT, for each new or reconditioned part or the labour required to install it:</p>
 
-<ol type="i">
+<center><form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+<span>Work Order #:</span> 
+<span> <?php echo $_SESSION['order_no']; ?></span><br></center>
+
+<center><h3>AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT </h3>
+<h4>*Schools must retain form for 3 years*</h4>
+</center>
+<table>
+  <tr>
+   <center> <th>WARNING:</th></center>
+
+    <center><td>BY SIGNING THIS AGREEMENT YOU GIVE UP YOUR RIGHT TO BRING A COURT ACTION TO RECOVER
+COMPENSATION FOR ANY INJURY OR DEATH TO YOU OR OTHERS AND FOR DAMAGE TO YOUR 
+PROPERTY ARISING DIRECTLY, INDIRECTLY OR CONSEQUENTIALLY FROM OR RELATED TO YOUR CHOICE
+TO HAVE UNTRAINED STUDENTS WORK ON YOUR AUTOMOBILE</td>
+  </tr>
+</table></center>
+
+
+<center><h4>PRELIMINARY UNDERSTANDING</h4></center>
+
+<ol>
   <li>
-     <p>the Board warrants the part and/or labour for a minimum of 90 days or 5,000 kilometers, whichever comes first,</p>
-  </li>
-  
-  <li>
-    <p>the warranty set out in subparagraph i. is provided under the Consumer Protection Act, 2002 (Ontario) and may not be waived by the consumer, and </p>
-  </li>
-  
-  <li>
-    <p>the warranty set out in subparagraph i. does not apply to, </p>
-    
-    <ol type="A">
+    <p>The undersigned acknowledges and agrees that while the undersigned’s automobile and all property located in or 
+on the automobile is located at the School, whether indoors or outside, that the undersigned assumes all risk
+of loss or damage to the automobile and the said property and further agree that:</p>
+
+    <ol type="a">
       <li>
-        <p> fluids, filters, lights, tires or batteries, or </p>
+        <p>The undersigned is aware that untrained students will perform work on our automobile and that
+allowing untrained students to do so has inherent risks and hazards, which the undersigned voluntarily
+assumes; and</p>
       </li>
+
+      <li>
+        <p>The undersigned has full knowledge of the nature and extent of the risks associated with allowing 
+untrained students to work on the undersigned’s automobile, the particulars of which include but are 
+not limited to:</p>
+
+        <ul>
+          <li>
+            <p>damage to or destruction of the automobile or any of its component parts, which damage or 
+destruction will not be repaired except at my full cost and expens</p>
+          </li>
+
+          <li>
+            <p>return of the automobile in an unsafe and un-road worthy condition</p>
+          </li>
+
+          <li>
+            <p>death or personal injury to the undersigned or others from operation of the automobile following 
+work being done on it by untrained students; and</p>
+          </li>
+
+        </ul>
+      </li>
+
       
       <li>
-        <p>a part that was not warranted by the manufacturer of the vehicle when the vehicle was sold as new.</p>
+        <p>The undersigned agrees that there may be unforeseen and unforeseeable risks associated with the 
+undersigned’s choice to have untrained students work on the undersigned’s automobile and those risks 
+although not foreseen or foreseeable are accepted, it being understood that the intent of this waiver 
+and release is to cover any and all eventualities whether foreseeable or not.</p>
       </li>
+
+
     </ol>
-    
   </li>
-  
+
+
+
+  <li>
+    <p>Despite the above-mentioned risks and hazards, the undersigned freely and voluntarily assume such risks and 
+hazards inherent in allowing untrained students to work on the undersigned’ automobile at the School</p>
+  </li>
 </ol>
 
-<h3>CONSUMER PROTECTION ACT, 2002</h3>
-<p>The Consumer Protection Act, 2002 (Ontario) provides you with rights in relation to having a motor vehicle repaired. Among other things, you have a right to a written estimate. A repairer may not charge an amount that is more than ten (10) per cent above that estimate. If you waived your right to an estimate, the repairer must have your authorization of the maximum amount that you will pay for the repairs. The repairer may not charge more than the maximum amount you authorized. In either case, the repairer may not charge for any work you did not authorize.
-</p> <br>
 
-<p>If you have concerns about the work or repairs performed by the repairer or about your rights or duties under the Consumer Protection Act, 2002, (Ontario) you should contact the Ministry of Consumer and Business Services.
-</p> <br>
+<p> <?php echo $_SESSION['customer_initial']; ?></p>
+<p>(initial)</p> <br>
 
-
-<h3>PEEL DISTRICT SCHOOL BOARD</h3> <br>
-<span>Teacher’s Name: <span>
-<input type="text" name="worker_firstname" placeholder="firstname" value="<?php echo $_SESSION['worker_firstname'];?>">
-
-<input type="text" name="worker_lastname" placeholder="lastname" value="<?php echo $_SESSION['worker_lastname'];?>"> <br>
-
-<span><?php echo $worker_firstnameERR;?></span>
-<span><?php echo $worker_lastnameERR;?></span> <br>
-
-<p>I have authority to bind the Board. E. & O. Excepted </p>
+<center><h4>RELEASE AND WAIVER OF LIABILITY</h4></center>
 
 
-<h3>ACKNOWLEDGEMENT</h3>
-<p>The foregoing is acknowledged and accepted by the undersigned.
-</p>
+<ol>
+  <li>
+    <p>In consideration of the work to be done on the undersigned’s automobile, which will be done by untrained students 
+of the Board
+, whether the work occurs during school hours, after school hours, or at any other time, the undersigned, 
+as the owner(s) of the automobile described on the attached Repair Work Order Form agree to release, indemnify 
+and save harmless the Indemnified Parties
+ and each of them against and from all actions damages, claims and 
+demands which may be brought against the above named persons by or on behalf of the undersigned or any third 
+party in respect of or arising out of any accidents which may result in injury or the death of person or damage to or loss
+of property belonging to any person if such  action depends in any way, in whole or in part on work having been done 
+on the 
+automobile by students of the School.</p>
+  </li>
 
-<span>Signature of Registered Owner: </span>
-<button type="button">Sign Here</button> <br>
 
+  <li>
+    <span>The undersigned 
+acknowledges that 
+the undersigned, 
+having read and understood all of the contents of this 
+Agreement, having taken specific note of the warning stated above, and intend to be legally bound to the contents of 
+this Agreement in so signing it on 
+this</span>
 
-<span>Name (Print): </span>
-<span> <?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']; ?> </span> <br>
+    <span> <?php echo date("j");?></span>
 
+    <span>day of</span>
+    <span> <?php echo date("F");?>,</span>
+    
+    <span> <?php echo date("Y");?></span>
+  </li>
 
+  <li>
+    <p>This Agreement is complimentary to and in addition to the Repair Work Order Form to which it is attached.</p>
+  </li>
+</ol> <br>
 
-<input type="submit" name="submit_invoicept2" value="Submit"> <br>
+<span class="Sig">Signature of Registered Owner:</span>
+<button type="button" class="button">Sign Here</button> <br>
+
+<center><span class="Name">Name(print):</span>
+<span> <?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']; ?></span>
+
+<button type="submit"  name="waiver2_submit" class="button">Submit</button>
 
 </form>
 
-<a href="invoice.php">Back</a>
+<a href="waiver.php" class="back">Back</a>
+</center>
 
 <?php
 //include the footer
 include '../../footer/footer.php';
 
 } else {
-
- echo "done";
- 
- 
- //insert the data into the database
- include "../../database/insert/insert_invoice.php";
-   
- //if the worker is logged int
- if($_SESSION['worker_loggedin']){
- 
-   //redirect page to worker control panel if worker is logged int
-?>
-
-   <script>redirect_page("../worker_cpanel.php");</script>
-
-<?php 
-  } else if($_SESSION['admin_loggedin']){
-    //redirect page to the admin check order page if the admini is logged in
-?>
-    <script>redirect_page("../../admin/orders/check_orders.php");</script>
+  echo "intake and waiver complete";
+  
+  //if user is editting the form
+  if ($_SESSION['editForm']){
+    include "../../database/update/update_orders.php";
     
+   
+  //if user is inserting data
+  } else {
+    include "../../database/insert/insert_intake.php";
+
+  }
+  
+  //if the user is the admin
+  if ($_SESSION['admin_loggedin']){
+?>
+  <script> redirect_page("../../admin/orders/check_orders.php");</script>
+  
+<?php
+  } else {
+?>
+
+  <script> redirect_page("../worker_cpanel.php");</script>
+  
 <?php
   }
 }
 ?>
-
-</body>
-</html>
