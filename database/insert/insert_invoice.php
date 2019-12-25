@@ -30,8 +30,23 @@ $order_no = $_SESSION['order_no'];
 //invoice number
 $invoice_no = $_SESSION['invoice_no'];
 
-//worker id
-$worker_id = 1;
+
+
+//if the user is the admin
+if ($_SESSION['admin_loggedin']){
+  //get the new worker id
+  include_once "../../database/select/aselect_waccounts.php";
+  $worker_id = get_waccounts_id($conn);
+
+// if the user is the worker
+} else {
+
+  //worker id
+  $worker_id = $_SESSION['worker_id'];
+}
+
+
+
 
 //invoice date
 $invoice_date = $_SESSION['invoice_date'];
@@ -43,10 +58,10 @@ $odometer_return = $_SESSION['odometer_return'];
 $done_description = $_SESSION['done_description'];
 
 //date that work was authorized
-$work_date = $_SESSION['plan_date'];
+$work_date = $_SESSION['completion_date'];
 
 //date the work is completed
-$completion_date = $_SESSION['completion_date'];
+$completion_date = $_SESSION['return_date'];
 
 
 //-----------Data to insert into the total cost table---------//
@@ -94,4 +109,9 @@ insertData($stmt_total_cost);
 
 $stmt_invoice->close();
 $stmt_total_cost->close();
+
+//set all session variables for order to blank
+include "../../src/clear_sessions.php";
+
+clear_invoice();
 ?>
