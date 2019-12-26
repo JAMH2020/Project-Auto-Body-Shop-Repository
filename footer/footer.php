@@ -62,7 +62,7 @@
   </div>
 
   <span class="copy_right_text">
-    <i class='far fa-copyright copy_right_symbol'></i> JAMH Group
+    <i class='far fa-copyright copy_right_symbol'></i> <?php echo " ". date("Y") . " ";?>JAMH Group
   </span>
 </div>
 
