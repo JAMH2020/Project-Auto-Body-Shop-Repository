@@ -28,7 +28,7 @@ function list_waccounts(){
   if ($stmt_a_waccounts->num_rows > 0){
 
     //prints out a table
-    echo "<table class='table'>";
+    echo "<table>";
       echo "<tr>";
       
         echo "<th>Worker Id</th>";
@@ -40,7 +40,7 @@ function list_waccounts(){
 
     while($stmt_a_waccounts->fetch()){
       echo "<tr>";
-        echo "<td> <input type='radio' name='order_id' value=" . $worker_idRow .">" . $worker_idRow . "</td>";
+        echo "<td>" . $worker_idRow . "</td>";
         echo "<td>" . $worker_firstnameRow . " " . $worker_lastnameRow . "</td>";
         echo "<td>" . $worker_passwordRow . "</td>";
         echo "<td>" . $worker_emailRow . "</td>";
@@ -57,7 +57,7 @@ function list_waccounts(){
     echo "</table>";
   
   } else {
-    echo "<h3 class='conclusion'>" . "There are no accounts available" . "</h3>";
+    echo "<h3>" . "There are no accounts available" . "</h3>";
   }
 
 

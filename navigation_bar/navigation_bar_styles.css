@@ -1,5 +1,5 @@
 *{
-  font-family: Verdana,sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   margin: 0px;
   line-height: 1.6;
 }
@@ -7,7 +7,7 @@
 
 /*division containing title, address and phone number*/
 .title_bar{
-  background-color: rgb(163, 209, 240);
+  background-color: #66c2ff;
   padding: 10px;
   color: rgb(255,255,255);
   overflow-x:hidden;
@@ -29,38 +29,47 @@
   float: left;  
   padding:20px 10px 5px 10px; 
   margin-top: 0px; 
-  font-size: 40px;   
+  font-size: 50px;   
   transform: translate(0px,-30px);
+  -ms-transform: translate(0px,-30px);
+  -webkit-transform: translate(0px,-30px);
+  -moz-transform: translate(0px,-30px);
+  -o-transform: translate(0px,-30px);
   font-weight: bold;
 }
 
 /*first part of the title*/
 .title_front{
  color: rgb(3, 55, 107);
- text-shadow: 1px 2px 2px  rgb(255,255,255);
+ text-shadow: 1px 2px 2px  rgb(204, 255, 255);
 }
 
 /*second part of the title*/
 .title_back{
   color: rgb(255,255,255); 
-  text-shadow: 1px 2px 2px  #66c2ff;
+  text-shadow: 1px 2px 2px  rgb(0, 51, 153);
 }
 
 /*division containing the phone number*/
 .phone { 
  font-size: 20px;  
- margin-left: 88%;
+}
+
+/*division for the phone and address*/
+.site_information{
+  height: 30%;
+  text-align: right;
+  padding: 5px 10px 5px 5px;
 }
 
 /*division containing the address*/
 .address{
-  margin-left:70%;
   font-size: 18px;
 }
 
 /*styles for phone number and address*/
 .title_details{
-  text-shadow: 1px 2px 2px  rgb(0,0,0);
+  text-shadow: 1px 2px 2px rgb(0, 51, 153);
 }
 
 
@@ -73,33 +82,79 @@
   overflow: hidden;
   background-color: white;
   width: 100%;  
+  box-shadow:0 5px 7px rgb(0,0,0);
 }
 
 
 
 .nav a {
-  float: right;
-  color: black;
   text-decoration: none;
   font-size: 20px;
+  color: rgb(0, 51, 102);
+  height: 100%;
+  padding: 23px 0;
+  width: 33%;
+  float:left;
   text-align: center;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-
-
-.nav a:hover {
-  background-color: rgb(100, 211, 252); 
-  color: rgb(250, 249, 249);
+/*very left link of the navigation bar*/
+.left_nav_link{
+  width: 34%;
 }
 
 /*links in the navigation bar*/
 .nav_link{
-  padding: 23px 0;
-  width: 33%
+  width: 33%;
 }
 
-/*the link to the most right of the navigation bar*/
-.left_link{
-  padding: 23px 0;
-  width: 34%;
+
+/*hover over the links*/
+.nav a:hover{
+  background-color: rgb(51, 102, 153); 
+  transition: background-color 0.5s ease, color 0.5s ease;
+  color: rgb(255,255,255);
+  cursor: pointer;
+}
+
+
+/*underline for the links*/
+.nav_link_underline{
+  display: block;
+  border-radius: 0.25px;
+  opacity: 0;
+  background-color: rgb(102, 204, 255);
+  width: 4px;
+  height:2px;
+  transition: transform 0.5s, opacity 0.5s;
+  margin: auto;
+}
+
+/*underline for the links when hovered*/
+.nav a:hover .nav_link_underline{
+  opacity: 1;
+  transform: scaleX(30);
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+
+
+
+/*filler space for the navigation bar once it become sticky*/
+.filler_nav{
+  height: 66px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/*show filler space for navigation bar*/
+.filler_show{
+  display: block;
+}
+
+/*hide filler space for navigation bar*/
+.filler_hide{
+  display: none;
 }

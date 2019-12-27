@@ -12,9 +12,17 @@ $(document).ready(function(){
     //stick the title bar and the navigation bar if the horizontal scroll is greater than
     if (scrollY > stickyNavbar){
       $(".nav").addClass("stickyY");
+      
+      //put a filler space for the navigation bar
+      $(".filler_nav").removeClass("filler_hide");
+      $(".filler_nav").addClass("filler_show");
     
     } else {
       $(".nav").removeClass("stickyY");
+      
+      //hide filler space for the navigation bar
+      $(".filler_nav").removeClass("filler_show");
+      $(".filler_nav").addClass("filler_hide");
     }
  
   };

@@ -173,7 +173,6 @@ include '../../footer/footer.php';
   
   //if user is editting the form
   if ($_SESSION['editForm']){
-    echo "EDITTING FORM";
     include "../../database/update/update_orders.php";
     
    

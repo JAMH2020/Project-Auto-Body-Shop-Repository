@@ -3,6 +3,15 @@
 if (session_start() === null){
   session_start();
 }
+
+
+//clear saved session variable from other pages
+include "../../src/clear_sessions.php";
+
+clear_invoice();
+
+//session to identify if the user is editting a form
+$_SESSION['editForm'] = false;
 ?>
 
 
