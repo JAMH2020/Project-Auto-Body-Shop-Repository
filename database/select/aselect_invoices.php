@@ -32,7 +32,7 @@ $stmt_ainvoice->bind_result($invoice_idRow, $order_noRow, $worker_idRow, $worker
 if ($stmt_ainvoice->num_rows > 0){
 
 //prints out a table
-  echo "<table>";
+  echo "<table class='table'>";
     echo "<tr>";
       
       echo "<th>Invoice Id</th>";
@@ -50,7 +50,7 @@ if ($stmt_ainvoice->num_rows > 0){
   
   while($stmt_ainvoice->fetch()){
     echo "<tr>";
-      echo "<td> <input type='checkbox' name='order_idArr[]' value=" . $invoice_idRow .">" . $invoice_idRow . "</td>";
+      echo "<td>" . $invoice_idRow . "</td>";
       echo "<td>" . $invoice_noRow . "</td>";
       echo "<td>" . $order_noRow . "</td>";
       echo "<td>" . $worker_firstnameRow . " " . $worker_lastnameRow . " #" . $worker_idRow . "</td>";
@@ -74,7 +74,7 @@ if ($stmt_ainvoice->num_rows > 0){
   
 //if there are no orders
 } else {
-  echo "<h3>" . "There are no invoices available" . "</h3>";
+  echo "<h3 class='conclusion'>". "There are no invoices available" . "</h3>";
   exit();
 }
 

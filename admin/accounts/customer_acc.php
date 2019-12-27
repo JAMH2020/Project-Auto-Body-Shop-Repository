@@ -14,6 +14,9 @@ if (session_start() === null){
   
   <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
   <script src="../../database/findRow.js"></script>
+  
+  <!--stylesheet for the accounts table-->
+  <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_caccounts.css">
 </head>
 <body>
   <?php
@@ -37,7 +40,10 @@ if (session_start() === null){
   
   <div id="rowText"></div>
   
-
+  <?php
+    //include the footer
+    include '../../footer/footer.php';
+   ?>
   
 </body>
 </html>

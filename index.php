@@ -15,8 +15,6 @@ if (session_start() === null){
 
     <meta name="author" content="JAMH Group">
     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link href="homepage_styles.css" rel="stylesheet" type="text/css">
   </head>
   <body>

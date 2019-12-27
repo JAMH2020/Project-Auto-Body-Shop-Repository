@@ -274,11 +274,11 @@
 
   display:inline-block;
   background-color: rgb(102, 204, 255);
-  width: 45%;
   padding: 70px 50px;
   font-weight:bold;
   color: rgb(51, 102, 153);
   line-height: 250%;
+  max-width:45%;
 }
 
 /*section for the image of the introduction*/
@@ -294,7 +294,7 @@
     background-size: 100% 100%;
   display:inline-block;
   padding: 80px 100px;
-  width: 55%;
+  flex-grow:1.5;
 }
 
 

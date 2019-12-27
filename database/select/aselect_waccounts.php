@@ -28,13 +28,14 @@ function list_waccounts(){
   if ($stmt_a_waccounts->num_rows > 0){
 
     //prints out a table
-    echo "<table>";
+    echo "<table class='table'>";
       echo "<tr>";
       
         echo "<th>Worker Id</th>";
         echo "<th>Name</th>";
         echo "<th>Password</th>";
         echo "<th>Email</th>";
+        echo "<th></th>";
       
       echo "</tr>";
 
@@ -57,7 +58,7 @@ function list_waccounts(){
     echo "</table>";
   
   } else {
-    echo "<h3>" . "There are no accounts available" . "</h3>";
+    echo "<h3 class='conclusion'>" . "There are no accounts available" . "</h3>";
   }
 
 

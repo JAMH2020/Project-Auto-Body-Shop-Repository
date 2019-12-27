@@ -37,7 +37,7 @@ $stmt_aorder->bind_result($order_idRow, $order_noRow, $dateRow, $worker_idRow, $
 if ($stmt_aorder->num_rows > 0){
 
 //prints out a table
-  echo "<table>";
+  echo "<table class='table'>";
     echo "<tr>";
       
       echo "<th>Order Id</th>";
@@ -88,7 +88,7 @@ if ($stmt_aorder->num_rows > 0){
   
 //if there are no orders
 } else {
-  echo "<h3>" . "There are no orders available" . "</h3>";
+  echo "<h3 class='conclusion'>" . "There are no orders available" . "</h3>";
   exit();
 }
 
