@@ -21,6 +21,9 @@ $_SESSION['editForm'] = false;
   
    <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
   <script src="../../database/findRow.js"></script>
+  
+  <!--stylesheet for the orders table-->
+  <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_orders.css">
 </head>
 <body>
   <?php
@@ -66,6 +69,11 @@ $_SESSION['editForm'] = false;
   <div id="editCheck"></div>
   
   <a href="../admin_cpanel.php">Back</a>
+  
+  <?php
+    //include the footer
+    include '../../footer/footer.php';
+  ?>
   
 </body>
 </html>
