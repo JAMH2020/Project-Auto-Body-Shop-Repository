@@ -316,4 +316,23 @@ $stmt_find_orders->close();
 $stmt_find_estimate->close();
 $stmt_find_profiles->close();
 $stmt_find_waccounts->close();
+
+
+
+//redirect to intake repair if editting data
+if ($_SESSION['editForm']){
+?>
+
+<!--redirect to the intake form-->
+<script>redirect_page('../../worker_cpanel/orders/intake_repair_form.php');</script>
+
+<?php
+//redirect to the invoice page if inserting data
+} else {
+?>
+
+<script>redirect_page('../../worker_cpanel/invoices/invoice.php');</script>
+
+<?php
+}
 ?>

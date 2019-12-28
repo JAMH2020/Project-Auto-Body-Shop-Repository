@@ -105,7 +105,6 @@ if ($stmt_find_invoices->num_rows > 0){
 
 
 
-
 //execute the statement to find the correpsonding order
 $stmt_find_orders->execute();
 
@@ -401,7 +400,9 @@ echo "<p>e_choice:" .  $_SESSION['removal_choice'] . "</p><br><br>";
 
 echo "<p>w_firstname:" . $_SESSION['worker_firstname'] . "</p>";
 echo "<p>w_lastname:" . $_SESSION['worker_lastname'] . "</p>";
-echo "<p>w_email:" . $_SESSION['worker_email'] . "</p>";
+echo "<p>w_email:" . $_SESSION['worker_email'] . "</p><br><br>";
+
+echo "<p>prev_invoice_no:" . $_SESSION['prev_invoice_no'] . "</p>";
 
 
 //close the statement
@@ -411,3 +412,7 @@ $stmt_find_profiles->close();
 $stmt_find_total->close();
 $stmt_find_estimate->close();
 ?>
+
+
+<!--redirect to the invoice page-->
+<script>redirect_page('../../worker_cpanel/invoices/invoice.php');</script>

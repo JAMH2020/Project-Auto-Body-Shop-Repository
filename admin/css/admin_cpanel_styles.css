@@ -1,3 +1,4 @@
-.admin_cpanelPage{
-  margin-bottom: 500px;
+/*window containing all the tables for each section*/
+.content_window{
+  min-height: 500px;
 }

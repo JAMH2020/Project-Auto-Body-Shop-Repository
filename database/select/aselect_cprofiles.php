@@ -64,7 +64,7 @@ if ($stmt_a_cprofiles->num_rows > 0){
 ?>
 
             <td>
-              <a href='#' onclick='findCAccountRow("<?php echo $profile_idRow?>", "../../database/select/find_row/find_row_cprofiles.php", "change/change_profile.php"); return false;'>Edit</a>
+              <a href='#' onclick='findCAccountRow("<?php echo $profile_idRow?>", "../../database/select/find_row/find_row_cprofiles.php", "profiles/change/change_profile.php"); return false;'>Edit</a>
             </td>
 
 <?php
@@ -79,3 +79,4 @@ if ($stmt_a_cprofiles->num_rows > 0){
 
 //close the statement
 $stmt_a_cprofiles->close();
+?>

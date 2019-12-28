@@ -74,3 +74,7 @@ echo "<p>c_change_status:" .  $_SESSION['account_change'] . "</p>";
 //close the statement
 $stmt_find_waccounts->close();
 ?>
+
+
+<!--redirect to the edit account page-->
+<script>redirect_page('accounts/change/change_account.php'); </script>

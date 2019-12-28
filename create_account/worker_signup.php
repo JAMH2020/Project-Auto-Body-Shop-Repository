@@ -168,10 +168,13 @@ include '../footer/footer.php';
 } else {
   //insert the user sign up data into the accounts table in the database
   include "../database/insert/insert_wsignup.php";
+  
+  //redirect to the worker section of the admin cpanel
+  $_SESSION['admin_section'] = "waccounts";
 ?>
 
   <!--redirect to the admin worker account page-->
-  <script>redirect_page("../admin/accounts/worker_acc.php");</script>
+  <script>redirect_page("../admin/admin_cpanel.php");</script>
   
 <?php
 }

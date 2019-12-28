@@ -34,6 +34,9 @@ $_SESSION['editForm'] = false;
   <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
   <script src="../database/findRow.js"></script>
   
+  <!--script to load a certain section-->
+  <script src="../src/js/load_file.js"></script>
+  
 </head>
 
 <body>
@@ -44,19 +47,33 @@ include "../navigation_bar/navigation_bar.php";
 ?>
 
 
+<a href="#"  onclick='loadFile("worker_orders.php")'>Orders</a>
+<a href="#"  onclick='loadFile("worker_invoices.php")'>Invoices</a>
 
-<h2 class='order_title'>MY ORDERS</h2>
-
-<a href="orders/intake_repair_form.php" class='order'>Create Order</a>
-<div class="create_order_underline"></div>
-<div id="editCheck"></div>
+<div class="content_window">
 
 <?php
-//include file for selecting orders
-include '../database/select/select_orders.php';
+//sessions to choose which section to load at default run of page
+if ($_SESSION['worker_section'] == "invoices"){
+?>
+
+<script> loadFile('worker_invoices.php'); </script>
+
+<?php
+} else {
+?>
+
+<script> loadFile('worker_orders.php'); </script>
+
+<?php
+}
+?>
+
+</div>
 
 
 
+<?php
 //include the footer
 include '../footer/footer.php';
 ?>

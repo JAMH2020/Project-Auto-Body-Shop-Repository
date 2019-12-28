@@ -16,7 +16,7 @@ function findCAccountRow(id, url, redirect){
   
   
   //redirect to page to modify inputs
-  redirect_page(redirect);
+  //redirect_page(redirect);
 }
 
 

@@ -258,7 +258,7 @@ if ($stmt_find_profile->num_rows > 0){
 
 
 
-/*
+
 
 //insert the data for the orders table
 $stmt_orders->execute();
@@ -268,7 +268,7 @@ $stmt_oprofile->execute();
 
 //insert the data for the estimate cost table
 $stmt_estimate_cost->execute();
-*/
+
 
 
 

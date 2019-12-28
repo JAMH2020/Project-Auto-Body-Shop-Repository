@@ -48,7 +48,7 @@ function list_waccounts(){
 ?>
 
               <td>
-                <a href='#' onclick='findCAccountRow("<?php echo $worker_idRow?>", "../../database/select/find_row/find_row_waccounts.php", "change/change_account.php"); return false;'>Edit</a>
+                <a href='#' onclick='findCAccountRow("<?php echo $worker_idRow?>", "../../database/select/find_row/find_row_waccounts.php", "accounts/change/change_account.php"); return false;'>Edit</a>
               </td>
 
 <?php     
