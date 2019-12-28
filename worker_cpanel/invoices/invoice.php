@@ -519,6 +519,14 @@ if ($_SESSION['removal_choice'] == "A"){
 <?php
 //back button redirects to worker control panel if worker is logged in
 if ($_SESSION['worker_loggedin']){
+
+  //if the worker is editting the invoice
+  if ($_SESSION['editForm']){
+  
+    $_SESSION['worker_section'] = "invoices";
+  } else {
+    $_SESSION['worker_section'] = "orders";
+  }
 ?>
 
 <a href="../worker_cpanel.php">Back</a>
