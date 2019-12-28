@@ -24,7 +24,7 @@ $stmt_u_tcost->bind_param("sdddddddddds", $invoice_no, $parts_price_unit, $labou
 //--------Data to insert into invoice table----//
 
 //order number
-$order_no = $_POST['order_no'];
+$order_no = $_SESSION['order_no'];
 
 
 
@@ -67,16 +67,16 @@ $invoice_id = $_SESSION['invoice_id'];
 //-----------Data to insert into the total cost table---------//
 
 //parts per unit
-$parts_per_unit = $_SESSION['parts_per_unit'];
+$parts_price_unit = $_SESSION['parts_per_unit'];
 
 //labour per unit
-$labour_per_unit = $_SESSION['labour_per_unit'];
+$labour_price_unit = $_SESSION['labour_per_unit'];
 
 //supplies per unit
-$supplies_per_unit = $_SESSION['supplies_per_unit'];
+$supplies_price_unit = $_SESSION['supplies_per_unit'];
 
 //disposal and recycing per ubnit
-$disposal_per_unit = $_SESSION['disposal_per_unit'];
+$disposal_price_unit = $_SESSION['disposal_per_unit'];
 
 //total of parts
 $parts_total = $_SESSION['parts_total'];
@@ -120,3 +120,4 @@ include "../../src/clear_sessions.php";
 
 clear_invoice();
 ?>
+
