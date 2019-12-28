@@ -1,121 +1,66 @@
 <?php
-/*********************************************
-** shows all the worker accounts available  **
-**********************************************/
-
-function list_waccounts(){
-  //include file to connect to the database
-  include_once '../../database/connectdb.php';
-
-  //include file to check errors in sql statements
-  include_once '../../database/error_check.php';
-
-
-  //prepare and bind sql statement
-  $stmt_a_waccounts = $conn->prepare("SELECT * FROM Worker_Accounts");
-
-  //execute the statement
-  $stmt_a_waccounts->execute();
-
-  //store the result
-  $stmt_a_waccounts->store_result();
-
-  //bind the results
-  $stmt_a_waccounts->bind_result($worker_idRow, $worker_firstnameRow, $worker_lastnameRow, $worker_passwordRow, $worker_emailRow);
-
-
-  //print out the accounts that are available
-  if ($stmt_a_waccounts->num_rows > 0){
-
-    //prints out a table
-    echo "<table class='table'>";
-      echo "<tr>";
+/******************************************
+** shows all the invoices that are done  **
+*******************************************/
+//include file to connect to the database
+include_once '../../database/connectdb.php';
+//include file to check errors in sql statements
+include_once '../../database/error_check.php';
+//prepare and bind sql statement
+$stmt_ainvoice = $conn->prepare("SELECT * FROM Invoice");
+//execute the statement
+$stmt_ainvoice->execute();
+//store the result
+$stmt_ainvoice->store_result();
+//bind the results
+$stmt_ainvoice->bind_result($invoice_idRow, $order_noRow, $worker_idRow, $invoice_noRow, $invoice_dateRow, $odometer_returnRow, $descriptionRow, $authorization_dateRow, $completion_dateRow);
+//print out the orders that are available
+if ($stmt_ainvoice->num_rows > 0){
+//prints out a table
+  echo "<table class='table'>";
+    echo "<tr>";
       
-        echo "<th>Worker Id</th>";
-        echo "<th>Name</th>";
-        echo "<th>Password</th>";
-        echo "<th>Email</th>";
-        echo "<th></th>";
-      
-      echo "</tr>";
-
-    while($stmt_a_waccounts->fetch()){
-      echo "<tr>";
-        echo "<td>" . $worker_idRow . "</td>";
-        echo "<td>" . $worker_firstnameRow . " " . $worker_lastnameRow . "</td>";
-        echo "<td>" . $worker_passwordRow . "</td>";
-        echo "<td>" . $worker_emailRow . "</td>";
+      echo "<th>Invoice Id</th>";
+      echo "<th>Invoice Number</th>";
+      echo "<th>Order Number</th>";
+      echo "<th>Worker Id</th>";
+      echo "<th>Invoice Date</th>";
+      echo "<th>Odometer Return Value</th>";
+      echo "<th>Description of Work Done</th>";
+      echo "<th>Authorization Date of Work</th>";
+      echo "<th>Completion Date</th>";
+      echo "<th></th>";
+    echo "</tr>";
+  
+  while($stmt_ainvoice->fetch()){
+    echo "<tr>";
+      echo "<td> <input type='checkbox' name='order_idArr[]' value=" . $invoice_idRow .">" . $invoice_idRow . "</td>";
+      echo "<td>" . $invoice_noRow . "</td>";
+      echo "<td>" . $order_noRow . "</td>";
+      echo "<td>" . $worker_idRow . "</td>";
+      echo "<td>" . $invoice_dateRow . "</td>";
+      echo "<td>" . $odometer_returnRow . "</td>";
+      echo "<td>" . $descriptionRow . "</td>";
+      echo "<td>" . $authorization_dateRow . "</td>";
+      echo "<td>" . $completion_dateRow . "</td>";
 ?>
 
-              <td>
-                <a href='#' onclick='findCAccountRow("<?php echo $worker_idRow?>", "../../database/select/find_row/find_row_waccounts.php", "accounts/change/change_account.php"); return false;'>Edit</a>
-              </td>
+            <td>
+              <a href='#' onclick='findCAccountRow("<?php echo $invoice_idRow?>", "../../database/select/find_row/find_row_invoices.php", "change/change_account.php"); return false;'>Edit</a>
+            </td>
 
-<?php     
-      echo "</tr>";
-    }
-  
-    echo "</table>";
-  
-  } else {
-    echo "<h3 class='conclusion'>" . "There are no accounts available" . "</h3>";
-  }
-
-
-  //close the statement
-  $stmt_a_waccounts->close();
-}
-
-
-
-
-
-function get_waccounts_id($conn){
-  //include file to connect to the database
-  include_once '../../database/connectdb.php';
-
-  //include file to check errors in sql statements
-  include_once '../../database/error_check.php';
-  
-  
-  
-  //prepare and bind sql statement
-  $stmt_a_waccounts = $conn->prepare("SELECT Worker_Id FROM Worker_Accounts WHERE Email = ?");
-  $stmt_a_waccounts->bind_param("s", $worker_email);
-  
-  //worker email
-  $worker_email = $_SESSION['worker_email'];
-  
-
-  //execute the statement
-  $stmt_a_waccounts->execute();
-
-  //store the result
-  $stmt_a_waccounts->store_result();
-
-  //bind the results
-  $stmt_a_waccounts->bind_result($worker_idRow);
-  
-  
-  //print out the accounts that are available
-  if ($stmt_a_waccounts->num_rows > 0){
-  
-    while($stmt_a_waccounts->fetch()){
-  
-      //save the session for the changed id
-      $worker_id = $worker_idRow;
-    }
-    
-  } else {
-    echo "<h1>NO EMAIL FOUND</h1>";
+<?php
+     
+    echo "</tr>";
   }
   
+  echo "</table>";
   
-  //close the statement
-  $stmt_a_waccounts->close();
-  
-  
-  //return value
-  return $worker_id;
+//if there are no orders
+} else {
+  echo "<h3 class='conclusion'>" . "There Are No Invoices Available" . "</h3>";
+  exit();
 }
+//close the statment
+$stmt_ainvoice->close();
 ?>
