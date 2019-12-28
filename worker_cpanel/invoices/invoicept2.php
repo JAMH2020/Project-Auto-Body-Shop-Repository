@@ -225,7 +225,13 @@ include '../../footer/footer.php';
    
  //if the worker is logged int
  if($_SESSION['worker_loggedin']){
-   //redirect page to worker control panel if worker is logged int
+ 
+   //redirect page to worker check invoices page if they are editting the invoices
+   if ($_SESSION['editForm']){ 
+     $_SESSION['worker_section'] = "invoices";
+   } else {
+     $_SESSION['worker_section'] = "orders";
+   }
 ?>
 
    <script>redirect_page("../worker_cpanel.php");</script>
