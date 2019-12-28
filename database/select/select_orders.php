@@ -18,12 +18,13 @@ include_once '../database/error_check.php';
 $stmt_orders1 = $conn->prepare("SELECT Orders.Order_Id, Orders.Order_No, Orders.Date, Order_Profile.First_Name, Order_Profile.Last_Name, Orders.Description, Orders.Work_Date, Orders.Odometer_Intake, Orders.School_Name, Orders.School_Address, Orders.Status
                                 FROM Orders
                                 INNER JOIN Order_Profile ON Orders.Order_No = Order_Profile.Order_No
-                                WHERE Orders.Worker_Id = ?");
+                                WHERE Orders.Worker_Id = ?
+                                ORDER BY Orders.Order_No DESC");
 
 $stmt_orders1->bind_param("i", $worker_id);
 
 //worker id from the sessions in the login
-$worker_id = 1;
+$worker_id = $_SESSION['worker_id'];
 
 //execute the prepared statement
 $stmt_orders1->execute();

@@ -21,8 +21,11 @@ $_SESSION['editForm'] = false;
   <!--style sheet for the worker control panel-->
   <link rel="stylesheet" type="text/css" href="worker_cpanel_styles.css">
   
-  <!--style sheet for table of the worker control panel-->
+  <!--style sheet for the orders table of the worker control panel-->
   <link rel="stylesheet" type="text/css" href="../database/select/css/select_orders.css">
+  
+  <!--style sheet for the invoices table of the worker control panel-->
+  <link rel="stylesheet" type="text/css" href="../database/select/css/select_invoices.css">
 
 
   <!--JQuery library-->
