@@ -184,11 +184,14 @@ include '../../footer/footer.php';
   
   //if the user is the admin
   if ($_SESSION['admin_loggedin']){
+    $_SESSION['admin_section'] = "orders";
 ?>
-  <script> redirect_page("../../admin/orders/check_orders.php");</script>
+  <script> redirect_page("../../admin/admin_cpanel.php");</script>
   
 <?php
   } else {
+  //redirect to the orders section of the worker control panel
+  $_SESSION['worker_section'] = "orders";
 ?>
 
   <script> redirect_page("../worker_cpanel.php");</script>
