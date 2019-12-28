@@ -6,7 +6,7 @@ if (session_start() === null){
 ?>
 
 
-  <!--the admin control panel section where they can check the customer profiles in the system--
+  <!--the admin control panel section where they can check the customer profiles in the system-->
   
   <!--stylesheet for the profiles table-->
   <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_cprofiles.css">
