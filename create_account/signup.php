@@ -177,9 +177,10 @@ include '../footer/footer.php';
   
   //if the admin is creating a customer account
   if($_SESSION['admin_create_caccount'] == 1){
+    $_SESSION['admin_section'] = "caccounts";
 ?>
   <!--redirect to the admin customer account page-->
-  <script>redirect_page("../admin/accounts/customer_acc.php");</script>
+  <script>redirect_page("../admin/admin_cpanel.php");</script>
   
 
 <?php
@@ -197,4 +198,6 @@ include '../footer/footer.php';
 
 </body>
 </html>
+
+
 
