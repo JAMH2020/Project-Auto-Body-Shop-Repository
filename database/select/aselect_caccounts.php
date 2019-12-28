@@ -48,7 +48,7 @@ function list_caccounts(){
       
 ?>
               <td>
-                <a href='#' onclick='findCAccountRow("<?php echo $customer_idRow?>", "../../database/select/find_row/find_row_caccounts.php", "change/change_account.php"); return false;'>Edit</a>
+                <a href='#' onclick='findCAccountRow("<?php echo $customer_idRow?>", "../../database/select/find_row/find_row_caccounts.php", "accounts/change/change_account.php"); return false;'>Edit</a>
               </td>
 <?php
      
