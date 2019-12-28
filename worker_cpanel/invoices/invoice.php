@@ -530,16 +530,19 @@ if ($_SESSION['worker_loggedin']){
 
   //if the admin is editting an invoice
   if ($_SESSION['editForm'] == true){
+  
+    $_SESSION['admin_section'] = "invoices";
 ?>
 
-<a href="../../admin/invoices/check_invoices.php">Back</a>
+<a href="../../admin/admin_cpanel.php">Back</a>
 
 <?php
   //if the admin is creating a new invoice
   } else {
+    $_SESSION['admin_section'] = "orders";
 ?>
 
-<a href="../../admin/orders/check_orders.php">Back</a>
+<a href="../../admin/admin_cpanel.php">Back</a>
 
 <?php  
   }
