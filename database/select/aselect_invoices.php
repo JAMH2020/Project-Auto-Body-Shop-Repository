@@ -42,8 +42,8 @@ if ($stmt_ainvoice->num_rows > 0){
       echo "<th>Invoice Date</th>";
       echo "<th>Odometer Return Value</th>";
       echo "<th>Description of Work Done</th>";
-      echo "<th>Authorization Date of Work</th>";
-      echo "<th>Completion Date</th>";
+      echo "<th>Date of Completion of Work</th>";
+      echo "<th>Date Vehicle is Returned</th>";
       echo "<th></th>";
 
     echo "</tr>";
