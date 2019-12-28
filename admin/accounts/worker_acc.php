@@ -5,27 +5,10 @@ if (session_start() === null){
 }
 ?>
 
-<!--the admin control panel section where they can check the worker accounts in the system-->
-<html>
-<head>
-  <!--JQuery library-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <!--script use to redirect the user to another page-->
-  <script src="../../src/js/submit_form.js"></script>
-  
-  <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
-  <script src="../../database/findRow.js"></script>
-  
+  <!--the admin control panel section where they can check the worker accounts in the system-->
   <!--stylesheet for the worker accounts table-->
   <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_waccounts.css">
-</head>
-<body>
-  <?php
-  //include the navigation bar
-  include "../../navigation_bar/navigation_bar.php";
-  ?>
-  
+
   <a href="../../create_account/worker_signup.php">Create Worker Account</a>
   
   <?php
@@ -34,15 +17,4 @@ if (session_start() === null){
   list_waccounts();
   ?>
 
-  
-  <a href="../admin_cpanel.php">Back</a>
-  
   <div id="rowText"></div>
-  
-  <?php
-    //include the footer
-    include '../../footer/footer.php';
-   ?>
-  
-</body>
-</html>
