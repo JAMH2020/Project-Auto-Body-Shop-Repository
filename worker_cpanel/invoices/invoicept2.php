@@ -225,7 +225,6 @@ include '../../footer/footer.php';
    
  //if the worker is logged int
  if($_SESSION['worker_loggedin']){
- 
    //redirect page to worker control panel if worker is logged int
 ?>
 
@@ -233,9 +232,17 @@ include '../../footer/footer.php';
 
 <?php 
   } else if($_SESSION['admin_loggedin']){
-    //redirect page to the admin check order page if the admini is logged in
+    
+    //redirect page to the admin check invoices page if they are editting the invoices
+    if ($_SESSION['editForm']){
+      $_SESSION['admin_section'] = "invoices";
+      
+    //redirect page to the admin check orders page if they are creating an invoice
+    } else {
+      $_SESSION['admin_section'] = "orders";
+    }
 ?>
-    <script>redirect_page("../../admin/invoices/check_invoices.php");</script>
+    <script>redirect_page("../../admin/admin_cpanel.php");</script>
     
 <?php
   }
