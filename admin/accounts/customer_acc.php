@@ -5,24 +5,13 @@ if (session_start() === null){
 }
 ?>
 
-<!--the admin control panel section where they can check the customer accounts in the system-->
-<html>
-<head>
-  
-  <!--script use to redirect the user to another page-->
-  <script src="../../src/js/submit_form.js"></script>
-  
-  <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
-  <script src="../../database/findRow.js"></script>
-  
+  <!--the admin control panel section where they can check the customer accounts in the system-->
   <!--stylesheet for the accounts table-->
   <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_caccounts.css">
-</head>
-<body>
-  <?php
-  //include the navigation bar
-  include_once "../../navigation_bar/navigation_bar.php";
   
+  
+  
+  <?php
   //session to admin is creating site
   $_SESSION['admin_create_caccount'] = 1;
   ?>
@@ -35,16 +24,7 @@ if (session_start() === null){
   include "../../database/select/aselect_caccounts.php";
   list_caccounts();
   ?>
-  
-  <a href="../admin_cpanel.php">Back</a>
-  
+ 
   <div id="rowText"></div>
   
-  <?php
-    //include the footer
-    include '../../footer/footer.php';
-   ?>
-  
-</body>
-</html>
 
