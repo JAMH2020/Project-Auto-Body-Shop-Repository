@@ -1,5 +1,5 @@
 <?php
-//start session to remember values of the inputs if it has not been started yet
+//start the session if it has not been started yet
 if (session_start() === null){
   session_start();
 }
