@@ -13,6 +13,7 @@
   overflow-x:hidden;
 }
 
+
 /*vertical sticky element for the title*/
 .stickyY{
   position: fixed;
@@ -35,71 +36,67 @@
   -webkit-transform: translate(0px,-30px);
   -moz-transform: translate(0px,-30px);
   -o-transform: translate(0px,-30px);
-  font-weight: bold;
+  font-weight: bolder;
 }
+
 
 /*first part of the title*/
 .title_front{
  color: rgb(3, 55, 107);
  text-shadow: 1px 2px 2px  rgb(204, 255, 255);
- -webkit-animation:colorchange 20s infinite alternate;
+ animation:colorchange 20s infinite alternate;
  }
 
-@-webkit-keyframes colorchange {
-  0% {
 
+
+@keyframes colorchange {
+
+  0% {
     color: blue;
   }
 
   10% {
-
     color: #8e44ad;
   }
 
   20% {
-
     color: #1abc9c;
   }
 
   30% {
-
     color: #d35400;
   }
 
   40% {
-
     color: blue;
   }
 
   50% {
-
     color: #34495e;
   }
 
   60% {
-
     color: blue;
   }
 
   70% {
-
     color: #2980b9;
   }
-  80% {
 
+  80% {
     color: #f1c40f;
   }
 
   90% {
-
     color: #2980b9;
   }
 
   100% {
-
     color: pink;
   }
 }
+
+
 
 /*second part of the title*/
 .title_back{
@@ -107,60 +104,139 @@
   text-shadow: 1px 2px 2px  rgb(0, 51, 153);
 }
 
+
+
 /*division containing the phone number*/
 .phone { 
  font-size: 20px;  
 }
 
+
+
 /*division for the phone and address*/
 .site_information{
-  height: 30%;
   text-align: right;
   padding: 5px 10px 5px 5px;
 }
+
+
 
 /*division containing the address*/
 .address{
   font-size: 18px;
 }
 
+
+
 /*styles for phone number and address*/
 .title_details{
   text-shadow: 1px 2px 2px rgb(0, 51, 153);
 }
+
+
 
 /*text of the address*/
 .address-heading{
   font-weight: bold;
 }
 
-.right_title_link{
-  color: rgb(255,255,255);
-  text-shadow: 1px 2px 2px  rgb(0, 51, 153);
-  text-align: center;
+
+
+/*dropdown menu for the user profile*/
+.profile_menu{
   float: right;
+  padding: 10px 20px;
+  text-align: center;
+  color: rgb(0, 51, 153);
+  text-shadow: 1px 2px 2px  rgb(255, 255, 255);
 }
 
-.left_title_link{
-  color: rgb(255,255,255);
-  text-shadow: 1px 2px 2px  rgb(0, 51, 153);
-  text-align: center;
-  float: right;
-  padding-right: 23px;
+/*button for the dropdown menu*/
+.profile_button{
+  font-weight: bold;
+  font-size: 20px;
+  transition: color 0.5s ease;
 }
+
+/*arrow of the profile dropdown*/
+.profile_arrow{
+  color: rgb(0, 51, 153);
+  transition: color 0.5s ease;
+}
+
+
+/*hovering over the profile button*/
+.profile_button:hover{
+  cursor: pointer;
+  color: rgb(0, 153, 204);
+  transition: color 0.5s ease;
+}
+
+/*arrow of the profile drowdown changes colour when hover*/
+.profile_button:hover .profile_arrow{
+  color: rgb(51, 204, 204);
+  transition: color 0.5s ease;
+}
+
+
+
+/*container for the dropdown menu*/
+.profile_dropdown{
+  padding: 0;
+  display:none;
+  background-color:  	rgb(245,245,245);
+  box-shadow: 2px 3px 5px rgb(0,0,0);
+  position: absolute;
+  text-align: center;
+  font-size: 20px;
+  z-index:1;
+  right:0;
+  border-radius: 8px 0 0 8px;
+}
+
+
+/*links for the profile*/
+.profile_link{
+  padding: 10px 20px;
+   text-decoration: none;
+   color: rgb(0, 51, 102);
+   display: block;
+   transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+/*the top profile link*/
+.top_profile_link{
+  border-radius: 8px 0 0 0;
+}
+
+/*the bottom profile link*/
+.bottom_profile_link{
+  border-radius: 0 0 0 8px;
+}
+
+/*hovering over the link*/
+.profile_link:hover{
+  background-color: rgb(51, 204, 255);
+  color: white;
+  transition: color 0.5s ease, background-color 0.5s ease;
+}
+
+
 
 .nav {
   overflow: hidden;
   background-color: white;
   width: 100%;  
   box-shadow:0 5px 7px rgb(0,0,0);
+  display: flex;
 }
+
+
 
 .nav a {
   text-decoration: none;
   font-size: 20px;
   color: rgb(0, 51, 102);
-  height: 100%;
   padding: 23px 0;
   width: 33%;
   float:left;
@@ -168,15 +244,21 @@
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+
+
 /*very left link of the navigation bar*/
 .left_nav_link{
-  width: 34%;
+  flex-grow:1;
 }
+
+
 
 /*links in the navigation bar*/
 .nav_link{
-  width: 33%;
+  flex-grow:1;
 }
+
+
 
 /*hover over the links*/
 .nav a:hover{
@@ -185,6 +267,8 @@
   color: rgb(255,255,255);
   cursor: pointer;
 }
+
+
 
 /*underline for the links*/
 .nav_link_underline{
@@ -198,12 +282,15 @@
   margin: auto;
 }
 
+
+
 /*underline for the links when hovered*/
 .nav a:hover .nav_link_underline{
   opacity: 1;
   transform: scaleX(30);
   transition: transform 0.5s, opacity 0.5s;
 }
+
 
 /*filler space for the navigation bar once it become sticky*/
 .filler_nav{
@@ -213,10 +300,14 @@
   margin: 0;
 }
 
+
+
 /*show filler space for navigation bar*/
 .filler_show{
   display: block;
 }
+
+
 
 /*hide filler space for navigation bar*/
 .filler_hide{
