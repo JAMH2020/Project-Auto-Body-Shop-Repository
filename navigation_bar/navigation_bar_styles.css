@@ -204,6 +204,15 @@
    transition: color 0.5s ease, background-color 0.5s ease;
 }
 
+/*hovering over the profile link and changing size of underline*/
+.profile_link:hover .nav_link_underline{
+  opacity: 1;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 4px 10px -5px rgb(0,0,0);
+  transform: scaleX(30);
+  transition: transform 0.5s, opacity 0.5s, background-color 0.25s;
+}
+
 /*the top profile link*/
 .top_profile_link{
   border-radius: 8px 0 0 0;
