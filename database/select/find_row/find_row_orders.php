@@ -20,13 +20,9 @@ include_once '../../error_check.php';
 $stmt_find_orders = $conn->prepare("SELECT * FROM Orders WHERE Order_Id = ?");
 $stmt_find_orders->bind_param("i",$order_find_id);
 
-//get the row from the customer accounts table
-$stmt_find_caccounts = $conn->prepare("SELECT * FROM Customer_Accounts WHERE Customer_Id = ?");
-$stmt_find_caccounts->bind_param("i",$customer_find_id);
-
 //get the row from the customer profile table
-$stmt_find_profiles = $conn->prepare("SELECT * FROM Customer_Profile WHERE Email = ?");
-$stmt_find_profiles->bind_param("s",$profile_find_email);
+$stmt_find_profiles = $conn->prepare("SELECT * FROM Order_Profile WHERE Order_No = ?");
+$stmt_find_profiles->bind_param("i",$profile_find_order_no);
 
 //get the row from the estimate cost table
 $stmt_find_estimate = $conn->prepare("SELECT * FROM Estimate_Cost WHERE Order_No = ?");
@@ -47,7 +43,7 @@ $stmt_find_orders->execute();
 $stmt_find_orders->store_result();
 
 //bind the results
-$stmt_find_orders->bind_result($order_idRow, $order_noRow, $order_dateRow, $worker_idRow, $customer_idRow, $plan_descriptionRow, $work_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow);
+$stmt_find_orders->bind_result($order_idRow, $order_noRow, $order_dateRow, $worker_idRow, $plan_descriptionRow, $work_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow);
 
 
 
@@ -70,9 +66,6 @@ if ($stmt_find_orders->num_rows > 0){
     
     //worker id
     $_SESSION['worker_id'] = $worker_idRow;
-    
-    //customer's id
-    $_SESSION['customer_id'] = $customer_idRow;
     
     //description of the work that is being don
     $_SESSION['plan_description'] = $plan_descriptionRow;
@@ -101,45 +94,10 @@ if ($stmt_find_orders->num_rows > 0){
 
 
 
-//get the customer id from sessions
-$customer_find_id = $_SESSION['customer_id'];
 
 
-//execute the statement for getting values from customer account
-$stmt_find_caccounts->execute();
-
-//store the result
-$stmt_find_caccounts->store_result();
-
-//bind the results
-$stmt_find_caccounts->bind_result($customer_idRow, $customer_firstnameRow, $customer_lastnameRow, $customer_passwordRow, $customer_emailRow);
-
-//store the values of the row into sessions
-if ($stmt_find_caccounts->num_rows > 0){
-
-  while($stmt_find_caccounts->fetch()){
-    //store the values into sessions
-    //-----customer accounts table-----//
-    
-     //customer firstname
-    $_SESSION['customer_firstname'] = $customer_firstnameRow;
-    
-     //customer lastname
-    $_SESSION['customer_lastname'] = $customer_lastnameRow;
-    
-     //customer's password
-    $_SESSION['customer_password'] = $customer_passwordRow;
-    
-     //customer's email
-    $_SESSION['customer_email'] = $_SESSION['prev_customer_email'] = $customer_emailRow;
-    }
- }
-
-
-
-
-//get the email to link the customer profile table using sessions
-$profile_find_email = $_SESSION['customer_email'];
+//get the order number from sessions
+$profile_find_order_no = $_SESSION['order_no'];
 
 
 //execute the statement for getting values from customer account
@@ -149,7 +107,7 @@ $stmt_find_profiles->execute();
 $stmt_find_profiles->store_result();
 
 //bind the results
-$stmt_find_profiles->bind_result($profile_idRow, $customer_phoneRow, $customer_addressRow, $customer_emailRow, $car_yearRow, $car_makeRow, $car_modelRow, $vin_noRow, $license_plateRow);
+$stmt_find_profiles->bind_result($profile_order_no, $customer_firstname, $customer_lastname, $customer_phoneRow, $customer_addressRow, $customer_emailRow, $car_yearRow, $car_makeRow, $car_modelRow, $vin_noRow, $license_plateRow);
 
 //store the values of the row into sessions
 if ($stmt_find_profiles->num_rows > 0){
@@ -158,14 +116,20 @@ if ($stmt_find_profiles->num_rows > 0){
     //store the values into sessions
     //-----customer profiles table-----//
     
-     //profile id
-    $_SESSION['profile_id'] = $profile_idRow;
+    //customer's firstname
+    $_SESSION['customer_firstname'] = $customer_firstname;
+    
+    //customer's lastname
+    $_SESSION['customer_lastname'] = $customer_lastname;
     
      //customer's phone number
     $_SESSION['customer_phone'] = $customer_phoneRow;
     
      //customer's address
     $_SESSION['customer_address'] = $customer_addressRow;
+    
+    //customer's email
+    $_SESSION['customer_email'] = $customer_emailRow;
     
     //car year
     $_SESSION['car_year'] = $car_yearRow;
@@ -306,7 +270,6 @@ echo "<p>o_id:" .  $_SESSION['order_id'] . "</p>";
 echo "<p>o_no.:" .  $_SESSION['order_no'] . "</p>";
 echo "<p>o_date:" .  $_SESSION['order_date'] . "</p>";
 echo "<p>o_workid:" .  $_SESSION['worker_id'] . "</p>";
-echo "<p>o_customerid:" .  $_SESSION['customer_id'] . "</p>";
 echo "<p>o_plandescription:" .  $_SESSION['plan_description'] . "</p>";
 echo "<p>o_workdate:" .  $_SESSION['plan_date'] . "</p>";
 echo "<p>o_odometerIn:" .  $_SESSION['odometer_intake'] . "</p>";
@@ -317,11 +280,9 @@ echo "<p>o_status:" .  $_SESSION['status'] . "</p><br><br>";
 
 echo "<p>c_firstname:" .  $_SESSION['customer_firstname'] . "</p>";
 echo "<p>c_lastname:" .  $_SESSION['customer_lastname'] . "</p>";
-echo "<p>c_email:" .  $_SESSION['customer_email'] . "</p>";
-echo "<p>c_password:" .  $_SESSION['customer_password'] . "</p><br><br>";
+echo "<p>c_email:" . $_SESSION['customer_email'] . "</p><br><br>";
 
 
-echo "<p>p_id:" .  $_SESSION['profile_id'] . "</p>";
 echo "<p>p_phone:" .  $_SESSION['customer_phone'] . "</p>";
 echo "<p>p_addres:" .  $_SESSION['customer_address'] . "</p>";
 echo "<p>p_year:" .  $_SESSION['car_year'] . "</p>";
@@ -352,6 +313,26 @@ echo "<p>modify variable_post:" . $_POST['editForm'] . "</p>";
 
 //close the statement
 $stmt_find_orders->close();
-$stmt_find_caccounts->close();
+$stmt_find_estimate->close();
 $stmt_find_profiles->close();
+$stmt_find_waccounts->close();
+
+
+
+//redirect to intake repair if editting data
+if ($_SESSION['editForm']){
+?>
+
+<!--redirect to the intake form-->
+<script>redirect_page('../../worker_cpanel/orders/intake_repair_form.php');</script>
+
+<?php
+//redirect to the invoice page if inserting data
+} else {
+?>
+
+<script>redirect_page('../../worker_cpanel/invoices/invoice.php');</script>
+
+<?php
+}
 ?>

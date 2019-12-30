@@ -12,7 +12,16 @@ include_once '../../database/error_check.php';
 
 
 //prepare and bind sql statement
-$stmt_aorder = $conn->prepare("SELECT * FROM Orders");
+$stmt_aorder = $conn->prepare("SELECT Orders.Order_Id, Orders.Order_No, Orders.Date, Orders.Worker_Id, Worker_Accounts.First_Name, Worker_Accounts.Last_Name, Order_Profile.First_Name, Order_Profile.Last_Name, Customer_Profile.Profile_Id, Orders.Description, Orders.Work_Date, Orders.Odometer_Intake, Orders.School_Name, Orders.School_Address, Orders.Status
+                               FROM Orders
+                               LEFT JOIN Worker_Accounts
+                                 ON Orders.Worker_Id = Worker_Accounts.Worker_Id
+                               LEFT JOIN Order_Profile
+                                 ON Orders.Order_No = Order_Profile.Order_No
+                               LEFT JOIN Customer_Profile
+                                 ON Order_Profile.Email = Customer_Profile.Email
+                               ORDER BY Orders.Order_Id
+                               ");
 
 //execute the statement
 $stmt_aorder->execute();
@@ -21,7 +30,7 @@ $stmt_aorder->execute();
 $stmt_aorder->store_result();
 
 //bind the results
-$stmt_aorder->bind_result($order_idRow, $order_noRow, $dateRow, $worker_idRow, $customer_idRow, $plan_descriptionRow, $plan_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow);
+$stmt_aorder->bind_result($order_idRow, $order_noRow, $dateRow, $worker_idRow, $worker_firstnameRow, $worker_lastnameRow, $customer_firstnameRow, $customer_lastnameRow, $customer_idRow, $plan_descriptionRow, $plan_dateRow, $odometer_intakeRow, $school_nameRow, $school_addressRow, $statusRow);
 
 
 //print out the orders that are available
@@ -34,8 +43,8 @@ if ($stmt_aorder->num_rows > 0){
       echo "<th>Order Id</th>";
       echo "<th>Order Number</th>";
       echo "<th>Date</th>";
-      echo "<th>Worker Id</th>";
-      echo "<th>Customer Id</th>";
+      echo "<th>Worker</th>";
+      echo "<th>Customer</th>";
       echo "<th>Description of Work</th>";
       echo "<th>Date Work is Done</th>";
       echo "<th>Odometer Reading at Intake</th>";
@@ -52,8 +61,8 @@ if ($stmt_aorder->num_rows > 0){
       echo "<td> <input type='checkbox' name='order_idArr[]' value=" . $order_idRow .">" . $order_idRow . "</td>";
       echo "<td>" . $order_noRow . "</td>";
       echo "<td>" . $dateRow . "</td>";
-      echo "<td>" . $worker_idRow . "</td>";
-      echo "<td>" . $customer_idRow . "</td>";
+      echo "<td>" . $worker_firstnameRow . " " . $worker_lastnameRow . " #" . $worker_idRow . "</td>";
+      echo "<td>" . $customer_firstnameRow . " " . $customer_lastnameRow . " #" . $customer_idRow . "</td>";
       echo "<td>" . $plan_descriptionRow . "</td>";
       echo "<td>" . $plan_dateRow . "</td>";
       echo "<td>" . $odometer_intakeRow . "</td>";

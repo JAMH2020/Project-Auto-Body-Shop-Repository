@@ -12,22 +12,19 @@ include_once '../../database/error_check.php';
 
 //prepare sql statement to bind
 //update orders table
-$stmt_u_orders = $conn->prepare("UPDATE Orders SET Order_No = ?, Worker_Id = ?, Customer_Id = ?, Description = ?, Work_Date = ?, Odometer_Intake = ?, School_Name = ?, School_Address = ?, Status = ? WHERE Order_Id = ?");
-$stmt_u_orders->bind_param("iiississsi", $order_no, $worker_id, $customer_id, $plan_description, $plan_date, $odometer_intake, $school_name, $school_address, $status, $order_id);
+$stmt_u_orders = $conn->prepare("UPDATE Orders SET Order_No = ?, Worker_Id = ?, Description = ?, Work_Date = ?, Odometer_Intake = ?, School_Name = ?, School_Address = ?, Status = ? WHERE Order_Id = ?");
+$stmt_u_orders->bind_param("iississsi", $order_no, $worker_id, $plan_description, $plan_date, $odometer_intake, $school_name, $school_address, $status, $order_id);
 
 
 //update estimate cost table
-$stmt_u_estimate = $conn->prepare("UPDATE Estimate_Cost SET Estimate_Date = ?, Estimate_Date_Expiry = ?, Parts_Unit_Price = ?, Labour_Unit_Price = ?, Supplies_Unit_Price = ?, Disposal_Unit_Price = ?, Parts_Total = ?, Labour_Total = ?, Supplies_Total = ?, Disposal_Total = ?, Total_Cost = ?, Exceed_Cost = ?, Removal_Choice = ?, Initial = ? WHERE Order_No = ?");
-$stmt_u_estimate->bind_param("ssddddddddddssi", $estimate_date, $estimate_expiry_date, $estimate_parts_per_unit, $estimate_labour_per_unit, $estimate_supplies_per_unit, $estimate_disposal_per_unit, $estimate_parts_total, $estimate_labour_total, $estimate_supplies_total, $estimate_disposal_total, $estimate_total_cost, $exceed_cost, $removal_choice, $customer_initial, $order_no_prev);
+$stmt_u_estimate = $conn->prepare("UPDATE Estimate_Cost SET Order_No = ?, Estimate_Date = ?, Estimate_Date_Expiry = ?, Parts_Unit_Price = ?, Labour_Unit_Price = ?, Supplies_Unit_Price = ?, Disposal_Unit_Price = ?, Parts_Total = ?, Labour_Total = ?, Supplies_Total = ?, Disposal_Total = ?, Total_Cost = ?, Exceed_Cost = ?, Removal_Choice = ?, Initial = ? WHERE Order_No = ?");
+$stmt_u_estimate->bind_param("issddddddddddssi", $order_no, $estimate_date, $estimate_expiry_date, $estimate_parts_per_unit, $estimate_labour_per_unit, $estimate_supplies_per_unit, $estimate_disposal_per_unit, $estimate_parts_total, $estimate_labour_total, $estimate_supplies_total, $estimate_disposal_total, $estimate_total_cost, $exceed_cost, $removal_choice, $customer_initial, $order_no_prev);
 
 
-//update changes that could affect the customer profile table
-$stmt_u_profiles = $conn->prepare("UPDATE Customer_Profile SET Phone_No = ?, Address = ?, Email = ?, Car_Year = ?, Car_Make = ?, Car_Model = ?, Vin_No = ?, License_Plate = ? WHERE Email = ?");
-$stmt_u_profiles->bind_param("sssisssss", $customer_phone, $customer_address, $customer_pemail, $car_year, $car_make, $car_model, $vin_no, $license_plate, $customer_pemail_prev);
+//update changes that could affect the order profile table
+$stmt_u_profiles = $conn->prepare("UPDATE Order_Profile SET Order_No = ?, First_Name = ?, Last_Name = ?, Phone_No = ?, Address = ?, Email = ?, Car_Year = ?, Car_Make = ?, Car_Model = ?, Vin_No = ?, License_Plate = ? WHERE Order_No = ?");
+$stmt_u_profiles->bind_param("isssssissssi", $order_no, $customer_firstname, $customer_lastname, $customer_phone, $customer_address, $customer_pemail, $car_year, $car_make, $car_model, $vin_no, $license_plate, $order_no_prev);
 
-//update changes that could affect the customer profile table
-$stmt_u_caccounts = $conn->prepare("UPDATE Customer_Accounts SET First_Name = ?, Last_Name = ?, Password = ?, Email = ? WHERE Email = ?");
-$stmt_u_caccounts->bind_param("sssss", $customer_firstname, $customer_lastname, $customer_password, $customer_cemail, $customer_cemail_prev);
 
 
 //--------Orders Table----------//
@@ -45,7 +42,7 @@ if ($_SESSION['admin_loggedin']){
   include_once "../../database/select/aselect_waccounts.php";
   $worker_id = get_waccounts_id($conn);
   
-// if the user is the workr
+// if the user is the worker
 } else {
 
   //worker id
@@ -55,8 +52,6 @@ if ($_SESSION['admin_loggedin']){
 
 
     
-//customer's id
-$customer_id = $_SESSION['customer_id'];
     
 //description of the work that is being don
 $plan_description = $_SESSION['plan_description'];
@@ -129,7 +124,7 @@ $order_no_prev = $_SESSION['prev_order_no'];
 
 
 
-//---------customer profile table------//
+//---------order profile table------//
 //firstname
 $customer_firstname = $_SESSION['customer_firstname'];
     
@@ -166,21 +161,6 @@ $customer_pemail_prev = $_SESSION['prev_customer_email'];
 
 
 
-//----------customer account table------------// 
-//firstname
-$customer_firstname = $_SESSION['customer_firstname'];
-    
-//lastname
-$customer_lastname = $_SESSION['customer_lastname'];
-    
-//password
-$customer_password = $_SESSION['customer_password'];
-    
-//email
-$customer_cemail = $_SESSION['customer_email'];
-
-//customer's previous email before change
-$customer_cemail_prev = $_SESSION['prev_customer_email'];
 
 
 
@@ -188,27 +168,18 @@ $customer_cemail_prev = $_SESSION['prev_customer_email'];
 $stmt_u_orders->execute();
 $stmt_u_estimate->execute();
 $stmt_u_profiles->execute();
-$stmt_u_caccounts->execute();
-
 
 
 //close statements
 $stmt_u_orders->close();
 $stmt_u_estimate->close();
 $stmt_u_profiles->close();
-$stmt_u_caccounts->close();
 
 
 
 
-// redefines all sessions in the order form to blank
-$_SESSION['order_id'] = $_SESSION['order_no'] = $_SESSION['worker_id'] = $_SESSION['customer_id'] = $_SESSION['plan_description'] = $_SESSION['plan_date'] = 
-$_SESSION['odometer_intake'] = $_SESSION['school_name'] = $_SESSION['school_address'] = $_SESSION['status'] = $_SESSION['estimate_date'] = $_SESSION['estimate_expiry_date'] = 
-$_SESSION['estimate_parts_per_unit'] = $_SESSION['estimate_labour_per_unit'] = $_SESSION['estimate_supplies_per_unit'] = $_SESSION['estimate_disposal_per_unit'] =
-$_SESSION['estimate_parts_total'] = $_SESSION['estimate_labour_total'] = $_SESSION['estimate_supplies_total'] = $_SESSION['estimate_disposal_total'] =
-$_SESSION['estimate_total_cost'] = $_SESSION['exceed_cost'] = $_SESSION['removal_choice'] = $_SESSION['customer_initial'] = $_SESSION['prev_order_no'] =
-$_SESSION['customer_firstname'] = $_SESSION['customer_lastname'] = $_SESSION['customer_phone'] = $_SESSION['customer_address'] = $_SESSION['customer_email'] = 
-$_SESSION['car_year'] = $_SESSION['car_make'] = $_SESSION['car_model'] = $_SESSION['vin_no'] = $_SESSION['license_plate'] = $_SESSION['prev_customer_email'] =
-$_SESSION['customer_password'] = $_SESSION['worker_email'] = "";
+//set all session variables for order to blank
+include "../../src/clear_sessions.php";
 
+clear_order();
 ?>

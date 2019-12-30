@@ -1,6 +1,6 @@
 .bg { 
   /* The Background Image */
-   background-image:url("images/homepage_background.jpg");
+   background-image:url("images/homepage/homepage_background.png");
   /* Height of Image */
     min-height: 550px; 
   /* Setting The location Of The Image */ 
@@ -9,52 +9,169 @@
     background-repeat: no-repeat;
     background-size: cover;
     position:relative;
+    display: table;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
 } 
 
 /*transparent colour over the background*/
 .colour_cover{
-  position:absolute;
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(0, 0, 0,0.3);
   top:0;
   left:0;
   width:100%;
   height:100%;
+  display: table-cell;
+  vertical-align: middle;
 }
+
 
 /*frame surrounding the slogan of the site*/
 .slogan_frame{
   padding:60px 80px;
-  background-color: rgb(100, 211, 252);
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  background-color: rgba(0, 0, 0,0.35);
   max-width: 70%;
   border-radius: 20px;
-  transform: translate(-50%, 0);
-  text-shadow: 1px 2px 2px  rgb(0,0,0);
+  text-shadow: 3px 7px 5px  rgb(51, 153, 255);
   box-shadow: 1px 2px 2px  rgb(255,255,255);
   font-weight: bold;
   text-transform: uppercase;
+  margin-left: auto;
+  margin-right: auto;
+  text-align:center;
 }
 
 /*slogan*/
 .slogan{
   color: rgb(255,255,255);
-  font-size: 35px;
+  font-size: 80px;
+
 }
 
 
+/*division for all the service options*/
+.service_items{
+  display: inline-block;
+}
+
 /*division for the services*/
 .services{
-  padding:30px 50px;
+  padding:30px 25px 200px 25px;
   background-color: rgb(255,255,255);
+  box-shadow: 0px 5px 10px -5px rgb(0,0,0);
+  height: 50%;
+  position: relative;
+  text-align:center;
+  z-index:2;
+}
+
+
+
+
+
+
+/*wave shape of services background*/
+.service_wave{
+  position: relative;
+  top: 105px;
+  z-index: 0;
+  
+  transform-origin: bottom;
+  -ms-transform-origin: bottom;
+  -webkit-transform-origin: bottom;
+  -moz-transform-origin: bottom;
+  -o-transform-origin: bottom;
+  
+  animation: animate_wave 1000ms cubic-bezier(0.23, 1, 0.32, 1);
+  -ms-animation: animate_wave 1000ms cubic-bezier(0.23, 1, 0.32, 1);
+  -webkit-animation: animate_wave 1000ms cubic-bezier(0.23, 1, 0.32, 1);
+  -moz-animation: animate_wave 1000ms cubic-bezier(0.23, 1, 0.32, 1);
+  -o-animation: animate_wave 1000ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+
+
+/*animation for the wave*/
+@keyframes animate_wave{
+  0%{
+    transform:scale(1,0);
+  }
+
+  50%{
+    transform:scale(1,2);
+  }
+
+  100%{
+    transform:scale(1,1);
+  }
+}
+
+@-ms-keyframes animate_wave{
+  0%{
+    -ms-transform:scale(1,0);
+  }
+
+  50%{
+    -ms-transform:scale(1,2);
+  }
+
+  100%{
+    -ms-transform:scale(1,1);
+  }
+}
+
+@-webkit-keyframes animate_wave{
+  0%{
+    -webkit-transform:scale(1,0);
+  }
+
+  50%{
+    -webkit-transform:scale(1,2);
+  }
+
+  100%{
+    -webkit-transform:scale(1,1);
+  }
+}
+
+@-moz-keyframes animate_wave{
+  0%{
+    -moz-transform:scale(1,0);
+  }
+
+  50%{
+    -moz-transform:scale(1,2);
+  }
+
+  100%{
+    -moz-transform:scale(1,1);
+  }
+}
+
+
+@-o-keyframes animate_wave{
+  0%{
+    -o-transform:scale(1,0);
+  }
+
+  50%{
+    -o-transform:scale(1,2);
+  }
+
+  100%{
+    -o-transform:scale(1,1);
+  }
 }
 
 /*title for the services offered*/
 .service_title{
   color:rgb(3, 55, 107);
+  font-weight: bold;
+  text-shadow: 1px 5px 5px rgb(51, 204, 255);
   text-transform: uppercase;
-  font-size: 25px;
+  font-size: 60px;
   text-align: center;
   display:inline-block;
   width:100%;
@@ -62,106 +179,82 @@
   letter-spacing: 5px;
 }
 
+/*frame for the service heading*/
+.service_heading{
+  padding:10px 5px;
+  background-color: rgba(0, 0, 0,0.35);
+  min-width: 70%;
+  text-shadow: 3px 7px 5px  rgb(51, 153, 255);
+  box-shadow: 1px 2px 2px  rgb(255,255,255);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: auto;
+  margin-right: auto;
+  text-align:center;
+  color: rgb(255,255,255);
+  font-size: 25px;
+}
 
 
-.C1{ 
-  background-image: url("https://grid.gograph.com/oil-icons-vector-stock_gg75609320.jpg"); 
-  height:80px; 
-  width:56px; 
-  margin-left: auto; 
-  margin-right: auto;  
-  position:relative;
-  overflow:visible;
-} 
+/*each service sertion*/
+.service_choice{
+  height: 250px;
+  width: 200px;
+  float: left;
+  padding: 0 50px;
+  display: table;
+}
 
-
-
-
-.C2{ 
-  background-image: url("https://media.gettyimages.com/vectors/auto-repair-shop-icons-set-vector-id510493087?s=612x612"); 
-  height:80px; 
-  width:85px; 
-  margin-left: auto; 
-  margin-right: auto; 
-  transform: translate(-210px,-80px); 
-  position:relative;
-  overflow:visible;
-} 
-
-
-
-.Oil_label{ 
-  height: 50px; 
-  width:70px;
-} 
-
-
-
-
-.repair_label{ 
-  height: 35px; 
-  width: 100%;
-} 
-
-/*cover for the label icons*/
-.label_cover{
-  position:absolute;
+/*colour cover for each service*/
+.service_cover{
+  background-color: rgba(0, 0, 0,0.2);
+  top:0;
+  left:0;
   width:100%;
   height:100%;
-  background-color:rgba(100, 211, 252, 0.2);
-  padding: 40px 60px;
-  border-radius: 20px;
-  border: 3px solid rgb(3, 55, 107);
+  display: table-cell;
+  vertical-align: middle;
+  border-radius: 15px;
 }
 
-.label_cover_repairs{
-  left:-70%;
-  top:-37.5%;
+
+/*each servive image*/
+.service_image{
+  margin:auto;
+  /* Height of Image */
+    min-height: 150px; 
+  /* Setting The location Of The Image */ 
+   background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: table;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
+    border-radius: 15px;
+    border: 1px solid rgb(0, 153, 255);
 }
 
-.label_cover_oil{
-  left:-100%;
-  top:-37.5%;
+/*repair image*/
+.repair_image{
+  /* The Background Image */
+   background-image:url("images/homepage/repairs.png");
 }
 
-.label_cover_consultation{
-  left:-70%;
-  top:-37.5%;
+/*oil change image*/
+.oil_image{
+   /* The Background Image */
+   background-image:url("images/homepage/oil.png");
 }
 
-/*title of the labels*/
-.label_title{
-  background-color: rgb(242, 247, 250);
-  border: 1px solid rgb(3, 55, 107); 
-  position: absolute;
-  top:100px;
-  border-radius:3px;
-  padding: 2px;
-  color:rgb(0, 0, 0);
-  display:inline-block;
-  text-align:center;
+
+/*consultation image*/
+.consultation_image{
+   /* The Background Image */
+   background-image:url("images/homepage/consultation.png");
 }
-
-.C3{ 
-  background-image: url("https://freedesignfile.com/upload/2013/08/310666.jpg"); 
-  height:79px; 
-  width:74px; 
-  margin-left: auto; 
-  margin-right: auto; 
-  transform: translate(210px,-160px); 
-  position:relative;
-  overflow:visible;
-} 
-
-
-
-
-.Consultation_label{ 
-  height: 35px; 
-  width: 100px;
-  left:-8px;
-} 
-
 
 .Intro_Para{ 
   height: 129px; 
@@ -171,16 +264,48 @@
 
 
 .introduction{
-  padding: 80px 100px;
+  padding: 0;
   background-color:rgb(163, 209, 240);
+  display:flex;
+}
+
+/*section for the text of the introduction*/
+.introduction_text{
+
+  display:inline-block;
+  background-color: rgb(102, 204, 255);
+  padding: 70px 50px;
+  font-weight:bold;
+  color: rgb(51, 102, 153);
+  line-height: 250%;
+  max-width:45%;
+}
+
+/*section for the image of the introduction*/
+.introduction_image{
+  /* The Background Image */
+   background-image:url("images/homepage/introduction.png");
+  /* Height of Image */
+    min-height: 550px; 
+  /* Setting The location Of The Image */ 
+   background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  display:inline-block;
+  padding: 80px 100px;
+  flex-grow:1.5;
 }
 
 
 .intro_title{ 
  height: 39px; 
- font-size: 30px; 
+ font-size: 40px; 
  display:block;
+ font-weight:bold;
  text-align: center;
  letter-spacing: 5px;
  text-shadow:0px 2px 5px black;
+ color:rgb(255,255,255);
+ padding: 10px 10px 50px 10px;
 } 

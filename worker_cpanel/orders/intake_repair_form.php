@@ -536,9 +536,11 @@ if($_SESSION['worker_loggedin']){
 <?php
 // bring the user back to the admin check orders page if they are the admin
 } else if ($_SESSION['admin_loggedin']){
+
+  $_SESSION['admin_section'] = "order";
 ?>
 
-<a href="../../admin/orders/check_orders.php">Back</a>
+<a href="../../admin/admin_cpanel.php">Back</a>
 
 <?php
 }

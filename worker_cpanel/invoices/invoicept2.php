@@ -30,10 +30,27 @@ save_session('worker_firstname');
 //teacher's name
 $worker_lastname = "";
 save_session('worker_lastname');
+
   
     
 //errors for any missing fields in the invoice form
 $worker_firstnameERR = $worker_lastnameERR = "";
+
+
+
+
+//if the admin is logged in
+if($_SESSION['admin_loggedin']){
+
+  //teacher's email
+  $worker_email = "";
+  save_session('worker_email');
+  
+  
+  
+  //error for any missing field in the teahcer's email
+  $teacher_emailERR = "";
+}
 
 
 
@@ -49,6 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   
   //teacher lastname
   createErrMsg("submit_invoicept2", "lastname", "worker_lastname", "worker_lastnameERR");
+  
+  
+  //if the admin is logged in teacher email is required
+  if($_SESSION['admin_loggedin']){
+    createErrMsg("submit_invoicept2", "email", "worker_email", "worker_emailERR");
+  }
 }
 
 
@@ -60,6 +83,15 @@ if ($worker_firstnameERR != "" or $worker_lastnameERR != ""){
   
 } else {
   $error_invoicept2_input = false;
+}
+
+
+
+//check teacher email if admin is logged on
+if($_SESSION['admin_loggedin']){
+  if($worker_emailERR != ""){
+    $error_invoicept2_input = true;
+  }
 }
 
 
@@ -115,10 +147,39 @@ WARRANTY </p> <br>
 <span>Teacher’s Name: <span>
 <input type="text" name="worker_firstname" placeholder="firstname" value="<?php echo $_SESSION['worker_firstname'];?>">
 
-<input type="text" name="worker_lastname" placeholder="lastname" value="<?php echo $_SESSION['worker_lastname'];?>"> <br>
+<input type="text" name="worker_lastname" placeholder="lastname" value="<?php echo $_SESSION['worker_lastname'];?>"> 
+
+<?php
+//if admin is logged on
+if($_SESSION['admin_loggedin']){
+?>
+
+
+<input type="text" name="worker_email" placeholder="email" value="<?php echo $_SESSION['worker_email'];?>"> 
+
+<?php
+}
+?>
+
+<br>
 
 <span><?php echo $worker_firstnameERR;?></span>
-<span><?php echo $worker_lastnameERR;?></span> <br>
+<span><?php echo $worker_lastnameERR;?></span> 
+
+
+<?php
+//if admin is logged on
+if($_SESSION['admin_loggedin']){
+?>
+
+<span><?php echo $worker_emailERR;?></span>
+
+<?php
+}
+?>
+
+
+<br>
 
 <p>I have authority to bind the Board. E. & O. Excepted </p>
 
@@ -134,6 +195,8 @@ WARRANTY </p> <br>
 <span>Name (Print): </span>
 <span> <?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']; ?> </span> <br>
 
+
+
 <input type="submit" name="submit_invoicept2" value="Submit"> <br>
 
 </form>
@@ -148,23 +211,44 @@ include '../../footer/footer.php';
 
  echo "done";
  
+ //if the user is editting the form
+ if ($_SESSION['editForm']){
+   include "../../database/update/update_invoices.php";
+   
+ //if the user is inserting the form
+ } else {
+   include "../../database/insert/insert_invoice.php";
+ }
  
- //insert the data into the database
- include "../../database/insert/insert_invoice.php";
+
+ 
    
  //if the worker is logged int
  if($_SESSION['worker_loggedin']){
  
-   //redirect page to worker control panel if worker is logged int
+   //redirect page to worker check invoices page if they are editting the invoices
+   if ($_SESSION['editForm']){ 
+     $_SESSION['worker_section'] = "invoices";
+   } else {
+     $_SESSION['worker_section'] = "orders";
+   }
 ?>
 
    <script>redirect_page("../worker_cpanel.php");</script>
 
 <?php 
   } else if($_SESSION['admin_loggedin']){
-    //redirect page to the admin check order page if the admini is logged in
+    
+    //redirect page to the admin check invoices page if they are editting the invoices
+    if ($_SESSION['editForm']){
+      $_SESSION['admin_section'] = "invoices";
+      
+    //redirect page to the admin check orders page if they are creating an invoice
+    } else {
+      $_SESSION['admin_section'] = "orders";
+    }
 ?>
-    <script>redirect_page("../../admin/orders/check_orders.php");</script>
+    <script>redirect_page("../../admin/admin_cpanel.php");</script>
     
 <?php
   }

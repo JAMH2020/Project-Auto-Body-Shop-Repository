@@ -118,7 +118,7 @@ if($stmt_clogin->num_rows > 0){
     $_SESSION["worker_loggedin"] = true;
     
     //worker's id
-    $_SESSION["wokrer_id"] = $worker_idRow;
+    $_SESSION['worker_id'] = $worker_idRow;
     
     //worker's firstname
     $_SESSION["worker_firstname"] = $worker_firstnameRow;

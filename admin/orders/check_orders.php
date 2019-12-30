@@ -1,27 +1,13 @@
 <?php
-//start the session if it has not been started yet
-if (session_start() === null){
-  session_start();
-}
-?>
+//include file to delete the orders
+include "../../database/delete/delete_orders.php";
 
-<!--the admin control panel section where they can check the orders in the system-->
-<html>
-<head>
-  <!--script use to redirect the user to another page-->
-  <script src="../../src/js/submit_form.js"></script>
+//session to identify if the user is editting a form
+$_SESSION['editForm'] = false;
+?>
   
-   <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
-  <script src="../../database/findRow.js"></script>
-</head>
-<body>
-  <?php
-  //include file to delete the orders
-  include "../../database/delete/delete_orders.php";
-  
-  //include the navigation bar
-  include "../../navigation_bar/navigation_bar.php";
-  
+<!--the admin control panel section where they can check the orders in the system-->  
+  <?php 
   //delete all post checked rows 
   if ($_SERVER['REQUEST_METHOD'] == "POST"){
     
@@ -43,8 +29,12 @@ if (session_start() === null){
   $_SESSION['editForm'] = false;
   
   ?>
+  
+  
+  <!--stylesheet for the orders table-->
+  <link rel="stylesheet" type="text/css" href="../database/select/css/aselect_orders.css">
 
-  <a href="../../worker_cpanel/orders/intake_repair_form.php" class='order'>Create Order</a>
+  <a href="../worker_cpanel/orders/intake_repair_form.php" class='order'>Create Order</a>
   <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
     <?php
@@ -56,8 +46,3 @@ if (session_start() === null){
   </form>
   <div id="rowText"></div>
   <div id="editCheck"></div>
-  
-  <a href="../admin_cpanel.php">Back</a>
-  
-</body>
-</html>

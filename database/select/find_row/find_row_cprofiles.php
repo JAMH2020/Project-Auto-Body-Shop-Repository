@@ -16,7 +16,7 @@ include_once '../../error_check.php';
 
 
 //prepare and bind sql statement
-$stmt_find_cprofiles = $conn->prepare("SELECT Customer_Profile.Profile_Id, Customer_Accounts.First_name, Customer_Accounts.Last_name, Customer_Profile.Phone_No, Customer_Profile.Address, Customer_Profile.Email, Customer_Profile.Car_Make, Customer_Profile.Car_Model, Customer_Profile.Vin_No, Customer_Profile.License_Plate 
+$stmt_find_cprofiles = $conn->prepare("SELECT Customer_Profile.Profile_Id, Customer_Accounts.First_name, Customer_Accounts.Last_name, Customer_Profile.Phone_No, Customer_Profile.Address, Customer_Profile.Email, Customer_Profile.Car_Year, Customer_Profile.Car_Make, Customer_Profile.Car_Model, Customer_Profile.Vin_No, Customer_Profile.License_Plate 
                                       FROM Customer_Profile
                                       LEFT JOIN Customer_Accounts ON Customer_Profile.Email=Customer_Accounts.Email
                                       WHERE Customer_Profile.Email=Customer_Accounts.Email AND Customer_Profile.Profile_Id=?");
@@ -32,7 +32,7 @@ $stmt_find_cprofiles->execute();
 $stmt_find_cprofiles->store_result();
 
 //bind the results
-$stmt_find_cprofiles->bind_result($profile_idRow, $customer_firstnameRow, $customer_lastnameRow, $phoneRow, $customer_addressRow, $customer_emailRow, $car_makeRow, $car_modelRow, $vin_noRow, $license_plateRow);
+$stmt_find_cprofiles->bind_result($profile_idRow, $customer_firstnameRow, $customer_lastnameRow, $phoneRow, $customer_addressRow, $customer_emailRow, $car_yearRow, $car_makeRow, $car_modelRow, $vin_noRow, $license_plateRow);
 
 
 
@@ -60,6 +60,9 @@ if ($stmt_find_cprofiles->num_rows > 0){
     //customer email
     $_SESSION['customer_email'] = $customer_emailRow;
     
+    //car year
+    $_SESSION['car_year'] = $car_yearRow;
+    
     //car make
     $_SESSION['car_make'] = $car_makeRow;
     
@@ -83,6 +86,7 @@ echo "<p>c_lastname:" .  $_SESSION['customer_lastname'] . "</p>";
 echo "<p>c_phone:" .  $_SESSION['customer_phone'] . "</p>";
 echo "<p>c_address:" . $_SESSION['customer_address'] . "</p>";
 echo "<p>c_email:" .  $_SESSION['customer_email'] . "</p>";
+echo "<p>c_car make:" .  $_SESSION['car_year'] . "</p>";
 echo "<p>c_car make:" .  $_SESSION['car_make'] . "</p>";
 echo "<p>c_car model:" .  $_SESSION['car_model'] . "</p>";
 echo "<p>c_vin no:" .  $_SESSION['vin_no'] . "</p>";
@@ -93,3 +97,6 @@ echo "<p>c_license plate:" .  $_SESSION['license_plate'] . "</p>";
 //close the statement
 $stmt_find_cprofiles->close();
 ?>
+
+<!--redirect page to the edit profile page-->
+<script>redirect_page('profiles/change/change_profile.php'); </script>

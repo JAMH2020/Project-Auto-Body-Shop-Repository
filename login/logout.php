@@ -1,23 +1,20 @@
 <?php
-//start the session if it has not been started yet
-if (session_start() === null){
-  session_start();
-}
-
- 
-// Unset all of the session variables
-$_SESSION = array();
-
- 
-// Destroy the session.
-session_destroy();
-
- 
-// Redirect to login page
+//start the session
+session_start();
 ?>
 
-<script>redirect_page("http://www.portcreditautobodyshop.tk/login/login.php")</script>
+
+<!--script that will redirect the user to another page-->
+<script src="../../src/js/submit_form.js"></script>
 
 <?php
-exit();
+$_SESSION['admin_loggedin'] = $_SESSION['worker_loggedin'] = $_SESSION['customer_loggedin'] = false;
+
+//unset the sessions and destroy
+$_SESSION = array();
+session_destroy();
 ?>
+
+<!--redirect to the login page-->
+<script>redirect_page("/login/login.php")</script>
+

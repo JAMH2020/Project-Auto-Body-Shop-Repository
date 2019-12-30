@@ -34,6 +34,9 @@ $customer_address = "";
 //email address
 $customer_email = "";
 
+//car year
+$car_year = "";
+
 //car make
 $car_make = "";
 
@@ -48,7 +51,7 @@ $license_plate = "";
 
 
 //variables for any missing fields in the sign up page
-$customer_phoneERR = $customer_addressERR = $customer_emailERR = $car_makeERR = $car_modelERR = $car_modelERR = $vin_noERR = $license_plateERR = "";
+$customer_phoneERR = $customer_addressERR = $customer_emailERR = $car_yearERR = $car_makeERR = $car_modelERR = $car_modelERR = $vin_noERR = $license_plateERR = "";
   
   
   
@@ -63,6 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
   //email
   createErrMsg("change_profile", "email", "email", "customer_emailERR");
+  
+  //car year
+  createErrMsg("change_profile", "car year", "car_year", "car_yearERR");
 
   //car make
   createErrMsg("change_profile", "car make", "car_make", "car_makeERR");
@@ -142,16 +148,23 @@ if ($error_profile_input or !isset($_POST['change_profile'])){
 
 </form>
 
-<a href="../check_profiles.php">Back</a>
+<?php
+$_SESSION['admin_section'] = "profiles";
+?>
+<a href="../../admin_cpanel.php">Back</a>
 
 <?php
 } else {
 
  //change the profile data in the customer accounts table in the database
  include "../../../database/update/update_cprofiles.php";
+ 
+ 
+ //redirect to the customer profile section of the admin control panel
+ $_SESSION['admin_section'] = "profiles";
 ?>
 
-<script>redirect_page("../check_profiles.php");</script>
+<script>redirect_page("../../admin_cpanel.php");</script>
 
 <?php
 }

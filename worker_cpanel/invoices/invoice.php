@@ -274,6 +274,18 @@ or $parts_totalERR  != "" or $labour_totalERR != "" or $supplies_totalERR != "" 
     $plan_date_format = reformat_date($_SESSION['plan_date']);
   }
 
+  //date the work was completed
+  if (!empty($_SESSION['completion_date'])){
+    $completion_date_format = reformat_date($_SESSION['completion_date']);
+  }
+
+  //date the car was returned
+  if (!empty($_SESSION['return_date'])){
+    $return_date_format = reformat_date($_SESSION['return_date']);
+  }
+  
+  
+
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
 if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
@@ -390,12 +402,12 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
 <input type="date" name="plan_date" value="<?php echo $plan_date_format;?>">
 
 <span>Date of completion of work:</span>
-<input type="date" name="completion_date" value="<?php echo $_SESSION['completion_date'];?>"><br>
+<input type="date" name="completion_date" value="<?php echo $completion_date_format;?>"><br>
 <span><?php echo $work_dateERR;?></span>
 <span><?php echo $completion_dateERR;?></span> <br>
 
 <span>Date vehicle was returned:</span>
-<input type="date" name="return_date" placeholder="Date of return" value="<?php echo $_SESSION['return_date'];?>"> <br>
+<input type="date" name="return_date" placeholder="Date of return" value="<?php echo $return_date_format;?>"> <br>
 <span><?php echo $return_dateERR;?></span> <br>
 
 <span>Any parts removed in the course of work on or repairs to the automobile shall be (select one): </span>
@@ -507,6 +519,14 @@ if ($_SESSION['removal_choice'] == "A"){
 <?php
 //back button redirects to worker control panel if worker is logged in
 if ($_SESSION['worker_loggedin']){
+
+  //if the worker is editting the invoice
+  if ($_SESSION['editForm']){
+  
+    $_SESSION['worker_section'] = "invoices";
+  } else {
+    $_SESSION['worker_section'] = "orders";
+  }
 ?>
 
 <a href="../worker_cpanel.php">Back</a>
@@ -515,11 +535,25 @@ if ($_SESSION['worker_loggedin']){
 <?php
 //back butto redirects to the admin check orders page if admin is logged in
 } else if($_SESSION['admin_loggedin']){
+
+  //if the admin is editting an invoice
+  if ($_SESSION['editForm'] == true){
+  
+    $_SESSION['admin_section'] = "invoices";
 ?>
 
-<a href="../../admin/orders/check_orders.php">Back</a>
+<a href="../../admin/admin_cpanel.php">Back</a>
 
 <?php
+  //if the admin is creating a new invoice
+  } else {
+    $_SESSION['admin_section'] = "orders";
+?>
+
+<a href="../../admin/admin_cpanel.php">Back</a>
+
+<?php  
+  }
 }
 
 

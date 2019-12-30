@@ -35,19 +35,20 @@ function list_waccounts(){
         echo "<th>Name</th>";
         echo "<th>Password</th>";
         echo "<th>Email</th>";
+        echo "<th></th>";
       
       echo "</tr>";
 
     while($stmt_a_waccounts->fetch()){
       echo "<tr>";
-        echo "<td> <input type='radio' name='order_id' value=" . $worker_idRow .">" . $worker_idRow . "</td>";
+        echo "<td>" . $worker_idRow . "</td>";
         echo "<td>" . $worker_firstnameRow . " " . $worker_lastnameRow . "</td>";
         echo "<td>" . $worker_passwordRow . "</td>";
         echo "<td>" . $worker_emailRow . "</td>";
 ?>
 
               <td>
-                <a href='#' onclick='findCAccountRow("<?php echo $worker_idRow?>", "../../database/select/find_row/find_row_waccounts.php", "change/change_account.php"); return false;'>Edit</a>
+                <a href='#' onclick='findCAccountRow("<?php echo $worker_idRow?>", "../../database/select/find_row/find_row_waccounts.php", "accounts/change/change_account.php"); return false;'>Edit</a>
               </td>
 
 <?php     

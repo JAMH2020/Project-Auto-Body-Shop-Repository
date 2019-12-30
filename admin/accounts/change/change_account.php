@@ -283,16 +283,19 @@ if ($_SESSION['account_change'] == 0){
 <?php
   //allows user to go back to the list of customer accounts if they are editting a customer account
   if ($_SESSION['account_change'] == 0){
+  
+    $_SESSION['admin_section'] = "caccounts";
 ?>
 
-<a href="../customer_acc.php">Back</a>
+<a href="../../admin_cpanel.php">Back</a>
 
 
 <?php
   } else {
+    $_SESSION['admin_section'] = "waccounts";
 ?>
 
-<a href="../worker_acc.php">Back</a>
+<a href="../../admin_cpanel.php">Back</a>
 
 <?php
   }
@@ -302,21 +305,28 @@ if ($_SESSION['account_change'] == 0){
   if (!$_SESSION['account_change']){
     //change the user sign up data into the accounts table in the database
     include "../../../database/update/update_caccounts.php";
+    
+    
+    //redirect the admin to the customer account section of the admin control panel
+    $_SESSION['admin_section'] = "caccounts";
   
 ?>
 
-<script>redirect_page("../customer_acc.php");</script>
+<script>redirect_page("../../admin_cpanel.php");</script>
 
 <?php
   } else {
     //change the account data in the worker accounts table in the database
     include "../../../database/update/update_waccounts.php";
-  }
+    
+    //redirect the admin to the worker account section of the admin control panel
+    $_SESSION['admin_section'] = "waccounts";
 ?>
 
-<script>redirect_page("../worker_acc.php");</script>
+<script>redirect_page("../../admin_cpanel.php");</script>
 
 <?php
+  }
 }
 ?>
 
