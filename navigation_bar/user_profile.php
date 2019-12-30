@@ -20,7 +20,7 @@
           <div class="nav_link_underline"></div>
         </div>
         <div class="profile_dropdown profile_dropdown_hide">
-          <a class= "profile_link top_profile_link" href="http://portcreditautobodyshop.tk/login/logout.php">
+          <a class= "profile_link top_profile_link" href="#" onclick="logout();">
             Sign-Out
             <div class="nav_link_underline"></div>
           </a>

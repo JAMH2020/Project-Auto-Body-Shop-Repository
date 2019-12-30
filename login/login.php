@@ -2,6 +2,7 @@
 //start the session if it has not been started yet
 if (session_start() === null){
  session_start();
+ session_regenerate_id(true);
 }
 ?>
 

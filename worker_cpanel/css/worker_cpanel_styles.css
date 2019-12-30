@@ -1,5 +1,5 @@
-/*section for all the links in the admin*/
-.admin_cpanel_links{
+/*section for all the links in the worker cpanel*/
+.worker_cpanel_links{
   display: flex;
   flex-wrap: wrap;
   font-size: 0;
@@ -52,8 +52,8 @@
   margin-top: 100px;
 }
 
-/*upper background of the admin cpanel*/
-.background_admin_cpanel{
+/*upper background of the worker cpanel*/
+.background_worker_cpanel{
   background-color: rgb(245,245,245);
   position: relative;
   z-index: 1;
@@ -85,3 +85,4 @@
   margin-left: auto;
   margin-right: auto;
 }
+

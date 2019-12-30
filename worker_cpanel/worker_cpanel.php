@@ -19,7 +19,10 @@ $_SESSION['editForm'] = false;
 <html>
 <head>
   <!--style sheet for the worker control panel-->
-  <link rel="stylesheet" type="text/css" href="worker_cpanel_styles.css">
+  <link rel="stylesheet" type="text/css" href="css/worker_cpanel_styles.css">
+  
+  <!--style sheet for the worker orders page-->
+  <link rel="stylesheet" type="text/css" href="css/worker_orders_styles.css">
   
   <!--style sheet for the orders table of the worker control panel-->
   <link rel="stylesheet" type="text/css" href="../database/select/css/select_orders.css">
@@ -40,6 +43,9 @@ $_SESSION['editForm'] = false;
   <!--script to load a certain section-->
   <script src="../src/js/load_file.js"></script>
   
+  <!--script to change tabs-->
+  <script src="../src/js/open_tab.js"></script>
+  
 </head>
 
 <body>
@@ -47,31 +53,59 @@ $_SESSION['editForm'] = false;
 <?php
 //include the navigation bar
 include "../navigation_bar/navigation_bar.php";
-?>
 
 
-<a href="#"  onclick='loadFile("worker_orders.php")'>Orders</a>
-<a href="#"  onclick='loadFile("worker_invoices.php")'>Invoices</a>
-
-<div class="content_window">
-
-<?php
-//sessions to choose which section to load at default run of page
+//opens the tab of the current section the user is on
 if ($_SESSION['worker_section'] == "invoices"){
 ?>
 
-<script> loadFile('worker_invoices.php'); </script>
+<script>openTab("invoices");</script>
 
 <?php
 } else {
 ?>
 
-<script> loadFile('worker_orders.php'); </script>
+<script>openTab("orders");</script>
 
 <?php
 }
 ?>
 
+<div class="admin_cpanel_window">
+  <div class="background_worker_cpanel">
+
+    <div class="worker_cpanel_links">
+
+      <a href="#"  class="a_option_link closed_tab" id="orders" onclick='loadFile("worker_orders.php"); openTab("orders");'>Orders</a>
+      <a href="#"  class="a_option_link closed_tab" id="invoices" onclick='loadFile("worker_invoices.php"); openTab("invoices")'>Invoices</a>
+      
+    </div>
+  </div>
+
+  <div class="content_window">
+    <div class="vertical_align_content">
+      <div class="horizontal_align_content">
+
+      <?php
+      //sessions to choose which section to load at default run of page
+      if ($_SESSION['worker_section'] == "invoices"){
+      ?>
+
+        <script> loadFile('worker_invoices.php'); </script>
+
+      <?php
+      } else {
+      ?>
+
+        <script> loadFile('worker_orders.php'); </script>
+
+      <?php 
+      }
+      ?>
+      </div>
+    </div>
+  
+  </div>
 </div>
 
 
