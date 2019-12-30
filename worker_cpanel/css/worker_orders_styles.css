@@ -1,0 +1,86 @@
+.order_title{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+  font-size: 30px;
+  left: 50px; 
+  color: rgb(3, 55, 107); 
+  text-shadow: 1px 2px 2px #66c2ff;
+  font-weight: bold;
+  margin: 10px 0 0 0;
+}
+
+
+.order{
+  transition: color 0.5s, text-shadow 0.5s;
+  -ms-transition: color 0.5s, text-shadow 0.5s;
+  -webkit-transition: color 0.5s, text-shadow 0.5s;
+  -moz-transition: color 0.5s, text-shadow 0.5s;
+  -o-transition: color 0.5s, text-shadow 0.5s;
+  
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  position: relative;
+  font-size: 20px; 
+  text-decoration: none;
+  color: rgb(0, 153, 255);
+  left: 50px;
+  position: relative;
+}
+
+.order:hover{
+  transition: color 0.5s, text-shadow 0.5s;
+  -ms-transition: color 0.5s, text-shadow 0.5s;
+  -webkit-transition: color 0.5s, text-shadow 0.5s;
+  -moz-transition: color 0.5s, text-shadow 0.5s;
+  -o-transition: color 0.5s, text-shadow 0.5s;
+  
+  color: rgb(51, 102, 153);
+  text-shadow: 1px 2px 5px rgb(153, 221, 255);
+}
+
+/*underline for the link*/
+.create_order_underline{
+  transition: transform 2s, background-color 1s, opacity 1s;
+  -ms-transition: transform 2s, background-color 1s, opacity 1s;
+  -webkit-transition: transform 2s, background-color 1s, opacity 1s;
+  -moz-transition: transform 2s, background-color 1s, opacity 1s;
+  -o-transition: transform 2s, background-color 1s, opacity 1s;
+  
+  opacity: 0;
+  height: 1px;
+  padding: 1px 0;
+  margin:0;
+  width: 20px;
+  border-radius:1px;
+  left:50px;
+  position:relative;
+  
+  transform-origin: left;
+  -ms-transform-origin: left;
+  -webkit-transform-origin: left;
+  -moz-transform-origin: left;
+  -o-transform-origin: left;
+}
+
+/*underline when hovering over the link*/
+.order:hover ~ .create_order_underline{
+  transition: transform 1s, background-color 1s, opacity 0.5s;
+  -ms-transition: transform 1s, background-color 1s, opacity 0.5s;
+  -webkit-transition: transform 1s, background-color 1s, opacity 0.5s;
+  -moz-transition: transform 1s, background-color 1s, opacity 0.5s;
+  -o-transition: transform 1s, background-color 1s, opacity 0.5s;
+  
+  opacity:1;
+  transform: scaleX(6);
+  -ms-transform: scaleX(6);
+  -webkit-transform: scaleX(6);
+  -moz-transform: scaleX(6);
+  -o-transform: scaleX(6);
+  
+  transform-origin: left;
+  -ms-transform-origin: left;
+  -webkit-transform-origin: left;
+  -moz-transform-origin: left;
+  -o-transform-origin: left;
+  
+  background-color: rgb(37, 72, 142);
+ }
+ 
