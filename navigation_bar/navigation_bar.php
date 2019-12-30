@@ -11,6 +11,9 @@
 <!--script for sticky element-->
 <script src="http://www.portcreditautobodyshop.tk/navigation_bar/js/sticky.js"></script>
 
+<!--script for loading another page-->
+<script src="http://www.portcreditautobodyshop.tk/src/js/load_file.js"></script>
+
 <!--script for the dropdown menu of the user profile-->
 <script src="http://www.portcreditautobodyshop.tk/navigation_bar/js/profile_dropdown.js"></script>
 
@@ -19,6 +22,7 @@
 
 <!--Google Icons-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <div class="title_bar" id="stickyTitleX">
       <div class ="title">
@@ -41,7 +45,7 @@
       <?php
       //display the profile section if the user is logged in
       if ($_SESSION['customer_loggedin'] || $_SESSION['worker_loggedin'] || $_SESSION['admin_loggedin']){
-        include '/srv/disk13/3148213/www/portcreditautobodyshop.tk/navigation_bar/user_profile.php';
+          include '/srv/disk13/3148213/www/portcreditautobodyshop.tk/navigation_bar/user_profile.php';
       }
       ?>
     </div>
@@ -84,4 +88,6 @@
       </a>
 
     </div>
+    <div class="logout"></div>
+
 
