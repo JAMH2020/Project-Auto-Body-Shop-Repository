@@ -159,4 +159,8 @@ body{
 /*left alignment for the back button*/
 .back_align{
   display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -o-flex;
 }
