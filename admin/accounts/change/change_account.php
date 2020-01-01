@@ -15,6 +15,8 @@ if (session_start() === null){
   <script src="../../../create_account/js/showpassword.js"></script>
   <!--script that will redirect the user to another page-->
   <script src="../../../src/js/submit_form.js"></script>
+  <!--styles for the change account page-->
+  <link href="change_account_styles.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -222,53 +224,99 @@ if (!isset($_POST['change_account']) or $error_account_input){
 
 </ul>
 
-<h1>Change Account</h1>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+<div class="background">
+  <div class="background_cover">
+    <div class="box">
 
-<span>First Name:</span>
+
+      <span class="Change_Account">Change Account</span>
+      <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+
 
 <?php
 //seperate form for changing customer account
 if ($_SESSION['account_change'] == 0){
 ?>
 
-
-<input type="text" name="customer_firstname" placeholder="First Name" value="<?php echo $_SESSION['customer_firstname']; ?>">
-
-<span>Last Name:</span>
-<input type="text" name="customer_lastname" placeholder="Last Name" value="<?php echo $_SESSION['customer_lastname']; ?>"> <br>
-
-<span>Password:</span>
-<input type="password" name="customer_password" placeholder="Password" id="password" value="<?php echo $_SESSION['customer_password']; ?>"> <br>
+            <div class="form_group">
+              <span>First Name:</span>
+              <input type="text" class="form_control" name="customer_firstname" placeholder="First Name" value="<?php echo $_SESSION['customer_firstname']; ?>">
+              <br>
+            </div>
 
 
-<input type="checkbox" onclick="showPassword()">
-<span>Show Password</span> <br>
+            <div class="form_group">
+              <span>Last Name:</span>
+              <input type="text" class="form_control"  name="customer_lastname" placeholder="Last Name" value="<?php echo $_SESSION['customer_lastname']; ?>">
+              <br>
+            </div>
 
 
-<span>Email:</span>
-<input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email']; ?>"> <br>
+            <div class="form_group">
+              <span>Password:</span>
+              <input type="password" class="form_control" name="customer_password" placeholder="Password" id="password" value="<?php echo $_SESSION['customer_password']; ?>"> 
+              <br>
+            </div>
+
+
+
+
+            <label class="checkbox_container">
+              <input type="checkbox" class="checkbox_hidden" onclick="showPassword()">
+              <div class="checkmark"></div>
+              <span>Show Password</span> 
+            </label><br>
+
+
+
+
+            <div class="form_group">
+              <span>Email:</span>
+              <input type="text" class="form_control" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email']; ?>"> 
+              <br>
+            </div>
 
 <?php
+//include the footer
+include '../../../footer/footer.php';
+
 } else {
 ?>
 
-
-<input type="text" name="worker_firstname" placeholder="First Name" value="<?php echo $_SESSION['worker_firstname']; ?>">
-
-<span>Last Name:</span>
-<input type="text" name="worker_lastname" placeholder="Last Name" value="<?php echo $_SESSION['worker_lastname']; ?>"> <br>
-
-<span>Password:</span>
-<input type="password" name="worker_password" placeholder="Password" id="password" value="<?php echo $_SESSION['worker_password']; ?>"> <br>
+            <div class="form_group">
+              <span>First Name:</span>
+              <input type="text" class="form_control" name="worker_firstname" placeholder="First Name" value="<?php echo $_SESSION['worker_firstname']; ?>">
+              <br>
+            </div>
 
 
-<input type="checkbox" onclick="showPassword()">
-<span>Show Password</span> <br>
+            <div class="form_group">
+              <span>Last Name:</span>
+              <input type="text" class="form_control" name="worker_lastname" placeholder="Last Name" value="<?php echo $_SESSION['worker_lastname']; ?>"> 
+              <br>
+            </div>
 
 
-<span>Email:</span>
-<input type="text" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email']; ?>"> <br>
+            <div class="form_group">
+              <span>Password:</span>
+              <input type="password" class="form_control" name="worker_password" placeholder="Password" id="password" value="<?php echo $_SESSION['worker_password']; ?>"> 
+              <br>
+            </div>
+
+
+
+
+            <label class="checkbox_container">
+              <input type="checkbox" class="checkbox_hidden" onclick="showPassword()">
+              <div class="checkmark"></div>
+              <span>Show Password</span> 
+            </label><br>
+
+            <div class="form_group">
+              <span>Email:</span>
+              <input type="text" class="form_control" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email']; ?>"> 
+              <br>
+            </div>
 
 
 <?php
@@ -276,7 +324,7 @@ if ($_SESSION['account_change'] == 0){
 ?>
 
 
-<input type="submit" name="change_account" value="Change"> <br>
+<input type="submit" class="change" name="change_account" value="Change"> <br>
 
 </form>
 
@@ -286,19 +334,24 @@ if ($_SESSION['account_change'] == 0){
   
     $_SESSION['admin_section'] = "caccounts";
 ?>
-
-<a href="../../admin_cpanel.php">Back</a>
+<div class="back_align">
+  <a href="../../admin_cpanel.php">Back</a>
+</div>
 
 
 <?php
   } else {
     $_SESSION['admin_section'] = "waccounts";
 ?>
-
-<a href="../../admin_cpanel.php">Back</a>
+<div class="back_align">
+  <a href="../../admin_cpanel.php">Back</a>
+</div>
 
 <?php
   }
+  
+//include the footer
+include '../../../footer/footer.php';
 } else {
   
   //if the user is editing the customer accounts

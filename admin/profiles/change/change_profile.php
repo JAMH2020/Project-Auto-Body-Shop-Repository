@@ -10,6 +10,9 @@ if (session_start() === null){
 <head>
   <!--script that will redirect the user to another page-->
   <script src="../../../src/js/submit_form.js"></script>
+  
+  <!--stylesheet for the page-->
+  <link href="change_profiles_styles.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -65,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   createErrMsg("change_profile", "address", "customer_address", "customer_addressERR");
 
   //email
-  createErrMsg("change_profile", "email", "email", "customer_emailERR");
+  createErrMsg("change_profile", "email", "customer_email", "customer_emailERR");
   
   //car year
   createErrMsg("change_profile", "car year", "car_year", "car_yearERR");
@@ -107,53 +110,89 @@ if ($error_profile_input or !isset($_POST['change_profile'])){
   include "../../../navigation_bar/navigation_bar.php";
 ?>
 
-<h1>Change Customer Profile</h1>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+    <div class="background">
+      <div class="background_cover">
+        <div class="box">
 
-<span>Name:</span>
-<span><?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']?></span> <br>
+          <span class="Change_Customer_Profile">Change Customer Profile</span>
 
-<span>Phone:</span>
-<input type="text" name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
-<span><?php echo $customer_phoneERR;?></span> <br>
+  
+          <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
-<span>Address:</span>
-<input type="text" name="customer_address" placeholder="Address" value="<?php echo $_SESSION['customer_address'];?>"> <br>
-<span><?php echo $customer_addressERR;?></span> <br>
+            <div class="form_group">
+              <span>Name:</span>
+              <span><?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']?></span> <br>
+            </div>
 
-<span>Email:</span>
-<input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
-<span><?php echo $customer_emailERR;?></span> <br>
+            <div class="form_group">
+              <span>Phone:</span>
+              <input type="text" class="form_control" name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+              <span class="profile_error"><?php echo $customer_phoneERR;?></span> <br>
+            </div>
 
-<span>Car Make:</span>
-<input type="text" name="car_make" placeholder="Car Make" value="<?php echo $_SESSION['car_make'];?>"> <br>
-<span><?php echo $car_makeERR;?></span> <br>
-
-<span>Car Model:</span>
-<input type="text" name="car_model" placeholder="Car Model" value="<?php echo $_SESSION['car_model'];?>"> <br>
-<span><?php echo $car_modelERR;?></span> <br>
-
-<span>Vin Number:</span>
-<input type="text" name="vin_no" placeholder="Vin No." value="<?php echo $_SESSION['vin_no'];?>"> <br>
-<span><?php echo $vin_noERR;?></span> <br>
-
-<span>License Plate:</span>
-<input type="text" name="license_plate" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
-<span><?php echo $license_plateERR;?></span> <br>
+            <div class="form_group">
+              <span>Address:</span>
+              <input type="text" class="form_control"  name="customer_address" placeholder="Address" value="<?php echo $_SESSION['customer_address'];?>"> <br>
+              <span class="profile_error"><?php echo $customer_addressERR;?></span> <br>
+            </div>
 
 
+            <div class="form_group">
+              <span>Email:</span>
+              <input type="text" class="form_control"  name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
+              <span class="profile_error"><?php echo $customer_emailERR;?></span> <br>
+            </div>
 
-<input type="submit" name="change_profile" value="Change"> <br>
+
+            <div class="form_group">
+              <span>Car Make:</span>
+              <input type="text" class="form_control" name="car_make" placeholder="Car Make" value="<?php echo $_SESSION['car_make'];?>"> <br>
+              <span class="profile_error"><?php echo $car_makeERR;?></span> <br>
+            </div>
 
 
-</form>
+            <div class="form_group">
+              <span>Car Model:</span>
+              <input type="text" class="form_control" name="car_model" placeholder="Car Model" value="<?php echo $_SESSION['car_model'];?>"> <br>
+              <span class="profile_error"><?php echo $car_modelERR;?></span> <br>
+            </div>
+
+
+            <div class="form_group">
+              <span>Vin Number:</span>
+              <input type="text" class="form_control" name="vin_no" placeholder="Vin No." value="<?php echo $_SESSION['vin_no'];?>"> <br>
+              <span class="profile_error"><?php echo $vin_noERR;?></span> <br>
+            </div>
+
+            <div class="form_group">
+              <span>License Plate:</span>
+              <input type="text" class="form_control" name="license_plate" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
+              <span class="profile_error"><?php echo $license_plateERR;?></span> <br>
+            </div>
+
+  
+              <input class="change" type="submit" name="change_profile" value="Change"> 
+
+          </form>
+
+          <div class="back_align">
+          
+            <?php
+              $_SESSION['admin_section'] = "profiles";
+            ?>
+            
+            <a href="../../admin_cpanel.php" class="back">Back</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
 
 <?php
-$_SESSION['admin_section'] = "profiles";
-?>
-<a href="../../admin_cpanel.php">Back</a>
+//include the footer
+include '../../../footer/footer.php';
 
-<?php
 } else {
 
  //change the profile data in the customer accounts table in the database
