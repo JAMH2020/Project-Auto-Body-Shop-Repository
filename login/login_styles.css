@@ -42,7 +42,7 @@ body{
 
  .background{
   /* The Background Image */
-  background-image:url("https://columbiaautoservice.ca/wp-content/uploads/2018/03/Service-5.jpg");
+  background-image:url("../images/login/login.png");
     min-height: 550px; 
     background-attachment: fixed;
     background-position: center;

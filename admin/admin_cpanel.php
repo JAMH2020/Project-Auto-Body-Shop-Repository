@@ -10,6 +10,11 @@ include "../src/clear_sessions.php";
 clear_order();
 clear_invoice();
 
+
+//session to identify if the user is editting a form
+$_SESSION['editForm'] = false;
+
+
 ?>
 
 <html>
@@ -25,11 +30,9 @@ clear_invoice();
   
    <!--script for finding the value of a certain row in the customer table without the refresh of the page-->
   <script src="../database/findRow.js"></script>
-
   
   <!--script ussed to open a tab for a certain section-->
   <script src="../src/js/open_tab.js"></script>
-
 
 </head>
 <body>
@@ -74,7 +77,6 @@ clear_invoice();
 
 
 <div class="admin_cpanelPage">
-
   <div class="background_admin_cpanel">
     <div class="admin_cpanel_links">
     
@@ -126,7 +128,6 @@ clear_invoice();
         ?>
       </div>
     </div>
-
   </div>
 
 </div>
@@ -138,4 +139,3 @@ include '../footer/footer.php';
 
 
 </body>
-</html>

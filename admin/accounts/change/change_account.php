@@ -277,9 +277,6 @@ if ($_SESSION['account_change'] == 0){
             </div>
 
 <?php
-//include the footer
-include '../../../footer/footer.php';
-
 } else {
 ?>
 
@@ -390,5 +387,6 @@ include '../../../footer/footer.php';
 
 </body>
 </html>
+
 
 

@@ -18,7 +18,7 @@ body{
 /*background iamge*/
 .background{
   /* The Background Image */
-  background-image:url("http://www.lowestrates.ca/sites/default/files/AdobeStock_97876318.jpeg");
+  background-image:url("../../../images/admin_cpanel/change_profiles.png");
 
   /* Height of Image */
   height: 100%;

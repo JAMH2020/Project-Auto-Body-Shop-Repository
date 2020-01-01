@@ -3,6 +3,9 @@
 if (session_start() === null){
   session_start();
 }
+
+//session to tell which section the admin is on
+$_SESSION['admin_section'] = "waccounts";
 ?>
 
   <!--the admin control panel section where they can check the worker accounts in the system-->

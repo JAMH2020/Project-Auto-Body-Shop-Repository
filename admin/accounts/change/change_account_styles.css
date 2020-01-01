@@ -15,7 +15,7 @@
 /*background image for the page*/
 .background{
   /* The Background Image */
-  background-image:url("https://www.brockroadgarage.ca/wp-content/uploads/2018/03/Electrical-Diagnostic-Repair-1140x760.jpg");
+  background-image:url("../../../images/admin_cpanel/change_account.png");
 
   /* Height of Image */
   height: 100%;
@@ -252,4 +252,3 @@
    -moz-transition:opacity 1s;
    -o-transition:opacity 1s;
  }
- 
