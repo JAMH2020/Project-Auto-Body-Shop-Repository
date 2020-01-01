@@ -1,3 +1,104 @@
-.welcome_page{
-  margin-bottom: 400px;
+/*section for all the links in the worker cpanel*/
+.customer_cpanel_links{
+  display: flex;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -o-flex;
+  
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  font-size: 0;
+  position: relative;
+
+}
+
+/*links for the options in the cpanel*/
+.a_option_link {
+ display:inline-block;
+ padding: 15px 15px ;
+ color: black;
+ font-size: 15px;
+ margin: 15px 0 0 0;
+ justify-content: center; 
+ border-radius: 8px 8px 0 0;
+ text-decoration: none;
+ position: relative;
+}
+
+.closed_tab:hover {
+  background-color: #ff6666;
+  color: white;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.closed_tab{
+  background-color: rgb(248,248,248);
+   box-shadow: 0 -3px 3px -3px rgb(0,0,0), 3px 0px 3px -3px black, -3px 0px 3px -3px black;
+   transition: background-color 0.5s ease, color 0.5s ease;
+   -ms-transition: background-color 0.5s ease, color 0.5s ease;
+   -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+   -moz-transition: background-color 0.5s ease, color 0.5s ease;
+   -o-transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.opened_tab{
+  background-color: rgb(255,255,255);
+  border-top: 3px solid rgb(255, 0, 102);
+  border-right: 3px solid rgb(255, 0, 102);
+  box-shadow: 0 -3px 3px -3px rgb(255, 0, 102), 3px 0px 3px -3px rgb(255, 0, 102), -3px 0px 3px -3px rgb(255, 0, 102);
+  z-index: 4;
+  top: 3px;
+  font-weight: bold;
+}
+
+
+.center_opened_tab{
+  border-left: 3px solid rgb(255, 0, 102);
+}
+
+
+.space{
+  margin-top: 100px;
+}
+
+/*upper background of the worker cpanel*/
+.background_customer_cpanel{
+  background-color: rgb(245,245,245);
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  border-bottom: 2px solid rgb(255, 0, 102);
+  margin-bottom: 24px;
+  padding-top: 20px;
+}
+
+/*window for the table*/
+.content_window{
+  background-color: rgb(255,255,255);
+  min-height: 500px;
+  display: table;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: relative;
+}
+
+/*vertical center for the table*/
+.vertical_align_content{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/*horizontal center for the table*/
+.horizontal_align_content{
+  margin-left: auto;
+  margin-right: auto;
 }
