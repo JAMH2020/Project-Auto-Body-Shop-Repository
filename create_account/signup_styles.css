@@ -87,6 +87,10 @@
    background-color: rgb(0, 51, 102);
    display:inline-block;
    transform:translate(0,5px);
+   -ms-transform:translate(0,5px);
+   -webkit-transform:translate(0,5px);
+   -moz-transform:translate(0,5px);
+   -o-transform:translate(0,5px);
  }
 
  /*the hidden checkbox*/
@@ -99,6 +103,10 @@
  .checkbox_container:hover .checkmark{
   background-color:rgb(0, 115, 230);
   transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
  }
 
  /*have a pointer cursor when hovering over the checkbox or its heading*/
@@ -110,6 +118,10 @@
  .checkbox_hidden:checked ~ .checkmark{
   background-color:rgb(51, 204, 204);
   transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
  }
 
  /*add a check symbol when the checkbox is checked*/
@@ -123,6 +135,11 @@
    left: 7px;
    height:6px;
    transform:rotate(45deg);
+   -ms-transform:rotate(45deg);
+   -webkit-transform:rotate(45deg);
+   -moz-transform:rotate(45deg);
+   -o-transform:rotate(45deg);
+   
    border-width: 0 2px 2px 0;
  }
 
@@ -130,4 +147,8 @@
  .checkbox_hidden:checked ~.checkmark::after{
    opacity:1;
    transition:opacity 1s;
+   -ms-transition:opacity 1s;
+   -webkit-transition:opacity 1s;
+   -moz-transition:opacity 1s;
+   -o-transition:opacity 1s;
  }

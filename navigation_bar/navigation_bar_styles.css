@@ -45,6 +45,10 @@
  color: rgb(3, 55, 107);
  text-shadow: 1px 2px 2px  rgb(204, 255, 255);
  animation:colorchange 20s infinite alternate;
+ -ms-animation:colorchange 20s infinite alternate;
+ -webkit-animation:colorchange 20s infinite alternate;
+ -moz-animation:colorchange 20s infinite alternate;
+ -o-animation:colorchange 20s infinite alternate;
  }
 
 
@@ -156,12 +160,20 @@
   font-weight: bold;
   font-size: 20px;
   transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
 }
 
 /*arrow of the profile dropdown*/
 .profile_arrow{
   color: rgb(0, 51, 153);
   transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
 }
 
 
@@ -170,12 +182,20 @@
   cursor: pointer;
   color: rgb(0, 153, 204);
   transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
 }
 
 /*arrow of the profile drowdown changes colour when hover*/
 .profile_button:hover .profile_arrow{
   color: rgb(51, 204, 204);
   transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
 }
 
 
@@ -202,15 +222,10 @@
    color: rgb(0, 51, 102);
    display: block;
    transition: color 0.5s ease, background-color 0.5s ease;
-}
-
-/*hovering over the profile link and changing size of underline*/
-.profile_link:hover .nav_link_underline{
-  opacity: 1;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 1px 4px 10px -5px rgb(0,0,0);
-  transform: scaleX(30);
-  transition: transform 0.5s, opacity 0.5s, background-color 0.25s;
+   -ms-transition: color 0.5s ease, background-color 0.5s ease;
+   -webkit-transition: color 0.5s ease, background-color 0.5s ease;
+   -moz-transition: color 0.5s ease, background-color 0.5s ease;
+   -o-transition: color 0.5s ease, background-color 0.5s ease;
 }
 
 /*the top profile link*/
@@ -228,6 +243,10 @@
   background-color: rgb(51, 204, 255);
   color: white;
   transition: color 0.5s ease, background-color 0.5s ease;
+  -ms-transition: color 0.5s ease, background-color 0.5s ease;
+  -webkit-transition: color 0.5s ease, background-color 0.5s ease;
+  -moz-transition: color 0.5s ease, background-color 0.5s ease;
+  -o-transition: color 0.5s ease, background-color 0.5s ease;
 }
 
 
@@ -238,6 +257,10 @@
   width: 100%;  
   box-shadow:0 5px 7px rgb(0,0,0);
   display: flex;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -o-flex;
 }
 
 
@@ -251,6 +274,10 @@
   float:left;
   text-align: center;
   transition: background-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 
@@ -258,6 +285,10 @@
 /*very left link of the navigation bar*/
 .left_nav_link{
   flex-grow:1;
+  -ms-flex-grow:1;
+  -webkit-flex-grow:1;
+  -moz-flex-grow:1;
+  -o-flex-grow:1;
 }
 
 
@@ -265,6 +296,10 @@
 /*links in the navigation bar*/
 .nav_link{
   flex-grow:1;
+  -ms-flex-grow:1;
+  -webkit-flex-grow:1;
+  -moz-flex-grow:1;
+  -o-flex-grow:1;
 }
 
 
@@ -273,6 +308,10 @@
 .nav a:hover{
   background-color: rgb(51, 102, 153); 
   transition: background-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, color 0.5s ease;
   color: rgb(255,255,255);
   cursor: pointer;
 }
@@ -288,6 +327,10 @@
   width: 4px;
   height:2px;
   transition: transform 0.5s, opacity 0.5s;
+  -ms-transition: transform 0.5s, opacity 0.5s;
+  -webkit-transition: transform 0.5s, opacity 0.5s;
+  -moz-transition: transform 0.5s, opacity 0.5s;
+  -o-transition: transform 0.5s, opacity 0.5s;
   margin: auto;
 }
 
@@ -297,7 +340,16 @@
 .nav a:hover .nav_link_underline{
   opacity: 1;
   transform: scaleX(30);
+  -ms-transform: scaleX(30);
+  -webkit-transform: scaleX(30);
+  -moz-transform: scaleX(30);
+  -o-transform: scaleX(30);
+  
   transition: transform 0.5s, opacity 0.5s;
+  -ms-transition: transform 0.5s, opacity 0.5s;
+  -webkit-transition: transform 0.5s, opacity 0.5s;
+  -moz-transition: transform 0.5s, opacity 0.5s;
+  -o-transition: transform 0.5s, opacity 0.5s;
 }
 
 

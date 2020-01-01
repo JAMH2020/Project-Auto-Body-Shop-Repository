@@ -164,6 +164,10 @@
 /*left alignment for the back button*/
 .back_align{
   display: flex;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -o-flex;
 }
 
 
