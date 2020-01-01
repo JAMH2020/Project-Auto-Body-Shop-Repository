@@ -1,0 +1,251 @@
+
+.Change_Account{
+  text-decoration: underline;
+  /* transform: translate(-210px,-80px);*/
+  display:inline-block;
+  width:100%;
+  text-align: center;
+  padding-top:100px;
+  padding-bottom:80px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+
+/*background image for the page*/
+.background{
+  /* The Background Image */
+  background-image:url("https://www.brockroadgarage.ca/wp-content/uploads/2018/03/Electrical-Diagnostic-Repair-1140x760.jpg");
+
+  /* Height of Image */
+  height: 100%;
+
+  /* Setting The location Of The Image */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 550px;
+ }
+
+  /*background cover for the background image*/
+ .background_cover{
+   position: relative;
+   top: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   background-color: rgba(255, 204, 153,0.3);
+ }
+
+
+
+ .back{
+  background-color: rgb(100, 211, 252);/* Green */
+  /*border: none;*/
+  color: rgb(153, 0, 0);
+  padding: 2px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 2px solid rgb(170, 18, 18);
+  border-radius: 20px;
+  margin: 15px;
+
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+
+/*hovering over the back button*/
+.back:hover{
+  background-color:rgb(255, 51, 0);
+  border-color: rgb(204, 0, 0);
+  color: rgb(255,255,255);
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+
+/*box division for the form*/
+.box{
+  width: 400px;
+  height: 100%;
+  background-color: rgb(100, 211, 252);
+  border: 3px solid White;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgb(0,0,0);
+  color: rgb(0, 51, 102);
+  text-align:center;
+ }
+
+
+ /*group for each form*/
+ .form_group{
+   padding-top: 20px;
+ }
+
+ /*text with error messages*/
+ .profile_error{
+   color: rgb(255, 51, 0);
+ }
+
+
+/*submit button to change the forms*/
+ .change{
+  background-color: rgb(100, 211, 252);
+  color: rgb(0, 51, 102);
+  padding: 2px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 2px solid rgb(0, 51, 102);
+  border-radius: 20px;
+  margin-top: 40px;
+  margin: 15px;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+
+/*hovering over the change button*/
+.change:hover{
+  background-color:rgb(255, 255, 153);
+  border-color: rgb(255, 255, 153);
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+
+
+/*the text input for the forms*/
+.form_control{
+  border-radius: 5px;
+  color: rgb(255, 255, 102);
+  background-color: rgb(0, 51, 102);
+  padding: 3px 10px;
+  border-color: rgb(255, 255, 102);
+}
+
+
+/*focusing on the text input form*/
+.form_control:focus{
+  background-color:rgb(255, 255, 102);
+  border-color: rgb(0, 51, 102);
+  color: rgb(0, 51, 102);
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+
+/*left alignment for the back button*/
+.back_align{
+  display: flex;
+}
+
+
+
+
+ /*checkbox container*/
+ .checkbox_container{
+   display: block;
+   position: relative;
+   padding: 10px;
+ }
+
+ /*custom checkmark*/
+ .checkmark{
+   padding: 10px;
+   background-color: rgb(0, 51, 102);
+   display:inline-block;
+
+   transform:translate(0,5px);
+   -ms-transform:translate(0,5px);
+   -webkit-transform:translate(0,5px);
+   -moz-transform:translate(0,5px);
+   -o-transform:translate(0,5px);
+ }
+
+ /*the hidden checkbox*/
+ .checkbox_hidden{
+   display:block;
+   opacity:0;
+ }
+
+ /*when hovering over the checkbox option*/
+ .checkbox_container:hover .checkmark{
+  background-color:rgb(0, 115, 230);
+  transition: background-color 0.5s;
+
+  -ms-transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+ }
+
+ /*have a pointer cursor when hovering over the checkbox or its heading*/
+ .checkbox_container:hover{
+   cursor:pointer;
+ }
+
+ /*change colour of the checkmark box when input is checked*/
+ .checkbox_hidden:checked ~ .checkmark{
+  background-color:rgb(255, 255, 102);
+  transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+ }
+
+ /*add a check symbol when the checkbox is checked*/
+ .checkmark::after{
+   content:"";
+   position: absolute;
+   opacity:0;
+   padding:3px;
+   border: solid rgb(0, 51, 102);
+   top:1.5px;
+   left: 7px;
+   height:6px;
+   transform:rotate(45deg);
+   -ms-transform:rotate(45deg);
+   -webkit-transform:rotate(45deg);
+   -moz-transform:rotate(45deg);
+   -o-transform:rotate(45deg);
+   border-width: 0 2px 2px 0;
+ }
+
+ /*show the check mark symbol when hidden checkbox is checked*/
+ .checkbox_hidden:checked ~.checkmark::after{
+   opacity:1;
+   transition:opacity 1s;
+   -ms-transition:opacity 1s;
+   -webkit-transition:opacity 1s;
+   -moz-transition:opacity 1s;
+   -o-transition:opacity 1s;
+ }
+ 
