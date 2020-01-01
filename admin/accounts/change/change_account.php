@@ -335,7 +335,7 @@ include '../../../footer/footer.php';
     $_SESSION['admin_section'] = "caccounts";
 ?>
 <div class="back_align">
-  <a href="../../admin_cpanel.php">Back</a>
+  <a class="back" href="../../admin_cpanel.php">Back</a>
 </div>
 
 
@@ -344,12 +344,17 @@ include '../../../footer/footer.php';
     $_SESSION['admin_section'] = "waccounts";
 ?>
 <div class="back_align">
-  <a href="../../admin_cpanel.php">Back</a>
+  <a class="back" href="../../admin_cpanel.php">Back</a>
 </div>
 
 <?php
   }
-  
+?>
+    </div>
+  </div>
+</div>
+
+<?php
 //include the footer
 include '../../../footer/footer.php';
 } else {
@@ -385,3 +390,5 @@ include '../../../footer/footer.php';
 
 </body>
 </html>
+
+
