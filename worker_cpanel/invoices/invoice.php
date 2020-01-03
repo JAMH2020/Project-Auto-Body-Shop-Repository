@@ -252,8 +252,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
 
-
-
 //check if there are any missing or incorrect fields
 $error_intake_input;
 if ($order_noERR != "" or $customer_firstnameERR != "" or $customer_lastnameERR != "" or $customer_phoneERR != "" or $customer_addressERR != "" or $customer_emailERR != "" or $invoice_noERR != "" 
@@ -533,7 +531,7 @@ if ($_SESSION['worker_loggedin']){
 
 
 <?php
-//back butto redirects to the admin check orders page if admin is logged in
+//back button redirects to the admin check orders page if admin is logged in
 } else if($_SESSION['admin_loggedin']){
 
   //if the admin is editting an invoice
@@ -552,6 +550,50 @@ if ($_SESSION['worker_loggedin']){
 
 <a href="../../admin/admin_cpanel.php">Back</a>
 
+<?php
+   $conn = new mysqli($servername, $username, $password,$db);
+   $check= "SELECT * FROM * WHERE  order_no= '$_POST[order_no]'";
+   $rs = mysqli_query($conn,$check);
+   $data = mysqli_fetch_array($rs, MYSQLI_NUM);
+   if($data[0] > 1) {
+    echo "Error, number already exists<br/>";
+   }
+
+   else
+   {
+     if (mysqli_query($con))
+     {
+        echo "<br/>";
+     }
+     else
+     {
+        echo "Error, number already exists<br/>";
+     }
+}
+?>
+  
+<?php
+   $conn = new mysqli($servername, $username, $password,$db);
+   $check= "SELECT * FROM * WHERE  invoice_no= '$_POST[invoice_no]'";
+   $rs = mysqli_query($conn,$check);
+   $data = mysqli_fetch_array($rs, MYSQLI_NUM);
+   if($data[0] > 1) {
+    echo "Error, number already exists<br/>";
+   }
+    
+    else
+   {
+     if (mysqli_query($con))
+     {
+        echo "<br/>";
+     }
+     else
+     {
+        echo "Error, number already exists<br/>";
+     }
+}
+?>
+  
 <?php  
   }
 }
