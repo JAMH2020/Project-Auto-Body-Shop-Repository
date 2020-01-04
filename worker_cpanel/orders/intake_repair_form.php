@@ -321,7 +321,7 @@ if ($_SESSION['editForm']){
 if ($_SESSION['admin_loggedin']){
 ?>
   <span>Teacher Email:</span>
-  <input type="text" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email'];?>">
+  <input type="email" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email'];?>">
   
 <?php
 }
@@ -555,6 +555,27 @@ include '../../footer/footer.php';
 
   <script>redirect_page("waiver.php");</script>
   
+<?php
+   $conn = new mysqli($servername, $username, $password,$db);
+   $check= "SELECT * FROM * WHERE  order_no= '$_POST[order_no]'";
+   $rs = mysqli_query($conn,$check);
+   $data = mysqli_fetch_array($rs, MYSQLI_NUM);
+   if($data[0] > 1) {
+    echo "Error, order number already exists<br/>";
+   }
+   else
+   {
+     if (mysqli_query($con))
+     {
+        echo "<br/>";
+     }
+     else
+     {
+        echo "Error, order number already exists<br/>";
+     }
+}
+?>
+
 <?php
 }
 ?>
