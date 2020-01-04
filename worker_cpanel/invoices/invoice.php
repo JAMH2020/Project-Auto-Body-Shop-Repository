@@ -556,7 +556,7 @@ if ($_SESSION['worker_loggedin']){
    $rs = mysqli_query($conn,$check);
    $data = mysqli_fetch_array($rs, MYSQLI_NUM);
    if($data[0] > 1) {
-    echo "Error, number already exists<br/>";
+    echo "Error, order number already exists<br/>";
    }
 
    else
@@ -567,7 +567,7 @@ if ($_SESSION['worker_loggedin']){
      }
      else
      {
-        echo "Error, number already exists<br/>";
+        echo "Error, order number already exists<br/>";
      }
 }
 ?>
@@ -578,7 +578,7 @@ if ($_SESSION['worker_loggedin']){
    $rs = mysqli_query($conn,$check);
    $data = mysqli_fetch_array($rs, MYSQLI_NUM);
    if($data[0] > 1) {
-    echo "Error, number already exists<br/>";
+    echo "Error, invoice number already exists<br/>";
    }
     
     else
@@ -589,7 +589,7 @@ if ($_SESSION['worker_loggedin']){
      }
      else
      {
-        echo "Error, number already exists<br/>";
+        echo "Error, invoice number already exists<br/>";
      }
 }
 ?>
