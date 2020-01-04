@@ -171,7 +171,7 @@ automobile rests solely with me.
       <span>I may decline the estimated amount above and instead authorize the Board to perform the work
 outlined at a cost not to exceed </span>
 
-      <input type="text" name="exceed_cost" placeholder="$-Amount" value="<?php echo $_SESSION['exceed_cost'];?>">   
+      <input type="number" name="exceed_cost" placeholder="$-Amount" value="<?php echo $_SESSION['exceed_cost'];?>">   
 
 
       <span> by   initialing here: </span>
@@ -206,7 +206,7 @@ outlined at a cost not to exceed </span>
 
       <td>
         <center class="spacep" ><span>Phone:</span>
-         <input type="text" name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+         <input type="tel" name="customer_phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
          <span><?php echo $customer_phoneERR;?></span></center>
       </td>
     </tr>
@@ -225,7 +225,7 @@ outlined at a cost not to exceed </span>
     <tr>
       <td>
         <center><span>Email:</span>
-        <input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
+        <input type="email" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
         <span><?php echo $customer_emailERR;?></span></center>
       </td>
     </tr>
