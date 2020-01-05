@@ -15,7 +15,7 @@ function openTab(clickedTab){
     $("#" + clickedTab).addClass("opened_tab");
     
     //add the left border to the tab if the tab is not the left most tab
-    if (clickedTab != "orders"){
+    if (clickedTab != "orders" && clickedTab != "ogorders"){
       $("#" + clickedTab).addClass("center_opened_tab");
     }
   
