@@ -3,7 +3,15 @@
 if (session_start() === null){
   session_start();
 }
+
+$_SESSION['worker_section'] = "orders";
+
+
+//session to identify if the user is editting a form
+$_SESSION['editForm'] = false;
 ?>
+
+
 
 <h2 class='order_title'>MY ORDERS</h2>
 

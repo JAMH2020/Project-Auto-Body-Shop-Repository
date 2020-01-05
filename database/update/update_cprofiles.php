@@ -12,8 +12,8 @@ include_once '../../../database/error_check.php';
 
 //prepare sql statement to bind
 //update customer account table
-$stmt_u_cprofiles = $conn->prepare("UPDATE Customer_Profile SET Phone_No = ?, Address = ?, Email = ?, Car_Make = ?, Car_Model = ?, Vin_No = ?, License_Plate = ? WHERE Profile_Id = ?");
-$stmt_u_cprofiles->bind_param("sssssssi", $customer_phone, $customer_address, $customer_email, $car_make, $car_model, $vin_no, $license_plate, $profile_id);
+$stmt_u_cprofiles = $conn->prepare("UPDATE Customer_Profile SET Phone_No = ?, Address = ?, Email = ?, Car_Year = ?,Car_Make = ?, Car_Model = ?, Vin_No = ?, License_Plate = ? WHERE Profile_Id = ?");
+$stmt_u_cprofiles->bind_param("sssissssi", $customer_phone, $customer_address, $customer_email, $car_year,$car_make, $car_model, $vin_no, $license_plate, $profile_id);
 
 //update changes that could affect the customer profile table
 $stmt_u_accounts = $conn->prepare("UPDATE Customer_Accounts SET Email = ? WHERE Email = ?");
@@ -29,6 +29,9 @@ $customer_address = $_POST['customer_address'];
 
 //customer's email
 $customer_email = $_POST['customer_email'];
+
+//car year
+$car_year = $_POST['car_year'];
 
 //car make
 $car_make = $_POST['car_make'];
@@ -72,3 +75,4 @@ $stmt_u_accounts->execute();
 $stmt_u_cprofiles->close();
 $stmt_u_accounts->close();
 ?>
+

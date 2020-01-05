@@ -6,58 +6,68 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-//name of the sender
-$sender_name = "JAMH Group";
+function send_mail($receiver, $message_subject, $email_message){
 
-//email of the sender
-$sender_email = "JAMH@portcreditautobodyshop.tk";
-
-//password of the sender email
-$email_password = "************";
-
-//email of the receiver
-$receiver_email = "___________________";
-
-//subject of the email
-$subject = "Email test";
-
-//message of the email
-$message = "Testing if this goes into spam";
-
-//retrieve the files used in the PHPMailer library
-require 'src/Exception.php';
-require 'src/PHPMailer.php';
-require 'src/SMTP.php';
+  //TEMPORARILY turn email service off by only sending to self
+  $receiver = "JAMH@portcreditautobodyshop.tk";
 
 
+  //name of the sender
+  $sender_name = "JAMH Group";
 
-$mail = new PHPMailer(true);
+  //email of the sender
+  $sender_email = "JAMH@portcreditautobodyshop.tk";
 
-$mail->SMTPDebug = 0;
+  //password of the sender email
+  $Password = "****************";
 
-//send through SMTP
-$mail->Host = 'smtp.mboxhosting.com';
-$mail->SMTPAuth = true;
-$mail->Username = $sender_email;
-$mail->Password = $email_password;
-$mail->SMTPSecure = 'tls';
-$mail->Port = 587;
+  //email of the receiver
+  $receiver_email = $receiver;
 
-//create email headers
-$mail->setFrom($sender_email, $sender_name);
-$mail->addAddress($receiver_email);
-$mail->addReplyTo($sender_email, $name);
+  //subject of the email
+  $subject = $message_subject;
 
-$mail->isHTML(true); 
+  //message of the email
+  $message = $email_message;
 
-//create the subject and the message of the email
-$mail->Subject = $subject;
-$mail->Body = $message;
+  //retrieve the files used in the PHPMailer library
+  require '/srv/disk13/3148213/www/portcreditautobodyshop.tk/database/src/Exception.php';
+  require '/srv/disk13/3148213/www/portcreditautobodyshop.tk/database/src/PHPMailer.php';
+  require '/srv/disk13/3148213/www/portcreditautobodyshop.tk/database/src/SMTP.php';
 
-//sends the mail if no exceptions were encountered
-try {
-  $mail->send();
-  echo 'Your message was sent successfully!';
-} catch (Exception $e) {
-     echo "Your message could not be sent! PHPMailer Error: {$mail->ErrorInfo}";
+
+
+  $mail = new PHPMailer(true);
+
+  $mail->SMTPDebug = 0;
+
+  //send through SMTP
+  $mail->Host = 'smtp.mboxhosting.com';
+  $mail->SMTPAuth = true;
+  $mail->Username = $sender_email;
+  $mail->Password = $Password;
+  $mail->SMTPSecure = 'tls';
+  $mail->Port = 587;
+
+  //create email headers
+  $mail->setFrom($sender_email, $sender_name);
+  $mail->addAddress($receiver_email);
+  $mail->addReplyTo($sender_email, $name);
+
+  //create the subject and the message of the email
+  $mail->Subject = $subject;
+  $mail->Body = $message;
+  
+  $mail->isHTML(true); 
+
+
+  //sends the mail if no exceptions were encountered
+  try {
+    $mail->send();
+    echo 'Your message was sent successfully!';
+  } catch (Exception $e) {
+       echo "Your message could not be sent! PHPMailer Error: {$mail->ErrorInfo}";
+  }
+        
 }
+ ?>

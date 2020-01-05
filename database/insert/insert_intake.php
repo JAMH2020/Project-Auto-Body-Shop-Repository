@@ -287,8 +287,4 @@ $stmt_update_account->close();
 $stmt_update_profile->close();
 
 
-//set all session variables for order to blank
-include "../../src/clear_sessions.php";
-
-clear_order();
 ?>

@@ -26,6 +26,9 @@
 <!--Google Icons-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<meta content="width=1200" name="viewport">
+<meta content="height =900" name="viewport">
+
 
     <div class="title_bar" id="stickyTitleX">
       <div class ="title">
@@ -92,6 +95,8 @@
 
     </div>
     <div class="logout"></div>
+
+  
 
   
 

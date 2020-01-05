@@ -3,6 +3,9 @@
 if (session_start() === null){
   session_start();
 }
+
+//check if the user is logged in yet
+include_once "../../../login/login_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -69,9 +72,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
   //email
   createErrMsg("change_profile", "email", "customer_email", "customer_emailERR");
+  $customer_email_exist = customer_exist($_SESSION['customer_email'], $_SESSION['prev_customer_email']);
+  
+  //if the email already exists other than the previous email, than throw an error
+  if ($customer_email_exist){
+    $customer_emailERR = "an account with this email already exists";
+  }
   
   //car year
   createErrMsg("change_profile", "car year", "car_year", "car_yearERR");
+  year_limit($_SESSION['car_year'], 1900, date("Y"), "car year", "car_yearERR");
 
   //car make
   createErrMsg("change_profile", "car make", "car_make", "car_makeERR");
@@ -81,13 +91,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   
   //vin number
   createErrMsg("change_profile", "VIN number", "vin_no", "vin_noERR");
+  limit_length($_SESSION['vin_no'], 17, 1, "VIN number" ,"vin_noERR");
   
   //license plate
   createErrMsg("change_profile", "license plate", "license_plate", "license_plateERR");
+  limit_length($_SESSION['license_plate'], 12, 0, "license plate" ,"license_plateERR");
+  
  
  
   //show the error title if any fields are missing after signing up
-  if (empty($_POST['customer_phone']) or empty($_POST['customer_address']) or empty($_POST['customer_email']) or empty($_POST['car_make']) or empty($_POST['car_model']) or empty($_POST['vin_no']) or empty($_POST['license_plate'])){
+  if ($customer_phoneERR != "" || $customer_addressERR != "" || $customer_emailERR != "" || $car_yearERR != "" || $car_makeERR != "" || $car_modelERR != "" || $vin_noERR != "" || $license_plateERR != ""){
     $error_profile_input = true;
       
   } else {
@@ -126,7 +139,8 @@ if ($error_profile_input or !isset($_POST['change_profile'])){
 
             <div class="form_group">
               <span>Phone:</span>
-              <input type="text" class="form_control" name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+              <input type="tel" class="form_control" name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required> <br>
+              <span>format: 123-456-7890</span> <br>
               <span class="profile_error"><?php echo $customer_phoneERR;?></span> <br>
             </div>
 
@@ -139,10 +153,16 @@ if ($error_profile_input or !isset($_POST['change_profile'])){
 
             <div class="form_group">
               <span>Email:</span>
-              <input type="text" class="form_control"  name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
+              <input type="email" class="form_control"  name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
               <span class="profile_error"><?php echo $customer_emailERR;?></span> <br>
             </div>
 
+
+            <div class="form_group">
+              <span>Car Year:</span>
+              <input type="text" class="form_control" name="car_year" placeholder="Car Year" value="<?php echo $_SESSION['car_year'];?>"> <br>
+              <span class="profile_error"><?php echo $car_yearERR;?></span> <br>
+            </div>
 
             <div class="form_group">
               <span>Car Make:</span>

@@ -3,6 +3,9 @@
 if (session_start() === null){
   session_start();
 }
+
+//check if the user is logged in yet
+include_once "../../login/login_check.php";
 ?>
 
 
@@ -15,6 +18,7 @@ if (session_start() === null){
 
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
+  
 </head>
 <body>
 
@@ -107,8 +111,8 @@ hazards inherent in allowing untrained students to work on the undersigned’ au
 </ol>
 
 
-<p> <?php echo $_SESSION['customer_initial']; ?></p>
-<p>(initial)</p> <br>
+<p class="description_value"> <?php echo $_SESSION['customer_initial']; ?></p>
+<p class="description_title">(initial)</p> <br>
 
 <center><h4>RELEASE AND WAIVER OF LIABILITY</h4></center>
 
@@ -154,10 +158,22 @@ this</span>
 <span class="Sig">Signature of Registered Owner:</span>
 <button type="button" class="button">Sign Here</button> <br>
 
-<center><span class="Name">Name(print):</span>
-<span> <?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']; ?></span>
+<center><span class="Name description_title">Name(print):</span>
+<span class="description_value"> <?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']; ?></span>
+
+
+<?php
+//if the user is not viewing the form
+if (!$_SESSION['viewForm']){
+?>
 
 <button type="submit"  name="waiver2_submit" class="button">Submit</button>
+
+<?php
+} 
+?>
+
+
 
 </form>
 
@@ -173,13 +189,44 @@ include '../../footer/footer.php';
   
   //if user is editting the form
   if ($_SESSION['editForm']){
+    
+    //save the status customer email and order number
+    $temp_status = $_SESSION['status'];
+    $temp_email = $_SESSION['customer_email'];
+    $temp_order_no = $_SESSION['order_no'];
+     
     include "../../database/update/update_orders.php";
     
+    
+    //if the order is completed
+    if ($temp_status == "complete"){
+      //send a message to the site to give a notification that someon made an appointment
+      include "../../database/sendmail.php";
+    
+    
+      //subject
+      $subject = "Completed Order #" . $temp_order_no;
+    
+      //message
+      $email_message = "<strong>Your order has been completed. You can come pick up your vehicle.</strong>";
+    
+    
+      send_mail($temp_email, $subject, $email_message);
+    }
+
    
   //if user is inserting data
   } else {
     include "../../database/insert/insert_intake.php";
-
+   
+  }
+  
+  
+  
+  //if the admin or worker is creating an order based an appointment, edit the status of the appointment
+  if ($_SESSION['oldOrder']){
+    $_SESSION['status'] = "met";
+    include "../../database/update/update_appointments.php";
   }
   
   //if the user is the admin

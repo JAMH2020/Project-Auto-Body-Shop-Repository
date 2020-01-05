@@ -252,3 +252,33 @@
    -moz-transition:opacity 1s;
    -o-transition:opacity 1s;
  }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /*value for each section*/
+.description_value{
+  padding: 4px 8px;
+}
+
+/*text area for the description*/
+.description_comment{
+  margin: 4px 20px 10px 20px
+}
+
+/*error messages*/
+.error_message{
+  color: rgb(255, 71, 26);
+  padding: 4px 20px;
+}
+
+
+/*information describing the form*/
+.information_text{
+  padding: 10px 20px;
+}

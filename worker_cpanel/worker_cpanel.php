@@ -4,14 +4,21 @@ if (session_start() === null){
   session_start();
 }
 
+//check if the user is logged in yet
+include_once "../login/login_check.php";
+
 //clear saved session variable from other pages
 include "../src/clear_sessions.php";
 
 clear_order();
 clear_invoice();
+clear_appointments();
 
 //session to identify if the user is editting a form
 $_SESSION['editForm'] = false;
+
+//session to identify if the user is viewing a form
+$_SESSION['viewForm'] = false;
 ?>
 
 <!-- control panel for the worker -->
@@ -46,6 +53,7 @@ $_SESSION['editForm'] = false;
   <!--script to change tabs-->
   <script src="../src/js/open_tab.js"></script>
   
+  
 </head>
 
 <body>
@@ -60,6 +68,21 @@ if ($_SESSION['worker_section'] == "invoices"){
 ?>
 
 <script>openTab("invoices");</script>
+
+<?php
+//opens the tab of the current section the user is on
+} else if ($_SESSION['worker_section'] == "aappointments"){
+?>
+
+<script>openTab("aappointments");</script>
+
+<?php
+//opens the tab of the current section the user is on
+} else if ($_SESSION['worker_section'] == "mappointments"){
+?>
+
+<script>openTab("mappointments");</script>
+
 
 <?php
 } else {
@@ -78,6 +101,8 @@ if ($_SESSION['worker_section'] == "invoices"){
 
       <a href="#"  class="a_option_link closed_tab" id="orders" onclick='loadFile("worker_orders.php"); openTab("orders");'>Orders</a>
       <a href="#"  class="a_option_link closed_tab" id="invoices" onclick='loadFile("worker_invoices.php"); openTab("invoices")'>Invoices</a>
+      <a href="#"  class="a_option_link closed_tab" id="aappointments" onclick='loadFile("worker_aappointments.php"); openTab("aappointments")'>Accepted Appointments</a>
+      <a href="#"  class="a_option_link closed_tab" id="mappointments" onclick='loadFile("worker_mappointments.php"); openTab("mappointments")'>Met Appointments</a>
       
     </div>
   </div>
@@ -92,7 +117,21 @@ if ($_SESSION['worker_section'] == "invoices"){
       ?>
 
         <script> loadFile('worker_invoices.php'); </script>
+      
+      <?php
+      //sessions to choose which section to load at default run of page
+      } else if ($_SESSION['worker_section'] == "aappointments"){
+      ?>
 
+        <script> loadFile('worker_aappointments.php'); </script>
+      
+       <?php
+      //sessions to choose which section to load at default run of page
+      } else if ($_SESSION['worker_section'] == "mappointments"){
+      ?>
+
+        <script> loadFile('worker_mappointments.php'); </script>
+        
       <?php
       } else {
       ?>
