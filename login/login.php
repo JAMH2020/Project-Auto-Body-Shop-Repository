@@ -21,6 +21,10 @@ if (session_start() === null){
   <!--style sheet for the login page-->
   <link href="login_styles.css" rel="stylesheet" type="text/css" />
   
+  <!--<meta content="width=1200" name="viewport">
+<meta content="height =900" name="viewport">-->
+  
+  
   
   
   <style type="text/css">
@@ -108,6 +112,8 @@ include "../navigation_bar/navigation_bar.php";
     <div class="background">
      <div class="background_cover">
         <div class="wrapper">
+        
+          <span class="error_message"><?php echo $loginERR; ?></span>
 
       
           <font class="login" size="10">Login</font>
@@ -125,9 +131,9 @@ include "../navigation_bar/navigation_bar.php";
             <center><div class="form-group">
                 <label class="login_headings">Username</label>
 
-                <input type="text" name="login_username" class="form-control" placeholder="Username" value="<?php echo $login_username; ?>">
+                <input type="text" name="login_username" class="form-control" placeholder="Username" value="<?php echo $login_username; ?>"> <br>
 
-                <span class="help-block"><?php echo $username_err; ?></span>
+                <span class="error_message"><?php echo $username_err; ?></span>
             </div>  </center>  
 
 
@@ -135,9 +141,9 @@ include "../navigation_bar/navigation_bar.php";
 
                 <label class="login_headings">Password</label>
 
-                <input type="password" name="login_password" class="form-control"  id="password" placeholder="Password">
+                <input type="password" name="login_password" class="form-control"  id="password" placeholder="Password"><br>
 
-                <span class="help-block"><?php echo $password_err; ?></span>
+                <span class="error_message"><?php echo $password_err; ?></span>
 
               </div>
               
