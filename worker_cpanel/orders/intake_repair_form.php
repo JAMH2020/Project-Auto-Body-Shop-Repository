@@ -424,6 +424,7 @@ if ($_SESSION['viewForm']){
   //if the user is not making an order from an appointment and the user is not viewing the form
   if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
 ?>
+
   <input type="text" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email'];?>">
   
 <?php
@@ -1031,6 +1032,27 @@ include '../../footer/footer.php';
 
   <script>redirect_page("waiver.php");</script>
   
+<?php
+   $conn = new mysqli($servername, $username, $password,$db);
+   $check= "SELECT * FROM * WHERE  order_no= '$_POST[order_no]'";
+   $rs = mysqli_query($conn,$check);
+   $data = mysqli_fetch_array($rs, MYSQLI_NUM);
+   if($data[0] > 1) {
+    echo "Error, order number already exists<br/>";
+   }
+   else
+   {
+     if (mysqli_query($con))
+     {
+        echo "<br/>";
+     }
+     else
+     {
+        echo "Error, order number already exists<br/>";
+     }
+}
+?>
+
 <?php
 }
 ?>

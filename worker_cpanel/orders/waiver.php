@@ -196,6 +196,7 @@ automobile rests solely with me.
 outlined at a cost not to exceed </span>
 
 
+
 <?php
   //if the user is not viewing the form
   if (!$_SESSION['viewForm']){
@@ -211,6 +212,7 @@ outlined at a cost not to exceed </span>
 <?php
   }
 ?>
+
 
 
       <span> by   initialing here: </span>
@@ -276,6 +278,7 @@ outlined at a cost not to exceed </span>
 
 
       <td>
+
         <center class="spacep" ><span class="description_title">Phone:</span>
 <?php
   //if the user is not viewing the form
@@ -293,6 +296,7 @@ outlined at a cost not to exceed </span>
   }
 ?>
          <span class="error_message"><?php echo $customer_phoneERR;?></span></center>
+
       </td>
     </tr>
 
@@ -324,6 +328,7 @@ outlined at a cost not to exceed </span>
 
     <tr>
       <td>
+
         <center><span class="description_title">Email:</span>
         
 <?php
@@ -342,6 +347,7 @@ outlined at a cost not to exceed </span>
   }
 ?>
         <span class="error_message"><?php echo $customer_emailERR;?></span></center>
+
       </td>
     </tr>
 
