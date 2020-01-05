@@ -3,6 +3,12 @@
 if (session_start() === null){
   session_start();
 }
+?>
+
+<!--script use to redirect the user to another page-->
+<script src="../../src/js/submit_form.js"></script>
+
+<?php
 
 //include file to delete the orders
 include "../../database/delete/delete_orders.php";
@@ -36,5 +42,38 @@ $_SESSION['admin_section'] = "orders";
   //session to identify if the user is editting a form
   $_SESSION['editForm'] = false;
   
+  
+  //if the delete button is not pressed yet
+  if (!isset($_POST['delete_order'])){
   ?>
+  
+  
+  <!--stylesheet for the orders table-->
+  <link rel="stylesheet" type="text/css" href="../database/select/css/aselect_orders.css">
+
+  <a href="../worker_cpanel/orders/intake_repair_form.php" class='order'>Create Order</a>
+  <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+
+    <?php
+     //include the file that will print out all the orders
+     include "../../database/select/aselect_orders.php";
+    ?>
+
+    <input type="submit" name="delete_order" value="Delete Order">
+  </form>
+  <div id="rowText"></div>
+  
+  <?php
+  //redirect to the admin control panel
+  } else {
+  
+    $_SESSION['admin_section'] = "orders";
+  ?>
+  
+  <script>redirect_page('../admin_cpanel.php'); </script>
+  
+  <?php
+  }
+  ?>
+  
   
