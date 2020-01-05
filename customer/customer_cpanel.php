@@ -4,8 +4,21 @@ if (session_start() === null){
   session_start();
 }
 
+//check if the user is logged in yet
+include_once "../login/login_check.php";
+
 //reset session to check if the user is editting 
 $_SESSION['editForm'] = false;
+
+//session to identify if the user is viewing a form
+$_SESSION['viewForm'] = false;
+
+//clear saved session variable from other pages
+include "../src/clear_sessions.php";
+
+clear_order();
+clear_invoice();
+clear_appointments();
 ?>
 
 <!-- control panel for the worker -->
