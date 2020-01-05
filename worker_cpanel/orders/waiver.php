@@ -3,6 +3,9 @@
 if (session_start() === null){
   session_start();
 }
+
+//check if the user is logged in yet
+include_once "../../login/login_check.php";
 ?>
 
 <!-- Waiver form for the intake of the vehicle -->
@@ -14,6 +17,7 @@ if (session_start() === null){
 
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
+ 
 </head>
 <body>
 
@@ -77,28 +81,48 @@ $customer_firstnameERR = $customer_lastnameERR = $customer_addressERR = $custome
 
 //returns an error message if a field is missing or there is an incorrect input
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['waiver_submit'])){
+  
+  //if the user is not making an order from an appointment or viewing the form
+  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+    //firstname
+    createErrMsg("waiver_submit", "first name", "customer_firstname", "customer_firstnameERR");
 
-  //firstname
-  createErrMsg("waiver_submit", "first name", "customer_firstname", "customer_firstnameERR");
+    //lastname
+    createErrMsg("waiver_submit", "last name", "customer_lastname", "customer_lastnameERR");
+    
+    //email
+    createErrMsg("waiver_submit", "email", "customer_email", "customer_emailERR");
+  
+    //if the user is editting the form, check if the email editted exists
+    if ($_SESSION['editForm']){
+      $customer_email_exist = customer_exist($_SESSION['customer_email'], "none");
+    
+      if (!$customer_email_exist){
+        $customer_emailERR = "This email does not exist";
+      }
+    }
+  }
+  
+  
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+    //address
+    createErrMsg("waiver_submit", "address", "customer_address", "customer_addressERR");
 
-  //lastname
-  createErrMsg("waiver_submit", "last name", "customer_lastname", "customer_lastnameERR");
+    //phone
+    createErrMsg("waiver_submit", "phone number", "customer_phone", "customer_phoneERR");
 
-  //address
-  createErrMsg("waiver_submit", "address", "customer_address", "customer_addressERR");
-
-  //email
-  createErrMsg("waiver_submit", "email", "customer_email", "customer_emailERR");
-
-  //phone
-  createErrMsg("waiver_submit", "phone number", "customer_phone", "customer_phoneERR");
-
-  //initials
-  createErrMsg("waiver_submit", "initial", "customer_initial", "customer_initialERR");
+    //initials
+    createErrMsg("waiver_submit", "initial", "customer_initial", "customer_initialERR");
+    initial_check($_SESSION['customer_initial'], $_SESSION['customer_firstname'], $_SESSION['customer_lastname'], "initial", "customer_firstnameERR", "customer_lastnameERR", "customer_initialERR");
 
 
-  //exceed amount
-  createErrMsg("waiver_submit", "amount", "exceed_cost", "exceed_costERR");
+    //exceed amount
+    createErrMsg("waiver_submit", "amount", "exceed_cost", "exceed_costERR");
+    check_number($_SESSION['exceed_cost'], "amount" ,"exceed_costERR");
+    
+  }
+  
 
 }
 
@@ -171,16 +195,46 @@ automobile rests solely with me.
       <span>I may decline the estimated amount above and instead authorize the Board to perform the work
 outlined at a cost not to exceed </span>
 
-      <input type="text" name="exceed_cost" placeholder="$-Amount" value="<?php echo $_SESSION['exceed_cost'];?>">   
+
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="exceed_cost" placeholder="$-Amount" value="<?php echo $_SESSION['exceed_cost'];?>">  
+      
+<?php
+  } else {
+?>
+
+      <span class="description_title"><?php echo $_SESSION['exceed_cost'];?></span>
+      
+<?php
+  }
+?>
 
 
       <span> by   initialing here: </span>
+
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
       <input type="text" name="customer_initial" placeholder="Initial" value="<?php echo $_SESSION['customer_initial'];?>"> 
+      
+<?php
+  } else {
+?>
+
+      <span class="description_title"><?php echo $_SESSION['customer_initial'];?></span>
+      
+<?php
+  }
+?>
     </li>
   </ul> <br>
   
-  <span><?php echo $exceed_costERR;?></span> <br>
-  <span><?php echo $customer_initialERR;?></span> <br>
+  <span class="error_message"><?php echo $exceed_costERR;?></span> <br>
+  <span class="error_message"><?php echo $customer_initialERR;?></span> <br>
 
 
 
@@ -193,11 +247,28 @@ outlined at a cost not to exceed </span>
       <td>
         <center class="space">
         
-          <span >Name(Print):</span>
+          <span class="description_title">Name(Print):</span>
+         
+<?php
+  //if the user is not making an order from an appointment or viewing the form
+  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
           <input type="text" name="customer_firstname" placeholder="Firstname" value="<?php echo $_SESSION['customer_firstname'];?>"> 
           <input type="text" name="customer_lastname" placeholder="Lastname" value="<?php echo $_SESSION['customer_lastname'];?>"> <br>
-          <span><?php echo $customer_firstnameERR;?></span> <br>
-          <span><?php echo $customer_lastnameERR;?></span>
+          
+<?php
+  } else {
+?>
+
+          <span class="description_value"><?php echo $_SESSION['customer_firstname'];?></span>
+          <span class="description_value"><?php echo $_SESSION['customer_lastname'];?></span> <br>
+
+<?php
+  }
+?>
+          
+          <span class="error_message"><?php echo $customer_firstnameERR;?></span> <br>
+          <span class="error_message"><?php echo $customer_lastnameERR;?></span>
           
          </center>
       </td>
@@ -205,9 +276,23 @@ outlined at a cost not to exceed </span>
 
 
       <td>
-        <center class="spacep" ><span>Phone:</span>
-         <input type="text" name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
-         <span><?php echo $customer_phoneERR;?></span></center>
+        <center class="spacep" ><span class="description_title">Phone:</span>
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+         <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+         <span class="description_title">Format:</span>
+         <span class="description_value">123-456-7890</span><br>
+<?php
+  } else {
+?>
+         <span class="description_value"><?php echo $_SESSION['customer_phone'];?></span> <br>
+         
+<?php
+  }
+?>
+         <span class="error_message"><?php echo $customer_phoneERR;?></span></center>
       </td>
     </tr>
 
@@ -215,18 +300,48 @@ outlined at a cost not to exceed </span>
 
     <tr>
       <td>
-        <center class="spaceA"><span>Address:</span>
+        <center class="spaceA description_title"><span>Address:</span>
+        
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
         <input type="text" name="customer_address" placeholder="Address" value="<?php echo $_SESSION['customer_address'];?>"> <br>
-        <span><?php echo $customer_addressERR;?></span></center>
+        
+<?php
+  } else {
+?>
+
+        <span class="description_value"><?php echo $_SESSION['customer_address'];?></span><br>
+        
+<?php
+  }
+?>
+        <span class="error_message"><?php echo $customer_addressERR;?></span></center>
       </td>
     </tr>
 
 
     <tr>
       <td>
-        <center><span>Email:</span>
-        <input type="text" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
-        <span><?php echo $customer_emailERR;?></span></center>
+        <center><span class="description_title">Email:</span>
+        
+<?php
+ //if the user is not making an order from an appointment
+ if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
+        <input type="email" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
+        
+<?php
+  } else {
+?>
+
+        <span class="description_value"><?php echo $_SESSION['customer_email'];?></span> <br>
+        
+<?php
+  }
+?>
+        <span class="error_message"><?php echo $customer_emailERR;?></span></center>
       </td>
     </tr>
 
@@ -236,22 +351,25 @@ outlined at a cost not to exceed </span>
       </td>
 
       <td>
-        <center class="date"><span>Date:</span></center>
+        <center class="date">
+          <span class="description_title">Date:</span>
 <?php
 // if the user is editting the form
 if ($_SESSION['editForm']){
 ?>
-        <span> <?php echo date_format($waiver_date, "D j/M/Y"); ?></span>
+        <span class="description_value"> <?php echo date_format($waiver_date, "D j/M/Y"); ?></span>
  
 <?php
 } else {
 ?>
 
-        <span> <?php echo date("D j/M/Y"); ?></span>
+        <span class="description_value"> <?php echo date("D j/M/Y"); ?></span>
         
 <?php
 }
 ?>
+
+       </center>
       </td>
     </tr>
 
@@ -260,8 +378,22 @@ if ($_SESSION['editForm']){
 </div>
 
 
+<?php
+  //if the user is not viewing the page
+  if (!$_SESSION['viewForm']){
+?>
 
 <input type="submit" name="waiver_submit" class="button" value="Submit">
+
+<?php
+} else {
+?>
+
+<input type="submit" name="waiver_submit" class="button" value="Next">
+
+<?php
+}
+?>
 
 <center>
   <h3>[Please proceed to the 
