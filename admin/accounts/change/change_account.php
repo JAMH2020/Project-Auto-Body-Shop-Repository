@@ -3,6 +3,9 @@
 if (session_start() === null){
   session_start();
 }
+
+//check if the user is logged in yet
+include_once "../../../login/login_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -60,13 +63,20 @@ if ($_SESSION['account_change'] == 0){
 
     //email
     createErrMsg("change_account", "email", "customer_email", "customer_emailERR");
+    $customer_email_exists = customer_exist($_SESSION['customer_email'], $_SESSION['prev_customer_email']);
+    
+    //if email is changed to an existing email other than the previous email, throw an error
+    if ($customer_email_exists){
+      $customer_emailERR = "an account with this email already exists";
+    }
 
     //password
     createErrMsg("change_account", "password", "customer_password", "customer_passwordERR");
+    password_check($_SESSION['customer_password'], "password", "customer_passwordERR");
  
  
     //show the error title if any fields are missing after signing up
-    if (empty($_POST['customer_firstname']) or empty($_POST['customer_lastname']) or empty($_POST['customer_email']) or empty($_POST['customer_password'])){
+    if ($customer_firstnameERR != "" || $customer_lastnameERR != "" || $customer_emailERR != "" || $customer_passwordERR != ""){
       $error_title = "Error";
       $error_account_input = true;
       
@@ -109,13 +119,19 @@ if ($_SESSION['account_change'] == 0){
 
     //email
     createErrMsg("change_account", "email", "worker_email", "worker_emailERR");
+    $worker_email_exists = worker_exist($worker_email, $exception);
+    
+    //if the worker email already exists other than the previous email, throw an error
+    if ($worker_email_exists){
+      $worker_emailERR = "an account with this email already exists";
+    }
 
     //password
     createErrMsg("change_account", "password", "worker_password", "worker_passwordERR");
  
  
     //show the error title if any fields are missing after signing up
-    if (empty($_POST['worker_firstname']) or empty($_POST['worker_lastname']) or empty($_POST['worker_email']) or empty($_POST['worker_password'])){
+    if ($worker_firstnameERR != "" || $worker_lastnameERR != "" || $worker_emailERR != ""){
       $error_title = "Error";
       $error_account_input = true;
       
@@ -139,8 +155,13 @@ if (!isset($_POST['change_account']) or $error_account_input){
   include "../../../navigation_bar/navigation_bar.php";
 ?>
 
-<span><?php echo $error_title;?></span>
-<ul id="errorList">
+
+<div class="background">
+  <div class="background_cover">
+    <div class="box">
+    
+    <span class="error_message"><?php echo $error_title;?></span>
+    <ul id="errorList" class="error_message">
   <?php
   //list errors for editing customer account
   if ($_SESSION['account_change'] == 0){
@@ -224,10 +245,6 @@ if (!isset($_POST['change_account']) or $error_account_input){
 
 </ul>
 
-<div class="background">
-  <div class="background_cover">
-    <div class="box">
-
 
       <span class="Change_Account">Change Account</span>
       <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
@@ -272,7 +289,7 @@ if ($_SESSION['account_change'] == 0){
 
             <div class="form_group">
               <span>Email:</span>
-              <input type="text" class="form_control" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email']; ?>"> 
+              <input type="email" class="form_control" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email']; ?>"> 
               <br>
             </div>
 
@@ -387,6 +404,5 @@ include '../../../footer/footer.php';
 
 </body>
 </html>
-
 
 
