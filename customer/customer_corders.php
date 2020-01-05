@@ -11,6 +11,7 @@ if (session_start() === null){
 <h2 class='invoice_title'>MY COMPLETED ORDERS</h2>
 
 <div id="editCheck"></div>
+<div id="viewCheck"></div>
 
 <?php
 //include file for selecting orders
