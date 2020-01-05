@@ -265,6 +265,14 @@ if ($_POST['editForm'] == "1"){
 }
 
 
+//view orders if the user pressed the view button
+if ($_POST['viewForm'] == "1"){
+  $_SESSION['viewForm'] = true;
+  
+} else if ($_POST['viewForm'] == "0"){
+  $_SESSION['viewForm'] = false;
+}
+
 
 echo "<p>o_id:" .  $_SESSION['order_id'] . "</p>";
 echo "<p>o_no.:" .  $_SESSION['order_no'] . "</p>";
@@ -319,8 +327,8 @@ $stmt_find_waccounts->close();
 
 
 
-//redirect to intake repair if editting data
-if ($_SESSION['editForm']){
+//redirect to intake repair if editting data or viewing
+if ($_SESSION['editForm'] || $_SESSION['viewForm']){
 ?>
 
 <!--redirect to the intake form-->
