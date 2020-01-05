@@ -1,0 +1,106 @@
+body{
+  background-color: rgb(230, 230, 230);
+}
+
+
+.image{
+  height:120px;
+  background-image:url('../../../images/worker_cpanel/PDSB.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+  margin: -85px 0 100px 50px;
+}
+
+
+
+.invoice_title {
+  text-align: center;
+  margin: auto;
+  font-family: "Arial", sans-serif; 
+  color: #800000; 
+  font-weight: bold;
+  width: 100%;
+  padding: 20px 10px;
+}
+
+
+
+.subtitle{
+  position: relative; 
+  left: 50px;
+  font-size: 30px;
+  width: 70%;
+  padding:20px 10px;
+  height:60px;
+  margin: 0px; 
+  font-family: "Arial", sans-serif;
+  text-decoration: underline;
+  color: #800000; 
+}
+
+/*headings for each section*/
+.description_title{
+  font-weight: bold;
+  padding: 10px 20px 10px 20px;
+}
+
+
+/*value for each section*/
+.description_value{
+  padding: 4px 8px;
+}
+
+/*text area for the description*/
+.description_comment{
+  margin: 4px 20px 10px 20px
+}
+
+/*error messages*/
+.error_message{
+  color: rgb(255, 71, 26);
+  padding: 4px 20px;
+}
+
+
+/*information describing the form*/
+.information_text{
+  padding: 10px 20px;
+}
+
+
+.information{
+  position: relative; 
+  font-size: 25px;
+  left: 50px; 
+}
+
+
+.description{
+  vertical-align: sub;
+  height:110px;
+  width: 200px;
+  resize:none;
+  display: inline-block;
+  font-weight: 300;
+  padding-left: 0.8rem;
+}
+
+
+.table{
+  position: relative; 
+  font-size: 25px;
+  left: 50px; 
+}
+
+
+.button{
+  -moz-box-shadow: inset 0 0 10px rgb(102, 217, 255);
+  -webkit-box-shadow: inset 0 0 10px rgb(102, 217, 255) ;
+  box-shadow: inset 0 0 10px rgb(26, 26, 255); 
+  position: relative; 
+  font-size: 25px;
+  color:rgb(26, 26, 255); 
+  left: 50px;  
+  background-color: rgb(102, 217, 255; 
+}

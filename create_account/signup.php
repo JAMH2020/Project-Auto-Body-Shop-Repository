@@ -22,6 +22,7 @@ if (session_start() === null){
   <script src="../src/js/submit_form.js"></script>
   <!--style page for the signup page-->
   <link href="signup_styles.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -59,9 +60,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
   //email
   createErrMsg("sign_up", "email", "customer_email", "customer_emailERR");
+  
+  //check if the customer email already exists
+  $customer_email_exist = customer_exist($customer_email, "none");
+  
+  if ($customer_email_exist){
+    $customer_emailERR = "An account with this email already exists";
+  }
+  
+  
 
   //password
   createErrMsg("sign_up", "password", "customer_password", "customer_passwordERR");
+  password_check($_SESSION['customer_password'], "password", "customer_passwordERR");
  
  
   //show the error title if any fields are missing after signing up
@@ -69,6 +80,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     $error_title = "Error";
   }
 }
+
+
+
 
 //title for the signup page
 $title = "";
@@ -88,12 +102,12 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
   //include the navigation bar
   include "../navigation_bar/navigation_bar.php";
 ?>
-
+    <div id="adminCustomer"></div>
     <div class="background">
       <div class="box">
     
-        <span><?php echo $error_title;?></span>
-          <ul id="errorList">
+        <span class="error_message"><?php echo $error_title;?></span>
+          <ul id="errorList" class="error_message">
           <?php
            //list the error message for firstname if missing
           if ($customer_firstnameERR != ""){
@@ -162,6 +176,17 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
 
           </form>
         </center>
+        
+        <?php
+        if($_SESSION['admin_create_caccount'] == 1){
+        ?>
+        <div class="back_align">
+          <a class="back" href="../admin/admin_cpanel.php">Back</a>
+        </div>
+        
+        <?php
+        }
+        ?>
       </div>
   </div>
 
@@ -199,6 +224,7 @@ include '../footer/footer.php';
 
 </body>
 </html>
+
 
 
 

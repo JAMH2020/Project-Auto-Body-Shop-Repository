@@ -18,7 +18,7 @@ body{
 /*background iamge*/
 .background{
   /* The Background Image */
-  background-image:url("http://www.lowestrates.ca/sites/default/files/AdobeStock_97876318.jpeg");
+  background-image:url("../../../images/admin_cpanel/change_profiles.png");
 
   /* Height of Image */
   height: 100%;
@@ -159,4 +159,39 @@ body{
 /*left alignment for the back button*/
 .back_align{
   display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -o-flex;
 }
+
+
+
+
+
+
+
+
+
+/*value for each section*/
+.description_value{
+  padding: 4px 8px;
+}
+
+/*text area for the description*/
+.description_comment{
+  margin: 4px 20px 10px 20px
+}
+
+/*error messages*/
+.error_message{
+  color: rgb(255, 71, 26);
+  padding: 4px 20px;
+}
+
+
+/*information describing the form*/
+.information_text{
+  padding: 10px 20px;
+}
+

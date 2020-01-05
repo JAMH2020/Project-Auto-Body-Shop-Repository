@@ -17,11 +17,17 @@
 <!--script for the dropdown menu of the user profile-->
 <script src="http://www.portcreditautobodyshop.tk/navigation_bar/js/profile_dropdown.js"></script>
 
+<!--script for hovering on tablets or phone-->
+<script src="http://www.portcreditautobodyshop.tk/src/js/can_touch.js"></script>
+
 <!--font awesome icons-->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 <!--Google Icons-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<meta content="width=1200" name="viewport">
+<meta content="height =900" name="viewport">
 
 
     <div class="title_bar" id="stickyTitleX">
@@ -89,5 +95,9 @@
 
     </div>
     <div class="logout"></div>
+
+  
+
+  
 
 

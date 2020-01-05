@@ -110,6 +110,7 @@ insertData($stmt_total_cost);
 $stmt_invoice->close();
 $stmt_total_cost->close();
 
+
 //set all session variables for order to blank
 include "../../src/clear_sessions.php";
 

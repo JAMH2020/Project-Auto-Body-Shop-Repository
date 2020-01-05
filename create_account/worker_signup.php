@@ -3,6 +3,15 @@
 if (session_start() === null){
   session_start();
 }
+
+//check if the user is logged in yet
+include_once "../login/login_check.php";
+
+//end session if user is not logged in
+if (!$_SESSION['admin_loggedin'] && !$_SESSION['worker_loggedin'] && !$_SESSION['customer_loggedin']){
+  $_SESSION = array();
+  session_destroy();
+}
 ?>
 
 
@@ -61,9 +70,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
   //email
   createErrMsg("sign_up", "email", "worker_email", "worker_emailERR");
+  
+  //check if there is already a worker account with the same email
+  $worker_email_exist = worker_exist($_SESSION['worker_email'], "none");
+  
+  if ($worker_email_exist){
+    $worker_emailERR = "An account with this email already exist";
+  }
 
   //password
   createErrMsg("sign_up", "password", "worker_password", "worker_passwordERR");
+  password_check($_SESSION['worker_password'], "password", "worker_passwordERR");
  
  
   //show the error title if any fields are missing after signing up
@@ -85,8 +102,8 @@ if (!isset($_POST['sign_up']) or $worker_firstnameERR != "" or $worker_lastnameE
     <div class="background">
       <div class="box">
     
-        <span><?php echo $error_title;?></span>
-          <ul id="errorList">
+        <span class="error_message"><?php echo $error_title;?></span>
+          <ul id="errorList" class="error_message">
           <?php
            //list the error message for firstname if missing
           if ($worker_firstnameERR != ""){
@@ -155,6 +172,9 @@ if (!isset($_POST['sign_up']) or $worker_firstnameERR != "" or $worker_lastnameE
 
           </form>
         </center>
+        <div class="back_align">
+          <a class="back" href="../admin/admin_cpanel.php">Back</a>
+        </div>
       </div>
   </div>
   

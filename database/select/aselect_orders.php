@@ -69,18 +69,40 @@ if ($stmt_aorder->num_rows > 0){
       echo "<td>" . $school_nameRow . "</td>";
       echo "<td>" . $school_addressRow . "</td>";
       echo "<td>" . $statusRow . "</td>";
+      
+      
+      //allow user to create invoice if the status is complete
+      if ($statusRow == "complete"){
 ?>
 
            <td>
              <a href='#' onclick='findCAccountRow("<?php echo $order_idRow?>", "../../database/select/find_row/find_row_orders.php", "../../worker_cpanel/invoices/invoice.php"); return false;'>Create Invoice</a>
            </td>
+          
+<?php
+      } else {
+         echo "<td></td>";
+      }
+      
+      //allow user to edit the order only if its status is not "recorded"
+      if ($statusRow != "recorded"){
+?>
            
            <td>
              <a href='#' onclick='editPage("../../database/select/find_row/find_row_orders.php", "../../database/select/find_row/find_row_orders.php", 1); findCAccountRow("<?php echo $order_idRow?>", "../../database/select/find_row/find_row_orders.php", "../../worker_cpanel/orders/intake_repair_form.php"); return false;'>Edit</a>
            </td>
 
+<?php
+      } else {
+?>
 
-<?php     
+           <td>
+             <a href='#' onclick='viewPage("../../database/select/find_row/find_row_orders.php", 1); findCAccountRow("<?php echo $order_idRow?>", "../../database/select/find_row/find_row_orders.php", "../../worker_cpanel/orders/intake_repair_form.php"); return false;'>View</a>
+           </td>
+
+<?php
+      }
+      
     echo "</tr>";
   }
   

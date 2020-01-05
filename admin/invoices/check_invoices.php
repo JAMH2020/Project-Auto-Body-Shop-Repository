@@ -5,6 +5,9 @@ if (session_start() === null){
 }
 
 
+$_SESSION['admin_section'] = "invoices";
+
+
 //session to identify if the user is editting a form
 $_SESSION['editForm'] = false;
 ?>
