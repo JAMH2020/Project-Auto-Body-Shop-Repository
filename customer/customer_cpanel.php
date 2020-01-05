@@ -84,7 +84,7 @@ include '../navigation_bar/navigation_bar.php';
   } else if ($_SESSION['customer_section'] == "corders"){
   ?>
 
-  <script>openTab("<?php echo 'porders';?>");</script>
+  <script>openTab("<?php echo 'corders';?>");</script>
 
   <?php
   } else if ($_SESSION['customer_section'] == "rorders"){
@@ -123,13 +123,13 @@ include '../navigation_bar/navigation_bar.php';
       } else if ($_SESSION['customer_section'] == "corders"){
       ?>
       
-      <script>loadFile("customer_cgorders.php");</script>
+      <script>loadFile("customer_corders.php");</script>
       
       <?php
       } else if ($_SESSION['customer_section'] == "rorders"){
       ?>
       
-      <script>loadFile("customer_rgorders.php");</script>
+      <script>loadFile("customer_rorders.php");</script>
       
       <?php
       } else if ($_SESSION['customer_section'] == "porders"){
