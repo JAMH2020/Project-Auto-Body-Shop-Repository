@@ -62,6 +62,7 @@ body{
   position: relative; 
   font-size: 25px;
   left: 50px; 
+  text-align:center;
 }
 
 
@@ -73,5 +74,39 @@ body{
   font-size: 25px;
   color:rgb(26, 26, 255); 
   left: 50px;  
-  background-color: rgb(102, 217, 255; 
+  background-color: rgb(102, 217, 255); 
+}
+
+
+
+
+
+
+/*headings for each section*/
+.description_title{
+  font-weight: bold;
+  padding: 10px 20px 10px 20px;
+}
+
+
+/*value for each section*/
+.description_value{
+  padding: 4px 8px;
+}
+
+/*text area for the description*/
+.description_comment{
+  margin: 4px 20px 10px 20px
+}
+
+/*error messages*/
+.error_message{
+  color: rgb(255, 71, 26);
+  padding: 4px 20px;
+}
+
+
+/*information describing the form*/
+.information_text{
+  padding: 10px 20px;
 }
