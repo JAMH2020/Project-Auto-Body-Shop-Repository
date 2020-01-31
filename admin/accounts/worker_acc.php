@@ -11,8 +11,13 @@ $_SESSION['admin_section'] = "waccounts";
   <!--the admin control panel section where they can check the worker accounts in the system-->
   <!--stylesheet for the worker accounts table-->
   <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_waccounts.css">
-
-  <a href="../../create_account/worker_signup.php">Create Worker Account</a>
+  
+  <h2 class="section_title">WORKER ACCOUNTS</h2>
+  
+  <div class="create_link">
+    <a href="../../create_account/worker_signup.php" class="create">Create Account</a>
+    <div class="create_underline"></div>
+  </div>
   
   <?php
   //include the file that will print out all the orders
