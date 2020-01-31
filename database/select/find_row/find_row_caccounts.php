@@ -63,12 +63,13 @@ if ($stmt_find_caccounts->num_rows > 0){
   echo "<p>nothing</p>";
 }
 
+/*
 echo "<p>c_id:" .  $_SESSION['customer_id'] . "</p>";
 echo "<p>c_firstame:" .  $_SESSION['customer_firstname'] . "</p>";
 echo "<p>c_password:" .  $_SESSION['customer_password'] . "</p>";
 echo "<p>c_email:" .  $_SESSION['customer_email'] . "</p>";
 echo "<p>c_change_status:" .  $_SESSION['account_change'] . "</p>";
-
+*/
 
 
 //close the statement
