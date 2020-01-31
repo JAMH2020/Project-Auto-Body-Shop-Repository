@@ -7,7 +7,7 @@ function clear_order(){
   $_SESSION['estimate_parts_per_unit'] = $_SESSION['estimate_parts_total'] = $_SESSION['estimate_labour_per_unit'] = $_SESSION['estimate_labour_total'] =
   $_SESSION['estimate_supplies_per_unit'] = $_SESSION['estimate_supplies_total'] = $_SESSION['estimate_disposal_per_unit'] = $_SESSION['estimate_disposal_total'] =
   $_SESSION['estimate_total_cost'] = $_SESSION['estimate_date'] = $_SESSION['estimate_expiry_date'] = $_SESSION['removal_choice'] = $_SESSION['customer_address'] = $_SESSION['customer_phone'] = $_SESSION['waiver_date'] = 
-  $_SESSION['customer_initial'] = $_SESSION['exceed_cost'] = $_SESSION['prev_order_no'] = $_SESSION['prev_customer_email'] = "";
+  $_SESSION['customer_initial'] = $_SESSION['exceed_cost'] = $_SESSION['prev_order_no'] = $_SESSION['prev_customer_email'] = $_SESSION['prev_worker_email'] = "";
   
   
   //if the admin or customer is logged in
@@ -47,7 +47,7 @@ $_SESSION['vin_no'] = $_SESSION['license_plate'] = $_SESSION['removal_choice'] =
 function clear_appointments(){
   //set all session variable for appointments to blank
   $_SESSION['appointment_id'] = $_SESSION['car_year'] = $_SESSION['car_make'] = $_SESSION['car_model'] = $_SESSION['school_name'] =  $_SESSION['school_address'] =
-  $_SESSION['plan_description'] = $_SESSION['plan_date'] = $_SESSION['status'] = "";
+  $_SESSION['plan_description'] = $_SESSION['plan_date'] = $_SESSION['status'] = $_SESSION['prev_status'] = "";
   
   //if the admin  or customer is logged on
   if ($_SESSION['admin_loggedin'] || $_SESSION['customer_loggedin']){
