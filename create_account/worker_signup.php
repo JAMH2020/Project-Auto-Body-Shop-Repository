@@ -20,7 +20,11 @@ if (!$_SESSION['admin_loggedin'] && !$_SESSION['worker_loggedin'] && !$_SESSION[
 <html lang="en">
 
 <head>  
-
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Create a Worker Account</title>
+  <meta name="description" content="Create Another Worker Account">
+  <meta name="author" content="JAMH Group">
 
   <!--script to create bullet points of error messages if there is a missing field
   or an error with the user's input-->
@@ -29,6 +33,8 @@ if (!$_SESSION['admin_loggedin'] && !$_SESSION['worker_loggedin'] && !$_SESSION[
   <script src="js/showpassword.js"></script>
   <!--script that will redirect the user to another page-->
   <script src="../src/js/submit_form.js"></script>
+  <!--script that will ask for user confirmation before submitting form-->
+  <script src="../src/js/form_confirmation.js"></script>
   <!--style page for the signup page-->
   <link href="signup_styles.css" rel="stylesheet" type="text/css" />
 </head>
@@ -144,7 +150,7 @@ if (!isset($_POST['sign_up']) or $worker_firstnameERR != "" or $worker_lastnameE
        
         <font class="Signup" size="10">Create Worker Account</font>
         <center>
-          <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+          <form name="accountForm" onsubmit="return confirmForm('accountForm', 'sign_up', 'account')" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
             <center class="di"><span>First Name:</span>
             <input type="text" name="worker_firstname" class="form-control" placeholder="First Name" value="<?php echo $_SESSION['worker_firstname'];?>"></center>
@@ -188,6 +194,9 @@ include '../footer/footer.php';
 } else {
   //insert the user sign up data into the accounts table in the database
   include "../database/insert/insert_wsignup.php";
+  
+  //notification that an account has been created
+  $_SESSION['account_done'] = "insert";
   
   //redirect to the worker section of the admin cpanel
   $_SESSION['admin_section'] = "waccounts";
