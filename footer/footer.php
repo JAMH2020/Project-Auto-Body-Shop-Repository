@@ -37,20 +37,12 @@
 
     <div class="social_media_box">
  
-      <a class="social_media_link" href="#" style="opacity:1">
+      <a class="social_media_link" href="/contacts/email.php" style="opacity:1">
         <i class="material-icons">email</i>
       </a>
-
-      <a class="social_media_link" href="#">
-        <i class='fab fa-facebook'></i>
-      </a>
  
-      <a class="social_media_link" href="#">
+      <a class="social_media_link" href="https://twitter.com/PortCreditSS?ref_src=twsrc%5Etfw%7Ctwcamp%5Eembeddedtimeline%7Ctwterm%5Eprofile%3APortCreditSS&ref_url=http%3A%2F%2Fschools.peelschools.org%2Fsec%2Fportcredit%2FPages%2Fdefault.aspx">
         <i class='fab fa-twitter'></i>
-      </a>
-
-      <a class="social_media_link" href="#">
-        <i class='fab fa-instagram'></i>
       </a>
 
       <a class="social_media_link" href="https://github.com/JAMH2020/Project-Auto-Body-Shop-Repository">
