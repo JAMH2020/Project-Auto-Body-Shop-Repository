@@ -1,9 +1,23 @@
 <?php
+//start the session if it has not been started yet
+if (session_start() === null){
+  session_start();
+}
+?>
+
+<!--script use to redirect the user to another page-->
+<script src="../../src/js/submit_form.js"></script>
+
+<?php
+
 //include file to delete the orders
 include "../../database/delete/delete_orders.php";
 
 //session to identify if the user is editting a form
 $_SESSION['editForm'] = false;
+
+//session to tell which tab they are currently on
+$_SESSION['admin_section'] = "orders";
 ?>
   
 <!--the admin control panel section where they can check the orders in the system-->  
@@ -28,6 +42,9 @@ $_SESSION['editForm'] = false;
   //session to identify if the user is editting a form
   $_SESSION['editForm'] = false;
   
+  
+  //if the delete button is not pressed yet
+  if (!isset($_POST['delete_order'])){
   ?>
   
   
@@ -45,4 +62,18 @@ $_SESSION['editForm'] = false;
     <input type="submit" name="delete_order" value="Delete Order">
   </form>
   <div id="rowText"></div>
-  <div id="editCheck"></div>
+  
+  <?php
+  //redirect to the admin control panel
+  } else {
+  
+    $_SESSION['admin_section'] = "orders";
+  ?>
+  
+  <script>redirect_page('../admin_cpanel.php'); </script>
+  
+  <?php
+  }
+  ?>
+  
+  

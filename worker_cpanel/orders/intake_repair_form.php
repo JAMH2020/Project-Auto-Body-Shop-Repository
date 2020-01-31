@@ -1,6 +1,9 @@
 <?php
 //start the session to remember the session variables
 session_start();
+
+//check if the user is logged in yet
+include_once "../../login/login_check.php";
 ?>
 
 <!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
@@ -13,6 +16,10 @@ session_start();
 
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
+  
+  <!--script that will default select a value in select dropdown-->
+  <script src="../../src/js/option_selected.js"></script>
+ 
 
 </head>
 <body>
@@ -134,75 +141,112 @@ include_once "../../database/fixinput.php";
 
 
 
-//returns an error message if a field is missing
+//returns an error message if a field is missing or if the input field is in an incorrect format
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
+  
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+  
+  
+      //if the user is not making an order from an appointment
+      if (!$_SESSION['oldOrder']){
+        //school name
+        createErrMsg("submit_intake", "school name", "school_name", "school_nameERR");
 
-  //order number
-  createErrMsg("submit_intake", "order number", "order_no", "order_noERR");
+        //school address
+        createErrMsg("submit_intake", "school address", "school_address", "school_addressERR");
+    
+        //car year
+        createErrMsg("submit_intake", "car year", "car_year", "car_yearERR");
+        year_limit($_SESSION['car_year'], 1900, date("Y"), "car year", "car_yearERR");
 
-  //school name
-  createErrMsg("submit_intake", "school name", "school_name", "school_nameERR");
+        //car make
+        createErrMsg("submit_intake", "car make", "car_make", "car_makeERR");
 
-  //school address
-  createErrMsg("submit_intake", "school address", "school_address", "school_addressERR");
+        //car model
+        createErrMsg("submit_intake", "car model", "car_model", "car_modelERR");
+    
+        //description of work that is going to be done
+        createErrMsg("submit_intake", "description", "plan_description", "plan_descriptionERR");
+    
+        //date that work is going to be done
+        createErrMsg("submit_intake", "date", "plan_date", "plan_dateERR");
+    
+    
+        //if the user is editting the form
+        if ($_SESSION['editForm']){
+          system_date_limit($_SESSION['plan_date'], "date", "plan_dateERR", $_SESSION['order_date'], "none");
+        } else {
+          system_date_limit($_SESSION['plan_date'], "date", "plan_dateERR", "today", "none");
+        }
+    
+      }
+    }
+  
 
-  //car year
-  createErrMsg("submit_intake", "car year", "car_year", "car_yearERR");
-
-  //car make
-  createErrMsg("submit_intake", "car make", "car_make", "car_makeERR");
-
-  //car model
-  createErrMsg("submit_intake", "car model", "car_model", "car_modelERR");
-
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+  
   //VIN number
   createErrMsg("submit_intake", "VIN number", "vin_no", "vin_noERR");
+  limit_length($_SESSION['vin_no'], 17, 1, "VIN number" ,"vin_noERR");
 
   //license plate number
   createErrMsg("submit_intake", "license plate", "license_plate", "license_plateERR");
+  limit_length($_SESSION['license_plate'], 12, 0, "license plate" ,"license_plateERR");
 
   //odometer reading at intake
   createErrMsg("submit_intake", "odometer reading", "odometer_intake", "odometer_intakeERR");
-
-  //description of work that is going to be done
-  createErrMsg("submit_intake", "description", "plan_description", "plan_descriptionERR");
-
-  //date that work is going to be done
-  createErrMsg("submit_intake", "date", "plan_date", "plan_dateERR");
+  check_number($_SESSION['odometer_intake'], "odometer reading" ,"odometer_intakeERR");  
 
   //estimate of the cost of parts per unit
   createErrMsg("submit_intake", "estimate", "estimate_parts_per_unit", "estimate_parts_per_unitERR");
+  check_number($_SESSION['estimate_parts_per_unit'], "estimate" ,"estimate_parts_per_unitERR");
 
   //estimate of the total cost of parts
   createErrMsg("submit_intake", "total estimate", "estimate_parts_total", "estimate_parts_totalERR");
+  check_number($_SESSION['estimate_parts_total'], "total estimate" ,"estimate_parts_totalERR");
 
   //estimate of the labour cost per unit
   createErrMsg("submit_intake", "estimate", "estimate_labour_per_unit", "estimate_labour_per_unitERR");
+  check_number($_SESSION['estimate_labour_per_unit'], "estimate" ,"estimate_labour_per_unitERR");
 
   //estimate of the total labour cost
   createErrMsg("submit_intake", "total estimate", "estimate_labour_total", "estimate_labour_totalERR");
+  check_number($_SESSION['estimate_labour_total'], "total estimate" ,"estimate_labour_totalERR");
 
   //estimate of the cost of shop supplies used per unit
   createErrMsg("submit_intake", "estimate", "estimate_supplies_per_unit", "estimate_supplies_per_unitERR");
+  check_number($_SESSION['estimate_supplies_per_unit'], "estimate" ,"estimate_supplies_per_unitERR");
 
   //estimate of the total cost of supplies
   createErrMsg("submit_intake", "total estimate", "estimate_supplies_total", "estimate_supplies_totalERR");
+  check_number($_SESSION['estimate_supplies_total'], "total estimate" ,"estimate_supplies_totalERR");
 
   //estimate of the recycling/disposal fee per unit
   createErrMsg("submit_intake", "estimate", "estimate_disposal_per_unit", "estimate_disposal_per_unitERR");
+  check_number($_SESSION['estimate_disposal_per_unit'], "estimate" ,"estimate_disposal_per_unitERR");
 
   //estimate of the total recycling/disposal fee
   createErrMsg("submit_intake", "total estimate", "estimate_disposal_total", "estimate_disposal_totalERR");
+  check_number($_SESSION['estimate_disposal_total'], "total estimate" ,"estimate_disposal_totalERR");
 
   //estimate of the total cost
-  createErrMsg("submit_intake", "total estimate", "estimate_total_cost", "estimate_total_costERR");
+  //createErrMsg("submit_intake", "total estimate", "estimate_total_cost", "estimate_total_costERR");
 
   //date the estimate of costings were made
   createErrMsg("submit_intake", "date", "estimate_date", "estimate_dateERR");
 
   //date the date of the estimate of the costings will expire
   createErrMsg("submit_intake", "date", "estimate_expiry_date", "estimate_expiry_dateERR");
+  
+  //if the user is editting the form
+  if ($_SESSION['editForm']){
+    system_date_limit($_SESSION['estimate_expiry_date'], "date", "estimate_expiry_dateERR", $_SESSION['order_date'], "none");
+  } else {
+    system_date_limit($_SESSION['estimate_expiry_date'], "date", "estimate_expiry_dateERR", "today", "none");
+  }
 
   //choice of removal
   createErrMsg("submit_intake", "removal choice", "removal_choice", "removal_choiceERR");
@@ -216,8 +260,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   
   //if the user is the admin
   if ($_SESSION['admin_loggedin']){
-    //worker account
-    createErrMsg("submit_intake", "worker email", "worker_email", "worker_emailERR");
+    
+    //if the user is not making an order from an appointment
+    if (!$_SESSION['oldOrder']){
+      //worker account
+      createErrMsg("submit_intake", "worker email", "worker_email", "worker_emailERR");
+    
+      //if the worker email is not empty
+      if ($worker_emailERR == ""){
+        //check if the worker account exists
+        $worker_account_exist = worker_exist($_SESSION['worker_email'], "none");
+    
+        if (!$worker_account_exist){
+          $worker_emailERR = "This worker email does not exist";
+        }
+      }
+    }
+  }
+  
+ }
+} else {
+  //auto-generate the next order number only when the user is inserting data
+  if (!$_SESSION['editForm']){
+    include_once '../../database/select/find_order_id.php';
+
+    $_SESSION['order_no'] = generate_order_no();
   }
 }
 
@@ -270,6 +337,8 @@ if (!empty($_SESSION['estimate_expiry_date'])){
 
 
 
+
+
 //ask the user to input the required fields if the user has not pressed the submit button yet
 if ($error_intake_input  or !isset($_POST['submit_intake'])){
 
@@ -277,7 +346,12 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
   include "../../navigation_bar/navigation_bar.php";
 ?>
 
+<script>
+function add_estimate(session, value1, value2, value3, value4){
+  $("#estimateTotal").load("../../src/sum_price.php?session=" + session + "&p1=" + value1 + "&p2=" + value2 + "&p3=" + value3 + "&p4=" + value4);
+}
 
+</script>
 
 
 <div class ="intake_title">
@@ -298,43 +372,79 @@ if ($error_intake_input  or !isset($_POST['submit_intake'])){
 //when editting the form
 if ($_SESSION['editForm']){
 ?>
-  <span>Status:</span>
-  <input type="text" name="status" placeholder="Status" value="<?php echo $_SESSION['status'];?>">
-  <span><?php echo $statusERR;?></span> <br> <br>
+  <span class="description_title">Status:</span>
+  <select name="status" id="status_dropdown" value="<?php echo $_SESSION['status'];?>">
+    <option value="">Choose a Status</option>
+    <option value="imcomplete">Imcomplete</option>
+    <option value="complete">Complete</option>
+  </select> <br>
+  <span class="error_message"><?php echo $statusERR;?></span> <br> <br>
   
+<?php
+  //default select the status based of sessions
+  if ($_SESSION['status'] == "imcomplete"){
+?>
+
+<script>defaultSelect('status_dropdown', 'imcomplete');</script>
+
+<?php
+  } else if ($_SESSION['status'] == "complete"){
+?>
+
+<script>defaultSelect('status_dropdown', 'complete');</script>
+
+<?php
+  }
+}
+
+
+//if the user is viewing the form
+if ($_SESSION['viewForm']){
+?>
+<span class="description_title">Status:</span>
+<span class="description_value"><?php echo $_SESSION['status'];?></span>
 <?php
 }
 ?>
-  
   
   <div class="subtitle">
     <p class="subtitle-heading">School Information</p>
   </div>
   
 
-  <span class="information-heading"> Work Order #:</span>
+  <span class="information-heading description_title"> Work Order #:</span>
 
-  <input type="number" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>">
-  
 <?php
-//if the user is the admin
-if ($_SESSION['admin_loggedin']){
+  //if the user is the admin
+  if ($_SESSION['admin_loggedin']){
 ?>
-  <span>Teacher Email:</span>
-  <input type="email" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email'];?>">
+  <span class="description_title">Teacher Email:</span>
   
 <?php
+  //if the user is not making an order from an appointment and the user is not viewing the form
+  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
+
+  <input type="text" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email'];?>">
+  
+<?php
+  } else {
+?>
+
+  <span class="description_value"><?php echo $_SESSION['worker_email'];?></span>
+  
+<?php
+  }
 }
 ?>
 
   <br>
-  <span><?php echo $order_noERR;?></span>
   
 <?php
-//if the user is the admin
-if ($_SESSION['admin_loggedin']){
+//if the user is the admin and is not viewing the form
+if ($_SESSION['admin_loggedin'] && !$_SESSION['viewForm']){
 ?>
-  <span><?php echo $worker_emailERR;?></span> 
+  <span class="error_message"><?php echo $worker_emailERR;?></span> 
 <?php
 }
 ?>
@@ -342,14 +452,44 @@ if ($_SESSION['admin_loggedin']){
   <br>
 
 
- <span>School Name:</span>
+ <span class="description_title">School Name:</span>
+
+<?php
+//if the user is not making an order from an appointment or viewing the form
+if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
   <input type="text" name="school_name" placeholder="School Name" value="<?php echo $_SESSION['school_name'];?>">
+  
+<?php
+} else {
+?>
 
+  <span class="description_value"><?php echo $_SESSION['school_name'];?></span>
 
-  <span>School Address:</span>
+<?php
+}
+?>
+
+  <span class="description_title">School Address:</span>
+  
+<?php
+//if the user is not making an order from an appointment or viewing the form
+if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
   <input type="text" name="school_address" placeholder="School Address" value="<?php echo $_SESSION['school_address'];?>"> <br>
-  <span><?php echo $school_nameERR;?></span>
-  <span><?php echo $school_addressERR;?></span> <br>
+  
+<?php
+} else {
+?>
+
+<span class="description_value"><?php echo $_SESSION['school_address'];?></span> <br>
+
+<?php
+}
+?>
+
+  <span class="error_message"><?php echo $school_nameERR;?></span>
+  <span class="error_message"><?php echo $school_addressERR;?></span> <br>
 
 </div>
 
@@ -365,51 +505,172 @@ if ($_SESSION['admin_loggedin']){
 
 <div class="information">
 
-  <span class="information-heading">Year:</span>
-  <input type="number" max= "4" min = "4" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
+  <span class="information-heading description_title">Year:</span>
+  
+<?php
+  //if the user is not making an order from an appointment or viewing the form
+  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
 
+  <input type="text" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>">
 
+<?php
+  } else {
+?>
 
-  <span>VIN #:</span>
+  <span class="description_value"><?php echo $_SESSION['car_year'];?></span>
+
+<?php
+  }
+?>
+
+  <span class="description_title">VIN #:</span>
+  
+<?php
+//if the user is not viewing the form
+if (!$_SESSION['viewForm']){
+?>
   <input type="text" name="vin_no" placeholder="VIN No." min = "17" max = "17" value="<?php echo $_SESSION['vin_no'];?>"><br>
-  <span><?php echo $car_yearERR;?></span>
-  <span><?php echo $vin_noERR;?></span> <br>
+
+<?php
+} else {
+?>
+
+  <span class="description_value"><?php echo $_SESSION['vin_no'];?></span> <br>
+  
+<?php
+}
+?>
+  <span class="error_message"><?php echo $car_yearERR;?></span>
+  <span class="error_message"><?php echo $vin_noERR;?></span> <br>
 
 
-  <span>Make:</span>
+  <span class="description_title">Make:</span>
+  
+<?php
+  //if the user is not making an order from an appointment
+  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
+
   <input type="text" name="car_make" placeholder="Make" value="<?php echo $_SESSION['car_make'];?>">
 
+<?php
+  } else {
+?>
 
+  <span class="description_value"><?php echo $_SESSION['car_make'];?></span>
 
-  <span>License Plate:</span>
+<?php
+}
+?>
+
+  <span class="description_title">License Plate:</span>
+  
+<?php
+//if the user is not viewing the form
+if (!$_SESSION['viewForm']){
+?>
   <input type="text" name="license_plate" max = "8" min = "2" placeholder="License Plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
-  <span><?php echo $car_makeERR;?></span>
-  <span><?php echo $license_plateERR;?></span> <br>
+  
+<?php
+} else {
+?>
+
+  <span class="description_value"><?php echo $_SESSION['license_plate'];?></span> <br>
+  
+<?php
+}
+?>
+
+  <span class="error_message"><?php echo $car_makeERR;?></span>
+  <span class="error_message"><?php echo $license_plateERR;?></span> <br>
 
 
-  <span>Model:</span>
+  <span class="description_title">Model:</span>
+  
+<?php
+  //if the user is not making an order from an appointment
+  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
+
   <input type="text" name="car_model" placeholder="Model" value="<?php echo $_SESSION['car_model'];?>">
+  
+<?php
+  } else {
+?>
 
+  <span class="description_value"><?php echo $_SESSION['car_model'];?></span>
 
-  <span>Odometer:</span>
-  <input type="number" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
-  <span><?php echo $car_modelERR;?></span>
-  <span><?php echo $odometer_intakeERR;?></span> <br>
+<?php
+  }
+?>
+
+  <span class="description_title">Odometer:</span>
+  
+<?php
+//if the user is not viewing the form
+if (!$_SESSION['viewForm']){
+?>
+  <input type="text" name="odometer_intake" placeholder="Odometer" value="<?php echo $_SESSION['odometer_intake'];?>"><br>
+  
+<?php
+} else {
+?>
+
+  <span class="description_value"><?php echo $_SESSION['odometer_intake'];?></span> <br>
+  
+<?php
+}
+?>
+
+  <span class="error_message"><?php echo $car_modelERR;?></span>
+  <span class="error_message"><?php echo $odometer_intakeERR;?></span> <br>
 
 
   <p>Detailed description of work to be performed including anticipated parts (including whether each part is a new part provided by the original equipment manufacturer, a new part not provided by the original equipment manufacturer, a used part or a reconditioned part) shop materials, environmental related, fees, disposal/recycling fees, etc.:
   </p>
 
-  <span><?php echo $plan_descriptionERR;?></span> <br>
+  <span class="error_message"><?php echo $plan_descriptionERR;?></span> <br>
 
   <div class="description">
-    <textarea name="plan_description" placeholder="Description..." rows="10" columns="50"> <?php echo $_SESSION['plan_description'];?> </textarea><br>
-  </div>
+  
+<?php
+  //if the user is not making an order from an appointment or viewing the form
+  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
+    <textarea name="plan_description" placeholder="Description..." rows="10" columns="50"><?php echo $_SESSION['plan_description'];?></textarea><br>
+    
+<?php
+  } else {
+?>
+
+    <span class="description_value"><?php echo $_SESSION['plan_description'];?></span>
+    
+<?php
+  }
+?>
+  </div> <br><br>
 
 
-  <span>Date on which the work shall be completed:</span>
+  <span class="description_title">Date on which the work shall be completed:</span>
+  
+<?php
+  //if the user is not making an order from an appointment
+  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
+?>
+
   <input type="date" name="plan_date" placeholder="Date" value="<?php echo $plan_date_format;?>"> <br>
-  <span><?php echo $plan_dateERR;?></span> <br>
+  
+<?php
+  } else {
+?>
+
+  <span class="description_value"><?php echo $plan_date_format;?></span> <br>
+  
+<?php
+  }
+?>
+  <span class="error_message"><?php echo $plan_dateERR;?></span> <br>
 
 </div>
 
@@ -423,76 +684,195 @@ if ($_SESSION['admin_loggedin']){
 <table class="table">
 
   <tr>
-    <th>Total Estimated Cost</th>
-    <th>Price Per Unit</th>
-    <th>Line Total</th>
+    <th class="description_title">Total Estimated Cost</th>
+    <th class="description_title">Price Per Unit</th>
+    <th class="description_title">Line Total</th>
   </tr>
 
 
   <tr>
-    <td>Parts:</td>
+    <td class="description_title">Parts:</td>
 
     <td>
-      <input type="number" name="estimate_parts_per_unit" placeholder="$-Parts/Unit" value="<?php echo $_SESSION['estimate_parts_per_unit'];?>"> <br>
-      <span><?php echo $estimate_parts_per_unitERR;?></span>
+    
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="estimate_parts_per_unit" placeholder="$-Parts/Unit" value="<?php echo $_SESSION['estimate_parts_per_unit'];?>"> <br>
+
+<?php
+  } else {
+?>
+      <span class="description_value"><?php echo $_SESSION['estimate_parts_per_unit'];?></span> <br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $estimate_parts_per_unitERR;?></span>
     </td>
 
     <td>
-      <input type="number" name="estimate_parts_total" placeholder="$-Parts Total" value="<?php echo $_SESSION['estimate_parts_total'];?>"> <br>
-      <span><?php echo $estimate_parts_totalERR;?></span>
+    
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="estimate_parts_total" placeholder="$-Parts Total" value="<?php echo $_SESSION['estimate_parts_total'];?>" id="sum1" onkeyup="add_estimate('<?php echo 'estimate_total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"> <br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['estimate_parts_total'];?></span> <br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $estimate_parts_totalERR;?></span>
     </td>
   </tr>
 
 
   <tr>
-    <td>Labour:</td>
+    <td class="description_title">Labour:</td>
 
     <td>
-      <input type="number" name="estimate_labour_per_unit" placeholder="$-Labour/Unit" value="<?php echo $_SESSION['estimate_labour_per_unit'];?>"> <br>
-      <span><?php echo $estimate_labour_per_unitERR;?></span>
+    
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="estimate_labour_per_unit" placeholder="$-Labour/Unit" value="<?php echo $_SESSION['estimate_labour_per_unit'];?>"> <br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['estimate_labour_per_unit'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $estimate_labour_per_unitERR;?></span>
     </td>
 
     <td>
-      <input type="number" name="estimate_labour_total" placeholder="$-Labour Total" value="<?php echo $_SESSION['estimate_labour_total'];?>"> <br>
-      <span><?php echo $estimate_labour_totalERR;?></span>
+    
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="estimate_labour_total" placeholder="$-Labour Total" value="<?php echo $_SESSION['estimate_labour_total'];?>" id="sum2" onkeyup="add_estimate('<?php echo 'estimate_total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"> <br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['estimate_labour_total'];?></span><br>
+
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $estimate_labour_totalERR;?></span>
     </td>
   </tr>
 
 
   <tr>
-    <td>Shop Supplies:</td>
+    <td class="description_title">Shop Supplies:</td>
 
     <td>
-      <input type="number" name="estimate_supplies_per_unit" placeholder="$-Supplies/Unit" value="<?php echo $_SESSION['estimate_supplies_per_unit'];?>"> <br>
-      <span><?php echo $estimate_supplies_per_unitERR;?></span>
+    
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="estimate_supplies_per_unit" placeholder="$-Supplies/Unit" value="<?php echo $_SESSION['estimate_supplies_per_unit'];?>"> <br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['estimate_supplies_per_unit'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $estimate_supplies_per_unitERR;?></span>
     </td>
 
     <td>
-      <input type="number" name="estimate_supplies_total" placeholder="$-Supplies Total" value="<?php echo $_SESSION['estimate_supplies_total'];?>"> <br>
-      <span><?php echo $estimate_supplies_totalERR;?></span>
+    
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="estimate_supplies_total" placeholder="$-Supplies Total" value="<?php echo $_SESSION['estimate_supplies_total'];?>" id="sum3" onkeyup="add_estimate('<?php echo 'estimate_total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"> <br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['estimate_supplies_total'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $estimate_supplies_totalERR;?></span>
     </td>
   </tr>
 
   <tr>
-    <td>Recycling/Disposal Fee:</td>
+    <td class="description_title">Recycling/Disposal Fee:</td>
 
     <td>
-      <input type="number" name="estimate_disposal_per_unit" placeholder="$-Recycling and Disposal/Unit" value="<?php echo $_SESSION['estimate_disposal_per_unit'];?>"> <br>
-      <span><?php echo $estimate_disposal_per_unitERR;?></span>
+    
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="estimate_disposal_per_unit" placeholder="$-Recycling and Disposal/Unit" value="<?php echo $_SESSION['estimate_disposal_per_unit'];?>"> <br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['estimate_disposal_per_unit'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $estimate_disposal_per_unitERR;?></span>
     </td>
 
     <td>
-      <input type="number" name="estimate_disposal_total" placeholder="$-Recycling and Disposal Total" value="<?php echo $_SESSION['estimate_disposal_total'];?>"> <br>
-      <span><?php echo $estimate_disposal_totalERR;?></span>
+    
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="estimate_disposal_total" placeholder="$-Recycling and Disposal Total" value="<?php echo $_SESSION['estimate_disposal_total'];?>" id="sum4" onkeyup="add_estimate('<?php echo 'estimate_total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"> <br>
+      
+<?php
+  } else {
+?>
+      <span class="description_value"><?php echo $_SESSION['estimate_disposal_total'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $estimate_disposal_totalERR;?></span>
     </td>
   </tr>
 
   <tr>
-    <td>Total Estimated Cost:</td>
+    <td class="description_title">Total Estimated Cost:</td>
     <td></td>
     <td>
-      <input type="number" name="estimate_total_cost" placeholder="$-Estimate Total" value="<?php echo $_SESSION['estimate_total_cost'];?>"> <br>
-      <span><?php echo $estimate_total_costERR;?></span>
+      
+      <span class="description_value" id="estimateTotal"><?php echo $_SESSION['estimate_total_cost'];?></span><br>
+      <span class="error_message"><?php echo $estimate_total_costERR;?></span>
     </td>
     
   </tr>
@@ -505,28 +885,117 @@ if ($_SESSION['admin_loggedin']){
 
 <div class="information">
 
-  <span class="information-heading">Date of Estimate:</span>
+  <span class="information-heading description_title">Date of Estimate:</span>
+  
+<?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
   <input type="date" name="estimate_date" placeholder="Date of Estimate" value="<?php echo $estimate_date_format?>"> <br>
-  <span><?php echo $estimate_dateERR;?></span><br>
+  
+<?php
+  } else {
+?>
+
+  <span class="description_value"><?php echo $estimate_date_format?></span> <br>
+  
+<?php
+  }
+?>
+  <span class="error_message"><?php echo $estimate_dateERR;?></span><br>
 
 
-  <span>This estimate expires on:</span>
+  <span class="description_title">This estimate expires on:</span>
+  
+<?php
+   //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
   <input type="date" name="estimate_expiry_date" placeholder="Expiry Date" value="<?php echo $estimate_expiry_date_format;?>"> <br>
-  <span><?php echo $estimate_expiry_dateERR;?></span> <br>
+  
+<?php
+  } else {
+?>
 
-  <span>Any parts removed in the course of work on repairs to the automobile shall be (select one)</span>
+  <span class="description_value"><?php echo $estimate_expiry_date_format;?></span><br>
+  
+<?php
+  }
+?>
+  <span class="error_message"><?php echo $estimate_expiry_dateERR;?></span> <br>
 
-  <select name="removal_choice" value="<?php echo $_SESSION['removal_choice'];?>">
+  <span class="description_title">Any parts removed in the course of work on repairs to the automobile shall be (select one)</span>
+
+
+<?php
+ //if the user is not viewing the form
+if (!$_SESSION['viewForm']){
+?>
+  <select name="removal_choice" id="removal_dropdown" value="<?php echo $_SESSION['removal_choice'];?>">
+    <option value="">Choose a Removal Option</option>
     <option value="A">(A) return to the undersigned</option>
     <option value="B">(B) disposed of by the School</option>
-  </select>
+  </select> <br>
+  
+  
+  <?php
+  if ($_SESSION['removal_choice'] == "B"){
+  ?>
+  
+  <script>
+  defaultSelect('removal_dropdown', 'B');
+  </script>
+  
+  <?php
+  } else if ($_SESSION['removal_choice'] == "A"){
+  ?>
+  
+  <script>
+  defaultSelect('removal_dropdown', 'A');
+  </script>
+  
+  <?php
+  }
+} else {
 
-  <span><?php echo $removal_choiceERR;?></span>
+  if ($_SESSION['removal_choice'] == "A"){
+  ?>
+  
+  <span class="description_value">(A) return to the undersigned</span> <br>
+  
+<?php
+  } else if ($_SESSION['removal_choice'] == "B"){
+?>
+
+  <span class="description_value">(B) disposed of by the School</span> <br>
+  
+<?php
+  }
+}
+?>
+
+  <span class="error_message"><?php echo $removal_choiceERR;?></span>
 
 </div>
 
-<input  class="button"type="submit" name="submit_intake" value="Submit"><br>
+
 <?php
+  //if the user is not viewing the form
+  if (!$_SESSION['viewForm']){
+?>
+
+<input  class="button"type="submit" name="submit_intake" value="Submit"><br>
+
+<?php
+  } else {
+?>
+
+<input  class="button"type="submit" name="submit_intake" value="Next"><br>
+
+<?php
+}
+
+
 //bring the user back to the worker control panel if they are a worker
 if($_SESSION['worker_loggedin']){
 ?>
@@ -543,8 +1012,16 @@ if($_SESSION['worker_loggedin']){
 <a href="../../admin/admin_cpanel.php">Back</a>
 
 <?php
-}
+// bring back the user to the customer complted orders page if they are the customer
+} else if ($_SESSION['customer_loggedin']){
 
+  $_SESSION['customer_section'] = "corders";
+?>
+
+<a href="../../customer/customer_cpanel.php">Back</a>
+
+<?php
+}
 
 //include the footer
 include '../../footer/footer.php';
@@ -582,3 +1059,4 @@ include '../../footer/footer.php';
 
 </body>
 </html>
+

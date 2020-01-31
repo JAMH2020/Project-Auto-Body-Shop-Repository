@@ -11,7 +11,7 @@ include_once "../database/error_check.php";
 
 // Prepare and bind select statement for the login
 //check customer accounts
-$stmt_clogin = $conn->prepare("SELECT * FROM Customer_Accounts WHERE Email = ? AND Password = ?");
+$stmt_clogin = $conn->prepare("SELECT * FROM Customer_Accounts WHERE Email = ? AND Password = ? AND Password != '-'");
 $stmt_clogin->bind_param("ss",$param_username, $param_password);
 
 //check worker accounts
@@ -79,7 +79,7 @@ if($stmt_clogin->num_rows > 0){
     $_SESSION["customer_loggedin"] = true;
     
     //customer's id
-    $_SESSION["cusomter_id"] = $customer_idRow;
+    $_SESSION["customer_id"] = $customer_idRow;
     
     //customer's firstname
     $_SESSION["customer_firstname"] = $customer_firstnameRow;
@@ -179,7 +179,7 @@ if($stmt_clogin->num_rows > 0){
         
       //prints out error if unable to find the username and password
       } else {
-        echo "<p>" . "Incorrect Username or Password" . "</p>";
+        $GLOBALS['loginERR'] = "<p>" . "Incorrect Username or Password" . "</p>";
       }
   
   

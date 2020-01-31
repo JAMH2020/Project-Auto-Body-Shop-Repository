@@ -28,7 +28,7 @@ body{
   border: 5px solid White;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 50px;
+  margin-bottom: 500px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
  }
@@ -42,7 +42,7 @@ body{
 
  .background{
   /* The Background Image */
-  background-image:url("https://columbiaautoservice.ca/wp-content/uploads/2018/03/Service-5.jpg");
+  background-image:url("../images/login/login.png");
     min-height: 550px; 
     background-attachment: fixed;
     background-position: center;
@@ -67,6 +67,11 @@ body{
  /*text input box*/
  .form-control{
   transition: background-color 1s, border-color 1s, color 1s;
+  -ms-transition: background-color 1s, border-color 1s, color 1s;
+  -webkit-transition: background-color 1s, border-color 1s, color 1s;
+  -moz-transition: background-color 1s, border-color 1s, color 1s;
+  -o-transition: background-color 1s, border-color 1s, color 1s;
+  
   border-radius: 5px;
   color: rgb(51, 204, 204);
   background-color: rgb(0, 51, 102);
@@ -77,6 +82,11 @@ body{
  /*text inputs when highlighted*/
  .form-control:focus{
    transition: background-color 1s, border-color 1s, color 1s;
+   -ms-transition: background-color 1s, border-color 1s, color 1s;
+   -webkit-transition: background-color 1s, border-color 1s, color 1s;
+   -moz-transition: background-color 1s, border-color 1s, color 1s;
+   -o-transition: background-color 1s, border-color 1s, color 1s;
+   
    background-color:rgb(51, 204, 204);
    border-color: rgb(0, 51, 102);
    color: rgb(0, 51, 102);
@@ -86,6 +96,11 @@ body{
  /*login button*/
  .login_btn{
    transition: background-color 1s, border-color 1s;
+   -ms-transition: background-color 1s, border-color 1s;
+   -webkit-transition: background-color 1s, border-color 1s;
+   -moz-transition: background-color 1s, border-color 1s;
+   -o-transition: background-color 1s, border-color 1s;
+   
    padding: 2px 30px;
    color: rgb(0, 51, 102);
    border-radius: 20px;
@@ -97,6 +112,11 @@ body{
  /*button on hover*/
  .login_btn:hover{
    transition: background-color 1s, border-color 1s;
+   -ms-transition: background-color 1s, border-color 1s;
+   -webkit-transition: background-color 1s, border-color 1s;
+   -moz-transition: background-color 1s, border-color 1s;
+   -o-transition: background-color 1s, border-color 1s;
+   
    background-color: rgb(0,255,204);
    border-color: rgb(0,255,204);
    cursor: pointer;
@@ -111,6 +131,11 @@ body{
  /*link to signup page*/
  .join_link{
    transition: color 1s;
+   -ms-transition: color 1s;
+   -webkit-transition: color 1s;
+   -moz-transition: color 1s;
+   -o-transition: color 1s;
+   
    text-decoration: none;
    color:rgb(0, 153, 153);
    display: block;
@@ -124,6 +149,11 @@ body{
 
  .link_underline{
   transition: opactiy 1s, background-color 1s, transform 1s;
+  -ms-transition: opactiy 1s, background-color 1s, transform 1s;
+  -webkit-transition: opactiy 1s, background-color 1s, transform 1s;
+  -moz-transition: opactiy 1s, background-color 1s, transform 1s;
+  -o-transition: opactiy 1s, background-color 1s, transform 1s;
+  
   opacity:0;
   padding: 1px 2px;
   background-color:rgb(0, 153, 153);
@@ -138,7 +168,16 @@ body{
    opacity:1;
    background-color:rgb(0, 255, 204);
    transform: scaleX(17);
+   -ms-transform: scaleX(17);
+   -webkit-transform: scaleX(17);
+   -moz-transform: scaleX(17);
+   -o-transform: scaleX(17);
+   
    transition: opactiy 1s, background-color 1s, transform 1s;
+   -ms-transition: opactiy 1s, background-color 1s, transform 1s;
+   -webkit-transition: opactiy 1s, background-color 1s, transform 1s;
+   -moz-transition: opactiy 1s, background-color 1s, transform 1s;
+   -o-transition: opactiy 1s, background-color 1s, transform 1s;
 
  }
  
@@ -155,10 +194,20 @@ body{
  /*custom checkmark*/
  .checkmark{
    transition: background-color 0.5s, opacity 1s;
+   -ms-transition: background-color 0.5s, opacity 1s;
+   -webkit-transition: background-color 0.5s, opacity 1s;
+   -moz-transition: background-color 0.5s, opacity 1s;
+   -o-transition: background-color 0.5s, opacity 1s;
+   
    padding: 10px;
    background-color: rgb(0, 51, 102);
    display:inline-block;
+   
    transform:translate(0,5px);
+   -ms-transform:translate(0,5px);
+   -webkit-transform:translate(0,5px);
+   -moz-transform:translate(0,5px);
+   -o-transform:translate(0,5px);
  }
 
  /*the hidden checkbox*/
@@ -171,6 +220,10 @@ body{
  .checkbox_container:hover .checkmark{
   background-color:rgb(0, 115, 230);
   transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
  }
 
  /*have a pointer cursor when hovering over the checkbox or its heading*/
@@ -182,6 +235,11 @@ body{
  .checkbox_hidden:checked ~ .checkmark{
   background-color:rgb(51, 204, 204);
   transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  
  }
 
  /*add a check symbol when the checkbox is checked*/
@@ -195,6 +253,10 @@ body{
    left: 7px;
    height:6px;
    transform:rotate(45deg);
+   -ms-transform:rotate(45deg);
+   -webkit-transform:rotate(45deg);
+   -moz-transform:rotate(45deg);
+   -o-transform:rotate(45deg);
    border-width: 0 2px 2px 0;
  }
 
@@ -202,5 +264,17 @@ body{
  .checkbox_hidden:checked ~.checkmark::after{
    opacity:1;
    transition:opacity 1s;
+   -ms-transition:opacity 1s;
+   -webkit-transition:opacity 1s;
+   -moz-transition:opacity 1s;
+   -o-transition:opacity 1s;
  }
+ 
+ 
+ 
+ /*error message*/
+ .error_message{
+   color:rgb(255, 71, 26);
+ }
+
 

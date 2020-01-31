@@ -3,6 +3,9 @@
 if (session_start() === null){
   session_start();
 }
+
+//check if the user is logged in yet
+include_once "../../login/login_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -164,90 +167,67 @@ include_once "../../database/fixinput.php";
 //returns an error message if a field is missing
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
   
-  //customer work order number
-  createErrMsg("submit_invoice", "order number", "order_no", "order_noERR");
- 
-  //customer firstname
-  createErrMsg("submit_invoice", "customer firstname", "customer_firstname", "customer_firstnameERR");
   
-  //customer lastname
-  createErrMsg("submit_invoice", "customer lastname", "customer_lastname", "customer_lastnameERR");
- 
-  //customer phone number
-  createErrMsg("submit_invoice", "customer phone ", "customer_phone", "customer_phoneERR");
- 
-  //customer address
-  createErrMsg("submit_invoice", "customer address", "customer_address", "customer_addressERR");
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
   
-  //customer invoice number
-  createErrMsg("submit_invoice", "invoice number", "invoice_no", "invoice_noERR");
-  
-  //car model year
-  createErrMsg("submit_intvoice", "car model year", "car_year", "car_yearERR");
- 
-  //car year make
-  createErrMsg("submit_invoice", "car make ", "car_make", "car_makeERR");
- 
-  //car model
-  createErrMsg("submit_invoice", "car model", "car_model", "car_modelERR");
- 
-  //car VIN number
-  createErrMsg("submit_invoice", "VIN number", "vin_no", "vin_noERR");
-  
-   //car license plate
-  createErrMsg("submit_invoice", "license plate", "license_plate", "license_plateERR");
-  
-  //intake odometer reading
-  createErrMsg("submit_invoice", "intake odometer", "odometer_intake", "odometer_intakeERR");
-  
-  //odometer reading when returned
-  createErrMsg("submit_invoice", "return reading", "odometer_return", "odometer_returnERR");
-  
-  //description of work done
-  createErrMsg("submit_invoice", "description", "done_description", "done_descriptionERR");
-  
-  //authorization date of work
-  createErrMsg("submit_invoice", "authorization date", "plan_date", "plan_dateERR");
-  
-  //completion date of work
-  createErrMsg("submit_invoice", "completion date", "completion_date", "completion_dateERR");
-  
-  //date when vehicle was returned
-  createErrMsg("submit_invoice", "date of return", "return_date", "return_dateERR");
-  
-  //returned parts returned or not
-  createErrMsg("submit_invoice", "removed parts returned or not", "removal_choice", "removal_choiceERR");
-  
-  //cost of parts per unit
-  createErrMsg("submit_invoice", "cost of parts/unit", "parts_per_unit", "parts_per_unitERR");
-  
-  //cost of labour per unit
-  createErrMsg("submit_invoice", "cost of labour/unit", "labour_per_unit", "labour_per_unitERR");
-  
-  //cost of shop supplies per unit
-  createErrMsg("submit_invoice", "cost of supplies/unit", "supplies_per_unit", "supplies_per_unitERR");
-  
-  //cost of recycling/disposal per unit
-  createErrMsg("submit_invoice", "cost of disposal/unit", "disposal_per_unit", "disposal_per_unitERR");
+    //odometer reading when returned
+    createErrMsg("submit_invoice", "return reading", "odometer_return", "odometer_returnERR");
+    check_number($_SESSION['odometer_return'] , "return reading", "odometer_returnERR");
     
-  //cost of parts
-  createErrMsg("submit_invoice", "cost of parts", "parts_total", "parts_totalERR");
+    //error if odometer return is less than odometer intake
+    if ($_SESSION['odometer_return'] < $_SESSION['odometer_intake'] && is_numeric($_SESSION['odometer_return'])){
+      $odometer_returnERR = "return reading must be greater or equal to the odometer reading on intake";
+    }
   
-  //cost of labour
-  createErrMsg("submit_invoice", "cost of labout", "labour_total", "labour_totalERR");
   
-  //cost of supplies
-  createErrMsg("submit_invoice", "supplies cost", "supplies_total", "supplies_totalERR");
+    //description of work done
+    createErrMsg("submit_invoice", "description", "done_description", "done_descriptionERR");
   
-  //items recycled or disposed of fees
-  createErrMsg("submit_invoice", "fees of disposal or recycling", "disposal_total", "disposal_totalERR");
   
-  //total estimated cost
-  createErrMsg("submit_invoice", "estimated costs", "estimate_total_cost", "estimate_total_costERR");
+    //completion date of work
+    createErrMsg("submit_invoice", "completion date", "completion_date", "completion_dateERR");
+    system_date_limit($_SESSION['completion_date'], "completion date", "completion_dateERR" ,$_SESSION['plan_date'], "today");
   
-  //total cost of repair
-  createErrMsg("submit_invoice", "repair cost", "total_cost", "total_costERR");
+    //date when vehicle was returned
+    createErrMsg("submit_invoice", "date of return", "return_date", "return_dateERR");
+    system_date_limit($_SESSION['return_date'], "date of return", "return_dateERR" ,$_SESSION['plan_date'], "today");
   
+  
+    //cost of parts per unit
+    createErrMsg("submit_invoice", "cost of parts/unit", "parts_per_unit", "parts_per_unitERR");
+    check_number($_SESSION['parts_per_unit'] , "cost of parts/unit", "parts_per_unitERR");
+  
+    //cost of labour per unit
+    createErrMsg("submit_invoice", "cost of labour/unit", "labour_per_unit", "labour_per_unitERR");
+    check_number($_SESSION['labour_per_unit'] , "cost of labour/unit", "labour_per_unitERR");
+  
+    //cost of shop supplies per unit
+    createErrMsg("submit_invoice", "cost of supplies/unit", "supplies_per_unit", "supplies_per_unitERR");
+    check_number($_SESSION['supplies_per_unit'] , "cost of supplies/unit", "supplies_per_unitERR");
+  
+    //cost of recycling/disposal per unit
+    createErrMsg("submit_invoice", "cost of disposal/unit", "disposal_per_unit", "disposal_per_unitERR");
+    check_number($_SESSION['disposal_per_unit'] , "cost of disposal/unit", "disposal_per_unitERR");
+    
+    //cost of parts
+    createErrMsg("submit_invoice", "cost of parts", "parts_total", "parts_totalERR");
+    check_number($_SESSION['parts_total'] , "cost of parts", "parts_totalERR");
+  
+    //cost of labour
+    createErrMsg("submit_invoice", "cost of labout", "labour_total", "labour_totalERR");
+    check_number($_SESSION['labour_total'] , "cost of labour", "labour_totalERR");
+  
+    //cost of supplies
+    createErrMsg("submit_invoice", "supplies cost", "supplies_total", "supplies_totalERR");
+    check_number($_SESSION['supplies_total'] , "cost of supplies", "supplies_totalERR");
+  
+    //items recycled or disposed of fees
+    createErrMsg("submit_invoice", "fees of disposal or recycling", "disposal_total", "disposal_totalERR");
+    check_number($_SESSION['disposal_total'] , "cost of disposal", "disposal_totalERR");
+  
+  }
+
 }
 
 
@@ -283,6 +263,17 @@ or $parts_totalERR  != "" or $labour_totalERR != "" or $supplies_totalERR != "" 
   }
   
   
+  
+  
+  
+  //autogenerate an invoice number if the user is making a new invoice
+  if (!$_SESSION['editForm']){
+    include_once "../../database/select/find_invoice_id.php";
+    
+    $_SESSION['invoice_no'] = generate_invoice_no($conn);
+  }
+  
+  
 
 
 //ask the user to input the required fields if the user has not pressed the submit button yet
@@ -291,90 +282,86 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
   include "../../navigation_bar/navigation_bar.php";
 ?>
 
+
+<script>
+function add_estimate(session, value1, value2, value3, value4){
+  $("#totalCost").load("../../src/sum_price.php?session=" + session + "&p1=" + value1 + "&p2=" + value2 + "&p3=" + value3 + "&p4=" + value4);
+}
+
+</script>
+
 <!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
-<h1>Automotive Final invoice</h1>
+<h1 class="invoice_title">Automotive Final invoice</h1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
-<h3>Customer information</h3>
-<span>Work Order #:</span>
-<input type="number" name="order_no" placeholder="Work Order No." value="<?php echo $_SESSION['order_no'];?>"> <br>
-<span><?php echo $order_noERR;?></span> <br>
+<h3 class="subtitle">Customer information</h3>
+<span class="description_title">Work Order #:</span>
+<span class="description_value"><?php echo $_SESSION['order_no'];?></span> <br>
 
 
-<span>Name(Print):</span>
-<input type="text" name="customer_firstname" placeholder="Customer Firstname" value="<?php echo $_SESSION['customer_firstname'];?>">
+<span class="description_title">Name(Print):</span>
+<span class="description_value"><?php echo $_SESSION['customer_firstname'];?></span>
 
-<input type="text" name="customer_lastname" placeholder="Customer Lastname" value="<?php echo $_SESSION['customer_lastname'];?>">
-
-
-<span>Phone:</span>
-<input type="tel" name="customer_phone" placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required value="<?php echo $_SESSION['customer_phone'];?>"><br>
-<span><?php echo $customer_firstnameERR;?></span>
-<span><?php echo $customer_lastnameERR;?></span>
-<span><?php echo $customer_phoneERR;?></span> <br>
+<span class="description_value"><?php echo $_SESSION['customer_lastname'];?></span>
 
 
-<span>Address:</span>
-<input type="text" name="customer_address" placeholder="Customer Address" value="<?php echo $_SESSION['customer_address'];?>"> <br>
-<span><?php echo $customer_addressERR;?></span> <br>
+<span class="description_title">Phone:</span>
+<span class="description_value"><?php echo $_SESSION['customer_phone'];?></span><br>
 
-<span>Email:</span>
-<input type="email" name="customer_email" placeholder="Email of customer." value="<?php echo $_SESSION['customer_email'];?>"><br>
-<span><?php echo $customer_emailERR;?></span> <br>
 
-<span>invoice #:</span>
-<input type="number" name="invoice_no" placeholder="Invoice number" value="<?php echo $_SESSION['invoice_no'];?>">
 
-<span>Date of Invoice:</span>
-<span> <?php echo date("D j/M/Y")?> </span> <br>
-<span><?php echo $invoice_noERR;?></span>
+<span class="description_title">Address:</span>
+<span class="description_value"><?php echo $_SESSION['customer_address'];?></span><br>
+
+<span class="description_title">Email:</span>
+<span class="description_value"><?php echo $_SESSION['customer_email'];?></span><br>
+
+<span class="description_title">invoice #:</span>
+<span class="description_value"><?php echo $_SESSION['invoice_no'];?></span>
+
+<span class="description_title">Date of Invoice:</span>
+<span class="description_value"> <?php echo date("D j/M/Y")?> </span> <br>
 
 
 
 
-<h3>Automobile repaired</h3>
+<h3 class="subtitle">Automobile repaired</h3>
 
 <table>
   <tr>
     <td>
-      <span>Year:</span>
-      <input type="number" max = "4" min = "4" name="car_year" placeholder="car year model" value="<?php echo $_SESSION['car_year'];?>"><br>
-      <span><?php echo $car_yearERR;?></span>
+      <span class="description_title">Year:</span>
+      <span class="description_value"><?php echo $_SESSION['car_year'];?></span><br>
     </td>
     
     <td> 
-      <span>VIN #:</span>
-       <input type="text" max = "17" min = "17" name="vin_no" placeholder="VIN" value="<?php echo $_SESSION['vin_no'];?>"><br>
-      <span><?php echo $Vin_noERR;?></span> <br>
+      <span class="description_title">VIN #:</span>
+      <span class="description_value"><?php echo $_SESSION['vin_no'];?></span><br>
     </td>
   
   </tr>
   
   <tr>
     <td>
-      <span>Make:</span>
-      <input type="text" name="car_make" placeholder="Make" value="<?php echo $_SESSION['car_make'];?>"> <br>
-      <span><?php echo $car_makeERR;?></span>
+      <span class="description_title">Make:</span>
+      <span class="description_value"><?php echo $_SESSION['car_make'];?></span>
     </td>
     
     <td>
-      <span>License Plate</span>
-      <input type="text" max = "8" min = "2" name="license_plate" placeholder="License plate" value="<?php echo $_SESSION['license_plate'];?>"> <br>
-      <span><?php echo $license_plateERR;?></span>
+      <span class="description_title">License Plate</span>
+      <span class="description_value"><?php echo $_SESSION['license_plate'];?></span>
     </td>
   </tr>
   
   <tr>
     <td>
-      <span>Model:</span>
-      <input type="text" name="car_model" placeholder="Model" value="<?php echo $_SESSION['car_model'];?>"> <br>
-      <span><?php echo $car_modelERR;?></span>
+      <span class="description_title">Model:</span>
+      <span class="description_value"><?php echo $_SESSION['car_model'];?></span>
     </td>
     
     <td>
-      <span>Odometer reading on intake:</span>
-      <input type="number" name="odometer_intake" placeholder="Odometer on Intake" value="<?php echo $_SESSION['odometer_intake'];?>"> <br>
-      <span><?php echo $odometer_intakeERR;?></span> <br>
+      <span class="description_title">Odometer reading on intake:</span>
+      <span class="description_value"><?php echo $_SESSION['odometer_intake'];?></span> <br>
     </td>
   </tr>
   
@@ -382,136 +369,334 @@ if ($error_invoice_input  or !isset($_POST['submit_invoice'])){
     <td>
     </td>
     <td>
-      <span>Odometer reading on return:</span>
-      <input type="number" name="odometer_return" placeholder="Odometer on Return" value="<?php echo $_SESSION['odometer_return'];?>"><br>
-      <span><?php echo $odometer_returnERR;?></span>
+      <span class="description_title">Odometer reading on return:</span>
+      
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="odometer_return" placeholder="Odometer on Return" value="<?php echo $_SESSION['odometer_return'];?>"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['odometer_return'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $odometer_returnERR;?></span>
     </td>
   </tr>
   
 </table> <br>
 
-<p>Detailed description of work performed, parts (including whether each part is a new part provided by the original equipment manufacturer, a new part not provided by the original equipment manufacturer, a used part or a reconditioned part) shop materials, environmental related, fees, disposal/recycling fees, etc.:
+<p class="description_title">Detailed description of work performed, parts (including whether each part is a new part provided by the original equipment manufacturer, a new part not provided by the original equipment manufacturer, a used part or a reconditioned part) shop materials, environmental related, fees, disposal/recycling fees, etc.:
 </p>
 
-<span><?php echo $done_descriptionERR;?></span> <br>
-<textarea name="done_description" placeholder="Description..." rows="10" columns="50"><?php echo $_SESSION['done_description'];?></textarea><br>
+<span class="error_message"><?php echo $done_descriptionERR;?></span> <br>
 
-<span>Date of authorization of work:</span>
-<input type="date" name="plan_date" value="<?php echo $plan_date_format;?>">
-
-<span>Date of completion of work:</span>
-<input type="date" name="completion_date" value="<?php echo $completion_date_format;?>"><br>
-<span><?php echo $work_dateERR;?></span>
-<span><?php echo $completion_dateERR;?></span> <br>
-
-<span>Date vehicle was returned:</span>
-<input type="date" name="return_date" placeholder="Date of return" value="<?php echo $return_date_format;?>"> <br>
-<span><?php echo $return_dateERR;?></span> <br>
-
-<span>Any parts removed in the course of work on or repairs to the automobile shall be (select one): </span>
-<select name="removal_choice" value="<?php echo $_SESSION['removal_choice'];?>">
 <?php
-//display the selected option based off the session variable
-if ($_SESSION['removal_choice'] == "A"){
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
 ?>
 
-  <option value="A" selected>(A) return to the undersigned</option>
-  <option value="B">(B) disposed of by the School</option>
+<textarea name="done_description" class="description_comment" placeholder="Description..." rows="10" columns="50"><?php echo $_SESSION['done_description'];?></textarea><br>
 
 <?php
 } else {
 ?>
 
-  <option value="A">(A) return to the undersigned</option>
-  <option value="B" selected>(B) disposed of by the School</option>
+<span class="description_value"><?php echo $_SESSION['done_description'];?></span><br><br>
 
 <?php
 }
 ?>
-</select>
+
+<span class="description_title">Date of authorization of work:</span>
+<span class="description_value"><?php echo $plan_date_format;?></span>
+
+<span class="description_title">Date of completion of work:</span>
+
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+
+<input type="date" name="completion_date" value="<?php echo $completion_date_format;?>">
+
+<?php
+  } else {
+?>
+
+<span class="description_value"><?php echo $completion_date_format;?></span>
+
+<?php
+  }
+?>
+
+<span class="error_message"><?php echo $completion_dateERR;?></span> <br>
+
+<span class="description_title">Date vehicle was returned:</span>
+
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+
+<input type="date" name="return_date" placeholder="Date of return" value="<?php echo $return_date_format;?>"> <br>
+
+<?php
+  } else {
+?>
+
+<span class="description_value"><?php echo $return_date_format;?></span><br>
+
+<?php
+  }
+?>
+
+
+<span class="error_message"><?php echo $return_dateERR;?></span> <br>
+
+<span class="description_title">Any parts removed in the course of work on or repairs to the automobile shall be (select one): </span>
+<?php
+//display the selected option based off the session variable
+if ($_SESSION['removal_choice'] == "A"){
+?>
+
+  <span class="description_value">(A) return to the undersigned</span>
+
+<?php
+} else {
+?>
+
+  <span class="description_value">(B) disposed of by the School</span>
+
+<?php
+}
+?>
+ 
+<h3 class="subtitle">TOTAL COST</h3> 
  
 <table>
   <tr>
-    <th>TOTAL COST</th>
-    <th>Price Per Unit</th>
-    <th>Line Total</th>
+    <th></th>
+    <th class="description_title">Price Per Unit</th>
+    <th class="description_title">Line Total</th>
   </tr>
   
   <tr>
-    <td>PARTS:</td>
+    <td class="description_title">PARTS:</td>
     
     <td>
-      <input type="number" name="parts_per_unit" placeholder="$ -Parts/Unit" value="<?php echo $_SESSION['parts_per_unit'];?>"><br>
-      <span><?php echo $parts_per_unitERR;?></span>
-    </td>
     
-    <td>
-      <input type="number" name="parts_total" placeholder="$ -Parts Total" value="<?php echo $_SESSION['parts_total'];?>"><br>
-      <span><?php echo $parts_totalERR;?></span>
-    </td>
-  </tr>
-  
-  <tr>
-    <td>LABOUR:</td>
-    <td>
-      <input type="number" name="labour_per_unit" placeholder="$ -Labour/Unit" value="<?php echo $_SESSION['labour_per_unit'];?>"><br>
-      <span><?php echo $labour_per_unitERR;?></span>
-    </td>
-    
-    <td>
-      <input type="number" name="labour_total" placeholder="$ -Labour Total" value="<?php echo $_SESSION['labour_total'];?>"><br>
-      <span><?php echo $labour_totalERR;?></span>
-    </td>
-  </tr>
-  
-  <tr>
-    <td>SHOP SUPPLIES:</td>
-    <td>
-      <input type="number" name="supplies_per_unit" placeholder="$ -Supplies/Unit" value="<?php echo $_SESSION['supplies_per_unit'];?>"><br>
-      <span><?php echo $supplies_per_unitERR;?></span>
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="parts_per_unit" placeholder="$ -Parts/Unit" value="<?php echo $_SESSION['parts_per_unit'];?>"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['parts_per_unit'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $parts_per_unitERR;?></span>
     </td>
     
     <td>
-      <input type="number" name="supplies_total" placeholder="$ -Supplies Total" value="<?php echo $_SESSION['supplies_total'];?>"><br>
-      <span><?php echo $supplies_totalERR;?></span>
-    </td>
-  </tr>
-  
-  <tr>
-    <td>RECYCLING/ DISPOSAL FEE:</td>
-    <td>
-      <input type="number" name="disposal_per_unit" placeholder="$ -Disposal/Unit" value="<?php echo $_SESSION['disposal_per_unit'];?>"><br>
-      <span><?php echo $disposal_per_unitERR;?></span>
-    </td>
     
-    <td>
-      <input type="number" name="disposal_total" placeholder="$ -Disposal Total" value="<?php echo $_SESSION['disposal_total'];?>"><br>
-      <span><?php echo $disposal_totalERR;?></span>
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="parts_total" placeholder="$ -Parts Total" value="<?php echo $_SESSION['parts_total'];?>" id="sum1" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['parts_total'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $parts_totalERR;?></span>
     </td>
   </tr>
   
   <tr>
-    <td>ESTIMATED OR AUTHORIZED COST:</td>
+    <td class="description_title">LABOUR:</td>
+    <td>
+    
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+
+      <input type="text" name="labour_per_unit" placeholder="$ -Labour/Unit" value="<?php echo $_SESSION['labour_per_unit'];?>"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['labour_per_unit'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $labour_per_unitERR;?></span>
+    </td>
+    
+    <td>
+    
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="labour_total" placeholder="$ -Labour Total" value="<?php echo $_SESSION['labour_total'];?>" id="sum2" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['labour_total'];?></span><br>
+      
+<?php
+  }
+?>
+
+      <span class="error_message"><?php echo $labour_totalERR;?></span>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="description_title">SHOP SUPPLIES:</td>
+    <td>
+    
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="supplies_per_unit" placeholder="$ -Supplies/Unit" value="<?php echo $_SESSION['supplies_per_unit'];?>"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['supplies_per_unit'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $supplies_per_unitERR;?></span>
+    </td>
+    
+    <td>
+    
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="supplies_total" placeholder="$ -Supplies Total" value="<?php echo $_SESSION['supplies_total'];?>" id="sum3" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['supplies_total'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $supplies_totalERR;?></span>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="description_title">RECYCLING/ DISPOSAL FEE:</td>
+    <td>
+    
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="disposal_per_unit" placeholder="$ -Disposal/Unit" value="<?php echo $_SESSION['disposal_per_unit'];?>"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['disposal_per_unit'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $disposal_per_unitERR;?></span>
+    </td>
+    
+    <td>
+    
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
+      <input type="text" name="disposal_total" placeholder="$ -Disposal Total" value="<?php echo $_SESSION['disposal_total'];?>" id="sum4" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
+      
+<?php
+  } else {
+?>
+
+      <span class="description_value"><?php echo $_SESSION['disposal_total'];?></span><br>
+      
+<?php
+  }
+?>
+      <span class="error_message"><?php echo $disposal_totalERR;?></span>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="description_title">ESTIMATED OR AUTHORIZED COST:</td>
     <td></td>
     <td>
-      <input type="number" name="estimate_total_cost" placeholder="$ -Estimated Total" value="<?php echo $_SESSION['estimate_total_cost'];?>"><br>
-      <span><?php echo $estimate_total_costERR;?></span>
+      <span class="description_value"><?php echo $_SESSION['estimate_total_cost'];?></span>
     </td>
   </tr>
   
   <tr>
-    <td>TOTAL COST:</td>
+    <td class="description_title">TOTAL COST:</td>
     <td></td>
     <td>
-      <input type="number" name="total_cost" placeholder="$ -Total" value="<?php echo $_SESSION['total_cost'];?>"><br>
-      <span><?php echo $total_costERR;?></span>
+      <span class="description_value" id="totalCost"><?php echo $_SESSION['total_cost'];?></span><br>
+      <span class="error_message"><?php echo $total_costERR;?></span>
     </td>
   </tr>
 
 </table> <br>
   
 
+<?php
+  //if the user is not viewing the invoice
+  if (!$_SESSION['viewForm']){
+?>
 <input type="submit" name="submit_invoice" value="Submit">
+
+<?php
+  } else {
+?>
+
+<input type="submit" name="submit_invoice" value="Next">
+
+<?php
+  }
+?>
 
 </form>
 <?php
@@ -596,6 +781,17 @@ if ($_SESSION['worker_loggedin']){
   
 <?php  
   }
+  
+//back button redirects customer to the check invoices page if the customer is logged in
+} else if ($_SESSION['customer_loggedin']){
+
+  $_SESSION['customer_section'] = "invoices";
+?>
+
+<a href="../../customer/customer_cpanel.php">Back</a>
+
+
+<?php
 }
 
 

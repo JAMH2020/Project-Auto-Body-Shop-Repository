@@ -5,7 +5,7 @@
 
 
 //connect to the database
-include_once '../../../database/connectdb.php';
+include '../../../database/connectdb.php';
 
 //include file to check for errors in sql statements
 include_once '../../../database/error_check.php';
@@ -60,3 +60,4 @@ $stmt_u_profiles->execute();
 $stmt_u_caccounts->close();
 $stmt_u_profiles->close();
 ?>
+

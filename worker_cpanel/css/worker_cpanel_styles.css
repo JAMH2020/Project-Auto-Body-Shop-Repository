@@ -1,7 +1,16 @@
 /*section for all the links in the worker cpanel*/
 .worker_cpanel_links{
   display: flex;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -o-flex;
+  
   flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
   font-size: 0;
   position: relative;
 
@@ -24,12 +33,20 @@
   background-color: #ff6666;
   color: white;
   transition: background-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .closed_tab{
   background-color: rgb(248,248,248);
    box-shadow: 0 -3px 3px -3px rgb(0,0,0), 3px 0px 3px -3px black, -3px 0px 3px -3px black;
    transition: background-color 0.5s ease, color 0.5s ease;
+   -ms-transition: background-color 0.5s ease, color 0.5s ease;
+   -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+   -moz-transition: background-color 0.5s ease, color 0.5s ease;
+   -o-transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .opened_tab{
@@ -85,4 +102,5 @@
   margin-left: auto;
   margin-right: auto;
 }
+
 

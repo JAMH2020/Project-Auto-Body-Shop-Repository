@@ -315,6 +315,15 @@ if ($_POST['editForm'] == "1"){
 
 
 
+//view orders if the user pressed the view button
+if ($_POST['viewForm'] == "1"){
+  $_SESSION['viewForm'] = true;
+  
+} else if ($_POST['viewForm'] == "0"){
+  $_SESSION['viewForm'] = false;
+}
+
+
 
 
 //execute the statement for getting values from the worker accounts table
@@ -416,3 +425,6 @@ $stmt_find_estimate->close();
 
 <!--redirect to the invoice page-->
 <script>redirect_page('../../worker_cpanel/invoices/invoice.php');</script>
+
+
+
