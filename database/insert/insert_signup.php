@@ -8,7 +8,7 @@
 include '../database/connectdb.php';
 
 //include file to check for errors in sql statements
-include '../database/error_check.php';
+include_once '../database/error_check.php';
 
 //prepare sql statement to bind
 $stmt_signup = $conn->prepare("INSERT INTO Customer_Accounts (First_Name, Last_Name, Password, Email) VALUES (?, ?, ?, ?)");
