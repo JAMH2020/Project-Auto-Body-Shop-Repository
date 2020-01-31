@@ -363,26 +363,28 @@ function system_date_limit($session, $name, $error_variable_name ,$system_date, 
     
     
     //check if the date is older
-    //check if the year is the same
-    if ($input_year == $current_year){
+    if ($system_date != "none"){
+      //check if the year is the same
+      if ($input_year == $current_year){
     
-      //check if the month is the same
-      if ($input_month == $current_month){
+        //check if the month is the same
+        if ($input_month == $current_month){
       
-        //check if the input day is less than the current day
-        if($input_day < $current_day){
-          $older = 1;
+          //check if the input day is less than the current day
+          if($input_day < $current_day){
+            $older = 1;
           
-        }
-        
-      } else if ($input_month < $current_month){
+          }
+          
+        } else if ($input_month < $current_month){
+          $older = 1;
+        } 
+      
+      //if the input year is less than the current year
+      } else if ($input_year < $current_year){
         $older = 1;
       } 
-      
-    //if the input year is less than the current year
-    } else if ($input_year < $current_year){
-      $older = 1;
-    } 
+    }
     
     
     
@@ -494,6 +496,9 @@ function password_check($password, $name, $error_variable_name){
     
     //variable to check if password contains a 
     $special_character = 0;
+    
+    //convert the password to lowercase
+    $password = strtolower($password);
     
     //if the length is less than 8 characters
     if ($length < 8){
