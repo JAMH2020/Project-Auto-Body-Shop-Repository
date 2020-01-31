@@ -356,7 +356,7 @@ if ($stmt_find_worker->num_rows > 0){
 
 
 
-
+/*
 echo "<p>i_id:" .  $_SESSION['invoice_id'] . "</p>";
 echo "<p>i_order_no.:" .  $_SESSION['order_no'] . "</p>";
 echo "<p>i_worker_id:" .  $_SESSION['worker_id'] . "</p>";
@@ -412,7 +412,7 @@ echo "<p>w_lastname:" . $_SESSION['worker_lastname'] . "</p>";
 echo "<p>w_email:" . $_SESSION['worker_email'] . "</p><br><br>";
 
 echo "<p>prev_invoice_no:" . $_SESSION['prev_invoice_no'] . "</p>";
-
+*/
 
 //close the statement
 $stmt_find_invoices->close();
