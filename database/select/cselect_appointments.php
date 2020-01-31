@@ -14,7 +14,7 @@ include_once '../database/error_check.php';
 function accepted_appointments($conn){
   //prepare and bind sql statement
   //inner join the customer accounts table into the orders table in order to get the customer's name using the customer id as the key
-  $stmt_accepted = $conn->prepare("SELECT * FROM Appointments WHERE Status = 'accepted' ORDER BY Appointment_Id DESC");
+  $stmt_accepted = $conn->prepare("SELECT * FROM Appointments WHERE Status = 'accepted' AND Customer_Id =" . $_SESSION['customer_id'] . " ORDER BY Appointment_Id DESC");
 
   //execute the prepared statement
   $stmt_accepted->execute();
@@ -82,7 +82,7 @@ function accepted_appointments($conn){
 function planned_appointments($conn){
   //prepare and bind sql statement
   //inner join the customer accounts table into the orders table in order to get the customer's name using the customer id as the key
-  $stmt_planned = $conn->prepare("SELECT * FROM Appointments WHERE Status = 'pending' ORDER BY Appointment_Id DESC");
+  $stmt_planned = $conn->prepare("SELECT * FROM Appointments WHERE Status = 'pending' AND Customer_Id =" . $_SESSION['customer_id'] . " ORDER BY Appointment_Id DESC");
 
   //execute the prepared statement
   $stmt_planned->execute();
@@ -159,7 +159,7 @@ $stmt_planned->close();
 function rejected_appointments($conn){
   //prepare and bind sql statement
   //inner join the customer accounts table into the orders table in order to get the customer's name using the customer id as the key
-    $stmt_rejected = $conn->prepare("SELECT * FROM Appointments WHERE Status = 'rejected' ORDER BY Appointment_Id DESC");
+    $stmt_rejected = $conn->prepare("SELECT * FROM Appointments WHERE Status = 'rejected' AND Customer_Id =" . $_SESSION['customer_id'] . " ORDER BY Appointment_Id DESC");
 
     //execute the prepared statement
     $stmt_rejected->execute();
@@ -393,3 +393,4 @@ function completed_invoices($conn){
   //close the statment
   $stmt_invoice->close();
 }
+?>
