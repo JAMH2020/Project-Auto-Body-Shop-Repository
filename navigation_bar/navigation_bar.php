@@ -31,10 +31,10 @@
 
 
     <div class="title_bar" id="stickyTitleX">
-      <div class ="title">
+      <a class ="title" href="http://www.portcreditautobodyshop.tk">
         <span class="title-heading title_front">Port Credit</span>
         <span class="title-heading title_back">Auto Repair Shop</span>
-      </div> 
+      </a> 
 
       <div class="site_information">
         <div class ="phone">
