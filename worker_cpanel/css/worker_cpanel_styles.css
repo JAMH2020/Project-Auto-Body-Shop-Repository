@@ -17,7 +17,7 @@
 }
 
 /*links for the options in the cpanel*/
-.a_option_link {
+.a_option_link, .a_appointment_link {
  display:inline-block;
  padding: 15px 15px ;
  color: black;
@@ -65,6 +65,46 @@
 }
 
 
+
+/*opened and closed tabs for appointments*/
+/*closing and opening tabs for the appointments*/
+.secondary_opened_tab{
+  background-color: rgb(204, 255, 204);
+  border-top: 3px solid rgb(0, 204, 102);
+  border-right: 3px solid rgb(0, 204, 102);
+  box-shadow: 0 -3px 3px -3px rgb(0, 204, 102), 3px 0px 3px -3px rgb(0, 204, 102), -3px 0px 3px -3px rgb(0, 204, 102);
+  z-index: 4;
+  top: 3px;
+  font-weight: bold;
+}
+
+.secondary_closed_tab{
+   background-color: rgb(255,255,255);
+   box-shadow: 0 -3px 3px -3px rgb(0,0,0), 3px 0px 3px -3px black, -3px 0px 3px -3px black;
+   transition: background-color 0.5s ease, color 0.5s ease;
+   -ms-transition: background-color 0.5s ease, color 0.5s ease;
+   -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+   -moz-transition: background-color 0.5s ease, color 0.5s ease;
+   -o-transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.secondary_closed_tab:hover {
+  background-color: rgb(0, 204, 102);
+  color: white;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+
+.secondary_center_opened_tab{
+  border-left: 3px solid rgb(0, 204, 102);
+}
+
+
+
 .space{
   margin-top: 100px;
 }
@@ -103,4 +143,34 @@
   margin-right: auto;
 }
 
+
+
+/*window for the appointments*/
+.appointment_window {
+  border-top: 2px solid rgb(0, 204, 102);
+  background-color: rgb(204, 255, 204);
+  padding: 24px 0;
+  min-height:500px;
+}
+
+
+
+/*notification to tell user that they have sent an email*/
+.notification_box{
+  background-color:rgb(102, 255, 153);
+  color:rgb(0, 102, 0);
+  border-top: 2px solid rgb(0, 102, 0);
+  border-bottom: 2px solid rgb(0, 102, 0);
+  text-align: center;
+  padding: 20px 0;
+  position:absolute;
+  width:100%;
+  display:none;
+  z-index:10;
+}
+
+
+.email_notification{
+  font-size:24px;
+}
 
