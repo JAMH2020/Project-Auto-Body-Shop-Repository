@@ -13,7 +13,7 @@ $_SESSION['editForm'] = false;
 
 
 
-<h2 class='invoice_title'>MY INVOICES</h2>
+<h2 class='order_title'>MY INVOICES</h2>
 
 <div id="editCheck"></div>
 

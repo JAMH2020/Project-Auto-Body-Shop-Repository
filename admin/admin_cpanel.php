@@ -32,6 +32,12 @@ $_SESSION['admin_create_caccount'] = 0;
 
 <html>
 <head>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Welcome <?php echo " " . $_SESSION['admin_firstname']; ?></title>
+  <meta name="description" content="Admin's Control Panel for Orders, Invoices, Appointments and Accounts">
+  <meta name="author" content="JAMH Group">
+
   <!--style sheet for the worker control panel-->
   <link rel="stylesheet" type="text/css" href="css/admin_cpanel_styles.css">
   
@@ -50,6 +56,8 @@ $_SESSION['admin_create_caccount'] = 0;
   <!--script used to remember a session when user clicks on a link-->
   <script src="../database/findRow.js"></script>
   
+  <!--script that will display message for any action user has done-->
+  <script src="../src/js/display_notification.js"></script>
   
 
 </head>
@@ -63,74 +71,137 @@ $_SESSION['admin_create_caccount'] = 0;
   if ($_SESSION['admin_section'] == "waccounts"){
 ?>
 
-    <script> openTab("<?php echo 'waccounts'; ?>");</script>
+    <script> openTab("<?php echo 'waccounts'; ?>", "a_option_link");</script>
 
 <?php
   } else if ($_SESSION['admin_section'] == "profiles"){
 ?>
-    <script> openTab("<?php echo 'profiles'; ?>");</script>
+    <script> openTab("<?php echo 'profiles'; ?>", "a_option_link");</script>
     
 <?php
   } else if ($_SESSION['admin_section'] == "caccounts"){
 ?>
 
-    <script> openTab("<?php echo 'caccounts';?>");</script>
+    <script> openTab("<?php echo 'caccounts';?>", "a_option_link");</script>
     
 <?php
   } else if ($_SESSION['admin_section'] == "invoices"){
 ?>
 
-    <script> openTab("<?php echo 'invoices';?>");</script>
+    <script> openTab("<?php echo 'invoices';?>", "a_option_link");</script>
     
 <?php
-  } else if ($_SESSION['admin_section'] == "aappointments"){
+  } else if ($_SESSION['admin_section'] == "appointments"){
 ?>
-    <script> openTab("<?php echo 'aappointments'; ?>");</script>
-        
 
-<?php
-  } else if ($_SESSION['admin_section'] == "rappointmnets"){
-?>
-    <script> openTab("<?php echo 'rappoinments'; ?>");</script>
-    
-  
-<?php
-  } else if ($_SESSION['admin_section'] == "iappointments"){
-?>
-    <script> openTab("<?php echo 'iappointments'; ?>");</script>
-    
+    <script> openTab("<?php echo 'appointments';?>", "a_option_link");</script>
     
 <?php
-  } else if ($_SESSION['admin_section'] == "mappointments"){
-?>
-    <script> openTab("<?php echo 'mappointments'; ?>");</script>
 
-
-<?php
   } else {
 ?>
 
-    <script> openTab("<?php echo 'orders';?>");</script>
+    <script> openTab("<?php echo 'orders';?>", "a_option_link");</script>
     
 <?php
+  }
+  
+  
+  $notification_job = "";
+  $notification_action = "";
+  
+  //comment for the notification if the user has inserted or editted a file
+  if ($_SESSION['order_done'] != ""){
+    $notification_job = "Order";
+    
+  } else if ($_SESSION['invoice_done'] != ""){
+    $notification_job = "Invoice";
+    
+  } else if ($_SESSION['appointment_done'] != ""){
+    $notification_job = "Appointment";
+    
+  } else if ($_SESSION['account_done'] != ""){
+    $notification_job = "Account";
+  
+  } else if ($_SESSION['profile_done'] != ""){
+    $notification_job = "Profile";
+  
+  }
+  
+  
+  
+  if ($_SESSION['order_done'] == "insert" || $_SESSION['invoice_done'] == "insert" || $_SESSION['appointment_done'] == "insert" || $_SESSION['account_done'] == "insert" || $_SESSION['profile_done'] == "insert"){
+  
+    $notification_action = "Inserted";
+    
+  } else if ($_SESSION['order_done'] == "edit" || $_SESSION['invoice_done'] == "edit" || $_SESSION['appointment_done'] == "edit" || $_SESSION['account_done'] == "edit" || $_SESSION['profile_done'] == "edit"){
+  
+    $notification_action = "Editted";
+    
+  } else if ($_SESSION['order_done'] == "delete"){
+  
+    $notification_action = "Deleted";
+    
   }
 ?>
 
 
+<div class="notification_box">
+  <span class="email_notification">
+    <i class='fas fa-check-circle sent_icon'></i>
+    <?php echo "Your " . $notification_job . " has been Successfully " . $notification_action; ?>
+  </span>
+</div>
+
+
+<div class="error_box">
+  <span class="error_notification">
+  <i class='fas fa-exclamation-triangle error_icon'></i>
+  <?php echo $_SESSION['error_notification'];?>
+  </span>
+</div>
+
+
+<?php
+//display any notifications if the user has editted or inserted data
+if ($_SESSION['order_done'] != "" || $_SESSION['invoice_done'] != "" || $_SESSION['appointment_done'] != "" || $_SESSION['account_done'] != "" || $_SESSION['profile_done'] != ""){
+?>
+
+<script>
+show_notification("notification_box");
+</script>
+
+<?php
+  $_SESSION['order_done'] = "";
+  $_SESSION['invoice_done'] = "";
+  $_SESSION['appointment_done'] = "";
+  $_SESSION['account_done'] = "";
+  $_SESSION['profile_done'] = "";
+}
+
+//display notification for error if there is any
+if ($_SESSION['error_notification'] != ""){
+?>
+
+<script>
+show_notification("error_box");
+</script>
+
+<?php
+  $_SESSION['error_notification'] = "";
+}
+?>
 
 <div class="admin_cpanelPage">
   <div class="background_admin_cpanel">
     <div class="admin_cpanel_links">
     
-      <a href="#" class="a_option_link closed_tab" id = "orders" onclick="loadFile('orders/check_orders.php'); openTab('orders');">Check Orders</a>
-      <a href="#" class="a_option_link closed_tab" id = "invoices" onclick="loadFile('invoices/check_invoices.php'); openTab('invoices');">Check Invoices</a>
-      <a href="#" class="a_option_link closed_tab" id = "caccounts" onclick="loadFile('accounts/customer_acc.php'); openTab('caccounts');">Check Customer Accounts</a>
-      <a href="#" class="a_option_link closed_tab" id = "profiles" onclick="loadFile('profiles/check_profiles.php'); openTab('profiles');">Check Profiles</a>
-      <a href="#" class="a_option_link closed_tab" id = "waccounts" onclick="loadFile('accounts/worker_acc.php'); openTab('waccounts');">Check Worker Accounts</a>
-      <a href="#" class="a_option_link closed_tab" id = "aappointments" onclick="loadFile('appointments/a_appointments.php'); openTab('aappointments');">Accepted Appointments</a>
-      <a href="#" class="a_option_link closed_tab" id = "rappointmnets" onclick="loadFile('appointments/r_appointments.php'); openTab('rappointmnets');">Rejected Appointments</a>
-      <a href="#" class="a_option_link closed_tab" id = "iappointments" onclick="loadFile('appointments/i_appointments.php'); openTab('iappointments');">Incoming Appointments</a>
-      <a href="#" class="a_option_link closed_tab" id = "mappointments" onclick="loadFile('appointments/m_appointments.php'); openTab('mappointments');">Met Appointments</a>
+      <a href="#" class="a_option_link closed_tab" id = "orders" onclick="loadFile('orders/check_orders.php'); openTab('orders', 'a_option_link');">Check Orders</a>
+      <a href="#" class="a_option_link closed_tab" id = "invoices" onclick="loadFile('invoices/check_invoices.php'); openTab('invoices', 'a_option_link');">Check Invoices</a>
+      <a href="#" class="a_option_link closed_tab" id = "caccounts" onclick="loadFile('accounts/customer_acc.php'); openTab('caccounts', 'a_option_link');">Check Customer Accounts</a>
+      <a href="#" class="a_option_link closed_tab" id = "profiles" onclick="loadFile('profiles/check_profiles.php'); openTab('profiles', 'a_option_link');">Check Profiles</a>
+      <a href="#" class="a_option_link closed_tab" id = "waccounts" onclick="loadFile('accounts/worker_acc.php'); openTab('waccounts', 'a_option_link');">Check Worker Accounts</a>
+      <a href="#" class="a_option_link closed_tab" id = "appointments" onclick="loadFile('appointments/appointments.php'); openTab('appointments', 'a_option_link');">Appointments</a>
       
     </div>
   </div>
@@ -162,32 +233,14 @@ $_SESSION['admin_create_caccount'] = 0;
         ?>
     
           <script> loadFile('invoices/check_invoices.php'); </script>
-      
-        <?php
-        } else if ($_SESSION['admin_section'] == 'aappointments'){
+          
+        
+         <?php
+        } else if ($_SESSION['admin_section'] == 'appointments'){
         ?>
     
-          <script> loadFile('appointments/a_appointments.php'); </script>
+          <script> loadFile('appointments/appointments.php'); </script>
       
-      
-        <?php
-        } else if ($_SESSION['admin_section'] == 'rappointmnets'){
-        ?>
-    
-          <script> loadFile('appointments/r_appointments.php'); </script>
-      
-      
-        <?php
-        } else if ($_SESSION['admin_section'] == 'iappointments'){
-        ?>
-    
-          <script> loadFile('appointments/i_appointments.php'); </script>
-         
-        <?php
-        } else if ($_SESSION['admin_section'] == 'mappointments'){
-        ?>
-    
-          <script> loadFile('appointments/m_appointments.php'); </script>
       
         <?php
         } else {

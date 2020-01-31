@@ -80,6 +80,7 @@ if ($stmt_find_cprofiles->num_rows > 0){
   echo "<p>nothing</p>";
 }
 
+/*
 echo "<p>c_id:" .  $_POST['profile_id'] . "</p>";
 echo "<p>c_firstame:" .  $_SESSION['customer_firstname'] . "</p>";
 echo "<p>c_lastname:" .  $_SESSION['customer_lastname'] . "</p>";
@@ -91,7 +92,7 @@ echo "<p>c_car make:" .  $_SESSION['car_make'] . "</p>";
 echo "<p>c_car model:" .  $_SESSION['car_model'] . "</p>";
 echo "<p>c_vin no:" .  $_SESSION['vin_no'] . "</p>";
 echo "<p>c_license plate:" .  $_SESSION['license_plate'] . "</p>";
-
+*/
 
 
 //close the statement

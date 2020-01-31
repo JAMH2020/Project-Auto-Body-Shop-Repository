@@ -23,25 +23,36 @@
 
 
 
-/*title for the appointment page*/
-.appointment_title{
-  text-decoration: underline;
-  /* transform: translate(-210px,-80px);*/
-  display:inline-block;
-  width:100%;
+/*title for the contacts*/
+.contacts_title_box{
+  padding: 40px 20px;
+  background-color: rgb(255, 102, 0);
   text-align: center;
-  padding-top:100px;
-  padding-bottom:80px;
-  font-size: 35px;
-  font-weight: bold;
 }
 
+.contacts_title{
+  color: rgb(255,255,255);
+  font-weight: bold;
+  font-size: 50px;
+}
+
+
+/*description for the comment section*/
+.comment_description{
+  color: rgb(0, 51, 102);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.comment_description_center{
+  text-align:center;
+}
 
 
 /*background image for the page*/
 .background{
   /* The Background Image */
-  background-image:url("../../images/customer_cpanel/appointment_bg2.png");
+  background-image:url("../images/contacts/contacts_bg.png");
 
   /* Height of Image */
   height: 100%;
@@ -60,43 +71,12 @@
    left: 0;
    height: 100%;
    width: 100%;
-   background-color: rgba(179, 255, 218, 0.3);
+   background-color: rgba(255, 217, 179, 0.3);
+   min-height:550px;
+   padding: 40px 0;
  }
  
  
- .back{
-  background-color: rgb(100, 211, 252);/* Green */
-  /*border: none;*/
-  color: rgb(153, 0, 0);
-  padding: 2px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border: 2px solid rgb(170, 18, 18);
-  border-radius: 20px;
-  margin: 15px;
-
-  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-}
-
-
-/*hovering over the back button*/
-.back:hover{
-  background-color:rgb(255, 51, 0);
-  border-color: rgb(204, 0, 0);
-  color: rgb(255,255,255);
-  cursor: pointer;
-  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-
-  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-}
 
 
 /*box division for the form*/
@@ -110,7 +90,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgb(0,0,0);
   color: rgb(0, 51, 102);
-  text-align:center;
+  padding: 10px 30px;
  }
 
 
@@ -121,7 +101,7 @@
  
  
  /*submit button to change the forms*/
- .change{
+ .send{
   background-color: rgb(100, 211, 252);
   color: rgb(0, 51, 102);
   padding: 2px 30px;
@@ -142,9 +122,9 @@
 
 
 /*hovering over the change button*/
-.change:hover{
-  background-color:rgb(102, 255, 153);
-  border-color: rgb(102, 255, 153);
+.send:hover{
+  background-color:rgb(255, 153, 102);
+  border-color: rgb(255, 153, 102);
   cursor: pointer;
   transition: background-color 0.5s ease, border-color 0.5s ease;
 
@@ -159,16 +139,16 @@
 /*the text input for the forms*/
 .form_control{
   border-radius: 5px;
-  color: rgb(102, 255, 153);
+  color: rgb(255, 153, 102);
   background-color: rgb(0, 51, 102);
   padding: 3px 10px;
-  border-color: rgb(102, 255, 153);
+  border-color: rgb(255, 153, 102);
 }
 
 
 /*focusing on the text input form*/
 .form_control:focus{
-  background-color:rgb(102, 255, 153);
+  background-color:rgb(255, 153, 102);
   border-color: rgb(0, 51, 102);
   color: rgb(0, 51, 102);
   transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
@@ -180,11 +160,21 @@
 }
 
 
-/*left alignment for the back button*/
-.back_align{
-  display: flex;
-  display: -ms-flex;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -o-flex;
+
+/*notification to tell user that they have sent an email*/
+.notification_box{
+  background-color:rgb(102, 255, 153);
+  color:rgb(0, 102, 0);
+  border-top: 2px solid rgb(0, 102, 0);
+  border-bottom: 2px solid rgb(0, 102, 0);
+  text-align: center;
+  padding: 20px 0;
+  position:absolute;
+  width:100%;
+  display:none;
+}
+
+
+.email_notification{
+  font-size:24px;
 }

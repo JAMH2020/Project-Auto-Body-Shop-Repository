@@ -7,6 +7,12 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Book an Appointment Now</title>
+  <meta name="description" content="Book an appointment for your car repair">
+  <meta name="author" content="JAMH Group">
+  
   <!--style sheet for the intake repair form-->
   <link rel="stylesheet" type="text/css" href="appointment_styles.css">
 
@@ -16,6 +22,9 @@ session_start();
   
   <!--script that will default select a value in select dropdown-->
   <script src="../../src/js/option_selected.js"></script>
+  
+  <!--script that will ask for user confirmation before submitting form-->
+  <script src="../../src/js/form_confirmation.js"></script>
 
 </head>
 <body>
@@ -106,12 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
   //description of work that is going to be done
   createErrMsg("submit_appointment", "description", "plan_description", "plan_descriptionERR");
-
-  
-  //if user is editting the orders
-  if ($_SESSION['editForm']){
-    
-  }
   
   
   //if the user is the admin
@@ -131,7 +134,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     
     //date that work is going to be done
     createErrMsg("submit_appointment", "date", "plan_date", "plan_dateERR");
-    system_date_limit($_SESSION['plan_date'], "date", "plan_dateERR" ,"today", "none");
+    
+    if ($_SESSION['status'] == "pending"){
+      system_date_limit($_SESSION['plan_date'], "date", "plan_dateERR" ,"today", "none");
+      
+    } else {
+      system_date_limit($_SESSION['plan_date'], "date", "plan_dateERR" ,"none", "today");
+    }
     
     //status of the work
     createErrMsg("submit_appointment", "order status", "status", "statusERR");
@@ -182,123 +191,154 @@ if ($error_appointment_input  or !isset($_POST['submit_appointment'])){
   include "../../navigation_bar/navigation_bar.php";
 ?>
 
-<h1>Book an Appointment</h1>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+<div class="background">
+  <div class="background_cover">
+    <div class="box">
+      <h1 class="appointment_title">Book an Appointment</h1>
 
-  <?php
-  if ($_SESSION['admin_loggedin']){
-  ?>
+      <form name="appointmentForm" onsubmit="return confirmForm('appointmentForm', 'submit_appointment', 'appointment')" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+
+      <?php
+      if ($_SESSION['admin_loggedin']){
+      ?>
 
   
-  <span class="description_title">Status of the appointment</span>
-  <select id="status_dropdown" name="status" value="<?php echo $_SESSION['status'];?>">
-    <option value="">Choose a Status</option>
-    <option value="pending">pending</option>
-    <option value="accepted">accepted</option>
-    <option value="rejected">rejected</option>
-  </select><br>
+        <span class="description_title">Status of the appointment</span>
+        <select id="status_dropdown" class="form_control" name="status" value="<?php echo $_SESSION['status'];?>">
+          <option value="">Choose a Status</option>
+          <option value="pending">pending</option>
+          <option value="accepted">accepted</option>
+          <option value="rejected">rejected</option>
+        </select><br>
   
   
-  <?php
-  if ($_SESSION['status'] == "rejected"){
-  ?>
-  <script>
-    defaultSelect('status_dropdown', 'rejected');
-  </script>
+      <?php
+      if ($_SESSION['status'] == "rejected"){
+      ?>
+      <script>
+        defaultSelect('status_dropdown', 'rejected');
+      </script>
   
-  <?php
-  } else if ($_SESSION['status'] == "accepted"){
-  ?>
+      <?php
+      } else if ($_SESSION['status'] == "accepted"){
+      ?>
   
-  <script>
-    defaultSelect('status_dropdown', 'accepted');
-  </script>
+      <script>
+        defaultSelect('status_dropdown', 'accepted');
+      </script>
   
-  <?php
-  } else if ($_SESSION['status'] == "pending"){
-  ?>
+      <?php
+      } else if ($_SESSION['status'] == "pending"){
+      ?>
   
-   <script>
-    defaultSelect('status_dropdown', 'pending');
-  </script>
+      <script>
+        defaultSelect('status_dropdown', 'pending');
+      </script>
   
-  <?php
-  }
-  ?>
+      <?php
+      }
+      ?>
   
-  <span class="error_message"><?php echo $statusERR;?></span> <br>
+      <span class="error_message"><?php echo $statusERR;?></span> <br>
+          
+      <div class="form_group">
+        <span class="description_title">Worker Email</span>
+        <input type="email" name="worker_email" class="form_control" placeholder="Email" value="<?php echo $_SESSION['worker_email'];?>"> <br>
+        <span class="error_message"><?php echo $worker_emailERR;?></span> <br>
+      </div>
   
-  <span class="description_title">Worker Email</span>
-  <input type="email" name="worker_email" placeholder="Email" value="<?php echo $_SESSION['worker_email'];?>"> <br>
-  <span class="error_message"><?php echo $worker_emailERR;?></span> <br>
+      <div class="form_group">
+        <span class="description_title">Date</span>
+        <input type="date" name="plan_date" class="form_control" placeholder="Date" value="<?php echo $plan_date_format;?>"> <br>
+        <span class="error_message"><?php echo $plan_dateERR;?></span> <br>
+      </div>
   
-  <span class="description_title">Date</span>
-  <input type="date" name="plan_date" placeholder="Date" value="<?php echo $plan_date_format;?>"> <br>
-  <span class="error_message"><?php echo $plan_dateERR;?></span> <br>
+      <?php
+      }
+      ?>
+      
+      <div class="form_group">
+        <span class="description_title">Car Year</span>
+        <input type="text" name="car_year"  class="form_control" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>"> <br>
+        <span class="error_message"><?php echo $car_yearERR;?></span> <br>
+      </div>
+      
+      <div class="form_group">
+        <span class="description_title">Car Make</span>
+        <input type="text" name="car_make"  class="form_control" placeholder="Make" value="<?php echo $_SESSION['car_make'];?>"> <br>
+        <span class="error_message"><?php echo $car_makeERR;?></span> <br>
+      </div>
+      
+      <div class="form_group">
+        <span class="description_title">Car Model</span>
+        <input type="text" name="car_model"  class="form_control" placeholder="Model" value="<?php echo $_SESSION['car_model'];?>"> <br>
+        <span class="error_message"><?php echo $car_modelERR;?></span> <br>
+      </div>
   
-  <?php
-  }
-  ?>
-
-  <span class="description_title">Car Year</span>
-  <input type="text" name="car_year" placeholder="Year" value="<?php echo $_SESSION['car_year'];?>"> <br>
-  <span class="error_message"><?php echo $car_yearERR;?></span> <br>
+      <div class="form_group">
+        <span class="description_title">School Name</span>
+        <input type="text" name="school_name"  class="form_control" placeholder="School" value="<?php echo $_SESSION['school_name'];?>"> <br>
+        <span class="error_message"><?php echo $school_nameERR;?></span> <br>
+      </div>
+      
+      <div class="form_group">
+        <span class="description_title">School Address</span>
+        <input type="text" name="school_address"  class="form_control" placeholder="Address" value="<?php echo $_SESSION['school_address'];?>"> <br>
+        <span class="error_message"><?php echo $school_addressERR;?></span> <br>
+      </div>
   
-  <span class="description_title">Car Make</span>
-  <input type="text" name="car_make" placeholder="Make" value="<?php echo $_SESSION['car_make'];?>"> <br>
-  <span class="error_message"><?php echo $car_makeERR;?></span> <br>
+      <div class="form_group">
+        <span class="description_title">Reason for the appointment</span> <br>
+        <span class="error_message"><?php echo $plan_descriptionERR;?></span> <br>
+        <textarea name="plan_description" class="description_comment form_control" placeholder="Description..." rows="10" columns="50"><?php echo $_SESSION['plan_description'];?></textarea><br>
+      </div>
   
-  <span class="description_title">Car Model</span>
-  <input type="text" name="car_model" placeholder="Model" value="<?php echo $_SESSION['car_model'];?>"> <br>
-  <span class="error_message"><?php echo $car_modelERR;?></span> <br>
-  
-  <span class="description_title">School Name</span>
-  <input type="text" name="school_name" placeholder="School" value="<?php echo $_SESSION['school_name'];?>"> <br>
-  <span class="error_message"><?php echo $school_nameERR;?></span> <br>
-  
-  <span class="description_title">School Address</span>
-  <input type="text" name="school_address" placeholder="Address" value="<?php echo $_SESSION['school_address'];?>"> <br>
-  <span class="error_message"><?php echo $school_addressERR;?></span> <br>
-  
-  <span class="description_title">Reason for the appointment</span> <br>
-  <span class="error_message"><?php echo $plan_descriptionERR;?></span> <br>
-  <textarea name="plan_description" class="description_comment" placeholder="Description..." rows="10" columns="50"><?php echo $_SESSION['plan_description'];?></textarea><br>
-  
-  <input class="button"type="submit" name="submit_appointment" value="Submit"><br>
-</form>
+      <input class="button change"type="submit" name="submit_appointment" value="Submit"><br>
+    </form>
 
   <?php
   //if the customer is loggedin
   if ($_SESSION['customer_loggedin']){
-  
+    
+    $_SESSION['customer_section'] = "appointments";
+    
     //if the customer is editting the order
     if ($_SESSION['editForm']){
-      $_SESSION['customer_section'] = "porders";
+      $_SESSION['customer_appointments'] = "porders";
     } else {
-      $_SESSION['customer_section'] = "ogorders";
+      $_SESSION['customer_appointments'] = "ogorders";
     }
   ?>
-
-    <a href="../customer_cpanel.php">Back</a>
+    <div class="back_align">
+      <a class="back" href="../customer_cpanel.php">Back</a>
+    </div>
 
 
 <?php
   } else if ($_SESSION['admin_loggedin']){
 ?>
-
-    <a href="../../admin/admin_cpanel.php">Back</a>
+    <div class="back_align">
+      <a class="back" href="../../admin/admin_cpanel.php">Back</a>
+    </div>
 
 <?php
   }
-  
+?>
+
+    </div>
+  </div>
+</div>
+
+
+<?php 
   //include the footer
   include '../../footer/footer.php';
   
 } else {
 
   if ($_SESSION['editForm']){
-    
+  
     //temporary variables for the status and the customer email
     $temp_appointment_id = $_SESSION['appointment_id'];
     $temp_status = $_SESSION['status'];
@@ -360,7 +400,7 @@ if ($error_appointment_input  or !isset($_POST['submit_appointment'])){
     $subject = "Incoming Appointment #" . $_SESSION['appointment_id'];
     
     //message
-    $email_message = "<strong style='font-size:20px'>" . $temp_email . " has made an appointment:</strong> <br> 
+    $email_message = "<strong style='font-size:20px'><span style='color:red;'>" . $temp_email . " </span> has made an appointment:</strong> <br> 
                       <div style='padding:10px 20px'>
                         <strong>Car Year:</strong> <span>" . $temp_car_year ."</span>
                       </div><br>
@@ -382,6 +422,14 @@ if ($error_appointment_input  or !isset($_POST['submit_appointment'])){
     
     send_mail("JAMH@portcreditautobodyshop.tk", $subject, $email_message);
 
+  }
+  
+  
+  //notification for the user's control panel
+  if ($_SESSION['editForm']){
+    $_SESSION['appointment_done'] = "edit";
+  } else {
+    $_SESSION['appointment_done'] = "insert";
   }
   
   

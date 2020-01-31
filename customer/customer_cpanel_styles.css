@@ -17,7 +17,7 @@
 }
 
 /*links for the options in the cpanel*/
-.a_option_link {
+.a_option_link, .a_appointment_link {
  display:inline-block;
  padding: 15px 15px ;
  color: black;
@@ -65,6 +65,47 @@
 }
 
 
+
+/*opened and closed links for the appointments tab*/
+/*closing and opening tabs for the appointments*/
+.secondary_opened_tab{
+  background-color: rgb(204, 255, 204);
+  border-top: 3px solid rgb(0, 204, 102);
+  border-right: 3px solid rgb(0, 204, 102);
+  box-shadow: 0 -3px 3px -3px rgb(0, 204, 102), 3px 0px 3px -3px rgb(0, 204, 102), -3px 0px 3px -3px rgb(0, 204, 102);
+  z-index: 4;
+  top: 3px;
+  font-weight: bold;
+}
+
+.secondary_closed_tab{
+   background-color: rgb(255,255,255);
+   box-shadow: 0 -3px 3px -3px rgb(0,0,0), 3px 0px 3px -3px black, -3px 0px 3px -3px black;
+   transition: background-color 0.5s ease, color 0.5s ease;
+   -ms-transition: background-color 0.5s ease, color 0.5s ease;
+   -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+   -moz-transition: background-color 0.5s ease, color 0.5s ease;
+   -o-transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.secondary_closed_tab:hover {
+  background-color: rgb(0, 204, 102);
+  color: white;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+
+.secondary_center_opened_tab{
+  border-left: 3px solid rgb(0, 204, 102);
+}
+
+
+
+
 .space{
   margin-top: 100px;
 }
@@ -101,4 +142,135 @@
 .horizontal_align_content{
   margin-left: auto;
   margin-right: auto;
+}
+
+
+/*window for the appointments*/
+.appointment_window {
+  border-top: 2px solid rgb(0, 204, 102);
+  background-color: rgb(204, 255, 204);
+  padding: 24px 0;
+  min-height:500px;
+}
+
+
+
+/*notification to tell user that they have sent an email*/
+.notification_box{
+  background-color:rgb(102, 255, 153);
+  color:rgb(0, 102, 0);
+  border-top: 2px solid rgb(0, 102, 0);
+  border-bottom: 2px solid rgb(0, 102, 0);
+  text-align: center;
+  padding: 20px 0;
+  position:absolute;
+  width:100%;
+  display:none;
+  z-index:10;
+}
+
+
+.email_notification{
+  font-size:24px;
+}
+
+
+
+
+
+.create{
+  transition: color 0.5s, text-shadow 0.5s;
+  -ms-transition: color 0.5s, text-shadow 0.5s;
+  -webkit-transition: color 0.5s, text-shadow 0.5s;
+  -moz-transition: color 0.5s, text-shadow 0.5s;
+  -o-transition: color 0.5s, text-shadow 0.5s;
+  
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  position: relative;
+  font-size: 20px; 
+  text-decoration: none;
+  color: rgb(0, 153, 255);
+  position: relative;
+}
+
+.create:hover{
+  transition: color 0.5s, text-shadow 0.5s;
+  -ms-transition: color 0.5s, text-shadow 0.5s;
+  -webkit-transition: color 0.5s, text-shadow 0.5s;
+  -moz-transition: color 0.5s, text-shadow 0.5s;
+  -o-transition: color 0.5s, text-shadow 0.5s;
+  
+  color: rgb(51, 102, 153);
+  text-shadow: 1px 2px 5px rgb(153, 221, 255);
+}
+
+/*underline for the link*/
+.create_underline{
+  transition: transform 2s, background-color 1s, opacity 1s;
+  -ms-transition: transform 2s, background-color 1s, opacity 1s;
+  -webkit-transition: transform 2s, background-color 1s, opacity 1s;
+  -moz-transition: transform 2s, background-color 1s, opacity 1s;
+  -o-transition: transform 2s, background-color 1s, opacity 1s;
+  
+  opacity: 0;
+  height: 1px;
+  padding: 1px 0;
+  margin:0;
+  width: 20px;
+  border-radius:1px;
+  position:relative;
+  
+  transform-origin: left;
+  -ms-transform-origin: left;
+  -webkit-transform-origin: left;
+  -moz-transform-origin: left;
+  -o-transform-origin: left;
+}
+
+/*underline when hovering over the link*/
+.create:hover ~ .create_underline{
+  transition: transform 1s, background-color 1s, opacity 0.5s;
+  -ms-transition: transform 1s, background-color 1s, opacity 0.5s;
+  -webkit-transition: transform 1s, background-color 1s, opacity 0.5s;
+  -moz-transition: transform 1s, background-color 1s, opacity 0.5s;
+  -o-transition: transform 1s, background-color 1s, opacity 0.5s;
+  
+  opacity:1;
+  transform: scaleX(10);
+  -ms-transform: scaleX(10);
+  -webkit-transform: scaleX(10);
+  -moz-transform: scaleX(10);
+  -o-transform: scaleX(10);
+  
+  transform-origin: left;
+  -ms-transform-origin: left;
+  -webkit-transform-origin: left;
+  -moz-transform-origin: left;
+  -o-transform-origin: left;
+  
+  background-color: rgb(37, 72, 142);
+ }
+ 
+ 
+ /*division for the create link*/
+ .create_link{
+   padding: 30px 20px 0 20px;
+ }
+ 
+ 
+ 
+ /*title for each sections*/
+ .section_title{
+  font-size: 30px;
+  color: rgb(3, 55, 107); 
+  text-shadow: 1px 2px 2px #66c2ff;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+
+
+.section_heading{
+  font-size: 45px;
+  padding: 15px 20px;
 }

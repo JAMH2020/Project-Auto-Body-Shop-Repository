@@ -13,7 +13,7 @@ function list_caccounts(){
 
 
   //prepare and bind sql statement
-  $stmt_a_caccounts = $conn->prepare("SELECT * FROM Customer_Accounts WHERE Password != '-' ORDER BY Last_Name");
+  $stmt_a_caccounts = $conn->prepare("SELECT * FROM Customer_Accounts WHERE Password != '-' ORDER BY First_Name");
 
   //execute the statement
   $stmt_a_caccounts->execute();

@@ -13,12 +13,20 @@ include_once "../../login/login_check.php";
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Orders Pg3 - Liability Agreement</title>
+  <meta name="description" content="Third Page of the Orders Form">
+  <meta name="author" content="JAMH Group">
+  
   <!--style sheet for the second waiver form-->
   <link rel="stylesheet" type="text/css" href="css/waiverpt2_styles.css">
 
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
   
+  <!--script that will ask for user confirmation before submitting form-->
+  <script src="../../src/js/form_confirmation.js"></script>
 </head>
 <body>
 
@@ -30,29 +38,32 @@ if (!isset($_POST['waiver2_submit'])){
   include "../../navigation_bar/navigation_bar.php";
 ?>
 
-<font class="Title" size="10">Automotive Repair Waiver</font>
+<font class="Title">Automotive Repair Waiver</font>
 
 
-<center><form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
-<span>Work Order #:</span> 
-<span> <?php echo $_SESSION['order_no']; ?></span><br></center>
+<center><form name="orderForm" onsubmit="return confirmForm('orderForm', 'waiver2_submit', 'order')" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+<span class="description_title">Work Order #:</span> 
+<span class="description_value"> <?php echo $_SESSION['order_no']; ?></span><br><br><br></center>
 
-<center><h3>AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT </h3>
+<center><h3 class="subtitle">AUTOMOTIVE SERVICES RELEASE AND WAIVER OF LIABILITY AGREEMENT </h3>
 <h4>*Schools must retain form for 3 years*</h4>
 </center>
-<table>
-  <tr>
-   <center> <th>WARNING:</th></center>
 
-    <center><td>BY SIGNING THIS AGREEMENT YOU GIVE UP YOUR RIGHT TO BRING A COURT ACTION TO RECOVER
+<center>
+  <table class="table_text">
+    <tr>
+     <center> <th>WARNING:</th></center>
+
+        <td>BY SIGNING THIS AGREEMENT YOU GIVE UP YOUR RIGHT TO BRING A COURT ACTION TO RECOVER
 COMPENSATION FOR ANY INJURY OR DEATH TO YOU OR OTHERS AND FOR DAMAGE TO YOUR 
 PROPERTY ARISING DIRECTLY, INDIRECTLY OR CONSEQUENTIALLY FROM OR RELATED TO YOUR CHOICE
 TO HAVE UNTRAINED STUDENTS WORK ON YOUR AUTOMOBILE</td>
-  </tr>
-</table></center>
+    </tr>
+  </table>
+</center>
 
 
-<center><h4>PRELIMINARY UNDERSTANDING</h4></center>
+<center><h4 class="information_text">PRELIMINARY UNDERSTANDING</h4></center>
 
 <ol>
   <li>
@@ -108,13 +119,13 @@ and release is to cover any and all eventualities whether foreseeable or not.</p
     <p>Despite the above-mentioned risks and hazards, the undersigned freely and voluntarily assume such risks and 
 hazards inherent in allowing untrained students to work on the undersigned’ automobile at the School</p>
   </li>
-</ol>
+</ol><br><br><br>
 
 
 <p class="description_value"> <?php echo $_SESSION['customer_initial']; ?></p>
 <p class="description_title">(initial)</p> <br>
 
-<center><h4>RELEASE AND WAIVER OF LIABILITY</h4></center>
+<center><h4 class="subtitle">RELEASE AND WAIVER OF LIABILITY</h4></center>
 
 
 <ol>
@@ -156,7 +167,7 @@ this</span>
 </ol> <br>
 
 <span class="Sig">Signature of Registered Owner:</span>
-<button type="button" class="button">Sign Here</button> <br>
+<button type="button" class="submit">Sign Here</button> <br>
 
 <center><span class="Name description_title">Name(print):</span>
 <span class="description_value"> <?php echo $_SESSION['customer_firstname'] . " " . $_SESSION['customer_lastname']; ?></span>
@@ -167,7 +178,9 @@ this</span>
 if (!$_SESSION['viewForm']){
 ?>
 
-<button type="submit"  name="waiver2_submit" class="button">Submit</button>
+<div class="button_align">
+  <input type="submit"  class="submit" name="waiver2_submit" value="Submit">
+</div>
 
 <?php
 } 
@@ -177,7 +190,9 @@ if (!$_SESSION['viewForm']){
 
 </form>
 
-<a href="waiver.php" class="back">Back</a>
+<div class="back_align">
+  <a href="waiver.php" class="back">Back</a>
+</div>
 </center>
 
 <?php
@@ -185,7 +200,6 @@ if (!$_SESSION['viewForm']){
 include '../../footer/footer.php';
 
 } else {
-  echo "intake and waiver complete";
   
   //if user is editting the form
   if ($_SESSION['editForm']){
@@ -219,6 +233,16 @@ include '../../footer/footer.php';
   } else {
     include "../../database/insert/insert_intake.php";
    
+  }
+  
+  
+  
+  
+  //notification to display when returning to the control panel
+  if ($_SESSION['editForm']){
+    $_SESSION['order_done'] = "edit";
+  } else {
+    $_SESSION['order_done'] = "insert";
   }
   
   

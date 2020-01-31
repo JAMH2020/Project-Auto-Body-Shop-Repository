@@ -52,7 +52,7 @@ if ($stmt_find_waccounts->num_rows > 0){
     $_SESSION['worker_password'] = $worker_passwordRow;
     
     //email
-    $_SESSION['worker_email'] = $worker_emailRow;
+    $_SESSION['worker_email'] = $_SESSION['prev_worker_email'] = $worker_emailRow;
     
     
     //identify that a customer account is being changed instead of worker account
@@ -63,13 +63,13 @@ if ($stmt_find_waccounts->num_rows > 0){
   echo "<p>nothing</p>";
 }
 
-
+/*
 echo "<p>c_id:" .  $_SESSION['worker_id'] . "</p>";
 echo "<p>c_firstame:" .  $_SESSION['worker_firstname'] . "</p>";
 echo "<p>c_password:" .  $_SESSION['worker_password'] . "</p>";
 echo "<p>c_email:" .  $_SESSION['worker_email'] . "</p>";
 echo "<p>c_change_status:" .  $_SESSION['account_change'] . "</p>";
-
+*/
 
 //close the statement
 $stmt_find_waccounts->close();

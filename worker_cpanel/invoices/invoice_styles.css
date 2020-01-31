@@ -18,9 +18,8 @@ body{
   text-align: center;
   margin: auto;
   font-family: "Arial", sans-serif; 
-  color: #800000; 
+  color: rgb(0, 102, 153); 
   font-weight: bold;
-  width: 100%;
   padding: 20px 10px;
 }
 
@@ -36,7 +35,7 @@ body{
   margin: 0px; 
   font-family: "Arial", sans-serif;
   text-decoration: underline;
-  color: #800000; 
+  color: rgb(0, 102, 153); 
 }
 
 /*headings for each section*/
@@ -94,13 +93,113 @@ body{
 }
 
 
-.button{
-  -moz-box-shadow: inset 0 0 10px rgb(102, 217, 255);
-  -webkit-box-shadow: inset 0 0 10px rgb(102, 217, 255) ;
-  box-shadow: inset 0 0 10px rgb(26, 26, 255); 
-  position: relative; 
-  font-size: 25px;
-  color:rgb(26, 26, 255); 
-  left: 50px;  
-  background-color: rgb(102, 217, 255; 
+/*back button*/
+ .back{
+  background-color: rgb(255,255,255);
+  color: rgb(153, 0, 0);
+  padding: 2px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 2px solid rgb(170, 18, 18);
+  border-radius: 20px;
+  margin: 15px;
+
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+
+/*hovering over the back button*/
+.back:hover{
+  background-color:rgb(255, 51, 0);
+  border-color: rgb(204, 0, 0);
+  color: rgb(255,255,255);
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+
+/*left alignment for the back button*/
+.back_align{
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -o-flex;
+}
+
+
+ /*submit button to change the the values*/
+ .submit{
+  background-color: rgb(255,255,255);
+  color: rgb(72, 72, 72);
+  padding: 8px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 3px solid rgb(72, 72, 72);
+  border-radius: 10px;
+  font-size:16px;
+  margin-top: 40px;
+  margin: 15px;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+/*hovering over the change input button*/
+.submit:hover{
+  background-color:rgb(77, 210, 255);
+  border-color: rgb(77, 210, 255);
+  box-shadow: 0px 0px 3px 3px rgb(102,255,255);
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+
+/*alignment for the buttons*/
+.button_align{
+  text-align:center;
+}
+
+
+
+/*the text input for the forms*/
+.form_control{
+  border-radius: 5px;
+  color: rgb(0, 51, 102);
+  background-color: rgb(255,255,255);
+  padding: 3px 10px;
+  border: 1px solid rgb(0, 51, 102)
+}
+
+/*focusing on the text input form*/
+.form_control:focus{
+  background-color:rgb(128, 223, 255);
+  border-color: rgb(0, 51, 102);
+  box-shadow:0px 0px 3px 2px rgb(204,255,255);
+  color: rgb(0, 51, 102);
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
 }

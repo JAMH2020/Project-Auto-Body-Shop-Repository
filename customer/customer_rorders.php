@@ -3,12 +3,16 @@
 if (session_start() === null){
   session_start();
 }
+
+//remember which tab section the user was on
+$_SESSION['customer_section'] = "appointments";
+$_SESSION['customer_appointments'] = "rorders";
 ?>
 
 <!--stylesheet for the pending appointments table-->
 <link rel="stylesheet" type="text/css" href="../database/select/css/cselect_rappointments.css">
 
-<h2 class='invoice_title'>MY REJECTED APPOINTMENTS</h2>
+<h2 class='section_title'>MY REJECTED APPOINTMENTS</h2>
 
 <div id="editCheck"></div>
 

@@ -4,8 +4,8 @@ if (session_start() === null){
   session_start();
 }
 
-$_SESSION['worker_section'] = "aappointments";
-
+$_SESSION['worker_section'] = "appointments";
+$_SESSION['worker_appointments'] = "aappointments";
 
 //session to identify if the user is editting a form
 $_SESSION['editForm'] = false;

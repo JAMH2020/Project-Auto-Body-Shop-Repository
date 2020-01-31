@@ -67,8 +67,6 @@ $stmt_alogin->bind_result($admin_idRow, $admin_firstnameRow, $admin_lastnameRow,
                 
 // Check if username and password exists from the 
 if($stmt_clogin->num_rows > 0){ 
-   echo "success";
-
 
   //get the result if the username and password exists
   while($stmt_clogin->fetch()){
@@ -106,8 +104,6 @@ if($stmt_clogin->num_rows > 0){
 
   //check if the username and password exists in the worker accounts
   if($stmt_wlogin->num_rows > 0){ 
-   echo "success";
-
 
     //get the result if the username and the password exists
     while($stmt_wlogin->fetch()){
@@ -143,8 +139,6 @@ if($stmt_clogin->num_rows > 0){
   } else {
     //check if the username and password exists in the admin accounts
     if($stmt_alogin->num_rows > 0){ 
-      echo "success";
-
 
       //get the result if the username and the password exists
       while($stmt_alogin->fetch()){

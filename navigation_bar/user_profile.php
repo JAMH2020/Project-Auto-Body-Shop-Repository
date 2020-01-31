@@ -25,9 +25,5 @@
             <div class="nav_link_underline"></div>
           </a>
       
-          <a class= "profile_link bottom_profile_link" href="#">
-            User Profile
-            <div class="nav_link_underline"></div>
-          </a>
         </div>
       </div>

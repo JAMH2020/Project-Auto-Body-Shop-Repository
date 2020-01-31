@@ -3,37 +3,15 @@ body{
 }
 
 .Title{
-  text-decoration: underline #cc0000;
+  text-decoration: underline;
   display:inline-block;
   width:100%;
   text-align: center;
-  padding-top:150px;
-  padding-bottom:100px;
- 
+  padding:100px 0 80px 0;
+  color: rgb(0, 102, 153);
+  font-size:35px;
 }
-.button{
-background-color: #008CBA;/* blue */
-  //border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border: 5px solid black;
-}
-.back{
-background-color: rgb(170, 18, 18);/* Green */
-  //border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border: 5px solid black;
-  margin-left:30px;
-}
+
 .Name{
   padding-left:1200px;
 
@@ -42,7 +20,23 @@ background-color: rgb(170, 18, 18);/* Green */
   padding-left:100px;
 }
 
+.subtitle{
+  position: relative; 
+  font-size: 20px;
+  padding:0;
+  height:60px;
+  margin: 0px; 
+  font-family: "Arial", sans-serif;
+  text-decoration: underline;
+  color: rgb(0, 102, 153);
+}
 
+
+
+/*tables of text*/
+.table_text{
+  width:80%;
+}
 
 
 
@@ -73,5 +67,92 @@ background-color: rgb(170, 18, 18);/* Green */
 
 /*information describing the form*/
 .information_text{
-  padding: 10px 20px;
+  padding: 50px 20px 20px 20px;
+}
+
+
+/*back button*/
+ .back{
+  background-color: rgb(255,255,255);
+  color: rgb(153, 0, 0);
+  padding: 2px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 2px solid rgb(170, 18, 18);
+  border-radius: 20px;
+  margin: 15px;
+
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+
+/*hovering over the back button*/
+.back:hover{
+  background-color:rgb(255, 51, 0);
+  border-color: rgb(204, 0, 0);
+  color: rgb(255,255,255);
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+
+
+/*left alignment for the back button*/
+.back_align{
+  display: flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -o-flex;
+}
+
+
+ /*submit button to change the the values*/
+ .submit{
+  background-color: rgb(255,255,255);
+  color: rgb(72, 72, 72);
+  padding: 8px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 3px solid rgb(72, 72, 72);
+  border-radius: 10px;
+  font-size:16px;
+  margin-top: 40px;
+  margin: 15px;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+/*hovering over the change input button*/
+.submit:hover{
+  background-color:rgb(77, 210, 255);
+  border-color: rgb(77, 210, 255);
+  box-shadow: 0px 0px 3px 3px rgb(102,255,255);
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+
+  -ms-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -webkit-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -moz-transition: background-color 0.5s ease, border-color 0.5s ease;
+  -o-transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+
+/*alignment for the buttons*/
+.button_align{
+  text-align:center;
 }
