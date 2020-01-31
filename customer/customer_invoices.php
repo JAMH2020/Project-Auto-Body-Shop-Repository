@@ -3,12 +3,15 @@
 if (session_start() === null){
   session_start();
 }
+
+//remember which tab section the user was on
+$_SESSION['customer_section'] = "invoices";
 ?>
 
 <!--stylesheet for the pending appointments table-->
 <link rel="stylesheet" type="text/css" href="../database/select/css/cselect_invoices.css">
 
-<h2 class='invoice_title'>MY INVOICES</h2>
+<h2 class='section_title'>MY INVOICES</h2>
 
 <div id="editCheck"></div>
 <div id="viewCheck"></div>
