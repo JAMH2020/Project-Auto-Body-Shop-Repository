@@ -11,6 +11,12 @@ include_once "../../login/login_check.php";
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Invoice Pg1 - General Information</title>
+  <meta name="description" content="First Page of the Invoice Form">
+  <meta name="author" content="JAMH Group">
+  
   <!--styles for the invoice page-->
   <link rel="stylesheet" type="text/css" href="invoice_styles.css">
   
@@ -191,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   
     //date when vehicle was returned
     createErrMsg("submit_invoice", "date of return", "return_date", "return_dateERR");
-    system_date_limit($_SESSION['return_date'], "date of return", "return_dateERR" ,$_SESSION['plan_date'], "today");
+    system_date_limit($_SESSION['return_date'], "date of return", "return_dateERR" ,$_SESSION['completion_date'], "today");
   
   
     //cost of parts per unit
@@ -229,6 +235,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
   }
 
 }
+
+
 
 
 
@@ -375,7 +383,7 @@ function add_estimate(session, value1, value2, value3, value4){
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="odometer_return" placeholder="Odometer on Return" value="<?php echo $_SESSION['odometer_return'];?>"><br>
+      <input type="text" class="form_control" name="odometer_return" placeholder="Odometer on Return" value="<?php echo $_SESSION['odometer_return'];?>"><br>
       
 <?php
   } else {
@@ -402,7 +410,7 @@ function add_estimate(session, value1, value2, value3, value4){
   if (!$_SESSION['viewForm']){
 ?>
 
-<textarea name="done_description" class="description_comment" placeholder="Description..." rows="10" columns="50"><?php echo $_SESSION['done_description'];?></textarea><br>
+<textarea name="done_description" class="description_comment form_control" placeholder="Description..." rows="10" cols="50"><?php echo $_SESSION['done_description'];?></textarea><br>
 
 <?php
 } else {
@@ -424,7 +432,7 @@ function add_estimate(session, value1, value2, value3, value4){
   if (!$_SESSION['viewForm']){
 ?>
 
-<input type="date" name="completion_date" value="<?php echo $completion_date_format;?>">
+<input type="date" class="form_control" style="cursor:pointer;" name="completion_date" value="<?php echo $completion_date_format;?>">
 
 <?php
   } else {
@@ -445,7 +453,7 @@ function add_estimate(session, value1, value2, value3, value4){
   if (!$_SESSION['viewForm']){
 ?>
 
-<input type="date" name="return_date" placeholder="Date of return" value="<?php echo $return_date_format;?>"> <br>
+<input type="date" class="form_control" style="cursor:pointer;" name="return_date" placeholder="Date of return" value="<?php echo $return_date_format;?>"> <br>
 
 <?php
   } else {
@@ -496,7 +504,7 @@ if ($_SESSION['removal_choice'] == "A"){
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="parts_per_unit" placeholder="$ -Parts/Unit" value="<?php echo $_SESSION['parts_per_unit'];?>"><br>
+      <input type="text" class="form_control" name="parts_per_unit" placeholder="$ -Parts/Unit" value="<?php echo $_SESSION['parts_per_unit'];?>"><br>
       
 <?php
   } else {
@@ -516,7 +524,7 @@ if ($_SESSION['removal_choice'] == "A"){
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="parts_total" placeholder="$ -Parts Total" value="<?php echo $_SESSION['parts_total'];?>" id="sum1" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
+      <input type="text" class="form_control" name="parts_total" placeholder="$ -Parts Total" value="<?php echo $_SESSION['parts_total'];?>" id="sum1" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
       
 <?php
   } else {
@@ -540,7 +548,7 @@ if ($_SESSION['removal_choice'] == "A"){
   if (!$_SESSION['viewForm']){
 ?>
 
-      <input type="text" name="labour_per_unit" placeholder="$ -Labour/Unit" value="<?php echo $_SESSION['labour_per_unit'];?>"><br>
+      <input type="text" class="form_control" name="labour_per_unit" placeholder="$ -Labour/Unit" value="<?php echo $_SESSION['labour_per_unit'];?>"><br>
       
 <?php
   } else {
@@ -560,7 +568,7 @@ if ($_SESSION['removal_choice'] == "A"){
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="labour_total" placeholder="$ -Labour Total" value="<?php echo $_SESSION['labour_total'];?>" id="sum2" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
+      <input type="text" class="form_control" name="labour_total" placeholder="$ -Labour Total" value="<?php echo $_SESSION['labour_total'];?>" id="sum2" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
       
 <?php
   } else {
@@ -584,7 +592,7 @@ if ($_SESSION['removal_choice'] == "A"){
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="supplies_per_unit" placeholder="$ -Supplies/Unit" value="<?php echo $_SESSION['supplies_per_unit'];?>"><br>
+      <input type="text" class="form_control" name="supplies_per_unit" placeholder="$ -Supplies/Unit" value="<?php echo $_SESSION['supplies_per_unit'];?>"><br>
       
 <?php
   } else {
@@ -604,7 +612,7 @@ if ($_SESSION['removal_choice'] == "A"){
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="supplies_total" placeholder="$ -Supplies Total" value="<?php echo $_SESSION['supplies_total'];?>" id="sum3" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
+      <input type="text" class="form_control" name="supplies_total" placeholder="$ -Supplies Total" value="<?php echo $_SESSION['supplies_total'];?>" id="sum3" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
       
 <?php
   } else {
@@ -627,7 +635,7 @@ if ($_SESSION['removal_choice'] == "A"){
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="disposal_per_unit" placeholder="$ -Disposal/Unit" value="<?php echo $_SESSION['disposal_per_unit'];?>"><br>
+      <input type="text" class="form_control" name="disposal_per_unit" placeholder="$ -Disposal/Unit" value="<?php echo $_SESSION['disposal_per_unit'];?>"><br>
       
 <?php
   } else {
@@ -647,7 +655,7 @@ if ($_SESSION['removal_choice'] == "A"){
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="disposal_total" placeholder="$ -Disposal Total" value="<?php echo $_SESSION['disposal_total'];?>" id="sum4" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
+      <input type="text" class="form_control" name="disposal_total" placeholder="$ -Disposal Total" value="<?php echo $_SESSION['disposal_total'];?>" id="sum4" onkeyup="add_estimate('<?php echo 'total_cost';?>',$('#sum1').val(), $('#sum2').val(), $('#sum3').val(), $('#sum4').val())"><br>
       
 <?php
   } else {
@@ -681,23 +689,24 @@ if ($_SESSION['removal_choice'] == "A"){
 
 </table> <br>
   
-
+<div class="button_align">
 <?php
   //if the user is not viewing the invoice
   if (!$_SESSION['viewForm']){
 ?>
-<input type="submit" name="submit_invoice" value="Submit">
+<input type="submit" class="submit" name="submit_invoice" value="Submit">
 
 <?php
   } else {
 ?>
 
-<input type="submit" name="submit_invoice" value="Next">
+<input type="submit" class="submit" name="submit_invoice" value="Next">
 
 <?php
   }
 ?>
 
+</div>
 </form>
 <?php
 //back button redirects to worker control panel if worker is logged in
@@ -711,12 +720,13 @@ if ($_SESSION['worker_loggedin']){
     $_SESSION['worker_section'] = "orders";
   }
 ?>
-
-<a href="../worker_cpanel.php">Back</a>
+<div class="back_align">
+  <a class="back" href="../worker_cpanel.php">Back</a>
+</div>
 
 
 <?php
-//back button redirects to the admin check orders page if admin is logged in
+//back butto redirects to the admin check orders page if admin is logged in
 } else if($_SESSION['admin_loggedin']){
 
   //if the admin is editting an invoice
@@ -725,7 +735,9 @@ if ($_SESSION['worker_loggedin']){
     $_SESSION['admin_section'] = "invoices";
 ?>
 
-<a href="../../admin/admin_cpanel.php">Back</a>
+<div class="back_align">
+  <a class="back" href="../../admin/admin_cpanel.php">Back</a>
+</div>
 
 <?php
   //if the admin is creating a new invoice
@@ -733,52 +745,10 @@ if ($_SESSION['worker_loggedin']){
     $_SESSION['admin_section'] = "orders";
 ?>
 
-<a href="../../admin/admin_cpanel.php">Back</a>
+<div class="back_align">
+  <a class="back" href="../../admin/admin_cpanel.php">Back</a>
+</div>
 
-<?php
-   $conn = new mysqli($servername, $username, $password,$db);
-   $check= "SELECT * FROM * WHERE  order_no= '$_POST[order_no]'";
-   $rs = mysqli_query($conn,$check);
-   $data = mysqli_fetch_array($rs, MYSQLI_NUM);
-   if($data[0] > 1) {
-    echo "Error, order number already exists<br/>";
-   }
-
-   else
-   {
-     if (mysqli_query($con))
-     {
-        echo "<br/>";
-     }
-     else
-     {
-        echo "Error, order number already exists<br/>";
-     }
-}
-?>
-  
-<?php
-   $conn = new mysqli($servername, $username, $password,$db);
-   $check= "SELECT * FROM * WHERE  invoice_no= '$_POST[invoice_no]'";
-   $rs = mysqli_query($conn,$check);
-   $data = mysqli_fetch_array($rs, MYSQLI_NUM);
-   if($data[0] > 1) {
-    echo "Error, invoice number already exists<br/>";
-   }
-    
-    else
-   {
-     if (mysqli_query($con))
-     {
-        echo "<br/>";
-     }
-     else
-     {
-        echo "Error, invoice number already exists<br/>";
-     }
-}
-?>
-  
 <?php  
   }
   
@@ -788,7 +758,9 @@ if ($_SESSION['worker_loggedin']){
   $_SESSION['customer_section'] = "invoices";
 ?>
 
-<a href="../../customer/customer_cpanel.php">Back</a>
+<div class="back_align">
+  <a class="back" href="../../customer/customer_cpanel.php">Back</a>
+</div>
 
 
 <?php
