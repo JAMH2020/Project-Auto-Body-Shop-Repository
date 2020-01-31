@@ -10,7 +10,9 @@ if (session_start() === null){
   
   <!--stylesheet for the profiles table-->
   <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_cprofiles.css">
-
+  
+  <h2 class="section_title">CUSTOMER PROFILES</h2>
+  
   <?php
   //include the file that will print out all the orders
   include "../../database/select/aselect_cprofiles.php";
@@ -18,3 +20,4 @@ if (session_start() === null){
   
   <div id="rowText"></div>
   
+
