@@ -11,8 +11,17 @@ include_once "../../../login/login_check.php";
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Edit a Customer Profile</title>
+  <meta name="description" content="Edit the Information of a Customer Profile">
+  <meta name="author" content="JAMH Group">
+
   <!--script that will redirect the user to another page-->
   <script src="../../../src/js/submit_form.js"></script>
+  
+  <!--script that will ask for user confirmation before submitting form-->
+  <script src="../../../src/js/form_confirmation.js"></script>
   
   <!--stylesheet for the page-->
   <link href="change_profiles_styles.css" rel="stylesheet" type="text/css" />
@@ -130,7 +139,7 @@ if ($error_profile_input or !isset($_POST['change_profile'])){
           <span class="Change_Customer_Profile">Change Customer Profile</span>
 
   
-          <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+          <form name="profileForm" onsubmit="return confirmForm('profileForm', 'change_profile', 'profile')" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
             <div class="form_group">
               <span>Name:</span>
@@ -221,6 +230,9 @@ include '../../../footer/footer.php';
  
  //redirect to the customer profile section of the admin control panel
  $_SESSION['admin_section'] = "profiles";
+ 
+ //notification that the profiles have been editted
+ $_SESSION['profile_done'] = "edit";
 ?>
 
 <script>redirect_page("../../admin_cpanel.php");</script>
