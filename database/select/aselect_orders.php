@@ -58,7 +58,14 @@ if ($stmt_aorder->num_rows > 0){
   
   while($stmt_aorder->fetch()){
     echo "<tr>";
-      echo "<td> <input type='checkbox' name='order_idArr[]' value=" . $order_idRow .">" . $order_idRow . "</td>";
+      
+      //if the order is not completed yet
+      if ($statusRow == "imcomplete"){
+        echo "<td> <input type='checkbox' name='order_idArr[]' value=" . $order_idRow .">" . $order_idRow . "</td> ";
+      } else {
+        echo "<td></td>";
+      }
+      
       echo "<td>" . $order_noRow . "</td>";
       echo "<td>" . $dateRow . "</td>";
       echo "<td>" . $worker_firstnameRow . " " . $worker_lastnameRow . " #" . $worker_idRow . "</td>";
