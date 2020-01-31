@@ -12,6 +12,12 @@ include_once "../../login/login_check.php";
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Orders Pg2 - Customer Information</title>
+  <meta name="description" content="Second Page of the Order Form">
+  <meta name="author" content="JAMH Group">
+  
   <!--stylesheet of waiver form-->
   <link rel="stylesheet" type="text/css" href="css/waiver_styles.css">
 
@@ -147,7 +153,7 @@ if ($error_waiver1_input or !isset($_POST['waiver_submit'])){
 ?>
 
 
-<font class="Title" size="10">WAIVER AND RELEASE OF LIABILITY</font>
+<font class="Title">WAIVER AND RELEASE OF LIABILITY</font>
 
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
@@ -196,12 +202,11 @@ automobile rests solely with me.
 outlined at a cost not to exceed </span>
 
 
-
 <?php
   //if the user is not viewing the form
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="exceed_cost" placeholder="$-Amount" value="<?php echo $_SESSION['exceed_cost'];?>">  
+      <input type="text" name="exceed_cost" class="form_control" placeholder="$-Amount" value="<?php echo $_SESSION['exceed_cost'];?>">  
       
 <?php
   } else {
@@ -214,14 +219,13 @@ outlined at a cost not to exceed </span>
 ?>
 
 
-
       <span> by   initialing here: </span>
 
 <?php
   //if the user is not viewing the form
   if (!$_SESSION['viewForm']){
 ?>
-      <input type="text" name="customer_initial" placeholder="Initial" value="<?php echo $_SESSION['customer_initial'];?>"> 
+      <input type="text" name="customer_initial" class="form_control" placeholder="Initial" value="<?php echo $_SESSION['customer_initial'];?>"> 
       
 <?php
   } else {
@@ -255,8 +259,8 @@ outlined at a cost not to exceed </span>
   //if the user is not making an order from an appointment or viewing the form
   if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
 ?>
-          <input type="text" name="customer_firstname" placeholder="Firstname" value="<?php echo $_SESSION['customer_firstname'];?>"> 
-          <input type="text" name="customer_lastname" placeholder="Lastname" value="<?php echo $_SESSION['customer_lastname'];?>"> <br>
+          <input type="text" name="customer_firstname" class="form_control" placeholder="Firstname" value="<?php echo $_SESSION['customer_firstname'];?>"> 
+          <input type="text" name="customer_lastname" class="form_control" placeholder="Lastname" value="<?php echo $_SESSION['customer_lastname'];?>"> <br>
           
 <?php
   } else {
@@ -278,13 +282,12 @@ outlined at a cost not to exceed </span>
 
 
       <td>
-
         <center class="spacep" ><span class="description_title">Phone:</span>
 <?php
   //if the user is not viewing the form
   if (!$_SESSION['viewForm']){
 ?>
-         <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
+         <input type="tel" class="form_control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required name="customer_phone" placeholder="Phone No." value="<?php echo $_SESSION['customer_phone'];?>"> <br>
          <span class="description_title">Format:</span>
          <span class="description_value">123-456-7890</span><br>
 <?php
@@ -296,7 +299,6 @@ outlined at a cost not to exceed </span>
   }
 ?>
          <span class="error_message"><?php echo $customer_phoneERR;?></span></center>
-
       </td>
     </tr>
 
@@ -310,7 +312,7 @@ outlined at a cost not to exceed </span>
   //if the user is not viewing the form
   if (!$_SESSION['viewForm']){
 ?>
-        <input type="text" name="customer_address" placeholder="Address" value="<?php echo $_SESSION['customer_address'];?>"> <br>
+        <input type="text" class="form_control" name="customer_address" placeholder="Address" value="<?php echo $_SESSION['customer_address'];?>"> <br>
         
 <?php
   } else {
@@ -328,14 +330,13 @@ outlined at a cost not to exceed </span>
 
     <tr>
       <td>
-
         <center><span class="description_title">Email:</span>
         
 <?php
  //if the user is not making an order from an appointment
  if(!$_SESSION['oldOrder'] && !$_SESSION['viewForm']){
 ?>
-        <input type="email" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
+        <input type="email" class="form_control" name="customer_email" placeholder="Email" value="<?php echo $_SESSION['customer_email'];?>"> <br>
         
 <?php
   } else {
@@ -347,7 +348,6 @@ outlined at a cost not to exceed </span>
   }
 ?>
         <span class="error_message"><?php echo $customer_emailERR;?></span></center>
-
       </td>
     </tr>
 
@@ -384,22 +384,25 @@ if ($_SESSION['editForm']){
 </div>
 
 
+<div class="button_align">
+
 <?php
   //if the user is not viewing the page
   if (!$_SESSION['viewForm']){
 ?>
 
-<input type="submit" name="waiver_submit" class="button" value="Submit">
+<input type="submit" class="submit" name="waiver_submit" class="button" value="Submit">
 
 <?php
 } else {
 ?>
 
-<input type="submit" name="waiver_submit" class="button" value="Next">
+<input type="submit" class="submit" name="waiver_submit" class="button" value="Next">
 
 <?php
 }
 ?>
+</div>
 
 <center>
   <h3>[Please proceed to the 
@@ -410,7 +413,9 @@ on next page]</h3>
 
 </form>
 
-<a href="intake_repair_form.php" class="back">Back</a>
+<div class="back_align">
+  <a class="back" href="intake_repair_form.php" class="back">Back</a>
+</div>
 
 
 <?php

@@ -5,7 +5,8 @@ if (session_start() === null){
 }
 
 
-$_SESSION['admin_section'] = "aappointments";
+$_SESSION['admin_section'] = "appointments";
+$_SESSION['admin_appointments'] = "aappointments";
 
 
 //session to identify if the user is editting a form
@@ -17,7 +18,7 @@ $_SESSION['editForm'] = false;
   <!--stylesheet for the invoices table-->
   <link rel="stylesheet" type="text/css" href="../../database/select/css/cselect_ogappointments.css">
   
-
+  <h2 class="section_title">ACCEPTED APPOINTMENTS</h2>
 
   <?php
   //include the file that will print out all the orders

@@ -7,6 +7,10 @@ function loadFile(url){
   $(".content_window").load(url);
 }
 
+function appointmentLoad(url){
+  $(".appointment_window").load(url);
+}
+
 function logout(){
   $(".logout").load('/login/logout.php')
 }

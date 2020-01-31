@@ -97,7 +97,7 @@ if ($stmt_find_appointment->num_rows > 0){
     $_SESSION['plan_date'] = $plan_dateRow;
     
     //status
-    $_SESSION['status'] = $statusRow;
+    $_SESSION['status'] = $_SESSION['prev_status'] = $statusRow;
 
    }
 } else {
@@ -123,12 +123,13 @@ if ($_POST['oldOrder'] == "1"){
 }
 
 
+/*
 echo "<p>c_id:" .  $_SESSION['appointment_id'] . "</p>";
 echo "<p>c_firstame:" .  $_SESSION['car_year'] . "</p>";
 echo "<p>c_password:" .   $_SESSION['school_name'] . "</p>";
 echo "<p>c_email:" .  $_SESSION['worker_email'] . "</p>";
 echo "<p>c_change_status:" .  $_SESSION['account_change'] . "</p>";
-
+*/
 
 //close the statement
 $stmt_find_appointment->close();

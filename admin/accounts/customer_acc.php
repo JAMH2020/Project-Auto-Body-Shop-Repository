@@ -15,7 +15,12 @@ $_SESSION['admin_section'] = "caccounts";
   <!--stylesheet for the accounts table-->
   <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_caccounts.css">
   
-  <a href="#" onclick='adminCaccount("/admin/accounts/admin_create_customer.php",1); return false;'>Create Customer Account</a>
+  <h2 class="section_title">CUSTOMER ACCOUNTS</h2>
+  
+  <div class="create_link">
+    <a href="#" class="create" onclick='adminCaccount("/admin/accounts/admin_create_customer.php",1); return false;'>Create Account</a>
+    <div class="create_underline"></div>
+  </div>
   
   
   <?php  

@@ -11,6 +11,12 @@ include_once "../../../login/login_check.php";
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Edit an Account</title>
+  <meta name="description" content="Edit a Customer or Worker Account">
+  <meta name="author" content="JAMH Group">
+
   <!--script to create bullet points of error messages if there is a missing field
  or an error with the user's input-->
   <script src="../../../create_account/js/errorlist.js"></script>
@@ -20,6 +26,8 @@ include_once "../../../login/login_check.php";
   <script src="../../../src/js/submit_form.js"></script>
   <!--styles for the change account page-->
   <link href="change_account_styles.css" rel="stylesheet" type="text/css" />
+  <!--script that will ask for user confirmation before submitting form-->
+  <script src="../../../src/js/form_confirmation.js"></script>
 
 </head>
 <body>
@@ -119,7 +127,7 @@ if ($_SESSION['account_change'] == 0){
 
     //email
     createErrMsg("change_account", "email", "worker_email", "worker_emailERR");
-    $worker_email_exists = worker_exist($worker_email, $exception);
+    $worker_email_exists = worker_exist($worker_email, $_SESSION['prev_worker_email']);
     
     //if the worker email already exists other than the previous email, throw an error
     if ($worker_email_exists){
@@ -128,10 +136,11 @@ if ($_SESSION['account_change'] == 0){
 
     //password
     createErrMsg("change_account", "password", "worker_password", "worker_passwordERR");
+    password_check($_SESSION['worker_password'], "password", "worker_passwordERR");
  
  
     //show the error title if any fields are missing after signing up
-    if ($worker_firstnameERR != "" || $worker_lastnameERR != "" || $worker_emailERR != ""){
+    if ($worker_firstnameERR != "" || $worker_lastnameERR != "" || $worker_emailERR != "" || $worker_passwordERR != ""){
       $error_title = "Error";
       $error_account_input = true;
       
@@ -247,7 +256,7 @@ if (!isset($_POST['change_account']) or $error_account_input){
 
 
       <span class="Change_Account">Change Account</span>
-      <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+      <form name="accountForm" onsubmit="return confirmForm('accountForm', 'change_account', 'account')" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
 
 <?php
@@ -347,6 +356,7 @@ if ($_SESSION['account_change'] == 0){
   if ($_SESSION['account_change'] == 0){
   
     $_SESSION['admin_section'] = "caccounts";
+    $_SESSION['account_done'] = "";
 ?>
 <div class="back_align">
   <a class="back" href="../../admin_cpanel.php">Back</a>
@@ -356,6 +366,7 @@ if ($_SESSION['account_change'] == 0){
 <?php
   } else {
     $_SESSION['admin_section'] = "waccounts";
+    $_SESSION['account_done'] = "";
 ?>
 <div class="back_align">
   <a class="back" href="../../admin_cpanel.php">Back</a>
@@ -393,6 +404,9 @@ include '../../../footer/footer.php';
     
     //redirect the admin to the worker account section of the admin control panel
     $_SESSION['admin_section'] = "waccounts";
+    
+    //notification that an account has been editted
+    $_SESSION['account_done'] = "edit";
 ?>
 
 <script>redirect_page("../../admin_cpanel.php");</script>
@@ -404,5 +418,4 @@ include '../../../footer/footer.php';
 
 </body>
 </html>
-
 

@@ -17,7 +17,7 @@ $_SESSION['editForm'] = false;
   <!--stylesheet for the invoices table-->
   <link rel="stylesheet" type="text/css" href="../../database/select/css/aselect_invoices.css">
   
-
+  <h2 class="section_title">INVOICES</h2>
 
   <?php
   //include the file that will print out all the orders

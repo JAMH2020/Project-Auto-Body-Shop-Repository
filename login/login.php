@@ -129,7 +129,7 @@ include "../navigation_bar/navigation_bar.php";
 
 
             <center><div class="form-group">
-                <label class="login_headings">Username</label>
+                <label class="login_headings">Email  </label>
 
                 <input type="text" name="login_username" class="form-control" placeholder="Username" value="<?php echo $login_username; ?>"> <br>
 

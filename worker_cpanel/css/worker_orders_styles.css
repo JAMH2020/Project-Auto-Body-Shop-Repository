@@ -1,11 +1,11 @@
 .order_title{
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
   font-size: 30px;
-  left: 50px; 
   color: rgb(3, 55, 107); 
   text-shadow: 1px 2px 2px #66c2ff;
   font-weight: bold;
   margin: 10px 0 0 0;
+  padding: 15px 20px;
 }
 
 
@@ -21,7 +21,6 @@
   font-size: 20px; 
   text-decoration: none;
   color: rgb(0, 153, 255);
-  left: 50px;
   position: relative;
 }
 
@@ -50,7 +49,6 @@
   margin:0;
   width: 20px;
   border-radius:1px;
-  left:50px;
   position:relative;
   
   transform-origin: left;
@@ -84,3 +82,8 @@
   background-color: rgb(37, 72, 142);
  }
  
+ 
+ 
+ .order_link{
+   padding: 30px 20px 0 20px;
+ }
