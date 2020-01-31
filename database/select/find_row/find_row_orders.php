@@ -274,6 +274,7 @@ if ($_POST['viewForm'] == "1"){
 }
 
 
+/*
 echo "<p>o_id:" .  $_SESSION['order_id'] . "</p>";
 echo "<p>o_no.:" .  $_SESSION['order_no'] . "</p>";
 echo "<p>o_date:" .  $_SESSION['order_date'] . "</p>";
@@ -317,7 +318,7 @@ echo "<p>e_initial:" .  $_SESSION['customer_initial'] . "</p> <br> <br>";
 
 echo "<p>modify variable:" . $_SESSION['editForm'] . "</p>";
 echo "<p>modify variable_post:" . $_POST['editForm'] . "</p>";
-
+*/
 
 //close the statement
 $stmt_find_orders->close();
