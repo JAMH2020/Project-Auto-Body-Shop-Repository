@@ -12,12 +12,22 @@ include_once "../../login/login_check.php";
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Invoice Pg2 - Agreement</title>
+  <meta name="description" content="Second Page of the Invoice Form">
+  <meta name="author" content="JAMH Group">
+  
   <!--styles for the invoice pages-->
   <link rel="stylesheet" type="text/css" href="invoice_styles.css">
 
   
   <!--script that will redirect the user to another page-->
   <script src="../../src/js/submit_form.js"></script>
+  
+  <!--script that will ask for user confirmation before submitting form-->
+  <script src="../../src/js/form_confirmation.js"></script>
+  
   </head>
 <body>
 
@@ -116,7 +126,7 @@ if ($error_invoicept2_input  or !isset($_POST['submit_invoicept2'])){
 ?>
 
 <!-- Form that repairer/worker will fill in when the client brings in their vehicle -->
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+<form name="invoiceForm" onsubmit="return confirmForm('invoiceForm', 'submit_invoicept2', 'invoice')" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 <p class="information_text">If this Invoice is not paid, and/or if the automobile is not claimed within THIRTY (30) days after notice of completion of work, it and all property therein or thereon will be deemed abandoned and disposed of as considered appropriate in the sole discretion of the Board. 
 WARRANTY </p> <br>
 
@@ -165,11 +175,11 @@ WARRANTY </p> <br>
 //if admin is logged on
 if($_SESSION['admin_loggedin']){
 ?>
-<input type="text" name="worker_firstname" placeholder="firstname" value="<?php echo $_SESSION['worker_firstname'];?>">
+<input type="text" class="form_control" name="worker_firstname" placeholder="firstname" value="<?php echo $_SESSION['worker_firstname'];?>">
 
-<input type="text" name="worker_lastname" placeholder="lastname" value="<?php echo $_SESSION['worker_lastname'];?>"> 
+<input type="text" class="form_control" name="worker_lastname" placeholder="lastname" value="<?php echo $_SESSION['worker_lastname'];?>"> 
 
-<input type="email" name="worker_email" placeholder="email" value="<?php echo $_SESSION['worker_email'];?>"> 
+<input type="email" class="form_control" name="worker_email" placeholder="email" value="<?php echo $_SESSION['worker_email'];?>"> 
 
 <?php
 } else {
@@ -210,7 +220,7 @@ if($_SESSION['admin_loggedin']){
 </p>
 
 <span class="information_text">Signature of Registered Owner: </span>
-<button type="button" class="information_text">Sign Here</button> <br>
+<button type="button" class="submit">Sign Here</button> <br>
 
 
 <span class="information_text">Name (Print): </span>
@@ -222,7 +232,9 @@ if($_SESSION['admin_loggedin']){
   if (!$_SESSION['viewForm']){
 ?>
 
-<input type="submit" name="submit_invoicept2" value="Submit" class="information_text"> <br>
+<div class="button_align">
+  <input type="submit" class="submit" name="submit_invoicept2" value="Submit" class="information_text"> <br>
+</div>
 
 <?php
   }
@@ -230,7 +242,9 @@ if($_SESSION['admin_loggedin']){
 
 </form>
 
-<a href="invoice.php" class="information_text">Back</a>
+<div class="back_align">
+  <a href="invoice.php" class="back">Back</a>
+</div>
 
 <?php
 //include the footer
@@ -238,8 +252,6 @@ include '../../footer/footer.php';
 
 } else {
 
- echo "done";
- 
  //if the user is editting the form
  if ($_SESSION['editForm']){
    include "../../database/update/update_invoices.php";
@@ -417,16 +429,18 @@ include '../../footer/footer.php';
    
    //send a message to the site to give a notification that someon made an appointment
    include "../../database/sendmail.php";
-   
-   echo $temp_email . "<br>";
-   echo $subject . "<br>";
-   echo $email_message . "<br>";
-    
     
    send_mail($temp_email, $subject, $email_message);
  }
  
-
+ 
+ 
+ //notification display for the control panel
+ if ($_SESSION['editForm']){
+   $_SESSION['invoice_done'] = "edit";
+ } else {
+   $_SESSION['invoice_done'] = "insert";
+ }
  
    
  //if the worker is logged int
