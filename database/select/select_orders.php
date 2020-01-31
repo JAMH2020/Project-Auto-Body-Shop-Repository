@@ -19,7 +19,11 @@ $stmt_orders1 = $conn->prepare("SELECT Orders.Order_Id, Orders.Order_No, Orders.
                                 FROM Orders
                                 INNER JOIN Order_Profile ON Orders.Order_No = Order_Profile.Order_No
                                 WHERE Orders.Worker_Id = ?
-                                ORDER BY Orders.Order_No DESC");
+                                ORDER BY CASE WHEN Orders.Status = 'imcomplete' THEN '1'
+                                              WHEN Orders.Status = 'complete' THEN '2'
+                                              WHEN Orders.Status = 'recorded' THEN '3'
+                                         END ASC
+                                         , Orders.Order_No DESC");
 
 $stmt_orders1->bind_param("i", $worker_id);
 
@@ -90,7 +94,7 @@ if ($stmt_orders1->num_rows > 0){
      
      
      //if the order status is not recorded, then allow the user to edit the order
-     if ($statusRow != "recorded"){
+     if ($statusRow != "recorded" && $statusRow != "complete"){
 ?>
            
            <td>
