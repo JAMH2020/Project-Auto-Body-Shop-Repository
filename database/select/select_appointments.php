@@ -159,7 +159,7 @@ function met_appointments($conn){
    echo "</table>";
    
 } else {
-  echo "<h3 class='conclusion'>" . "There are no accepted appointments" . "</h3>";
+  echo "<h3 class='conclusion'>" . "There are no appointments that are converted to orders" . "</h3>";
 }
 
 
