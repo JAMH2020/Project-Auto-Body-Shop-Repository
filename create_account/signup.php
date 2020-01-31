@@ -12,6 +12,28 @@ if (session_start() === null){
 
 <head>  
 
+  <?php
+  if ($_SESSION['admin_create_caccount'] == 1){
+  ?>
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Create a Customer Account</title>
+  <meta name="description" content="Create Another Customer Account">
+  <meta name="author" content="JAMH Group">
+  
+  <?php
+  } else {
+  ?>
+  
+  <meta charset="UTF-8">
+  <!--title that will show up on the tab-->
+  <title>Make an Account Today</title>
+  <meta name="description" content="Make a User Account for Accessing the Website">
+  <meta name="author" content="JAMH Group">
+  
+  <?php
+  }
+  ?>
 
   <!--script to create bullet points of error messages if there is a missing field
   or an error with the user's input-->
@@ -20,6 +42,8 @@ if (session_start() === null){
   <script src="js/showpassword.js"></script>
   <!--script that will redirect the user to another page-->
   <script src="../src/js/submit_form.js"></script>
+  <!--script that will ask for user confirmation before submitting form-->
+  <script src="../src/js/form_confirmation.js"></script>
   <!--style page for the signup page-->
   <link href="signup_styles.css" rel="stylesheet" type="text/css" />
 
@@ -148,7 +172,7 @@ if (!isset($_POST['sign_up']) or $customer_firstnameERR != "" or $customer_lastn
        
         <font class="Signup" size="10"><?php echo $title; ?></font>
         <center>
-          <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
+          <form name="accountForm" onsubmit="return confirmForm('accountForm', 'sign_up', 'account')" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" autocomplete = "off">
 
             <center class="di"><span>First Name:</span>
             <input type="text" name="customer_firstname" class="form-control" placeholder="First Name" value="<?php echo $_SESSION['customer_firstname'];?>"></center>
@@ -204,6 +228,9 @@ include '../footer/footer.php';
   //if the admin is creating a customer account
   if($_SESSION['admin_create_caccount'] == 1){
     $_SESSION['admin_section'] = "caccounts";
+    
+    //notification that admin has created an account
+    $_SESSION['account_done'] = "insert";
 ?>
   <!--redirect to the admin customer account page-->
   <script>redirect_page("../admin/admin_cpanel.php");</script>
